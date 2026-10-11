@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { GoogleOutdoorMap } from "@/components/app/GoogleOutdoorMap";
+import { OsmOutdoorMap } from "@/components/app/OsmOutdoorMap";
+import { ClientOnly } from "@/components/app/ClientOnly";
 import { EVENT_CONFIG } from "@/lib/event-config";
 import { Card } from "@/components/ui/card";
 import { MapPin } from "lucide-react";
@@ -96,7 +97,9 @@ function MapPage() {
         </TabsContent>
 
         <TabsContent value="outdoor" className="mt-4">
-          <GoogleOutdoorMap />
+          <ClientOnly fallback={<div className="h-[430px] w-full rounded-2xl bg-muted/30 animate-pulse" />}>
+            {() => <OsmOutdoorMap />}
+          </ClientOnly>
           <Card className="mt-3 border-0 p-4 shadow-card">
             <p className="text-sm font-semibold">{EVENT_CONFIG.venue.name}</p>
             <p className="mt-1 text-xs text-muted-foreground">{EVENT_CONFIG.venue.address}</p>

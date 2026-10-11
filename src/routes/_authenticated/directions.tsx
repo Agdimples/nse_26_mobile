@@ -1,23 +1,20 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useRef, useState, useMemo } from "react";
+import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState, useMemo } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { NsePageHeader } from "@/components/app/NsePageHeader";
-import { useGoogleMaps } from "@/lib/google-maps";
 import { EVENT_CONFIG } from "@/lib/event-config";
 import { HOTELS } from "@/lib/reference";
 import { useMutation } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { getDirections } from "@/lib/maps.functions";
+import { DirectionsInteractiveMap } from "@/components/app/DirectionsInteractiveMap";
+import { ClientOnly } from "@/components/app/ClientOnly";
 import {
-  ArrowLeft,
   Loader2,
-  MapPin,
   Footprints,
   Car,
   Navigation,
-  Eye,
-  Layers,
 } from "lucide-react";
 
 type Search = { lat?: number; lng?: number; name?: string };
@@ -33,23 +30,6 @@ export const Route = createFileRoute("/_authenticated/directions")({
 
 export function DirectionsPage() {
   const { lat, lng, name } = Route.useSearch();
-  const navigate = useNavigate();
-  const { ready, authFailed } = useGoogleMaps();
-  const mapRef = useRef<HTMLDivElement>(null);
-  const mapInstance = useRef<any>(null);
-  const polylineRef = useRef<any>(null);
-  const markersRef = useRef<any[]>([]);
-
-  const [origin, setOrigin] = useState<{ lat: number; lng: number; label: string }>({
-    lat: EVENT_CONFIG.venue.latitude,
-    lng: EVENT_CONFIG.venue.longitude,
-    label: "Maiduguri (Center)",
-  });
-  const [selectedOriginPreset, setSelectedOriginPreset] = useState<string>("venue");
-  const [mode, setMode] = useState<"WALK" | "DRIVE">("DRIVE");
-  const [geoError, setGeoError] = useState<string | null>(null);
-  const [tilt, setTilt] = useState<number>(45);
-  const [mapType, setMapType] = useState<"roadmap" | "hybrid">("roadmap");
 
   const dest = useMemo(
     () =>
@@ -62,6 +42,32 @@ export function DirectionsPage() {
           },
     [lat, lng, name],
   );
+
+  const isDestVenue =
+    Math.abs(dest.lat - EVENT_CONFIG.venue.latitude) < 0.0001 &&
+    Math.abs(dest.lng - EVENT_CONFIG.venue.longitude) < 0.0001;
+
+  const defaultHotel = HOTELS[0];
+
+  const [origin, setOrigin] = useState<{ lat: number; lng: number; label: string }>(() =>
+    isDestVenue
+      ? {
+          lat: defaultHotel.latitude,
+          lng: defaultHotel.longitude,
+          label: defaultHotel.name,
+        }
+      : {
+          lat: EVENT_CONFIG.venue.latitude,
+          lng: EVENT_CONFIG.venue.longitude,
+          label: EVENT_CONFIG.venue.name,
+        },
+  );
+
+  const [selectedOriginPreset, setSelectedOriginPreset] = useState<string>(
+    isDestVenue ? `hotel-${defaultHotel.id}` : "venue",
+  );
+  const [mode, setMode] = useState<"WALK" | "DRIVE">("DRIVE");
+  const [geoError, setGeoError] = useState<string | null>(null);
 
   const dirFn = useServerFn(getDirections);
   const { data: route, mutate, isPending } = useMutation({
@@ -128,161 +134,7 @@ export function DirectionsPage() {
     }
   }
 
-  // Initialize Google Map only when ready and no auth failure
-  useEffect(() => {
-    if (!ready || authFailed || !mapRef.current) return;
-
-    if (!mapInstance.current) {
-      try {
-        const map = new window.google.maps.Map(mapRef.current, {
-          center: { lat: dest.lat, lng: dest.lng },
-          zoom: 14,
-          tilt: 45,
-          mapId: "DEMO_MAP_ID",
-          mapTypeId: "roadmap",
-          disableDefaultUI: true,
-          zoomControl: true,
-        });
-
-        mapInstance.current = map;
-      } catch (e) {
-        console.warn("[DirectionsPage] Google Map init error:", e);
-      }
-    } else {
-      mapInstance.current.panTo({ lat: dest.lat, lng: dest.lng });
-    }
-  }, [ready, authFailed, dest]);
-
-  // Sync Map Type
-  useEffect(() => {
-    if (mapInstance.current) {
-      mapInstance.current.setMapTypeId(mapType);
-    }
-  }, [mapType]);
-
-  // Sync Tilt
-  useEffect(() => {
-    if (mapInstance.current) {
-      if (mapType === "roadmap") {
-        mapInstance.current.setTilt(tilt);
-      }
-    }
-  }, [tilt, mapType]);
-
-  // Draw Google Map Route & Markers
-  useEffect(() => {
-    if (!ready || authFailed || !mapInstance.current) return;
-    const map = mapInstance.current;
-
-    // Clear old markers
-    markersRef.current.forEach((m) => {
-      if (typeof m.setMap === "function") m.setMap(null);
-      else m.map = null;
-    });
-    markersRef.current = [];
-
-    // Clear old polyline
-    if (polylineRef.current) {
-      polylineRef.current.setMap(null);
-      polylineRef.current = null;
-    }
-
-    // Destination Marker
-    if (window.google.maps.marker?.AdvancedMarkerElement) {
-      const pin = document.createElement("div");
-      pin.style.display = "flex";
-      pin.style.alignItems = "center";
-      pin.style.justifyContent = "center";
-      pin.style.width = "34px";
-      pin.style.height = "34px";
-      pin.style.borderRadius = "9999px";
-      pin.style.backgroundColor = "#C9A227";
-      pin.style.border = "3px solid #ffffff";
-      pin.style.boxShadow = "0 2px 6px rgba(0,0,0,0.35)";
-      pin.style.fontSize = "16px";
-      pin.innerText = "📍";
-      const destMarker = new window.google.maps.marker.AdvancedMarkerElement({
-        position: { lat: dest.lat, lng: dest.lng },
-        map,
-        title: dest.name,
-        content: pin,
-      });
-      markersRef.current.push(destMarker);
-    } else {
-      const destMarker = new window.google.maps.Marker({
-        position: { lat: dest.lat, lng: dest.lng },
-        map,
-        title: dest.name,
-        icon: {
-          path: "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z",
-          scale: 1.6,
-          fillColor: "#C9A227",
-          fillOpacity: 1,
-          strokeColor: "#ffffff",
-          strokeWeight: 2,
-          anchor: new window.google.maps.Point(12, 22),
-        },
-      });
-      markersRef.current.push(destMarker);
-    }
-
-    // Origin Marker
-    if (origin) {
-      if (window.google.maps.marker?.AdvancedMarkerElement) {
-        const pin = document.createElement("div");
-        pin.style.width = "18px";
-        pin.style.height = "18px";
-        pin.style.borderRadius = "9999px";
-        pin.style.backgroundColor = "#123E73";
-        pin.style.border = "2.5px solid #ffffff";
-        pin.style.boxShadow = "0 2px 6px rgba(0,0,0,0.35)";
-        const originMarker = new window.google.maps.marker.AdvancedMarkerElement({
-          position: { lat: origin.lat, lng: origin.lng },
-          map,
-          title: origin.label,
-          content: pin,
-        });
-        markersRef.current.push(originMarker);
-      } else {
-        const originMarker = new window.google.maps.Marker({
-          position: { lat: origin.lat, lng: origin.lng },
-          map,
-          title: origin.label,
-          icon: {
-            path: window.google.maps.SymbolPath.CIRCLE,
-            scale: 8,
-            fillColor: "#123E73",
-            fillOpacity: 1,
-            strokeColor: "#ffffff",
-            strokeWeight: 2.5,
-          },
-        });
-        markersRef.current.push(originMarker);
-      }
-    }
-
-    // Draw Route Polyline
-    if (route?.encodedPolyline && window.google.maps.geometry?.encoding) {
-      const path = window.google.maps.geometry.encoding.decodePath(route.encodedPolyline);
-      const line = new window.google.maps.Polyline({
-        path,
-        strokeColor: "#123E73",
-        strokeWeight: 5.5,
-        strokeOpacity: 0.9,
-      });
-      line.setMap(map);
-      polylineRef.current = line;
-
-      // Fit bounds
-      const bounds = new window.google.maps.LatLngBounds();
-      bounds.extend({ lat: dest.lat, lng: dest.lng });
-      bounds.extend({ lat: origin.lat, lng: origin.lng });
-      map.fitBounds(bounds, 60);
-    }
-  }, [ready, authFailed, route, dest, origin]);
-
   const hotelPresets = HOTELS.filter((h) => h.latitude != null && h.longitude != null).slice(0, 10);
-
   const googleMapsAppUrl = `https://www.google.com/maps/dir/?api=1&origin=${origin.lat},${origin.lng}&destination=${dest.lat},${dest.lng}&travelmode=${mode === "DRIVE" ? "driving" : "walking"}`;
 
   return (
@@ -349,59 +201,17 @@ export function DirectionsPage() {
           </Button>
         </div>
 
-        {/* Map Container: 3D Google Vector Map */}
+        {/* Map Container: Interactive Map with Streets / Satellite and Real Route Polyline */}
         <Card className="relative overflow-hidden border-0 shadow-elevated">
-          <div ref={mapRef} className="aspect-[4/3] w-full bg-muted" />
-
-          {/* Loading Shimmer while Google Maps script initializes */}
-          {!ready && !authFailed && (
-            <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-muted/80 backdrop-blur-sm">
-              <Loader2 className="h-7 w-7 animate-spin text-primary" />
-              <p className="mt-2 text-xs font-semibold text-foreground">Loading 3D Google Map…</p>
-            </div>
-          )}
-
-          {/* Connection / Auth Fallback */}
-          {authFailed && (
-            <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-background/95 p-4 text-center">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-soft text-primary shadow-inner">
-                <Navigation className="h-6 w-6" />
-              </div>
-              <p className="mt-2 text-sm font-bold text-foreground">Route Details</p>
-              <p className="mt-1 max-w-xs text-xs text-muted-foreground">
-                {origin.label} → {dest.name}
-              </p>
-              <Button size="sm" asChild className="mt-3 shadow">
-                <a href={googleMapsAppUrl} target="_blank" rel="noreferrer">
-                  Open Google Maps App ↗
-                </a>
-              </Button>
-            </div>
-          )}
-
-          {/* 3D Map Controls Toolbar (when ready) */}
-          {ready && !authFailed && (
-            <div className="absolute left-3 top-3 z-10 flex flex-col gap-1.5">
-              <Button
-                size="sm"
-                variant={tilt > 0 ? "default" : "secondary"}
-                onClick={() => setTilt((t) => (t === 0 ? 45 : 0))}
-                className="h-8 px-2.5 text-xs font-bold shadow-md gap-1"
-              >
-                <Eye className="h-3.5 w-3.5" />
-                <span>{tilt > 0 ? "3D Tilt" : "2D"}</span>
-              </Button>
-              <Button
-                size="sm"
-                variant="secondary"
-                onClick={() => setMapType((t) => (t === "roadmap" ? "hybrid" : "roadmap"))}
-                className="h-8 px-2 text-xs font-medium shadow-md gap-1 bg-white/95 text-foreground"
-              >
-                <Layers className="h-3.5 w-3.5 text-primary" />
-                <span>{mapType === "hybrid" ? "Satellite" : "Map"}</span>
-              </Button>
-            </div>
-          )}
+          <ClientOnly fallback={<div className="aspect-[4/3] w-full bg-muted/40 animate-pulse" />}>
+            {() => (
+              <DirectionsInteractiveMap
+                dest={dest}
+                origin={origin}
+                encodedPolyline={route?.encodedPolyline}
+              />
+            )}
+          </ClientOnly>
         </Card>
 
         {/* Loading Spinner */}
