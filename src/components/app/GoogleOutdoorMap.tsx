@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, lazy, Suspense } from "react";
 import { Link } from "@tanstack/react-router";
 import { useGoogleMaps, DEFAULT_MAP_CENTER } from "@/lib/google-maps";
 import { VENUE_DATA, HOTELS, hotelMinRate, hotelDistanceKm, type Hotel } from "@/lib/reference";
@@ -7,7 +7,7 @@ import { EVENT_CONFIG } from "@/lib/event-config";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { OsmOutdoorMap } from "./OsmOutdoorMap";
+import { ClientOnly } from "./ClientOnly";
 import {
   Compass,
   RotateCw,
@@ -19,6 +19,8 @@ import {
   X,
   Eye,
 } from "lucide-react";
+
+const LazyOsmOutdoorMap = lazy(() => import("./OsmOutdoorMap"));
 
 type FilterCategory = "all" | "venue" | "hotels" | "hospitals" | "security" | "airport" | "food";
 
@@ -57,9 +59,17 @@ export function GoogleOutdoorMap() {
   } | null>(null);
 
   // If Google Maps fails authentication (e.g. Firebase App Check enforcement on Google Cloud)
-  // or script loading fails, immediately render the interactive OSM & Satellite map.
+  // or script loading fails, immediately render the interactive OSM & Satellite map via client-only lazy load.
   if (authFailed || error || initFailed) {
-    return <OsmOutdoorMap />;
+    return (
+      <ClientOnly fallback={<div className="h-[430px] w-full rounded-2xl bg-muted/30 animate-pulse" />}>
+        {() => (
+          <Suspense fallback={<div className="h-[430px] w-full rounded-2xl bg-muted/30 animate-pulse" />}>
+            <LazyOsmOutdoorMap />
+          </Suspense>
+        )}
+      </ClientOnly>
+    );
   }
 
   // Initialize Map

@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useRef, useState, useMemo } from "react";
+import { useEffect, useRef, useState, useMemo, lazy, Suspense } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useGoogleMaps } from "@/lib/google-maps";
@@ -8,9 +8,7 @@ import { HOTELS } from "@/lib/reference";
 import { useMutation } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { getDirections } from "@/lib/maps.functions";
-import { MapContainer, TileLayer, Marker, Polyline } from "react-leaflet";
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
+import { ClientOnly } from "@/components/app/ClientOnly";
 import {
   ArrowLeft,
   Loader2,
@@ -21,6 +19,8 @@ import {
   Eye,
   Layers,
 } from "lucide-react";
+
+const LazyLeafletDirectionsMap = lazy(() => import("@/components/app/LeafletDirectionsMap"));
 
 type Search = { lat?: number; lng?: number; name?: string };
 
@@ -33,24 +33,10 @@ export const Route = createFileRoute("/_authenticated/directions")({
   component: DirectionsPage,
 });
 
-const destLeafletIcon = L.divIcon({
-  className: "",
-  html: '<span style="display:flex;width:32px;height:32px;border-radius:9999px;background:#C9A227;border:3px solid #fff;box-shadow:0 3px 8px rgba(0,0,0,0.4);align-items:center;justify-content:center;color:#fff;font-size:16px;line-height:1;font-weight:bold;">📍</span>',
-  iconSize: [32, 32],
-  iconAnchor: [16, 16],
-});
-
-const originLeafletIcon = L.divIcon({
-  className: "",
-  html: '<span style="display:flex;width:24px;height:24px;border-radius:9999px;background:#123E73;border:2.5px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.35);align-items:center;justify-content:center;color:#fff;font-size:12px;line-height:1;">•</span>',
-  iconSize: [24, 24],
-  iconAnchor: [12, 12],
-});
-
 export function DirectionsPage() {
   const { lat, lng, name } = Route.useSearch();
   const navigate = useNavigate();
-  const { ready, authFailed, error: mapsError } = useGoogleMaps();
+  const { ready, authFailed } = useGoogleMaps();
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstance = useRef<any>(null);
   const polylineRef = useRef<any>(null);
@@ -358,30 +344,13 @@ export function DirectionsPage() {
               </div>
             </>
           ) : (
-            <MapContainer
-              center={[dest.lat, dest.lng]}
-              zoom={13}
-              scrollWheelZoom={false}
-              className="aspect-[4/3] w-full"
-            >
-              <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
-              />
-              <Marker position={[dest.lat, dest.lng]} icon={destLeafletIcon} />
-              {origin && <Marker position={[origin.lat, origin.lng]} icon={originLeafletIcon} />}
-              {origin && (
-                <Polyline
-                  positions={[
-                    [origin.lat, origin.lng],
-                    [dest.lat, dest.lng],
-                  ]}
-                  color="#123E73"
-                  weight={4}
-                  dashArray="6, 8"
-                />
+            <ClientOnly fallback={<div className="aspect-[4/3] w-full bg-muted/30 animate-pulse" />}>
+              {() => (
+                <Suspense fallback={<div className="aspect-[4/3] w-full bg-muted/30 animate-pulse" />}>
+                  <LazyLeafletDirectionsMap dest={dest} origin={origin} />
+                </Suspense>
               )}
-            </MapContainer>
+            </ClientOnly>
           )}
         </Card>
 

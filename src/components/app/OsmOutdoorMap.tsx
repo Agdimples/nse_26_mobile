@@ -1,8 +1,5 @@
-import { useMemo, useState, useEffect } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import { Link } from "@tanstack/react-router";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
 import { VENUE_DATA, HOTELS, hotelMinRate, hotelDistanceKm, type Hotel } from "@/lib/reference";
 import { formatNGN } from "@/lib/format";
 import { EVENT_CONFIG } from "@/lib/event-config";
@@ -24,6 +21,7 @@ import {
   X,
   Compass,
 } from "lucide-react";
+import "leaflet/dist/leaflet.css";
 
 type FilterCategory = "all" | "venue" | "hotels" | "hospitals" | "security" | "airport" | "food";
 
@@ -38,47 +36,14 @@ const CATEGORY_COLORS: Record<string, string> = {
   Government: "#475569",
 };
 
-function pinIcon(color: string, isVenue = false) {
-  const size = isVenue ? 34 : 26;
-  return L.divIcon({
-    className: "",
-    html: `<span style="display:flex;width:${size}px;height:${size}px;border-radius:9999px;background:${color};border:${isVenue ? "3px" : "2.5px"} solid #ffffff;box-shadow:0 3px 8px rgba(0,0,0,0.4);align-items:center;justify-content:center;color:#ffffff;font-size:${size / 2}px;line-height:1;font-weight:bold;">${isVenue ? "📍" : "•"}</span>`,
-    iconSize: [size, size],
-    iconAnchor: [size / 2, size / 2],
-    popupAnchor: [0, -size / 2],
-  });
-}
-
-const userLocationIcon = L.divIcon({
-  className: "",
-  html: '<span style="display:flex;width:22px;height:22px;border-radius:9999px;background:#2563eb;border:3px solid #ffffff;box-shadow:0 0 0 6px rgba(37,99,235,0.3),0 2px 6px rgba(0,0,0,0.4)"></span>',
-  iconSize: [22, 22],
-  iconAnchor: [11, 11],
-});
-
-function MapResizer() {
-  const map = useMap();
-  useEffect(() => {
-    const timer = setTimeout(() => map.invalidateSize(), 200);
-    const onResize = () => map.invalidateSize();
-    window.addEventListener("resize", onResize);
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener("resize", onResize);
-    };
-  }, [map]);
-  return null;
-}
-
 export function OsmOutdoorMap() {
-  const center = useMemo(
-    () => [EVENT_CONFIG.venue.latitude, EVENT_CONFIG.venue.longitude] as [number, number],
-    [],
-  );
+  const containerRef = useRef<HTMLDivElement>(null);
+  const mapInstanceRef = useRef<any>(null);
+  const layerGroupRef = useRef<any>(null);
+  const tileLayerRef = useRef<any>(null);
 
   const [mapType, setMapType] = useState<"streets" | "satellite">("streets");
   const [activeFilter, setActiveFilter] = useState<FilterCategory>("all");
-  const [userLoc, setUserLoc] = useState<[number, number] | null>(null);
   const [locating, setLocating] = useState(false);
   const [selectedItem, setSelectedItem] = useState<{
     id: string;
@@ -91,88 +56,209 @@ export function OsmOutdoorMap() {
     hotel?: Hotel;
   } | null>(null);
 
+  // Initialize Vanilla Leaflet inside useEffect (never evaluated in SSR)
+  useEffect(() => {
+    if (typeof window === "undefined" || !containerRef.current || mapInstanceRef.current) return;
+
+    let isCancelled = false;
+
+    import("leaflet").then((mod) => {
+      if (isCancelled || !containerRef.current) return;
+      const L = mod.default || mod;
+
+      const map = L.map(containerRef.current, {
+        center: [EVENT_CONFIG.venue.latitude, EVENT_CONFIG.venue.longitude],
+        zoom: 13,
+        scrollWheelZoom: false,
+        zoomControl: true,
+      });
+
+      // Default Voyager tiles
+      const streets = L.tileLayer(
+        "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
+        {
+          attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; OpenStreetMap',
+          maxZoom: 20,
+        },
+      ).addTo(map);
+
+      tileLayerRef.current = streets;
+
+      const layerGroup = L.layerGroup().addTo(map);
+      layerGroupRef.current = layerGroup;
+      mapInstanceRef.current = map;
+
+      // Invalidate size on resize
+      setTimeout(() => map.invalidateSize(), 250);
+      window.addEventListener("resize", () => map.invalidateSize());
+    });
+
+    return () => {
+      isCancelled = true;
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.remove();
+        mapInstanceRef.current = null;
+      }
+    };
+  }, []);
+
+  // Sync Streets vs Satellite
+  useEffect(() => {
+    if (!mapInstanceRef.current) return;
+    import("leaflet").then((mod) => {
+      const L = mod.default || mod;
+      const map = mapInstanceRef.current;
+
+      if (tileLayerRef.current) {
+        map.removeLayer(tileLayerRef.current);
+      }
+
+      if (mapType === "satellite") {
+        tileLayerRef.current = L.tileLayer(
+          "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+          {
+            attribution: "Imagery &copy; Esri",
+            maxZoom: 18,
+          },
+        ).addTo(map);
+      } else {
+        tileLayerRef.current = L.tileLayer(
+          "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
+          {
+            attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; OpenStreetMap',
+            maxZoom: 20,
+          },
+        ).addTo(map);
+      }
+    });
+  }, [mapType]);
+
+  // Sync Markers when filter changes
+  useEffect(() => {
+    if (!mapInstanceRef.current || !layerGroupRef.current) return;
+
+    import("leaflet").then((mod) => {
+      const L = mod.default || mod;
+      const group = layerGroupRef.current;
+      group.clearLayers();
+
+      const itemsToMark: Array<{
+        id: string;
+        title: string;
+        category: string;
+        address?: string;
+        lat: number;
+        lng: number;
+        phone?: string;
+        hotel?: Hotel;
+        isVenue?: boolean;
+      }> = [];
+
+      // 1. Venue
+      if (activeFilter === "all" || activeFilter === "venue") {
+        itemsToMark.push({
+          id: "venue-icc",
+          title: EVENT_CONFIG.venue.name,
+          category: "Venue",
+          address: EVENT_CONFIG.venue.address,
+          lat: EVENT_CONFIG.venue.latitude,
+          lng: EVENT_CONFIG.venue.longitude,
+          phone: EVENT_CONFIG.primaryHotline,
+          isVenue: true,
+        });
+      }
+
+      // 2. Hotels
+      if (activeFilter === "all" || activeFilter === "hotels") {
+        HOTELS.forEach((h) => {
+          if (h.latitude && h.longitude) {
+            itemsToMark.push({
+              id: `hotel-${h.id}`,
+              title: h.name,
+              category: "Hotel",
+              address: h.location,
+              lat: h.latitude,
+              lng: h.longitude,
+              phone: h.contactPhone,
+              hotel: h,
+            });
+          }
+        });
+      }
+
+      // 3. POIs
+      VENUE_DATA.nearby.forEach((p) => {
+        if (!p.latitude || !p.longitude) return;
+        const catLower = p.category.toLowerCase();
+        let match = false;
+        if (activeFilter === "all") match = true;
+        else if (activeFilter === "hospitals" && catLower.includes("hospital")) match = true;
+        else if (activeFilter === "security" && catLower.includes("security")) match = true;
+        else if (activeFilter === "airport" && catLower.includes("airport")) match = true;
+        else if (activeFilter === "food" && (catLower.includes("restaurant") || catLower.includes("cafe"))) match = true;
+
+        if (match) {
+          itemsToMark.push({
+            id: p.id,
+            title: p.name,
+            category: p.category,
+            address: p.note,
+            lat: p.latitude,
+            lng: p.longitude,
+            phone: p.phone,
+          });
+        }
+      });
+
+      itemsToMark.forEach((item) => {
+        const isVenue = Boolean(item.isVenue);
+        const color = CATEGORY_COLORS[item.category] ?? "#123E73";
+        const size = isVenue ? 34 : 26;
+
+        const icon = L.divIcon({
+          className: "",
+          html: `<span style="display:flex;width:${size}px;height:${size}px;border-radius:9999px;background:${color};border:${isVenue ? "3px" : "2.5px"} solid #ffffff;box-shadow:0 3px 8px rgba(0,0,0,0.4);align-items:center;justify-content:center;color:#ffffff;font-size:${size / 2}px;line-height:1;font-weight:bold;">${isVenue ? "📍" : "•"}</span>`,
+          iconSize: [size, size],
+          iconAnchor: [size / 2, size / 2],
+          popupAnchor: [0, -size / 2],
+        });
+
+        const marker = L.marker([item.lat, item.lng], { icon });
+        marker.on("click", () => {
+          setSelectedItem(item);
+          mapInstanceRef.current?.panTo([item.lat, item.lng]);
+        });
+        marker.addTo(group);
+      });
+    });
+  }, [activeFilter]);
+
   function locateMe() {
-    if (!navigator.geolocation) return;
+    if (!navigator.geolocation || !mapInstanceRef.current) return;
     setLocating(true);
     navigator.geolocation.getCurrentPosition(
       (pos) => {
-        setUserLoc([pos.coords.latitude, pos.coords.longitude]);
         setLocating(false);
+        import("leaflet").then((mod) => {
+          const L = mod.default || mod;
+          const map = mapInstanceRef.current;
+          const userIcon = L.divIcon({
+            className: "",
+            html: '<span style="display:flex;width:22px;height:22px;border-radius:9999px;background:#2563eb;border:3px solid #ffffff;box-shadow:0 0 0 6px rgba(37,99,235,0.3),0 2px 6px rgba(0,0,0,0.4)"></span>',
+            iconSize: [22, 22],
+            iconAnchor: [11, 11],
+          });
+          L.marker([pos.coords.latitude, pos.coords.longitude], { icon: userIcon })
+            .addTo(map)
+            .bindPopup("<strong>You are here</strong>")
+            .openPopup();
+          map.setView([pos.coords.latitude, pos.coords.longitude], 15);
+        });
       },
       () => setLocating(false),
       { enableHighAccuracy: true, timeout: 8000 },
     );
   }
-
-  // Filter items
-  const items = useMemo(() => {
-    const list: Array<{
-      id: string;
-      title: string;
-      category: string;
-      address?: string;
-      lat: number;
-      lng: number;
-      phone?: string;
-      hotel?: Hotel;
-      isVenue?: boolean;
-    }> = [];
-
-    if (activeFilter === "all" || activeFilter === "venue") {
-      list.push({
-        id: "venue-icc",
-        title: EVENT_CONFIG.venue.name,
-        category: "Venue",
-        address: EVENT_CONFIG.venue.address,
-        lat: EVENT_CONFIG.venue.latitude,
-        lng: EVENT_CONFIG.venue.longitude,
-        phone: EVENT_CONFIG.primaryHotline,
-        isVenue: true,
-      });
-    }
-
-    if (activeFilter === "all" || activeFilter === "hotels") {
-      HOTELS.forEach((h) => {
-        if (h.latitude && h.longitude) {
-          list.push({
-            id: `hotel-${h.id}`,
-            title: h.name,
-            category: "Hotel",
-            address: h.location,
-            lat: h.latitude,
-            lng: h.longitude,
-            phone: h.contactPhone,
-            hotel: h,
-          });
-        }
-      });
-    }
-
-    VENUE_DATA.nearby.forEach((p) => {
-      if (!p.latitude || !p.longitude) return;
-      const catLower = p.category.toLowerCase();
-      let match = false;
-      if (activeFilter === "all") match = true;
-      else if (activeFilter === "hospitals" && catLower.includes("hospital")) match = true;
-      else if (activeFilter === "security" && catLower.includes("security")) match = true;
-      else if (activeFilter === "airport" && catLower.includes("airport")) match = true;
-      else if (activeFilter === "food" && (catLower.includes("restaurant") || catLower.includes("cafe"))) match = true;
-
-      if (match) {
-        list.push({
-          id: p.id,
-          title: p.name,
-          category: p.category,
-          address: p.note,
-          lat: p.latitude,
-          lng: p.longitude,
-          phone: p.phone,
-        });
-      }
-    });
-
-    return list;
-  }, [activeFilter]);
 
   return (
     <div className="space-y-3">
@@ -208,69 +294,7 @@ export function OsmOutdoorMap() {
 
       {/* Map Card */}
       <Card className="relative overflow-hidden border-0 shadow-elevated">
-        <MapContainer
-          center={center}
-          zoom={13}
-          scrollWheelZoom={false}
-          className="h-[430px] w-full"
-        >
-          <MapResizer />
-          {mapType === "satellite" ? (
-            <>
-              <TileLayer
-                attribution="Imagery &copy; Esri"
-                url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
-                maxZoom={18}
-              />
-              <TileLayer
-                url="https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Reference_Overlay/MapServer/tile/{z}/{y}/{x}"
-                maxZoom={18}
-                opacity={0.85}
-              />
-            </>
-          ) : (
-            <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
-              url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
-              maxZoom={20}
-            />
-          )}
-
-          {/* User Location Marker */}
-          {userLoc && (
-            <Marker position={userLoc} icon={userLocationIcon}>
-              <Popup>
-                <strong>You are here</strong>
-              </Popup>
-            </Marker>
-          )}
-
-          {/* Render markers */}
-          {items.map((item) => (
-            <Marker
-              key={item.id}
-              position={[item.lat, item.lng]}
-              icon={pinIcon(CATEGORY_COLORS[item.category] ?? "#123E73", item.isVenue)}
-              eventHandlers={{
-                click: () => setSelectedItem(item),
-              }}
-            >
-              <Popup>
-                <div className="text-xs">
-                  <strong>{item.title}</strong>
-                  <br />
-                  <span className="text-muted-foreground">{item.category}</span>
-                  {item.address && (
-                    <>
-                      <br />
-                      <span>{item.address}</span>
-                    </>
-                  )}
-                </div>
-              </Popup>
-            </Marker>
-          ))}
-        </MapContainer>
+        <div ref={containerRef} className="h-[430px] w-full bg-muted/30" />
 
         {/* Map Floating Controls */}
         <div className="absolute right-3 top-3 z-[500] flex flex-col gap-1.5">
@@ -388,3 +412,5 @@ export function OsmOutdoorMap() {
     </div>
   );
 }
+
+export default OsmOutdoorMap;
