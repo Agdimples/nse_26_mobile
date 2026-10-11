@@ -9,145 +9,79 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AuthRouteImport } from './routes/auth'
-import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ApiChatRouteImport } from './routes/api/chat'
-import { Route as AuthenticatedWaitlistRouteImport } from './routes/_authenticated/waitlist'
-import { Route as AuthenticatedTransportRouteImport } from './routes/_authenticated/transport'
-import { Route as AuthenticatedSpeakersRouteImport } from './routes/_authenticated/speakers'
-import { Route as AuthenticatedScheduleRouteImport } from './routes/_authenticated/schedule'
-import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
-import { Route as AuthenticatedNetworkRouteImport } from './routes/_authenticated/network'
-import { Route as AuthenticatedNearbyRouteImport } from './routes/_authenticated/nearby'
-import { Route as AuthenticatedMoreRouteImport } from './routes/_authenticated/more'
-import { Route as AuthenticatedMapRouteImport } from './routes/_authenticated/map'
-import { Route as AuthenticatedMaidguideRouteImport } from './routes/_authenticated/maidguide'
-import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/home'
-import { Route as AuthenticatedFaqRouteImport } from './routes/_authenticated/faq'
-import { Route as AuthenticatedEmergencyRouteImport } from './routes/_authenticated/emergency'
-import { Route as AuthenticatedDirectionsRouteImport } from './routes/_authenticated/directions'
-import { Route as AuthenticatedConciergeRouteImport } from './routes/_authenticated/concierge'
-import { Route as AuthenticatedChatbotRouteImport } from './routes/_authenticated/chatbot'
-import { Route as AuthenticatedAnnouncementsRouteImport } from './routes/_authenticated/announcements'
-import { Route as AuthenticatedAccommodationRouteImport } from './routes/_authenticated/accommodation'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedAboutRouteImport } from './routes/_authenticated/about'
+import { Route as AuthenticatedAccommodationRouteImport } from './routes/_authenticated/accommodation'
 import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
-import { Route as AuthenticatedConciergeIndexRouteImport } from './routes/_authenticated/concierge.index'
+import { Route as AuthenticatedAnnouncementsRouteImport } from './routes/_authenticated/announcements'
+import { Route as AuthenticatedChatbotRouteImport } from './routes/_authenticated/chatbot'
+import { Route as AuthenticatedConciergeRouteImport } from './routes/_authenticated/concierge'
+import { Route as AuthenticatedDirectionsRouteImport } from './routes/_authenticated/directions'
+import { Route as AuthenticatedEmergencyRouteImport } from './routes/_authenticated/emergency'
+import { Route as AuthenticatedFaqRouteImport } from './routes/_authenticated/faq'
+import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/home'
+import { Route as AuthenticatedMaidguideRouteImport } from './routes/_authenticated/maidguide'
+import { Route as AuthenticatedMapRouteImport } from './routes/_authenticated/map'
+import { Route as AuthenticatedMoreRouteImport } from './routes/_authenticated/more'
+import { Route as AuthenticatedNearbyRouteImport } from './routes/_authenticated/nearby'
+import { Route as AuthenticatedNetworkRouteImport } from './routes/_authenticated/network'
+import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
+import { Route as AuthenticatedScheduleRouteImport } from './routes/_authenticated/schedule'
+import { Route as AuthenticatedSpeakersRouteImport } from './routes/_authenticated/speakers'
+import { Route as AuthenticatedTransportRouteImport } from './routes/_authenticated/transport'
+import { Route as AuthenticatedWaitlistRouteImport } from './routes/_authenticated/waitlist'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as AuthCallbackRouteImport } from './routes/auth.callback'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
-import { Route as AuthenticatedSpeakersSpeakerIdRouteImport } from './routes/_authenticated/speakers.$speakerId'
-import { Route as AuthenticatedScheduleSessionIdRouteImport } from './routes/_authenticated/schedule.$sessionId'
-import { Route as AuthenticatedNetworkUserIdRouteImport } from './routes/_authenticated/network.$userId'
-import { Route as AuthenticatedConciergeUsherRouteImport } from './routes/_authenticated/concierge.usher'
-import { Route as AuthenticatedConciergeOrdersRouteImport } from './routes/_authenticated/concierge.orders'
-import { Route as AuthenticatedConciergeFoodRouteImport } from './routes/_authenticated/concierge.food'
-import { Route as AuthenticatedAdminUshersRouteImport } from './routes/_authenticated/admin/ushers'
-import { Route as AuthenticatedAdminSpeakersRouteImport } from './routes/_authenticated/admin/speakers'
-import { Route as AuthenticatedAdminSessionsRouteImport } from './routes/_authenticated/admin/sessions'
-import { Route as AuthenticatedAdminOrdersRouteImport } from './routes/_authenticated/admin/orders'
-import { Route as AuthenticatedAdminMenuRouteImport } from './routes/_authenticated/admin/menu'
-import { Route as AuthenticatedAdminEmergencyRouteImport } from './routes/_authenticated/admin/emergency'
-import { Route as AuthenticatedAdminAnnouncementsRouteImport } from './routes/_authenticated/admin/announcements'
 import { Route as AuthenticatedAdminAccommodationsRouteImport } from './routes/_authenticated/admin/accommodations'
+import { Route as AuthenticatedAdminAnnouncementsRouteImport } from './routes/_authenticated/admin/announcements'
+import { Route as AuthenticatedAdminEmergencyRouteImport } from './routes/_authenticated/admin/emergency'
+import { Route as AuthenticatedAdminExhibitorsRouteImport } from './routes/_authenticated/admin/exhibitors'
+import { Route as AuthenticatedAdminMenuRouteImport } from './routes/_authenticated/admin/menu'
+import { Route as AuthenticatedAdminOrdersRouteImport } from './routes/_authenticated/admin/orders'
+import { Route as AuthenticatedAdminSessionsRouteImport } from './routes/_authenticated/admin/sessions'
+import { Route as AuthenticatedAdminSpeakersRouteImport } from './routes/_authenticated/admin/speakers'
+import { Route as AuthenticatedAdminStaffRouteImport } from './routes/_authenticated/admin/staff'
+import { Route as AuthenticatedAdminUshersRouteImport } from './routes/_authenticated/admin/ushers'
+import { Route as AuthenticatedConciergeIndexRouteImport } from './routes/_authenticated/concierge.index'
+import { Route as AuthenticatedConciergeFoodRouteImport } from './routes/_authenticated/concierge.food'
+import { Route as AuthenticatedConciergeOrdersRouteImport } from './routes/_authenticated/concierge.orders'
+import { Route as AuthenticatedConciergeUsherRouteImport } from './routes/_authenticated/concierge.usher'
+import { Route as AuthenticatedNetworkUserIdRouteImport } from './routes/_authenticated/network.$userId'
+import { Route as AuthenticatedScheduleSessionIdRouteImport } from './routes/_authenticated/schedule.$sessionId'
+import { Route as AuthenticatedSpeakersSpeakerIdRouteImport } from './routes/_authenticated/speakers.$speakerId'
 import { Route as AuthenticatedNetworkRoomRoomIdRouteImport } from './routes/_authenticated/network.room.$roomId'
 
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiChatRoute = ApiChatRouteImport.update({
-  id: '/api/chat',
-  path: '/api/chat',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthenticatedWaitlistRoute = AuthenticatedWaitlistRouteImport.update({
-  id: '/waitlist',
-  path: '/waitlist',
+const AuthenticatedAboutRoute = AuthenticatedAboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedTransportRoute = AuthenticatedTransportRouteImport.update({
-  id: '/transport',
-  path: '/transport',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedSpeakersRoute = AuthenticatedSpeakersRouteImport.update({
-  id: '/speakers',
-  path: '/speakers',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedScheduleRoute = AuthenticatedScheduleRouteImport.update({
-  id: '/schedule',
-  path: '/schedule',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
-  id: '/profile',
-  path: '/profile',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedNetworkRoute = AuthenticatedNetworkRouteImport.update({
-  id: '/network',
-  path: '/network',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedNearbyRoute = AuthenticatedNearbyRouteImport.update({
-  id: '/nearby',
-  path: '/nearby',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedMoreRoute = AuthenticatedMoreRouteImport.update({
-  id: '/more',
-  path: '/more',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedMapRoute = AuthenticatedMapRouteImport.update({
-  id: '/map',
-  path: '/map',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedMaidguideRoute = AuthenticatedMaidguideRouteImport.update({
-  id: '/maidguide',
-  path: '/maidguide',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedHomeRoute = AuthenticatedHomeRouteImport.update({
-  id: '/home',
-  path: '/home',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedFaqRoute = AuthenticatedFaqRouteImport.update({
-  id: '/faq',
-  path: '/faq',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedEmergencyRoute = AuthenticatedEmergencyRouteImport.update({
-  id: '/emergency',
-  path: '/emergency',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedDirectionsRoute = AuthenticatedDirectionsRouteImport.update({
-  id: '/directions',
-  path: '/directions',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedConciergeRoute = AuthenticatedConciergeRouteImport.update({
-  id: '/concierge',
-  path: '/concierge',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedChatbotRoute = AuthenticatedChatbotRouteImport.update({
-  id: '/chatbot',
-  path: '/chatbot',
+const AuthenticatedAccommodationRoute =
+  AuthenticatedAccommodationRouteImport.update({
+    id: '/accommodation',
+    path: '/accommodation',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminRouteRoute = AuthenticatedAdminRouteRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedAnnouncementsRoute =
@@ -156,102 +90,105 @@ const AuthenticatedAnnouncementsRoute =
     path: '/announcements',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedAccommodationRoute =
-  AuthenticatedAccommodationRouteImport.update({
-    id: '/accommodation',
-    path: '/accommodation',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedAboutRoute = AuthenticatedAboutRouteImport.update({
-  id: '/about',
-  path: '/about',
+const AuthenticatedChatbotRoute = AuthenticatedChatbotRouteImport.update({
+  id: '/chatbot',
+  path: '/chatbot',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedAdminRouteRoute = AuthenticatedAdminRouteRouteImport.update({
-  id: '/admin',
-  path: '/admin',
+const AuthenticatedConciergeRoute = AuthenticatedConciergeRouteImport.update({
+  id: '/concierge',
+  path: '/concierge',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedConciergeIndexRoute =
-  AuthenticatedConciergeIndexRouteImport.update({
-    id: '/',
-    path: '/',
-    getParentRoute: () => AuthenticatedConciergeRoute,
-  } as any)
+const AuthenticatedDirectionsRoute = AuthenticatedDirectionsRouteImport.update({
+  id: '/directions',
+  path: '/directions',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedEmergencyRoute = AuthenticatedEmergencyRouteImport.update({
+  id: '/emergency',
+  path: '/emergency',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedFaqRoute = AuthenticatedFaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedHomeRoute = AuthenticatedHomeRouteImport.update({
+  id: '/home',
+  path: '/home',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedMaidguideRoute = AuthenticatedMaidguideRouteImport.update({
+  id: '/maidguide',
+  path: '/maidguide',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedMapRoute = AuthenticatedMapRouteImport.update({
+  id: '/map',
+  path: '/map',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedMoreRoute = AuthenticatedMoreRouteImport.update({
+  id: '/more',
+  path: '/more',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedNearbyRoute = AuthenticatedNearbyRouteImport.update({
+  id: '/nearby',
+  path: '/nearby',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedNetworkRoute = AuthenticatedNetworkRouteImport.update({
+  id: '/network',
+  path: '/network',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedScheduleRoute = AuthenticatedScheduleRouteImport.update({
+  id: '/schedule',
+  path: '/schedule',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSpeakersRoute = AuthenticatedSpeakersRouteImport.update({
+  id: '/speakers',
+  path: '/speakers',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedTransportRoute = AuthenticatedTransportRouteImport.update({
+  id: '/transport',
+  path: '/transport',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedWaitlistRoute = AuthenticatedWaitlistRouteImport.update({
+  id: '/waitlist',
+  path: '/waitlist',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthCallbackRoute = AuthCallbackRouteImport.update({
+  id: '/callback',
+  path: '/callback',
+  getParentRoute: () => AuthRoute,
+} as any)
 const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AuthenticatedAdminRouteRoute,
 } as any)
-const AuthenticatedSpeakersSpeakerIdRoute =
-  AuthenticatedSpeakersSpeakerIdRouteImport.update({
-    id: '/$speakerId',
-    path: '/$speakerId',
-    getParentRoute: () => AuthenticatedSpeakersRoute,
-  } as any)
-const AuthenticatedScheduleSessionIdRoute =
-  AuthenticatedScheduleSessionIdRouteImport.update({
-    id: '/$sessionId',
-    path: '/$sessionId',
-    getParentRoute: () => AuthenticatedScheduleRoute,
-  } as any)
-const AuthenticatedNetworkUserIdRoute =
-  AuthenticatedNetworkUserIdRouteImport.update({
-    id: '/$userId',
-    path: '/$userId',
-    getParentRoute: () => AuthenticatedNetworkRoute,
-  } as any)
-const AuthenticatedConciergeUsherRoute =
-  AuthenticatedConciergeUsherRouteImport.update({
-    id: '/usher',
-    path: '/usher',
-    getParentRoute: () => AuthenticatedConciergeRoute,
-  } as any)
-const AuthenticatedConciergeOrdersRoute =
-  AuthenticatedConciergeOrdersRouteImport.update({
-    id: '/orders',
-    path: '/orders',
-    getParentRoute: () => AuthenticatedConciergeRoute,
-  } as any)
-const AuthenticatedConciergeFoodRoute =
-  AuthenticatedConciergeFoodRouteImport.update({
-    id: '/food',
-    path: '/food',
-    getParentRoute: () => AuthenticatedConciergeRoute,
-  } as any)
-const AuthenticatedAdminUshersRoute =
-  AuthenticatedAdminUshersRouteImport.update({
-    id: '/ushers',
-    path: '/ushers',
-    getParentRoute: () => AuthenticatedAdminRouteRoute,
-  } as any)
-const AuthenticatedAdminSpeakersRoute =
-  AuthenticatedAdminSpeakersRouteImport.update({
-    id: '/speakers',
-    path: '/speakers',
-    getParentRoute: () => AuthenticatedAdminRouteRoute,
-  } as any)
-const AuthenticatedAdminSessionsRoute =
-  AuthenticatedAdminSessionsRouteImport.update({
-    id: '/sessions',
-    path: '/sessions',
-    getParentRoute: () => AuthenticatedAdminRouteRoute,
-  } as any)
-const AuthenticatedAdminOrdersRoute =
-  AuthenticatedAdminOrdersRouteImport.update({
-    id: '/orders',
-    path: '/orders',
-    getParentRoute: () => AuthenticatedAdminRouteRoute,
-  } as any)
-const AuthenticatedAdminMenuRoute = AuthenticatedAdminMenuRouteImport.update({
-  id: '/menu',
-  path: '/menu',
-  getParentRoute: () => AuthenticatedAdminRouteRoute,
-} as any)
-const AuthenticatedAdminEmergencyRoute =
-  AuthenticatedAdminEmergencyRouteImport.update({
-    id: '/emergency',
-    path: '/emergency',
+const AuthenticatedAdminAccommodationsRoute =
+  AuthenticatedAdminAccommodationsRouteImport.update({
+    id: '/accommodations',
+    path: '/accommodations',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
 const AuthenticatedAdminAnnouncementsRoute =
@@ -260,11 +197,93 @@ const AuthenticatedAdminAnnouncementsRoute =
     path: '/announcements',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
-const AuthenticatedAdminAccommodationsRoute =
-  AuthenticatedAdminAccommodationsRouteImport.update({
-    id: '/accommodations',
-    path: '/accommodations',
+const AuthenticatedAdminEmergencyRoute =
+  AuthenticatedAdminEmergencyRouteImport.update({
+    id: '/emergency',
+    path: '/emergency',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminExhibitorsRoute =
+  AuthenticatedAdminExhibitorsRouteImport.update({
+    id: '/exhibitors',
+    path: '/exhibitors',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminMenuRoute = AuthenticatedAdminMenuRouteImport.update({
+  id: '/menu',
+  path: '/menu',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
+const AuthenticatedAdminOrdersRoute =
+  AuthenticatedAdminOrdersRouteImport.update({
+    id: '/orders',
+    path: '/orders',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminSessionsRoute =
+  AuthenticatedAdminSessionsRouteImport.update({
+    id: '/sessions',
+    path: '/sessions',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminSpeakersRoute =
+  AuthenticatedAdminSpeakersRouteImport.update({
+    id: '/speakers',
+    path: '/speakers',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminStaffRoute = AuthenticatedAdminStaffRouteImport.update({
+  id: '/staff',
+  path: '/staff',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
+const AuthenticatedAdminUshersRoute =
+  AuthenticatedAdminUshersRouteImport.update({
+    id: '/ushers',
+    path: '/ushers',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedConciergeIndexRoute =
+  AuthenticatedConciergeIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedConciergeRoute,
+  } as any)
+const AuthenticatedConciergeFoodRoute =
+  AuthenticatedConciergeFoodRouteImport.update({
+    id: '/food',
+    path: '/food',
+    getParentRoute: () => AuthenticatedConciergeRoute,
+  } as any)
+const AuthenticatedConciergeOrdersRoute =
+  AuthenticatedConciergeOrdersRouteImport.update({
+    id: '/orders',
+    path: '/orders',
+    getParentRoute: () => AuthenticatedConciergeRoute,
+  } as any)
+const AuthenticatedConciergeUsherRoute =
+  AuthenticatedConciergeUsherRouteImport.update({
+    id: '/usher',
+    path: '/usher',
+    getParentRoute: () => AuthenticatedConciergeRoute,
+  } as any)
+const AuthenticatedNetworkUserIdRoute =
+  AuthenticatedNetworkUserIdRouteImport.update({
+    id: '/$userId',
+    path: '/$userId',
+    getParentRoute: () => AuthenticatedNetworkRoute,
+  } as any)
+const AuthenticatedScheduleSessionIdRoute =
+  AuthenticatedScheduleSessionIdRouteImport.update({
+    id: '/$sessionId',
+    path: '/$sessionId',
+    getParentRoute: () => AuthenticatedScheduleRoute,
+  } as any)
+const AuthenticatedSpeakersSpeakerIdRoute =
+  AuthenticatedSpeakersSpeakerIdRouteImport.update({
+    id: '/$speakerId',
+    path: '/$speakerId',
+    getParentRoute: () => AuthenticatedSpeakersRoute,
   } as any)
 const AuthenticatedNetworkRoomRoomIdRoute =
   AuthenticatedNetworkRoomRoomIdRouteImport.update({
@@ -275,7 +294,7 @@ const AuthenticatedNetworkRoomRoomIdRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/auth': typeof AuthRoute
+  '/auth': typeof AuthRouteWithChildren
   '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/about': typeof AuthenticatedAboutRoute
   '/accommodation': typeof AuthenticatedAccommodationRoute
@@ -297,13 +316,16 @@ export interface FileRoutesByFullPath {
   '/transport': typeof AuthenticatedTransportRoute
   '/waitlist': typeof AuthenticatedWaitlistRoute
   '/api/chat': typeof ApiChatRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/admin/accommodations': typeof AuthenticatedAdminAccommodationsRoute
   '/admin/announcements': typeof AuthenticatedAdminAnnouncementsRoute
   '/admin/emergency': typeof AuthenticatedAdminEmergencyRoute
+  '/admin/exhibitors': typeof AuthenticatedAdminExhibitorsRoute
   '/admin/menu': typeof AuthenticatedAdminMenuRoute
   '/admin/orders': typeof AuthenticatedAdminOrdersRoute
   '/admin/sessions': typeof AuthenticatedAdminSessionsRoute
   '/admin/speakers': typeof AuthenticatedAdminSpeakersRoute
+  '/admin/staff': typeof AuthenticatedAdminStaffRoute
   '/admin/ushers': typeof AuthenticatedAdminUshersRoute
   '/concierge/food': typeof AuthenticatedConciergeFoodRoute
   '/concierge/orders': typeof AuthenticatedConciergeOrdersRoute
@@ -317,7 +339,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/auth': typeof AuthRoute
+  '/auth': typeof AuthRouteWithChildren
   '/about': typeof AuthenticatedAboutRoute
   '/accommodation': typeof AuthenticatedAccommodationRoute
   '/announcements': typeof AuthenticatedAnnouncementsRoute
@@ -337,13 +359,16 @@ export interface FileRoutesByTo {
   '/transport': typeof AuthenticatedTransportRoute
   '/waitlist': typeof AuthenticatedWaitlistRoute
   '/api/chat': typeof ApiChatRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/admin/accommodations': typeof AuthenticatedAdminAccommodationsRoute
   '/admin/announcements': typeof AuthenticatedAdminAnnouncementsRoute
   '/admin/emergency': typeof AuthenticatedAdminEmergencyRoute
+  '/admin/exhibitors': typeof AuthenticatedAdminExhibitorsRoute
   '/admin/menu': typeof AuthenticatedAdminMenuRoute
   '/admin/orders': typeof AuthenticatedAdminOrdersRoute
   '/admin/sessions': typeof AuthenticatedAdminSessionsRoute
   '/admin/speakers': typeof AuthenticatedAdminSpeakersRoute
+  '/admin/staff': typeof AuthenticatedAdminStaffRoute
   '/admin/ushers': typeof AuthenticatedAdminUshersRoute
   '/concierge/food': typeof AuthenticatedConciergeFoodRoute
   '/concierge/orders': typeof AuthenticatedConciergeOrdersRoute
@@ -359,7 +384,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
-  '/auth': typeof AuthRoute
+  '/auth': typeof AuthRouteWithChildren
   '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/_authenticated/about': typeof AuthenticatedAboutRoute
   '/_authenticated/accommodation': typeof AuthenticatedAccommodationRoute
@@ -381,13 +406,16 @@ export interface FileRoutesById {
   '/_authenticated/transport': typeof AuthenticatedTransportRoute
   '/_authenticated/waitlist': typeof AuthenticatedWaitlistRoute
   '/api/chat': typeof ApiChatRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/_authenticated/admin/accommodations': typeof AuthenticatedAdminAccommodationsRoute
   '/_authenticated/admin/announcements': typeof AuthenticatedAdminAnnouncementsRoute
   '/_authenticated/admin/emergency': typeof AuthenticatedAdminEmergencyRoute
+  '/_authenticated/admin/exhibitors': typeof AuthenticatedAdminExhibitorsRoute
   '/_authenticated/admin/menu': typeof AuthenticatedAdminMenuRoute
   '/_authenticated/admin/orders': typeof AuthenticatedAdminOrdersRoute
   '/_authenticated/admin/sessions': typeof AuthenticatedAdminSessionsRoute
   '/_authenticated/admin/speakers': typeof AuthenticatedAdminSpeakersRoute
+  '/_authenticated/admin/staff': typeof AuthenticatedAdminStaffRoute
   '/_authenticated/admin/ushers': typeof AuthenticatedAdminUshersRoute
   '/_authenticated/concierge/food': typeof AuthenticatedConciergeFoodRoute
   '/_authenticated/concierge/orders': typeof AuthenticatedConciergeOrdersRoute
@@ -425,13 +453,16 @@ export interface FileRouteTypes {
     | '/transport'
     | '/waitlist'
     | '/api/chat'
+    | '/auth/callback'
     | '/admin/accommodations'
     | '/admin/announcements'
     | '/admin/emergency'
+    | '/admin/exhibitors'
     | '/admin/menu'
     | '/admin/orders'
     | '/admin/sessions'
     | '/admin/speakers'
+    | '/admin/staff'
     | '/admin/ushers'
     | '/concierge/food'
     | '/concierge/orders'
@@ -465,13 +496,16 @@ export interface FileRouteTypes {
     | '/transport'
     | '/waitlist'
     | '/api/chat'
+    | '/auth/callback'
     | '/admin/accommodations'
     | '/admin/announcements'
     | '/admin/emergency'
+    | '/admin/exhibitors'
     | '/admin/menu'
     | '/admin/orders'
     | '/admin/sessions'
     | '/admin/speakers'
+    | '/admin/staff'
     | '/admin/ushers'
     | '/concierge/food'
     | '/concierge/orders'
@@ -508,13 +542,16 @@ export interface FileRouteTypes {
     | '/_authenticated/transport'
     | '/_authenticated/waitlist'
     | '/api/chat'
+    | '/auth/callback'
     | '/_authenticated/admin/accommodations'
     | '/_authenticated/admin/announcements'
     | '/_authenticated/admin/emergency'
+    | '/_authenticated/admin/exhibitors'
     | '/_authenticated/admin/menu'
     | '/_authenticated/admin/orders'
     | '/_authenticated/admin/sessions'
     | '/_authenticated/admin/speakers'
+    | '/_authenticated/admin/staff'
     | '/_authenticated/admin/ushers'
     | '/_authenticated/concierge/food'
     | '/_authenticated/concierge/orders'
@@ -530,17 +567,17 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
-  AuthRoute: typeof AuthRoute
+  AuthRoute: typeof AuthRouteWithChildren
   ApiChatRoute: typeof ApiChatRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated': {
@@ -550,137 +587,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/chat': {
-      id: '/api/chat'
-      path: '/api/chat'
-      fullPath: '/api/chat'
-      preLoaderRoute: typeof ApiChatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/waitlist': {
-      id: '/_authenticated/waitlist'
-      path: '/waitlist'
-      fullPath: '/waitlist'
-      preLoaderRoute: typeof AuthenticatedWaitlistRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/transport': {
-      id: '/_authenticated/transport'
-      path: '/transport'
-      fullPath: '/transport'
-      preLoaderRoute: typeof AuthenticatedTransportRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/speakers': {
-      id: '/_authenticated/speakers'
-      path: '/speakers'
-      fullPath: '/speakers'
-      preLoaderRoute: typeof AuthenticatedSpeakersRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/schedule': {
-      id: '/_authenticated/schedule'
-      path: '/schedule'
-      fullPath: '/schedule'
-      preLoaderRoute: typeof AuthenticatedScheduleRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/profile': {
-      id: '/_authenticated/profile'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof AuthenticatedProfileRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/network': {
-      id: '/_authenticated/network'
-      path: '/network'
-      fullPath: '/network'
-      preLoaderRoute: typeof AuthenticatedNetworkRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/nearby': {
-      id: '/_authenticated/nearby'
-      path: '/nearby'
-      fullPath: '/nearby'
-      preLoaderRoute: typeof AuthenticatedNearbyRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/more': {
-      id: '/_authenticated/more'
-      path: '/more'
-      fullPath: '/more'
-      preLoaderRoute: typeof AuthenticatedMoreRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/map': {
-      id: '/_authenticated/map'
-      path: '/map'
-      fullPath: '/map'
-      preLoaderRoute: typeof AuthenticatedMapRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/maidguide': {
-      id: '/_authenticated/maidguide'
-      path: '/maidguide'
-      fullPath: '/maidguide'
-      preLoaderRoute: typeof AuthenticatedMaidguideRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/home': {
-      id: '/_authenticated/home'
-      path: '/home'
-      fullPath: '/home'
-      preLoaderRoute: typeof AuthenticatedHomeRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/faq': {
-      id: '/_authenticated/faq'
-      path: '/faq'
-      fullPath: '/faq'
-      preLoaderRoute: typeof AuthenticatedFaqRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/emergency': {
-      id: '/_authenticated/emergency'
-      path: '/emergency'
-      fullPath: '/emergency'
-      preLoaderRoute: typeof AuthenticatedEmergencyRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/directions': {
-      id: '/_authenticated/directions'
-      path: '/directions'
-      fullPath: '/directions'
-      preLoaderRoute: typeof AuthenticatedDirectionsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/concierge': {
-      id: '/_authenticated/concierge'
-      path: '/concierge'
-      fullPath: '/concierge'
-      preLoaderRoute: typeof AuthenticatedConciergeRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/chatbot': {
-      id: '/_authenticated/chatbot'
-      path: '/chatbot'
-      fullPath: '/chatbot'
-      preLoaderRoute: typeof AuthenticatedChatbotRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/announcements': {
-      id: '/_authenticated/announcements'
-      path: '/announcements'
-      fullPath: '/announcements'
-      preLoaderRoute: typeof AuthenticatedAnnouncementsRouteImport
+    '/_authenticated/about': {
+      id: '/_authenticated/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AuthenticatedAboutRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/accommodation': {
@@ -690,13 +608,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAccommodationRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/about': {
-      id: '/_authenticated/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AuthenticatedAboutRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/admin': {
       id: '/_authenticated/admin'
       path: '/admin'
@@ -704,12 +615,138 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/concierge/': {
-      id: '/_authenticated/concierge/'
-      path: '/'
-      fullPath: '/concierge/'
-      preLoaderRoute: typeof AuthenticatedConciergeIndexRouteImport
-      parentRoute: typeof AuthenticatedConciergeRoute
+    '/_authenticated/announcements': {
+      id: '/_authenticated/announcements'
+      path: '/announcements'
+      fullPath: '/announcements'
+      preLoaderRoute: typeof AuthenticatedAnnouncementsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/chatbot': {
+      id: '/_authenticated/chatbot'
+      path: '/chatbot'
+      fullPath: '/chatbot'
+      preLoaderRoute: typeof AuthenticatedChatbotRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/concierge': {
+      id: '/_authenticated/concierge'
+      path: '/concierge'
+      fullPath: '/concierge'
+      preLoaderRoute: typeof AuthenticatedConciergeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/directions': {
+      id: '/_authenticated/directions'
+      path: '/directions'
+      fullPath: '/directions'
+      preLoaderRoute: typeof AuthenticatedDirectionsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/emergency': {
+      id: '/_authenticated/emergency'
+      path: '/emergency'
+      fullPath: '/emergency'
+      preLoaderRoute: typeof AuthenticatedEmergencyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/faq': {
+      id: '/_authenticated/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof AuthenticatedFaqRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/home': {
+      id: '/_authenticated/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof AuthenticatedHomeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/maidguide': {
+      id: '/_authenticated/maidguide'
+      path: '/maidguide'
+      fullPath: '/maidguide'
+      preLoaderRoute: typeof AuthenticatedMaidguideRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/map': {
+      id: '/_authenticated/map'
+      path: '/map'
+      fullPath: '/map'
+      preLoaderRoute: typeof AuthenticatedMapRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/more': {
+      id: '/_authenticated/more'
+      path: '/more'
+      fullPath: '/more'
+      preLoaderRoute: typeof AuthenticatedMoreRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/nearby': {
+      id: '/_authenticated/nearby'
+      path: '/nearby'
+      fullPath: '/nearby'
+      preLoaderRoute: typeof AuthenticatedNearbyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/network': {
+      id: '/_authenticated/network'
+      path: '/network'
+      fullPath: '/network'
+      preLoaderRoute: typeof AuthenticatedNetworkRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/profile': {
+      id: '/_authenticated/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AuthenticatedProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/schedule': {
+      id: '/_authenticated/schedule'
+      path: '/schedule'
+      fullPath: '/schedule'
+      preLoaderRoute: typeof AuthenticatedScheduleRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/speakers': {
+      id: '/_authenticated/speakers'
+      path: '/speakers'
+      fullPath: '/speakers'
+      preLoaderRoute: typeof AuthenticatedSpeakersRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/transport': {
+      id: '/_authenticated/transport'
+      path: '/transport'
+      fullPath: '/transport'
+      preLoaderRoute: typeof AuthenticatedTransportRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/waitlist': {
+      id: '/_authenticated/waitlist'
+      path: '/waitlist'
+      fullPath: '/waitlist'
+      preLoaderRoute: typeof AuthenticatedWaitlistRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/callback': {
+      id: '/auth/callback'
+      path: '/callback'
+      fullPath: '/auth/callback'
+      preLoaderRoute: typeof AuthCallbackRouteImport
+      parentRoute: typeof AuthRoute
     }
     '/_authenticated/admin/': {
       id: '/_authenticated/admin/'
@@ -718,88 +755,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
-    '/_authenticated/speakers/$speakerId': {
-      id: '/_authenticated/speakers/$speakerId'
-      path: '/$speakerId'
-      fullPath: '/speakers/$speakerId'
-      preLoaderRoute: typeof AuthenticatedSpeakersSpeakerIdRouteImport
-      parentRoute: typeof AuthenticatedSpeakersRoute
-    }
-    '/_authenticated/schedule/$sessionId': {
-      id: '/_authenticated/schedule/$sessionId'
-      path: '/$sessionId'
-      fullPath: '/schedule/$sessionId'
-      preLoaderRoute: typeof AuthenticatedScheduleSessionIdRouteImport
-      parentRoute: typeof AuthenticatedScheduleRoute
-    }
-    '/_authenticated/network/$userId': {
-      id: '/_authenticated/network/$userId'
-      path: '/$userId'
-      fullPath: '/network/$userId'
-      preLoaderRoute: typeof AuthenticatedNetworkUserIdRouteImport
-      parentRoute: typeof AuthenticatedNetworkRoute
-    }
-    '/_authenticated/concierge/usher': {
-      id: '/_authenticated/concierge/usher'
-      path: '/usher'
-      fullPath: '/concierge/usher'
-      preLoaderRoute: typeof AuthenticatedConciergeUsherRouteImport
-      parentRoute: typeof AuthenticatedConciergeRoute
-    }
-    '/_authenticated/concierge/orders': {
-      id: '/_authenticated/concierge/orders'
-      path: '/orders'
-      fullPath: '/concierge/orders'
-      preLoaderRoute: typeof AuthenticatedConciergeOrdersRouteImport
-      parentRoute: typeof AuthenticatedConciergeRoute
-    }
-    '/_authenticated/concierge/food': {
-      id: '/_authenticated/concierge/food'
-      path: '/food'
-      fullPath: '/concierge/food'
-      preLoaderRoute: typeof AuthenticatedConciergeFoodRouteImport
-      parentRoute: typeof AuthenticatedConciergeRoute
-    }
-    '/_authenticated/admin/ushers': {
-      id: '/_authenticated/admin/ushers'
-      path: '/ushers'
-      fullPath: '/admin/ushers'
-      preLoaderRoute: typeof AuthenticatedAdminUshersRouteImport
-      parentRoute: typeof AuthenticatedAdminRouteRoute
-    }
-    '/_authenticated/admin/speakers': {
-      id: '/_authenticated/admin/speakers'
-      path: '/speakers'
-      fullPath: '/admin/speakers'
-      preLoaderRoute: typeof AuthenticatedAdminSpeakersRouteImport
-      parentRoute: typeof AuthenticatedAdminRouteRoute
-    }
-    '/_authenticated/admin/sessions': {
-      id: '/_authenticated/admin/sessions'
-      path: '/sessions'
-      fullPath: '/admin/sessions'
-      preLoaderRoute: typeof AuthenticatedAdminSessionsRouteImport
-      parentRoute: typeof AuthenticatedAdminRouteRoute
-    }
-    '/_authenticated/admin/orders': {
-      id: '/_authenticated/admin/orders'
-      path: '/orders'
-      fullPath: '/admin/orders'
-      preLoaderRoute: typeof AuthenticatedAdminOrdersRouteImport
-      parentRoute: typeof AuthenticatedAdminRouteRoute
-    }
-    '/_authenticated/admin/menu': {
-      id: '/_authenticated/admin/menu'
-      path: '/menu'
-      fullPath: '/admin/menu'
-      preLoaderRoute: typeof AuthenticatedAdminMenuRouteImport
-      parentRoute: typeof AuthenticatedAdminRouteRoute
-    }
-    '/_authenticated/admin/emergency': {
-      id: '/_authenticated/admin/emergency'
-      path: '/emergency'
-      fullPath: '/admin/emergency'
-      preLoaderRoute: typeof AuthenticatedAdminEmergencyRouteImport
+    '/_authenticated/admin/accommodations': {
+      id: '/_authenticated/admin/accommodations'
+      path: '/accommodations'
+      fullPath: '/admin/accommodations'
+      preLoaderRoute: typeof AuthenticatedAdminAccommodationsRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
     '/_authenticated/admin/announcements': {
@@ -809,12 +769,110 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminAnnouncementsRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
-    '/_authenticated/admin/accommodations': {
-      id: '/_authenticated/admin/accommodations'
-      path: '/accommodations'
-      fullPath: '/admin/accommodations'
-      preLoaderRoute: typeof AuthenticatedAdminAccommodationsRouteImport
+    '/_authenticated/admin/emergency': {
+      id: '/_authenticated/admin/emergency'
+      path: '/emergency'
+      fullPath: '/admin/emergency'
+      preLoaderRoute: typeof AuthenticatedAdminEmergencyRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/exhibitors': {
+      id: '/_authenticated/admin/exhibitors'
+      path: '/exhibitors'
+      fullPath: '/admin/exhibitors'
+      preLoaderRoute: typeof AuthenticatedAdminExhibitorsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/menu': {
+      id: '/_authenticated/admin/menu'
+      path: '/menu'
+      fullPath: '/admin/menu'
+      preLoaderRoute: typeof AuthenticatedAdminMenuRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/orders': {
+      id: '/_authenticated/admin/orders'
+      path: '/orders'
+      fullPath: '/admin/orders'
+      preLoaderRoute: typeof AuthenticatedAdminOrdersRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/sessions': {
+      id: '/_authenticated/admin/sessions'
+      path: '/sessions'
+      fullPath: '/admin/sessions'
+      preLoaderRoute: typeof AuthenticatedAdminSessionsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/speakers': {
+      id: '/_authenticated/admin/speakers'
+      path: '/speakers'
+      fullPath: '/admin/speakers'
+      preLoaderRoute: typeof AuthenticatedAdminSpeakersRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/staff': {
+      id: '/_authenticated/admin/staff'
+      path: '/staff'
+      fullPath: '/admin/staff'
+      preLoaderRoute: typeof AuthenticatedAdminStaffRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/ushers': {
+      id: '/_authenticated/admin/ushers'
+      path: '/ushers'
+      fullPath: '/admin/ushers'
+      preLoaderRoute: typeof AuthenticatedAdminUshersRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/concierge/': {
+      id: '/_authenticated/concierge/'
+      path: '/'
+      fullPath: '/concierge/'
+      preLoaderRoute: typeof AuthenticatedConciergeIndexRouteImport
+      parentRoute: typeof AuthenticatedConciergeRoute
+    }
+    '/_authenticated/concierge/food': {
+      id: '/_authenticated/concierge/food'
+      path: '/food'
+      fullPath: '/concierge/food'
+      preLoaderRoute: typeof AuthenticatedConciergeFoodRouteImport
+      parentRoute: typeof AuthenticatedConciergeRoute
+    }
+    '/_authenticated/concierge/orders': {
+      id: '/_authenticated/concierge/orders'
+      path: '/orders'
+      fullPath: '/concierge/orders'
+      preLoaderRoute: typeof AuthenticatedConciergeOrdersRouteImport
+      parentRoute: typeof AuthenticatedConciergeRoute
+    }
+    '/_authenticated/concierge/usher': {
+      id: '/_authenticated/concierge/usher'
+      path: '/usher'
+      fullPath: '/concierge/usher'
+      preLoaderRoute: typeof AuthenticatedConciergeUsherRouteImport
+      parentRoute: typeof AuthenticatedConciergeRoute
+    }
+    '/_authenticated/network/$userId': {
+      id: '/_authenticated/network/$userId'
+      path: '/$userId'
+      fullPath: '/network/$userId'
+      preLoaderRoute: typeof AuthenticatedNetworkUserIdRouteImport
+      parentRoute: typeof AuthenticatedNetworkRoute
+    }
+    '/_authenticated/schedule/$sessionId': {
+      id: '/_authenticated/schedule/$sessionId'
+      path: '/$sessionId'
+      fullPath: '/schedule/$sessionId'
+      preLoaderRoute: typeof AuthenticatedScheduleSessionIdRouteImport
+      parentRoute: typeof AuthenticatedScheduleRoute
+    }
+    '/_authenticated/speakers/$speakerId': {
+      id: '/_authenticated/speakers/$speakerId'
+      path: '/$speakerId'
+      fullPath: '/speakers/$speakerId'
+      preLoaderRoute: typeof AuthenticatedSpeakersSpeakerIdRouteImport
+      parentRoute: typeof AuthenticatedSpeakersRoute
     }
     '/_authenticated/network/room/$roomId': {
       id: '/_authenticated/network/room/$roomId'
@@ -830,10 +888,12 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminAccommodationsRoute: typeof AuthenticatedAdminAccommodationsRoute
   AuthenticatedAdminAnnouncementsRoute: typeof AuthenticatedAdminAnnouncementsRoute
   AuthenticatedAdminEmergencyRoute: typeof AuthenticatedAdminEmergencyRoute
+  AuthenticatedAdminExhibitorsRoute: typeof AuthenticatedAdminExhibitorsRoute
   AuthenticatedAdminMenuRoute: typeof AuthenticatedAdminMenuRoute
   AuthenticatedAdminOrdersRoute: typeof AuthenticatedAdminOrdersRoute
   AuthenticatedAdminSessionsRoute: typeof AuthenticatedAdminSessionsRoute
   AuthenticatedAdminSpeakersRoute: typeof AuthenticatedAdminSpeakersRoute
+  AuthenticatedAdminStaffRoute: typeof AuthenticatedAdminStaffRoute
   AuthenticatedAdminUshersRoute: typeof AuthenticatedAdminUshersRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
 }
@@ -844,10 +904,12 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
       AuthenticatedAdminAccommodationsRoute,
     AuthenticatedAdminAnnouncementsRoute: AuthenticatedAdminAnnouncementsRoute,
     AuthenticatedAdminEmergencyRoute: AuthenticatedAdminEmergencyRoute,
+    AuthenticatedAdminExhibitorsRoute: AuthenticatedAdminExhibitorsRoute,
     AuthenticatedAdminMenuRoute: AuthenticatedAdminMenuRoute,
     AuthenticatedAdminOrdersRoute: AuthenticatedAdminOrdersRoute,
     AuthenticatedAdminSessionsRoute: AuthenticatedAdminSessionsRoute,
     AuthenticatedAdminSpeakersRoute: AuthenticatedAdminSpeakersRoute,
+    AuthenticatedAdminStaffRoute: AuthenticatedAdminStaffRoute,
     AuthenticatedAdminUshersRoute: AuthenticatedAdminUshersRoute,
     AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
   }
@@ -965,10 +1027,20 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
+interface AuthRouteChildren {
+  AuthCallbackRoute: typeof AuthCallbackRoute
+}
+
+const AuthRouteChildren: AuthRouteChildren = {
+  AuthCallbackRoute: AuthCallbackRoute,
+}
+
+const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
-  AuthRoute: AuthRoute,
+  AuthRoute: AuthRouteWithChildren,
   ApiChatRoute: ApiChatRoute,
 }
 export const routeTree = rootRouteImport
