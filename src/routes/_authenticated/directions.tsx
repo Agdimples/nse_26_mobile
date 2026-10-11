@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useRef, useState, useMemo, lazy, Suspense } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { NsePageHeader } from "@/components/app/NsePageHeader";
@@ -9,7 +9,6 @@ import { HOTELS } from "@/lib/reference";
 import { useMutation } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { getDirections } from "@/lib/maps.functions";
-import { ClientOnly } from "@/components/app/ClientOnly";
 import {
   ArrowLeft,
   Loader2,
@@ -20,8 +19,6 @@ import {
   Eye,
   Layers,
 } from "lucide-react";
-
-const LazyLeafletDirectionsMap = lazy(() => import("@/components/app/LeafletDirectionsMap"));
 
 type Search = { lat?: number; lng?: number; name?: string };
 
@@ -133,22 +130,26 @@ export function DirectionsPage() {
 
   // Initialize Google Map only when ready and no auth failure
   useEffect(() => {
-    if (!ready || authFailed || !mapRef.current || mapInstance.current) return;
+    if (!ready || authFailed || !mapRef.current) return;
 
-    try {
-      const map = new window.google.maps.Map(mapRef.current, {
-        center: { lat: dest.lat, lng: dest.lng },
-        zoom: 14,
-        tilt: 45,
-        mapId: "DEMO_MAP_ID",
-        mapTypeId: "roadmap",
-        disableDefaultUI: true,
-        zoomControl: true,
-      });
+    if (!mapInstance.current) {
+      try {
+        const map = new window.google.maps.Map(mapRef.current, {
+          center: { lat: dest.lat, lng: dest.lng },
+          zoom: 14,
+          tilt: 45,
+          mapId: "DEMO_MAP_ID",
+          mapTypeId: "roadmap",
+          disableDefaultUI: true,
+          zoomControl: true,
+        });
 
-      mapInstance.current = map;
-    } catch (e) {
-      console.warn("[DirectionsPage] Google Map init error:", e);
+        mapInstance.current = map;
+      } catch (e) {
+        console.warn("[DirectionsPage] Google Map init error:", e);
+      }
+    } else {
+      mapInstance.current.panTo({ lat: dest.lat, lng: dest.lng });
     }
   }, [ready, authFailed, dest]);
 
@@ -348,42 +349,58 @@ export function DirectionsPage() {
           </Button>
         </div>
 
-        {/* Map Container: 3D Google Vector or Interactive Leaflet Map */}
+        {/* Map Container: 3D Google Vector Map */}
         <Card className="relative overflow-hidden border-0 shadow-elevated">
-          {ready && !authFailed ? (
-            <>
-              <div ref={mapRef} className="aspect-[4/3] w-full bg-muted" />
+          <div ref={mapRef} className="aspect-[4/3] w-full bg-muted" />
 
-              {/* 3D Map Controls Toolbar */}
-              <div className="absolute left-3 top-3 flex flex-col gap-1.5 z-10">
-                <Button
-                  size="sm"
-                  variant={tilt > 0 ? "default" : "secondary"}
-                  onClick={() => setTilt((t) => (t === 0 ? 45 : 0))}
-                  className="h-8 px-2.5 text-xs font-bold shadow-md gap-1"
-                >
-                  <Eye className="h-3.5 w-3.5" />
-                  <span>{tilt > 0 ? "3D Tilt" : "2D"}</span>
-                </Button>
-                <Button
-                  size="sm"
-                  variant="secondary"
-                  onClick={() => setMapType((t) => (t === "roadmap" ? "hybrid" : "roadmap"))}
-                  className="h-8 px-2 text-xs font-medium shadow-md gap-1 bg-white/95 text-foreground"
-                >
-                  <Layers className="h-3.5 w-3.5 text-primary" />
-                  <span>{mapType === "hybrid" ? "Satellite" : "Map"}</span>
-                </Button>
+          {/* Loading Shimmer while Google Maps script initializes */}
+          {!ready && !authFailed && (
+            <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-muted/80 backdrop-blur-sm">
+              <Loader2 className="h-7 w-7 animate-spin text-primary" />
+              <p className="mt-2 text-xs font-semibold text-foreground">Loading 3D Google Map…</p>
+            </div>
+          )}
+
+          {/* Connection / Auth Fallback */}
+          {authFailed && (
+            <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-background/95 p-4 text-center">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-soft text-primary shadow-inner">
+                <Navigation className="h-6 w-6" />
               </div>
-            </>
-          ) : (
-            <ClientOnly fallback={<div className="aspect-[4/3] w-full bg-muted/30 animate-pulse" />}>
-              {() => (
-                <Suspense fallback={<div className="aspect-[4/3] w-full bg-muted/30 animate-pulse" />}>
-                  <LazyLeafletDirectionsMap dest={dest} origin={origin} />
-                </Suspense>
-              )}
-            </ClientOnly>
+              <p className="mt-2 text-sm font-bold text-foreground">Route Details</p>
+              <p className="mt-1 max-w-xs text-xs text-muted-foreground">
+                {origin.label} → {dest.name}
+              </p>
+              <Button size="sm" asChild className="mt-3 shadow">
+                <a href={googleMapsAppUrl} target="_blank" rel="noreferrer">
+                  Open Google Maps App ↗
+                </a>
+              </Button>
+            </div>
+          )}
+
+          {/* 3D Map Controls Toolbar (when ready) */}
+          {ready && !authFailed && (
+            <div className="absolute left-3 top-3 z-10 flex flex-col gap-1.5">
+              <Button
+                size="sm"
+                variant={tilt > 0 ? "default" : "secondary"}
+                onClick={() => setTilt((t) => (t === 0 ? 45 : 0))}
+                className="h-8 px-2.5 text-xs font-bold shadow-md gap-1"
+              >
+                <Eye className="h-3.5 w-3.5" />
+                <span>{tilt > 0 ? "3D Tilt" : "2D"}</span>
+              </Button>
+              <Button
+                size="sm"
+                variant="secondary"
+                onClick={() => setMapType((t) => (t === "roadmap" ? "hybrid" : "roadmap"))}
+                className="h-8 px-2 text-xs font-medium shadow-md gap-1 bg-white/95 text-foreground"
+              >
+                <Layers className="h-3.5 w-3.5 text-primary" />
+                <span>{mapType === "hybrid" ? "Satellite" : "Map"}</span>
+              </Button>
+            </div>
           )}
         </Card>
 
