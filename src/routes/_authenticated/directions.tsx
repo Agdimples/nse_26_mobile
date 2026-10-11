@@ -1,13 +1,16 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { useGoogleMaps, DEFAULT_MAP_CENTER } from "@/lib/google-maps";
+import { useGoogleMaps } from "@/lib/google-maps";
 import { EVENT_CONFIG } from "@/lib/event-config";
-import { HOTELS, VENUE_DATA } from "@/lib/reference";
+import { HOTELS } from "@/lib/reference";
 import { useMutation } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { getDirections } from "@/lib/maps.functions";
+import { MapContainer, TileLayer, Marker, Polyline } from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 import {
   ArrowLeft,
   Loader2,
@@ -17,9 +20,6 @@ import {
   Navigation,
   Eye,
   Layers,
-  RotateCw,
-  Building2,
-  Compass,
 } from "lucide-react";
 
 type Search = { lat?: number; lng?: number; name?: string };
@@ -33,10 +33,24 @@ export const Route = createFileRoute("/_authenticated/directions")({
   component: DirectionsPage,
 });
 
+const destLeafletIcon = L.divIcon({
+  className: "",
+  html: '<span style="display:flex;width:32px;height:32px;border-radius:9999px;background:#C9A227;border:3px solid #fff;box-shadow:0 3px 8px rgba(0,0,0,0.4);align-items:center;justify-content:center;color:#fff;font-size:16px;line-height:1;font-weight:bold;">📍</span>',
+  iconSize: [32, 32],
+  iconAnchor: [16, 16],
+});
+
+const originLeafletIcon = L.divIcon({
+  className: "",
+  html: '<span style="display:flex;width:24px;height:24px;border-radius:9999px;background:#123E73;border:2.5px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.35);align-items:center;justify-content:center;color:#fff;font-size:12px;line-height:1;">•</span>',
+  iconSize: [24, 24],
+  iconAnchor: [12, 12],
+});
+
 export function DirectionsPage() {
   const { lat, lng, name } = Route.useSearch();
   const navigate = useNavigate();
-  const { ready, error: mapsError } = useGoogleMaps();
+  const { ready, authFailed, error: mapsError } = useGoogleMaps();
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstance = useRef<any>(null);
   const polylineRef = useRef<any>(null);
@@ -53,14 +67,17 @@ export function DirectionsPage() {
   const [tilt, setTilt] = useState<number>(45);
   const [mapType, setMapType] = useState<"roadmap" | "hybrid">("roadmap");
 
-  const dest =
-    lat != null && lng != null
-      ? { lat, lng, name: name ?? "Destination" }
-      : {
-          lat: EVENT_CONFIG.venue.latitude,
-          lng: EVENT_CONFIG.venue.longitude,
-          name: EVENT_CONFIG.venue.name,
-        };
+  const dest = useMemo(
+    () =>
+      lat != null && lng != null
+        ? { lat, lng, name: name ?? "Destination" }
+        : {
+            lat: EVENT_CONFIG.venue.latitude,
+            lng: EVENT_CONFIG.venue.longitude,
+            name: EVENT_CONFIG.venue.name,
+          },
+    [lat, lng, name],
+  );
 
   const dirFn = useServerFn(getDirections);
   const { data: route, mutate, isPending } = useMutation({
@@ -75,6 +92,11 @@ export function DirectionsPage() {
         },
       }),
   });
+
+  // Calculate route on mount or changes
+  useEffect(() => {
+    mutate({ origin, mode });
+  }, [origin, mode, dest]);
 
   // GPS Locate User
   function locate() {
@@ -92,7 +114,6 @@ export function DirectionsPage() {
         };
         setOrigin(loc);
         setSelectedOriginPreset("custom");
-        mutate({ origin: loc, mode });
       },
       (err) => setGeoError(`Location access: ${err.message}`),
       { enableHighAccuracy: true, timeout: 10000 },
@@ -109,7 +130,6 @@ export function DirectionsPage() {
         label: EVENT_CONFIG.venue.name,
       };
       setOrigin(loc);
-      mutate({ origin: loc, mode });
     } else if (val.startsWith("hotel-")) {
       const hotelId = val.replace("hotel-", "");
       const hotel = HOTELS.find((h) => h.id === hotelId);
@@ -120,29 +140,29 @@ export function DirectionsPage() {
           label: hotel.name,
         };
         setOrigin(loc);
-        mutate({ origin: loc, mode });
       }
     }
   }
 
-  // Initialize Map
+  // Initialize Google Map only when ready and no auth failure
   useEffect(() => {
-    if (!ready || !mapRef.current || mapInstance.current) return;
+    if (!ready || authFailed || !mapRef.current || mapInstance.current) return;
 
-    const map = new window.google.maps.Map(mapRef.current, {
-      center: { lat: dest.lat, lng: dest.lng },
-      zoom: 14,
-      tilt: 45,
-      mapTypeId: "roadmap",
-      disableDefaultUI: true,
-      zoomControl: true,
-    });
+    try {
+      const map = new window.google.maps.Map(mapRef.current, {
+        center: { lat: dest.lat, lng: dest.lng },
+        zoom: 14,
+        tilt: 45,
+        mapTypeId: "roadmap",
+        disableDefaultUI: true,
+        zoomControl: true,
+      });
 
-    mapInstance.current = map;
-
-    // Trigger initial route
-    mutate({ origin, mode });
-  }, [ready]);
+      mapInstance.current = map;
+    } catch (e) {
+      console.warn("[DirectionsPage] Google Map init error:", e);
+    }
+  }, [ready, authFailed, dest]);
 
   // Sync Map Type
   useEffect(() => {
@@ -154,17 +174,21 @@ export function DirectionsPage() {
   // Sync Tilt
   useEffect(() => {
     if (mapInstance.current) {
-      mapInstance.current.setTilt(tilt);
+      if (mapType === "roadmap") {
+        mapInstance.current.setTilt(tilt);
+      }
     }
-  }, [tilt]);
+  }, [tilt, mapType]);
 
-  // Draw Map Route & Markers
+  // Draw Google Map Route & Markers
   useEffect(() => {
-    if (!ready || !mapInstance.current) return;
+    if (!ready || authFailed || !mapInstance.current) return;
     const map = mapInstance.current;
 
     // Clear old markers
-    markersRef.current.forEach((m) => m.setMap(null));
+    markersRef.current.forEach((m) => {
+      if (typeof m.setMap === "function") m.setMap(null);
+    });
     markersRef.current = [];
 
     // Clear old polyline
@@ -220,32 +244,17 @@ export function DirectionsPage() {
       line.setMap(map);
       polylineRef.current = line;
 
+      // Fit bounds
       const bounds = new window.google.maps.LatLngBounds();
-      path.forEach((p: any) => bounds.extend(p));
-      map.fitBounds(bounds, 50);
-    } else if (origin) {
-      // Fallback straight line
-      const line = new window.google.maps.Polyline({
-        path: [
-          { lat: origin.lat, lng: origin.lng },
-          { lat: dest.lat, lng: dest.lng },
-        ],
-        strokeColor: "#123E73",
-        strokeWeight: 3.5,
-        strokeOpacity: 0.6,
-        strokeDasharray: [8, 4],
-      });
-      line.setMap(map);
-      polylineRef.current = line;
-
-      const bounds = new window.google.maps.LatLngBounds();
-      bounds.extend({ lat: origin.lat, lng: origin.lng });
       bounds.extend({ lat: dest.lat, lng: dest.lng });
+      bounds.extend({ lat: origin.lat, lng: origin.lng });
       map.fitBounds(bounds, 60);
     }
-  }, [ready, route, origin, dest.lat, dest.lng, dest.name]);
+  }, [ready, authFailed, route, dest, origin]);
 
-  const hotelPresets = HOTELS.filter((h) => h.latitude && h.longitude);
+  const hotelPresets = HOTELS.filter((h) => h.latitude != null && h.longitude != null).slice(0, 10);
+
+  const googleMapsAppUrl = `https://www.google.com/maps/dir/?api=1&origin=${origin.lat},${origin.lng}&destination=${dest.lat},${dest.lng}&travelmode=${mode === "DRIVE" ? "driving" : "walking"}`;
 
   return (
     <div className="pb-8">
@@ -257,7 +266,7 @@ export function DirectionsPage() {
         >
           <ArrowLeft className="h-4 w-4" /> Home
         </button>
-        <h1 className="text-xl font-bold">3D Live Directions</h1>
+        <h1 className="text-xl font-bold">Live Directions & Navigation</h1>
         <p className="mt-1 text-sm text-white/85 inline-flex items-center gap-1">
           <MapPin className="h-3.5 w-3.5 text-accent" /> To:{" "}
           <span className="font-semibold">{dest.name}</span>
@@ -306,10 +315,7 @@ export function DirectionsPage() {
             variant={mode === "DRIVE" ? "default" : "outline"}
             size="sm"
             className="flex-1"
-            onClick={() => {
-              setMode("DRIVE");
-              if (origin) mutate({ origin, mode: "DRIVE" });
-            }}
+            onClick={() => setMode("DRIVE")}
           >
             <Car className="h-4 w-4 mr-1.5" /> Drive
           </Button>
@@ -317,46 +323,72 @@ export function DirectionsPage() {
             variant={mode === "WALK" ? "default" : "outline"}
             size="sm"
             className="flex-1"
-            onClick={() => {
-              setMode("WALK");
-              if (origin) mutate({ origin, mode: "WALK" });
-            }}
+            onClick={() => setMode("WALK")}
           >
             <Footprints className="h-4 w-4 mr-1.5" /> Walk
           </Button>
         </div>
 
-        {/* 3D Map Container */}
+        {/* Map Container: 3D Google Vector or Interactive Leaflet Map */}
         <Card className="relative overflow-hidden border-0 shadow-elevated">
-          <div ref={mapRef} className="aspect-[4/3] w-full bg-muted" />
+          {ready && !authFailed ? (
+            <>
+              <div ref={mapRef} className="aspect-[4/3] w-full bg-muted" />
 
-          {/* 3D Map Controls Toolbar */}
-          <div className="absolute left-3 top-3 flex flex-col gap-1.5 z-10">
-            <Button
-              size="sm"
-              variant={tilt > 0 ? "default" : "secondary"}
-              onClick={() => setTilt((t) => (t === 0 ? 45 : 0))}
-              className="h-8 px-2.5 text-xs font-bold shadow-md gap-1"
+              {/* 3D Map Controls Toolbar */}
+              <div className="absolute left-3 top-3 flex flex-col gap-1.5 z-10">
+                <Button
+                  size="sm"
+                  variant={tilt > 0 ? "default" : "secondary"}
+                  onClick={() => setTilt((t) => (t === 0 ? 45 : 0))}
+                  className="h-8 px-2.5 text-xs font-bold shadow-md gap-1"
+                >
+                  <Eye className="h-3.5 w-3.5" />
+                  <span>{tilt > 0 ? "3D Tilt" : "2D"}</span>
+                </Button>
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  onClick={() => setMapType((t) => (t === "roadmap" ? "hybrid" : "roadmap"))}
+                  className="h-8 px-2 text-xs font-medium shadow-md gap-1 bg-white/95 text-foreground"
+                >
+                  <Layers className="h-3.5 w-3.5 text-primary" />
+                  <span>{mapType === "hybrid" ? "Satellite" : "Map"}</span>
+                </Button>
+              </div>
+            </>
+          ) : (
+            <MapContainer
+              center={[dest.lat, dest.lng]}
+              zoom={13}
+              scrollWheelZoom={false}
+              className="aspect-[4/3] w-full"
             >
-              <Eye className="h-3.5 w-3.5" />
-              <span>{tilt > 0 ? "3D Tilt" : "2D"}</span>
-            </Button>
-            <Button
-              size="sm"
-              variant="secondary"
-              onClick={() => setMapType((t) => (t === "roadmap" ? "hybrid" : "roadmap"))}
-              className="h-8 px-2 text-xs font-medium shadow-md gap-1 bg-white/95 text-foreground"
-            >
-              <Layers className="h-3.5 w-3.5 text-primary" />
-              <span>{mapType === "hybrid" ? "Satellite" : "Map"}</span>
-            </Button>
-          </div>
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+              />
+              <Marker position={[dest.lat, dest.lng]} icon={destLeafletIcon} />
+              {origin && <Marker position={[origin.lat, origin.lng]} icon={originLeafletIcon} />}
+              {origin && (
+                <Polyline
+                  positions={[
+                    [origin.lat, origin.lng],
+                    [dest.lat, dest.lng],
+                  ]}
+                  color="#123E73"
+                  weight={4}
+                  dashArray="6, 8"
+                />
+              )}
+            </MapContainer>
+          )}
         </Card>
 
         {/* Loading Spinner */}
         {isPending && (
           <div className="flex items-center justify-center gap-2 p-3 text-sm text-muted-foreground">
-            <Loader2 className="h-4 w-4 animate-spin text-primary" /> Calculating optimal Google route…
+            <Loader2 className="h-4 w-4 animate-spin text-primary" /> Calculating optimal route…
           </div>
         )}
 
@@ -365,48 +397,43 @@ export function DirectionsPage() {
           <Card className="border-0 p-4 shadow-card bg-surface space-y-4">
             <div className="flex items-center justify-between border-b border-border pb-3">
               <div>
-                <p className="text-2xl font-black text-foreground">
+                <p className="text-2xl font-bold text-foreground">
                   {Math.max(1, Math.round(route.durationSeconds / 60))} min
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  {(route.distanceMeters / 1000).toFixed(1)} km · via {route.summary || "Maiduguri Network"}
+                  {(route.distanceMeters / 1000).toFixed(1)} km · via Maiduguri Network
                 </p>
               </div>
-              <Button size="sm" variant="outline" asChild>
-                <a
-                  href={`https://www.google.com/maps/dir/?api=1&origin=${origin.lat},${origin.lng}&destination=${dest.lat},${dest.lng}&travelmode=${mode.toLowerCase()}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Open in Google Maps ↗
-                </a>
-              </Button>
+              <a
+                href={googleMapsAppUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline"
+              >
+                Open in Google Maps ↗
+              </a>
             </div>
 
             {/* Turn by turn steps */}
             <div className="space-y-2">
-              <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
                 Turn-by-turn directions ({route.steps.length} steps)
               </p>
-              <div className="max-h-64 space-y-2.5 overflow-y-auto pr-1">
-                {route.steps.map((step, i) => (
-                  <div key={i} className="flex gap-3 text-xs leading-relaxed">
+              <div className="space-y-2">
+                {route.steps.map((step, idx) => (
+                  <div key={idx} className="flex items-start gap-2 text-xs">
                     <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary-soft text-[10px] font-bold text-primary">
-                      {i + 1}
+                      {idx + 1}
                     </span>
-                    <div className="min-w-0 flex-1">
+                    <div className="flex-1 pt-0.5">
                       <div
-                        className="font-medium text-foreground [&_b]:font-bold"
+                        className="text-foreground leading-snug [&>b]:font-semibold"
                         dangerouslySetInnerHTML={{ __html: step.instruction }}
                       />
-                      {step.distanceMeters > 0 && (
-                        <p className="text-[11px] text-muted-foreground mt-0.5">
-                          {step.distanceMeters >= 1000
-                            ? `${(step.distanceMeters / 1000).toFixed(1)} km`
-                            : `${step.distanceMeters} m`}
-                          {step.durationText ? ` · ${step.durationText}` : ""}
-                        </p>
-                      )}
+                      <span className="text-[10px] text-muted-foreground">
+                        {(step.distanceMeters / 1000).toFixed(1)} km
+                        {step.durationText ? ` · ${step.durationText}` : ""}
+                      </span>
                     </div>
                   </div>
                 ))}

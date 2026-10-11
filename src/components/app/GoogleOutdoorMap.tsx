@@ -7,21 +7,15 @@ import { EVENT_CONFIG } from "@/lib/event-config";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { OsmOutdoorMap } from "./OsmOutdoorMap";
 import {
   Compass,
   RotateCw,
   RotateCcw,
   Layers,
-  MapPin,
   Navigation,
   Phone,
   Building2,
-  Hotel as HotelIcon,
-  Cross,
-  Plane,
-  Shield,
-  Utensils,
-  Maximize2,
   X,
   Eye,
 } from "lucide-react";
@@ -41,7 +35,7 @@ const CATEGORY_COLORS: Record<string, string> = {
 };
 
 export function GoogleOutdoorMap() {
-  const { ready, error } = useGoogleMaps();
+  const { ready, authFailed, error } = useGoogleMaps();
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<any>(null);
   const markersRef = useRef<any[]>([]);
@@ -50,6 +44,7 @@ export function GoogleOutdoorMap() {
   const [heading, setHeading] = useState<number>(0);
   const [mapType, setMapType] = useState<"roadmap" | "hybrid">("roadmap");
   const [activeFilter, setActiveFilter] = useState<FilterCategory>("all");
+  const [initFailed, setInitFailed] = useState(false);
   const [selectedItem, setSelectedItem] = useState<{
     id: string;
     title: string;
@@ -61,32 +56,42 @@ export function GoogleOutdoorMap() {
     hotel?: Hotel;
   } | null>(null);
 
+  // If Google Maps fails authentication (e.g. Firebase App Check enforcement on Google Cloud)
+  // or script loading fails, immediately render the interactive OSM & Satellite map.
+  if (authFailed || error || initFailed) {
+    return <OsmOutdoorMap />;
+  }
+
   // Initialize Map
   useEffect(() => {
     if (!ready || !mapContainerRef.current || mapInstanceRef.current) return;
 
-    const map = new window.google.maps.Map(mapContainerRef.current, {
-      center: DEFAULT_MAP_CENTER,
-      zoom: 14,
-      tilt: 45,
-      heading: 0,
-      mapTypeId: "roadmap",
-      disableDefaultUI: true,
-      zoomControl: true,
-      zoomControlOptions: {
-        position: window.google.maps.ControlPosition.RIGHT_BOTTOM,
-      },
-    });
+    try {
+      const map = new window.google.maps.Map(mapContainerRef.current, {
+        center: DEFAULT_MAP_CENTER,
+        zoom: 14,
+        tilt: 45,
+        heading: 0,
+        mapTypeId: "roadmap",
+        disableDefaultUI: true,
+        zoomControl: true,
+        zoomControlOptions: {
+          position: window.google.maps.ControlPosition.RIGHT_BOTTOM,
+        },
+      });
 
-    mapInstanceRef.current = map;
+      mapInstanceRef.current = map;
 
-    // Listen to camera movements
-    map.addListener("heading_changed", () => {
-      setHeading(Math.round(map.getHeading() || 0));
-    });
-    map.addListener("tilt_changed", () => {
-      setTilt(Math.round(map.getTilt() || 0));
-    });
+      map.addListener("heading_changed", () => {
+        setHeading(Math.round(map.getHeading() || 0));
+      });
+      map.addListener("tilt_changed", () => {
+        setTilt(Math.round(map.getTilt() || 0));
+      });
+    } catch (err) {
+      console.warn("[GoogleOutdoorMap] Map initialization failed, activating fallback:", err);
+      setInitFailed(true);
+    }
   }, [ready]);
 
   // Sync Map Type
@@ -101,7 +106,10 @@ export function GoogleOutdoorMap() {
     if (!ready || !mapInstanceRef.current) return;
 
     // Clear previous markers
-    markersRef.current.forEach((m) => m.setMap(null));
+    markersRef.current.forEach((m) => {
+      if (typeof m.setMap === "function") m.setMap(null);
+      else if (m.map) m.map = null;
+    });
     markersRef.current = [];
 
     const map = mapInstanceRef.current;
@@ -117,7 +125,6 @@ export function GoogleOutdoorMap() {
       isVenue?: boolean;
     }> = [];
 
-    // 1. Venue
     if (activeFilter === "all" || activeFilter === "venue") {
       itemsToMark.push({
         id: "venue-icc",
@@ -131,7 +138,6 @@ export function GoogleOutdoorMap() {
       });
     }
 
-    // 2. Hotels
     if (activeFilter === "all" || activeFilter === "hotels") {
       HOTELS.forEach((h) => {
         if (h.latitude && h.longitude) {
@@ -149,7 +155,6 @@ export function GoogleOutdoorMap() {
       });
     }
 
-    // 3. POIs
     VENUE_DATA.nearby.forEach((p) => {
       if (!p.latitude || !p.longitude) return;
 
@@ -163,7 +168,7 @@ export function GoogleOutdoorMap() {
 
       if (matches) {
         itemsToMark.push({
-          id: `poi-${p.id}`,
+          id: p.id,
           title: p.name,
           category: p.category,
           address: p.note,
@@ -174,35 +179,65 @@ export function GoogleOutdoorMap() {
       }
     });
 
-    // Create markers
     itemsToMark.forEach((item) => {
-      const isVenue = item.isVenue;
+      const isVenue = Boolean(item.isVenue);
       const markerColor = isVenue ? "#123E73" : CATEGORY_COLORS[item.category] ?? "#123E73";
 
-      const marker = new window.google.maps.Marker({
-        position: { lat: item.lat, lng: item.lng },
-        map,
-        title: item.title,
-        animation: isVenue ? window.google.maps.Animation.DROP : undefined,
-        icon: {
-          path: isVenue
-            ? "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
-            : window.google.maps.SymbolPath.CIRCLE,
-          scale: isVenue ? 1.8 : 7,
-          fillColor: markerColor,
-          fillOpacity: 1,
-          strokeColor: "#ffffff",
-          strokeWeight: 2.5,
-          anchor: isVenue ? new window.google.maps.Point(12, 22) : undefined,
-        },
-      });
+      // Modern AdvancedMarkerElement when available
+      if (window.google?.maps?.marker?.AdvancedMarkerElement) {
+        const pinElement = document.createElement("div");
+        pinElement.style.display = "flex";
+        pinElement.style.alignItems = "center";
+        pinElement.style.justifyContent = "center";
+        pinElement.style.width = isVenue ? "32px" : "24px";
+        pinElement.style.height = isVenue ? "32px" : "24px";
+        pinElement.style.borderRadius = "9999px";
+        pinElement.style.backgroundColor = markerColor;
+        pinElement.style.border = isVenue ? "3px solid #ffffff" : "2px solid #ffffff";
+        pinElement.style.boxShadow = "0 2px 6px rgba(0,0,0,0.35)";
+        pinElement.style.color = "#ffffff";
+        pinElement.style.fontSize = isVenue ? "16px" : "11px";
+        pinElement.style.cursor = "pointer";
+        pinElement.innerText = isVenue ? "📍" : "•";
 
-      marker.addListener("click", () => {
-        setSelectedItem(item);
-        map.panTo({ lat: item.lat, lng: item.lng });
-      });
+        const marker = new window.google.maps.marker.AdvancedMarkerElement({
+          map,
+          position: { lat: item.lat, lng: item.lng },
+          title: item.title,
+          content: pinElement,
+        });
 
-      markersRef.current.push(marker);
+        marker.addListener("click", () => {
+          setSelectedItem(item);
+          map.panTo({ lat: item.lat, lng: item.lng });
+        });
+
+        markersRef.current.push(marker);
+      } else {
+        const marker = new window.google.maps.Marker({
+          position: { lat: item.lat, lng: item.lng },
+          map,
+          title: item.title,
+          icon: {
+            path: isVenue
+              ? "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+              : window.google.maps.SymbolPath.CIRCLE,
+            scale: isVenue ? 1.8 : 7,
+            fillColor: markerColor,
+            fillOpacity: 1,
+            strokeColor: "#ffffff",
+            strokeWeight: 2.5,
+            anchor: isVenue ? new window.google.maps.Point(12, 22) : undefined,
+          },
+        });
+
+        marker.addListener("click", () => {
+          setSelectedItem(item);
+          map.panTo({ lat: item.lat, lng: item.lng });
+        });
+
+        markersRef.current.push(marker);
+      }
     });
   }, [ready, activeFilter]);
 
@@ -210,7 +245,9 @@ export function GoogleOutdoorMap() {
   function toggleTilt() {
     if (!mapInstanceRef.current) return;
     const nextTilt = tilt === 0 ? 45 : 0;
-    mapInstanceRef.current.setTilt(nextTilt);
+    if (mapType === "roadmap") {
+      mapInstanceRef.current.setTilt(nextTilt);
+    }
     setTilt(nextTilt);
   }
 
@@ -279,14 +316,6 @@ export function GoogleOutdoorMap() {
           </div>
         )}
 
-        {error && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center bg-surface/95 p-4 text-center">
-            <MapPin className="h-8 w-8 text-destructive mb-2" />
-            <p className="text-sm font-semibold text-destructive">Google Maps connection error</p>
-            <p className="text-xs text-muted-foreground mt-1">{error}</p>
-          </div>
-        )}
-
         {/* 3D & Camera Control Toolbar overlay */}
         {ready && (
           <div className="absolute left-3 top-3 flex flex-col gap-1.5 z-10">
@@ -296,7 +325,7 @@ export function GoogleOutdoorMap() {
               variant={tilt > 0 ? "default" : "secondary"}
               onClick={toggleTilt}
               className="h-8 px-2.5 text-xs font-bold shadow-md gap-1.5 backdrop-blur-md"
-              title="Toggle 3D Tilt (Realistic Buildings & Perspective)"
+              title="Toggle 3D Tilt"
             >
               <Eye className="h-3.5 w-3.5" />
               <span>{tilt > 0 ? "3D Tilt" : "2D Flat"}</span>
@@ -308,7 +337,7 @@ export function GoogleOutdoorMap() {
               variant="secondary"
               onClick={() => setMapType((t) => (t === "roadmap" ? "hybrid" : "roadmap"))}
               className="h-8 px-2 text-xs font-medium shadow-md gap-1 bg-white/95 text-foreground hover:bg-white"
-              title="Toggle Realistic Satellite Imagery"
+              title="Toggle Satellite Imagery"
             >
               <Layers className="h-3.5 w-3.5 text-primary" />
               <span>{mapType === "hybrid" ? "Satellite" : "Map"}</span>
@@ -368,7 +397,7 @@ export function GoogleOutdoorMap() {
         )}
       </Card>
 
-      {/* Selected Location Card / Detail Drawer */}
+      {/* Selected Location Card */}
       {selectedItem ? (
         <Card className="border-0 p-4 shadow-card bg-surface transition-all">
           <div className="flex items-start justify-between gap-2">
@@ -396,7 +425,6 @@ export function GoogleOutdoorMap() {
             </button>
           </div>
 
-          {/* Hotel rates and distance if hotel */}
           {selectedItem.hotel && (
             <div className="mt-2.5 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
               {hotelMinRate(selectedItem.hotel) != null && (
@@ -411,7 +439,6 @@ export function GoogleOutdoorMap() {
           )}
 
           <div className="mt-3 flex gap-2">
-            {/* Live in-app directions button */}
             <Button size="sm" asChild className="flex-1">
               <Link
                 to="/directions"

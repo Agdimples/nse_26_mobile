@@ -5,7 +5,9 @@ declare global {
     google: any;
     __googleMapsLoaded?: boolean;
     __googleMapsLoading?: Promise<void>;
+    __googleMapsAuthFailed?: boolean;
     __initGoogleMap?: () => void;
+    gm_authFailure?: () => void;
   }
 }
 
@@ -20,8 +22,22 @@ export const DEFAULT_MAP_CENTER = {
   lng: 13.15,
 };
 
+// Global authentication failure hook called by Google Maps JS on App Check or key rejection
+if (typeof window !== "undefined") {
+  window.gm_authFailure = () => {
+    console.warn(
+      "[Google Maps] Authentication failed (e.g. Firebase App Check enforcement on Google Cloud or API key restriction). Automatically activating fallback map.",
+    );
+    window.__googleMapsAuthFailed = true;
+    window.dispatchEvent(new CustomEvent("google-maps-auth-failure"));
+  };
+}
+
 export function loadGoogleMaps(): Promise<void> {
   if (typeof window === "undefined") return Promise.resolve();
+  if (window.__googleMapsAuthFailed) {
+    return Promise.reject(new Error("Google Maps authentication failed (App Check / key restriction)."));
+  }
   if (window.__googleMapsLoaded && window.google?.maps) return Promise.resolve();
   if (window.__googleMapsLoading) return window.__googleMapsLoading;
 
@@ -31,7 +47,6 @@ export function loadGoogleMaps(): Promise<void> {
   }
 
   window.__googleMapsLoading = new Promise<void>((resolve, reject) => {
-    // If google already exists on the window object
     if (window.google?.maps) {
       window.__googleMapsLoaded = true;
       resolve();
@@ -39,6 +54,10 @@ export function loadGoogleMaps(): Promise<void> {
     }
 
     window.__initGoogleMap = () => {
+      if (window.__googleMapsAuthFailed) {
+        reject(new Error("Google Maps authentication failed."));
+        return;
+      }
       window.__googleMapsLoaded = true;
       resolve();
     };
@@ -48,7 +67,7 @@ export function loadGoogleMaps(): Promise<void> {
       key,
       loading: "async",
       callback: "__initGoogleMap",
-      libraries: "marker,places,geometry,maps3d",
+      libraries: "marker,places,geometry",
       v: "weekly",
     });
 
@@ -56,7 +75,7 @@ export function loadGoogleMaps(): Promise<void> {
     script.async = true;
     script.onerror = () => {
       window.__googleMapsLoading = undefined;
-      reject(new Error("Failed to load Google Maps script. Check your internet connection or API key."));
+      reject(new Error("Failed to load Google Maps script."));
     };
     document.head.appendChild(script);
   });
@@ -65,22 +84,41 @@ export function loadGoogleMaps(): Promise<void> {
 }
 
 export function useGoogleMaps() {
-  const [ready, setReady] = useState(false);
+  const [ready, setReady] = useState(() => Boolean(typeof window !== "undefined" && window.__googleMapsLoaded && !window.__googleMapsAuthFailed));
+  const [authFailed, setAuthFailed] = useState(() => Boolean(typeof window !== "undefined" && window.__googleMapsAuthFailed));
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     let mounted = true;
+
+    const handleAuthFailure = () => {
+      if (mounted) {
+        setAuthFailed(true);
+        setReady(false);
+        setError("Google Maps authentication failed (App Check restriction active on Google Cloud).");
+      }
+    };
+
+    window.addEventListener("google-maps-auth-failure", handleAuthFailure);
+
     loadGoogleMaps()
       .then(() => {
-        if (mounted) setReady(true);
+        if (mounted && !window.__googleMapsAuthFailed) {
+          setReady(true);
+        }
       })
       .catch((e: Error) => {
-        if (mounted) setError(e.message);
+        if (mounted) {
+          setError(e.message);
+          setReady(false);
+        }
       });
+
     return () => {
       mounted = false;
+      window.removeEventListener("google-maps-auth-failure", handleAuthFailure);
     };
   }, []);
 
-  return { ready, error, apiKey: GOOGLE_MAPS_KEY };
+  return { ready: ready && !authFailed, authFailed, error, apiKey: GOOGLE_MAPS_KEY };
 }
