@@ -523,5 +523,70 @@
       "escort",
       "guide"
     ]
+  },
+  {
+    "id": "faq-41",
+    "category": "Registration",
+    "question": "What are the conference registration fees for Maiduguri 2026?",
+    "answer": "**Early Bird (3rd March – 31st August, 2026):**\n• Fellows: ₦120,000\n• Corporate & Associate Members: ₦75,000\n• Non-Members: ₦75,000\n• Spouses: ₦25,000\n• Graduates & Students: ₦20,000\n• Virtual Attendees: ₦60,000\n• International Delegates: $500\n\n**Late Registration (1st Sept. – 23rd Nov., 2026):**\n• Fellows: ₦135,000\n• Corporate & Associate Members: ₦85,000\n• Non-Members: ₦85,000\n• Spouses: ₦30,000\n• Graduates & Students: ₦25,000\n• Virtual Attendees: ₦70,000\n• International Delegates: $500\n\nFees include access to technical sessions, exhibition, cultural night, industrial tour, and gala dinner (varies by tier).",
+    "keywords": [
+      "fees",
+      "price",
+      "cost",
+      "registration fee",
+      "fellow",
+      "student",
+      "spouse",
+      "early bird",
+      "late registration"
+    ]
+  },
+  {
+    "id": "faq-42",
+    "category": "Registration",
+    "question": "How do I register for Maiduguri 2026?",
+    "answer": "Register online at **https://conference.nse.org.ng/registration**.\n1. Choose **Individual Registration** or **Group Registration**.\n2. Members enter their Membership Number to load details automatically. Non-members fill their details manually.\n3. Choose Physical or Virtual participation, and tick 'Include Spouse Details' if applicable.\n4. Pay securely using **Paystack** or **Remita**.\nInstant email and SMS confirmations are dispatched immediately upon successful payment.",
+    "keywords": [
+      "register",
+      "portal",
+      "online registration",
+      "paystack",
+      "remita",
+      "individual",
+      "group"
+    ]
+  },
+  {
+    "id": "faq-43",
+    "category": "Registration",
+    "question": "Who can I contact for registration and technical enquiries?",
+    "answer": "Official NSE Conference Enquiries:\n• **Registration:** +234 201 330 1060 (Ext. 4815, 4852, 4851, 4861)\n• **Technical Support:** +234 201 330 1060 (Ext. 4833)\n• **Partnerships & Exhibitions:** +234 201 330 1060 (Ext. 4855) or email **mimusa@nse.org.ng**\n• **General Inquiries:** **conference@nse.org.ng**\n• **Portal:** https://conference.nse.org.ng",
+    "keywords": [
+      "phone",
+      "contact",
+      "hotline",
+      "enquiries",
+      "email",
+      "support",
+      "exhibition",
+      "partner"
+    ]
+  },
+  {
+    "id": "faq-44",
+    "category": "Schedule",
+    "question": "What is the 5-day conference schedule outline?",
+    "answer": "**Dates: Monday 30th Nov – Friday 4th Dec, 2026**\n• **Day 1 (Mon 30 Nov):** Arrival, Registration, Presidential Cocktail & Fellowship Conferment (8am - 6pm)\n• **Day 2 (Tue 1 Dec):** Opening Ceremony, Exhibition Launch & 1st Plenary Session (8am - 6pm)\n• **Day 3 (Wed 2 Dec):** 2nd Plenary Session, Group Dynamics Competitions, Welfare & Cultural Night (8am - 6pm)\n• **Day 4 (Thu 3 Dec):** Closing Ceremony, Annual General Meeting (AGM), Annual Dinner & Gala Night (8am - 9pm)\n• **Day 5 (Fri 4 Dec):** Industrial Visits, Spouses Heritage Tour & Delegate Departures",
+    "keywords": [
+      "days",
+      "dates",
+      "schedule outline",
+      "programme",
+      "gala night",
+      "agm",
+      "cultural night",
+      "cocktail"
+    ]
   }
 ]
+

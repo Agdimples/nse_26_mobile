@@ -10,21 +10,39 @@ export const Route = createFileRoute("/_authenticated/emergency")({
   component: EmergencyPage,
 });
 
-/* Bundled baseline — always available, matches the Flutter Emergency screen. */
+/* Bundled baseline — official NSE conference secretariat & emergency services */
 const BASE_CONTACTS = [
   {
-    id: "hotline",
-    name: "Conference Hotline",
-    detail: "24/7 operations desk at ICC",
-    phone: EVENT_CONFIG.primaryHotline,
+    id: "registration-hotline",
+    name: "Registration & Secretariat Desk",
+    detail: "ICC Main Lobby — Ext. 4815, 4852, 4851, 4861",
+    phone: "+234 201 330 1060",
     icon: Megaphone,
     tint: "text-primary",
     bg: "bg-primary-soft",
   },
   {
+    id: "technical-hotline",
+    name: "Technical Support Desk",
+    detail: "Presentation and IT issues — Ext. 4833",
+    phone: "+234 201 330 1060",
+    icon: ShieldAlert,
+    tint: "text-primary",
+    bg: "bg-primary-soft",
+  },
+  {
+    id: "partnership-hotline",
+    name: "Partnership & Exhibition Desk",
+    detail: "Exhibitor & partnership enquiries — Ext. 4855",
+    phone: "+234 201 330 1060",
+    icon: Megaphone,
+    tint: "text-success",
+    bg: "bg-success-soft",
+  },
+  {
     id: "police",
-    name: "Police",
-    detail: "Borno State Command — national emergency line",
+    name: "Police (Borno Command)",
+    detail: "National emergency line",
     phone: "112",
     icon: Lock,
     tint: "text-primary",
@@ -33,18 +51,9 @@ const BASE_CONTACTS = [
   {
     id: "ambulance",
     name: "Ambulance / Medical",
-    detail: "National emergency services",
+    detail: "Emergency medical response team at ICC",
     phone: "112",
     icon: Stethoscope,
-    tint: "text-destructive",
-    bg: "bg-destructive-soft",
-  },
-  {
-    id: "venue-security",
-    name: "Venue Security",
-    detail: "ICC security office, Main Lobby",
-    phone: EVENT_CONFIG.primaryHotline,
-    icon: ShieldAlert,
     tint: "text-destructive",
     bg: "bg-destructive-soft",
   },

@@ -71,9 +71,22 @@ function HomePage() {
               {countdown}
             </span>
           </div>
-          <p className="mt-4 text-sm text-white/70">
-            {EVENT_CONFIG.shortName} · {EVENT_CONFIG.venue.name}
-          </p>
+          <div className="mt-3.5 flex items-center justify-between border-t border-white/15 pt-3">
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-emerald-200">
+                MAIDUGURI 2026
+              </p>
+              <p className="text-xs font-semibold text-white/90">
+                {EVENT_CONFIG.dates}
+              </p>
+            </div>
+            <Link
+              to="/about"
+              className="inline-flex items-center gap-1 rounded-full bg-white/20 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur transition hover:bg-white/30"
+            >
+              Conference Guide ›
+            </Link>
+          </div>
         </div>
       </section>
 
