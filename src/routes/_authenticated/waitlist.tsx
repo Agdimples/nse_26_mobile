@@ -58,7 +58,7 @@ function WaitlistPage() {
   const total = orders.length + ushers.length;
 
   return (
-    <div className="pb-16">
+    <div className="pb-24">
       <NsePageHeader
         title="Activity & Requests"
         subtitle={
@@ -73,7 +73,7 @@ function WaitlistPage() {
 
       <Section title="Usher beckons" icon={ConciergeBell} emptyHref="/concierge/usher" emptyLabel="Beckon an usher">
         {ushers.map((u) => (
-          <Card key={u.id} className="border-0 p-3 shadow-card">
+          <Card key={u.id} className="border-0 bg-surface rounded-2xl p-4 shadow-card">
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0 flex-1">
                 <p className="text-sm font-semibold capitalize">{u.reason.replace("_", " ")}</p>
@@ -89,7 +89,7 @@ function WaitlistPage() {
 
       <Section title="Food orders" icon={UtensilsCrossed} emptyHref="/concierge/food" emptyLabel="Order food">
         {orders.map((o) => (
-          <Card key={o.id} className="border-0 p-3 shadow-card">
+          <Card key={o.id} className="border-0 bg-surface rounded-2xl p-4 shadow-card">
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0 flex-1">
                 <p className="text-sm font-semibold">{o.food_order_items?.reduce((s, i) => s + i.quantity, 0) ?? 0} items</p>

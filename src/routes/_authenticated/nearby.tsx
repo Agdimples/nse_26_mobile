@@ -79,7 +79,7 @@ function NearbyPage() {
   const shown = grouped.reduce((n, [, list]) => n + list.length, 0);
 
   return (
-    <div className="pb-16">
+    <div className="pb-24">
       <NsePageHeader
         title="Nearby"
         subtitle={`${total} key places around ${VENUE_DATA.venue.shortName}`}
@@ -197,7 +197,7 @@ function PoiCard({ poi }: { poi: NearbyPoi }) {
         )}`;
 
   return (
-    <Card className="border-0 p-3.5 shadow-card">
+    <Card className="border-0 bg-surface rounded-2xl p-4 shadow-card transition-shadow hover:shadow-md">
       <div className="flex items-start gap-3">
         <span
           className={`mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full ${tint}`}

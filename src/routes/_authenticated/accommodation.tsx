@@ -91,7 +91,7 @@ function AccommodationPage() {
   }, [sort, cap, query]);
 
   return (
-    <div className="pb-16">
+    <div className="pb-24">
       <NsePageHeader
         title="Accommodation"
         subtitle={`${HOTELS.length} delegate hotels · official masterlist`}
@@ -200,7 +200,7 @@ function HotelCard({ hotel }: { hotel: Hotel }) {
         )}`;
 
   return (
-    <Card className="overflow-hidden border-0 p-0 shadow-card">
+    <Card className="overflow-hidden border-0 bg-surface rounded-2xl p-0 shadow-card transition-shadow hover:shadow-md">
       {hasPhotos ? (
         <img
           src={hotelPhotoUrl(hotel)}

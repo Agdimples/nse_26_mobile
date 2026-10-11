@@ -24,7 +24,7 @@ function AboutPage() {
   const info = CONFERENCE_INFO;
 
   return (
-    <div className="space-y-4 pb-16">
+    <div className="space-y-4 pb-24">
       <NsePageHeader
         title="Maiduguri 2026"
         subtitle="Official conference guide, programme & secretariat"

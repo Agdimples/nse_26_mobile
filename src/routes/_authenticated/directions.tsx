@@ -140,6 +140,7 @@ export function DirectionsPage() {
         center: { lat: dest.lat, lng: dest.lng },
         zoom: 14,
         tilt: 45,
+        mapId: "DEMO_MAP_ID",
         mapTypeId: "roadmap",
         disableDefaultUI: true,
         zoomControl: true,
@@ -175,6 +176,7 @@ export function DirectionsPage() {
     // Clear old markers
     markersRef.current.forEach((m) => {
       if (typeof m.setMap === "function") m.setMap(null);
+      else m.map = null;
     });
     markersRef.current = [];
 
@@ -185,38 +187,77 @@ export function DirectionsPage() {
     }
 
     // Destination Marker
-    const destMarker = new window.google.maps.Marker({
-      position: { lat: dest.lat, lng: dest.lng },
-      map,
-      title: dest.name,
-      icon: {
-        path: "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z",
-        scale: 1.6,
-        fillColor: "#C9A227",
-        fillOpacity: 1,
-        strokeColor: "#ffffff",
-        strokeWeight: 2,
-        anchor: new window.google.maps.Point(12, 22),
-      },
-    });
-    markersRef.current.push(destMarker);
+    if (window.google.maps.marker?.AdvancedMarkerElement) {
+      const pin = document.createElement("div");
+      pin.style.display = "flex";
+      pin.style.alignItems = "center";
+      pin.style.justifyContent = "center";
+      pin.style.width = "34px";
+      pin.style.height = "34px";
+      pin.style.borderRadius = "9999px";
+      pin.style.backgroundColor = "#C9A227";
+      pin.style.border = "3px solid #ffffff";
+      pin.style.boxShadow = "0 2px 6px rgba(0,0,0,0.35)";
+      pin.style.fontSize = "16px";
+      pin.innerText = "📍";
+      const destMarker = new window.google.maps.marker.AdvancedMarkerElement({
+        position: { lat: dest.lat, lng: dest.lng },
+        map,
+        title: dest.name,
+        content: pin,
+      });
+      markersRef.current.push(destMarker);
+    } else {
+      const destMarker = new window.google.maps.Marker({
+        position: { lat: dest.lat, lng: dest.lng },
+        map,
+        title: dest.name,
+        icon: {
+          path: "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z",
+          scale: 1.6,
+          fillColor: "#C9A227",
+          fillOpacity: 1,
+          strokeColor: "#ffffff",
+          strokeWeight: 2,
+          anchor: new window.google.maps.Point(12, 22),
+        },
+      });
+      markersRef.current.push(destMarker);
+    }
 
     // Origin Marker
     if (origin) {
-      const originMarker = new window.google.maps.Marker({
-        position: { lat: origin.lat, lng: origin.lng },
-        map,
-        title: origin.label,
-        icon: {
-          path: window.google.maps.SymbolPath.CIRCLE,
-          scale: 8,
-          fillColor: "#123E73",
-          fillOpacity: 1,
-          strokeColor: "#ffffff",
-          strokeWeight: 2.5,
-        },
-      });
-      markersRef.current.push(originMarker);
+      if (window.google.maps.marker?.AdvancedMarkerElement) {
+        const pin = document.createElement("div");
+        pin.style.width = "18px";
+        pin.style.height = "18px";
+        pin.style.borderRadius = "9999px";
+        pin.style.backgroundColor = "#123E73";
+        pin.style.border = "2.5px solid #ffffff";
+        pin.style.boxShadow = "0 2px 6px rgba(0,0,0,0.35)";
+        const originMarker = new window.google.maps.marker.AdvancedMarkerElement({
+          position: { lat: origin.lat, lng: origin.lng },
+          map,
+          title: origin.label,
+          content: pin,
+        });
+        markersRef.current.push(originMarker);
+      } else {
+        const originMarker = new window.google.maps.Marker({
+          position: { lat: origin.lat, lng: origin.lng },
+          map,
+          title: origin.label,
+          icon: {
+            path: window.google.maps.SymbolPath.CIRCLE,
+            scale: 8,
+            fillColor: "#123E73",
+            fillOpacity: 1,
+            strokeColor: "#ffffff",
+            strokeWeight: 2.5,
+          },
+        });
+        markersRef.current.push(originMarker);
+      }
     }
 
     // Draw Route Polyline
@@ -244,7 +285,7 @@ export function DirectionsPage() {
   const googleMapsAppUrl = `https://www.google.com/maps/dir/?api=1&origin=${origin.lat},${origin.lng}&destination=${dest.lat},${dest.lng}&travelmode=${mode === "DRIVE" ? "driving" : "walking"}`;
 
   return (
-    <div className="pb-16">
+    <div className="pb-24">
       <NsePageHeader
         title="Live Directions"
         subtitle={`To: ${dest.name}`}

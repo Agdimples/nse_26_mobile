@@ -40,7 +40,7 @@ function MapPage() {
   }, [room]);
 
   return (
-    <div className="pb-16">
+    <div className="pb-24">
       <NsePageHeader
         title="Venue & 3D Map"
         subtitle={`${EVENT_CONFIG.venue.name} · Indoor & outdoor`}

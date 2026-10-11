@@ -50,7 +50,7 @@ function NetworkPage() {
   });
 
   return (
-    <div className="pb-12">
+    <div className="pb-24">
       <NsePageHeader
         title="Network"
         subtitle="Connect with fellow attendees"
@@ -59,11 +59,17 @@ function NetworkPage() {
 
       <div className="space-y-4 px-4 pt-4">
         <Tabs defaultValue="rooms" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 bg-muted/60 p-1">
-            <TabsTrigger value="rooms" className="text-xs font-semibold">
+          <TabsList className="grid h-11 w-full grid-cols-2 rounded-xl bg-muted/80 p-1">
+            <TabsTrigger
+              value="rooms"
+              className="rounded-lg text-xs font-bold transition-all data-[state=active]:bg-surface data-[state=active]:text-foreground data-[state=active]:shadow-sm"
+            >
               Chat rooms
             </TabsTrigger>
-            <TabsTrigger value="people" className="text-xs font-semibold">
+            <TabsTrigger
+              value="people"
+              className="rounded-lg text-xs font-bold transition-all data-[state=active]:bg-surface data-[state=active]:text-foreground data-[state=active]:shadow-sm"
+            >
               People ({directory.length})
             </TabsTrigger>
           </TabsList>
@@ -76,17 +82,19 @@ function NetworkPage() {
                 params={{ roomId: r.id }}
                 className="block transition active:scale-[0.99]"
               >
-                <Card className="flex items-center gap-3 border-0 p-4 shadow-card hover:bg-muted/30">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary-soft text-primary">
-                    <Hash className="h-5 w-5" />
+                <Card className="flex items-center gap-3.5 border-0 bg-surface p-4 rounded-2xl shadow-card transition-shadow hover:shadow-md">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-primary shadow-inner">
+                    <Hash className="h-6 w-6" />
                   </div>
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-bold text-foreground">{r.name}</p>
                     {r.description && (
-                      <p className="mt-0.5 line-clamp-1 text-xs text-muted-foreground">{r.description}</p>
+                      <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{r.description}</p>
                     )}
                   </div>
-                  <MessageCircle className="h-4 w-4 text-muted-foreground" />
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-muted/60 text-muted-foreground">
+                    <MessageCircle className="h-4 w-4" />
+                  </div>
                 </Card>
               </Link>
             ))}
@@ -94,21 +102,26 @@ function NetworkPage() {
 
           <TabsContent value="people" className="mt-4 space-y-3">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 placeholder="Search by name, company, role…"
-                className="h-10 pl-9 text-xs"
+                className="h-11 rounded-xl pl-10 text-xs shadow-sm bg-surface"
               />
             </div>
 
             {filtered.length === 0 ? (
-              <Card className="border-0 p-8 text-center shadow-card">
-                <p className="text-sm text-muted-foreground">
+              <Card className="border-0 bg-surface p-8 text-center rounded-2xl shadow-card">
+                <p className="text-sm font-semibold text-foreground">
                   {directory.length === 0
-                    ? "Be the first to join the directory! Enable it in your profile."
-                    : "No matches found for your search."}
+                    ? "Directory is warming up"
+                    : "No attendees found"}
+                </p>
+                <p className="mt-1.5 text-xs text-muted-foreground leading-relaxed">
+                  {directory.length === 0
+                    ? "Be among the first delegates to join the directory by enabling networking in your profile."
+                    : "Try searching with a different name, organisation, or engineering discipline."}
                 </p>
               </Card>
             ) : (
@@ -120,18 +133,22 @@ function NetworkPage() {
                     params={{ userId: p.id }}
                     className="block transition active:scale-[0.99]"
                   >
-                    <Card className="flex items-center gap-3 border-0 p-3.5 shadow-card hover:bg-muted/30">
-                      <Avatar className="h-12 w-12 border border-border">
+                    <Card className="flex items-center gap-3.5 border-0 bg-surface p-3.5 rounded-2xl shadow-card transition-shadow hover:shadow-md">
+                      <Avatar className="h-12 w-12 border border-border shadow-sm">
                         <AvatarImage src={p.avatar_url ?? undefined} />
-                        <AvatarFallback className="font-semibold text-xs">{initials(p.display_name)}</AvatarFallback>
+                        <AvatarFallback className="font-bold text-xs bg-primary-soft text-primary">
+                          {initials(p.display_name)}
+                        </AvatarFallback>
                       </Avatar>
                       <div className="min-w-0 flex-1">
                         <p className="truncate text-sm font-bold text-foreground">{p.display_name}</p>
                         <p className="mt-0.5 truncate text-xs text-muted-foreground">
-                          {[p.title, p.company].filter(Boolean).join(" · ") || "Attendee"}
+                          {[p.title, p.company].filter(Boolean).join(" · ") || "Conference Delegate"}
                         </p>
                       </div>
-                      <MessageCircle className="h-4 w-4 text-muted-foreground" />
+                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-muted/60 text-muted-foreground">
+                        <MessageCircle className="h-4 w-4" />
+                      </div>
                     </Card>
                   </Link>
                 ))}

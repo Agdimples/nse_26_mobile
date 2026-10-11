@@ -57,7 +57,7 @@ function HomePage() {
   const countdown = countdownLabel();
 
   return (
-    <div className="pb-16">
+    <div className="pb-24">
       {/* Official Hero Header */}
       <section className="relative overflow-hidden rounded-b-[32px] bg-brand-gradient px-4 pb-7 pt-4 text-white shadow-elevated">
         <div className="hero-sheen pointer-events-none absolute inset-0" />

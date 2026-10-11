@@ -3,7 +3,13 @@ import { Sparkles } from "lucide-react";
 
 export function FloatingChatbot() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  if (pathname.startsWith("/chatbot") || pathname.startsWith("/admin") || pathname.startsWith("/auth")) {
+  if (
+    pathname.startsWith("/chatbot") ||
+    pathname.startsWith("/admin") ||
+    pathname.startsWith("/auth") ||
+    pathname.includes("/network/room") ||
+    (pathname.startsWith("/network/") && pathname !== "/network")
+  ) {
     return null;
   }
 

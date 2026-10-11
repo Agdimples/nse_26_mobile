@@ -41,7 +41,7 @@ function OrdersPage() {
   }, [user, qc]);
 
   return (
-    <div className="pb-16">
+    <div className="pb-24">
       <NsePageHeader
         title="My Orders & Requests"
         subtitle="Track meal orders and concierge requests"
@@ -51,13 +51,13 @@ function OrdersPage() {
       <div className="space-y-4 px-4 pt-4">
 
       <section>
-        <h3 className="mb-2 text-sm font-semibold uppercase tracking-wider text-muted-foreground">Food orders</h3>
+        <h3 className="mb-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">Food orders</h3>
         {orders.length === 0 ? (
           <p className="text-sm text-muted-foreground">No food orders yet.</p>
         ) : (
-          <div className="space-y-2">
+          <div className="space-y-2.5">
             {orders.map((o) => (
-              <Card key={o.id} className="border-0 p-3 shadow-card">
+              <Card key={o.id} className="border-0 bg-surface rounded-2xl p-4 shadow-card">
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-semibold">{o.food_order_items?.reduce((s, i) => s + i.quantity, 0) ?? 0} items · Complimentary</p>

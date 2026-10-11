@@ -33,7 +33,7 @@ function SchedulePage() {
   }
 
   return (
-    <div className="pb-16">
+    <div className="pb-24">
       <NsePageHeader
         title="Programme & Schedule"
         subtitle="Sessions, timings & keynote speakers"
@@ -168,22 +168,22 @@ function SessionsList() {
         {filtered.map((s) => (
           <Card
             key={s.id}
-            className="overflow-hidden border-0 p-0 shadow-card"
+            className="overflow-hidden border-0 bg-surface rounded-2xl shadow-card transition-shadow hover:shadow-md"
             onClick={() => navigate({ to: "/schedule/$sessionId", params: { sessionId: s.id } })}
           >
-            <div className="flex cursor-pointer items-start gap-3 p-4">
-              <div className="w-16 shrink-0 text-xs font-semibold leading-tight text-primary">
+            <div className="flex cursor-pointer items-start gap-3.5 p-4">
+              <div className="w-16 shrink-0 text-xs font-bold leading-tight text-primary">
                 {formatTimeRange(s.starts_at, s.ends_at).split(" – ").map((t, i) => (
                   <div key={i}>{t}</div>
                 ))}
               </div>
               <div className="min-w-0 flex-1">
                 <div className="flex items-start justify-between gap-2">
-                  <h3 className="text-sm font-semibold leading-snug">{s.title}</h3>
+                  <h3 className="text-sm font-bold leading-snug">{s.title}</h3>
                   <Button
                     size="icon"
                     variant="ghost"
-                    className="h-7 w-7 shrink-0"
+                    className="h-7 w-7 shrink-0 text-muted-foreground hover:text-primary"
                     onClick={(e) => {
                       e.stopPropagation();
                       toggleAgenda.mutate(s.id);
@@ -192,25 +192,25 @@ function SessionsList() {
                     {agendaSet.has(s.id) ? (
                       <BookmarkCheck className="h-4 w-4 text-primary" />
                     ) : (
-                      <BookmarkPlus className="h-4 w-4 text-muted-foreground" />
+                      <BookmarkPlus className="h-4 w-4" />
                     )}
                   </Button>
                 </div>
-                <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
-                  {s.room && <span>📍 {s.room}</span>}
+                <div className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
+                  {s.room && <span className="font-medium text-foreground/80">📍 {s.room}</span>}
                   {s.track && (
-                    <Badge variant="secondary" className="h-4 px-1.5 text-[10px]">
+                    <Badge variant="secondary" className="h-4 px-1.5 text-[10px] font-semibold">
                       {s.track}
                     </Badge>
                   )}
                   {s.session_type !== "talk" && (
-                    <Badge variant="outline" className="h-4 px-1.5 text-[10px] capitalize">
+                    <Badge variant="outline" className="h-4 px-1.5 text-[10px] capitalize font-medium">
                       {s.session_type}
                     </Badge>
                   )}
                 </div>
                 {s.session_speakers && s.session_speakers.length > 0 && (
-                  <p className="mt-2 truncate text-xs text-muted-foreground">
+                  <p className="mt-2.5 truncate text-xs font-medium text-muted-foreground">
                     {s.session_speakers.map((ss) => ss.speakers?.name).filter(Boolean).join(" · ")}
                   </p>
                 )}
@@ -237,27 +237,29 @@ function SpeakersList() {
   });
 
   return (
-    <div className="px-4 pb-4 pt-4">
-      <p className="text-sm text-muted-foreground">{speakers.length} amazing people</p>
+    <div className="px-4 pb-24 pt-4">
+      <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+        {speakers.length} Featured Speakers & Leaders
+      </p>
       <div className="mt-4 grid grid-cols-2 gap-3">
         {speakers.map((sp) => (
           <Link key={sp.id} to="/speakers/$speakerId" params={{ speakerId: sp.id }} className="block">
-            <Card className="overflow-hidden border-0 p-4 shadow-card">
-              <Avatar className="mx-auto h-20 w-20">
+            <Card className="overflow-hidden border-0 bg-surface rounded-2xl p-4 shadow-card transition-shadow hover:shadow-md">
+              <Avatar className="mx-auto h-20 w-20 border-2 border-border shadow-sm">
                 <AvatarImage src={sp.avatar_url ?? undefined} />
-                <AvatarFallback className="text-base">{initials(sp.name)}</AvatarFallback>
+                <AvatarFallback className="text-base font-bold bg-primary-soft text-primary">{initials(sp.name)}</AvatarFallback>
               </Avatar>
-              <p className="mt-3 text-center text-sm font-semibold leading-tight">{sp.name}</p>
+              <p className="mt-3 text-center text-sm font-bold leading-tight text-foreground">{sp.name}</p>
               {sp.title && (
-                <p className="mt-0.5 line-clamp-2 text-center text-[11px] text-muted-foreground">
+                <p className="mt-1 line-clamp-2 text-center text-[11px] leading-tight text-muted-foreground">
                   {sp.title}
                 </p>
               )}
               {sp.company && (
-                <p className="text-center text-[11px] font-medium text-primary">{sp.company}</p>
+                <p className="mt-0.5 text-center text-[11px] font-semibold text-primary">{sp.company}</p>
               )}
               {sp.is_keynote && (
-                <Badge className="mt-2 w-full justify-center bg-accent text-accent-foreground hover:bg-accent">
+                <Badge className="mt-2.5 w-full justify-center bg-accent text-accent-foreground font-bold hover:bg-accent border-0">
                   Keynote
                 </Badge>
               )}

@@ -60,40 +60,61 @@ const BASE_CONTACTS = [
 ] as const;
 
 function EmergencyPage() {
-  // Extra contacts from the backend (the bundled list above is the baseline).
-  const { data: extra = [] } = useQuery({
+  const { data: dbContacts = [], isLoading } = useQuery({
     queryKey: ["emergency-contacts"],
     queryFn: async () => {
-      const { data } = await supabase.from("emergency_contacts").select("*").order("sort_order");
-      return (data ?? []) as unknown as { id: string; label: string; phone: string; category?: string }[];
+      const { data } = await supabase
+        .from("emergency_contacts")
+        .select("*")
+        .order("sort_order");
+      return (data ?? []) as {
+        id: string;
+        label: string;
+        phone: string;
+        category?: string;
+        description?: string;
+      }[];
     },
   });
 
+  const getIconProps = (category?: string) => {
+    switch (category?.toLowerCase()) {
+      case "medical":
+        return { icon: Stethoscope, tint: "text-destructive", bg: "bg-destructive-soft" };
+      case "emergency":
+      case "police":
+        return { icon: Lock, tint: "text-primary", bg: "bg-primary-soft" };
+      case "technical":
+        return { icon: ShieldAlert, tint: "text-primary", bg: "bg-primary-soft" };
+      case "partnership":
+        return { icon: Megaphone, tint: "text-success", bg: "bg-success-soft" };
+      default:
+        return { icon: Megaphone, tint: "text-primary", bg: "bg-primary-soft" };
+    }
+  };
+
+  // If database contacts are loaded, display them; otherwise fallback to bundled BASE_CONTACTS
+  const contactsToDisplay = dbContacts.length > 0
+    ? dbContacts.map((c) => ({
+        id: c.id,
+        name: c.label,
+        detail: c.description || c.category || "Official Desk",
+        phone: c.phone,
+        ...getIconProps(c.category),
+      }))
+    : BASE_CONTACTS;
+
   return (
-    <div className="pb-16">
+    <div className="pb-24">
       <NsePageHeader
         title="Emergency"
         subtitle="Tap a contact to call immediately."
         backTo="/home"
       />
       <div className="space-y-3 px-4 pt-4">
-        {BASE_CONTACTS.map((c) => (
+        {contactsToDisplay.map((c) => (
           <ContactCard key={c.id} {...c} />
         ))}
-        {extra
-          .filter((c) => c.phone)
-          .map((c) => (
-            <ContactCard
-              key={c.id}
-              id={c.id}
-              name={c.label}
-              detail={c.category ?? "Conference contact"}
-              phone={c.phone}
-              icon={AlertTriangle}
-              tint="text-warning-foreground"
-              bg="bg-accent-soft"
-            />
-          ))}
       </div>
     </div>
   );

@@ -82,7 +82,7 @@ function UsherPage() {
   });
 
   return (
-    <div className="pb-16">
+    <div className="pb-24">
       <NsePageHeader
         title="Beckon an Usher"
         subtitle="An event staffer will come to your location"
@@ -91,39 +91,38 @@ function UsherPage() {
 
       <div className="space-y-4 px-4 pt-4">
 
-
-      <Card className="space-y-3 border-0 p-4 shadow-card">
-        <div className="space-y-1">
+      <Card className="space-y-3.5 border-0 bg-surface rounded-2xl p-4 shadow-card">
+        <div className="space-y-1.5">
           <Label>Reason</Label>
           <select
             value={reason}
             onChange={(e) => setReason(e.target.value)}
-            className="flex h-10 w-full rounded-md border border-input bg-background px-3 text-sm"
+            className="flex h-11 w-full rounded-xl border border-input bg-background px-3 text-xs"
           >
             {REASONS.map((r) => <option key={r}>{r}</option>)}
           </select>
         </div>
-        <div className="space-y-1">
+        <div className="space-y-1.5">
           <Label>Where are you? (room / row / seat)</Label>
-          <Input value={location} onChange={(e) => setLocation(e.target.value)} placeholder="e.g. Hall A, Row 4, Seat 12" />
+          <Input value={location} onChange={(e) => setLocation(e.target.value)} placeholder="e.g. Hall A, Row 4, Seat 12" className="h-11 rounded-xl text-xs" />
         </div>
-        <div className="space-y-1">
+        <div className="space-y-1.5">
           <Label>Note (optional)</Label>
-          <Textarea rows={2} value={note} onChange={(e) => setNote(e.target.value)} placeholder="Anything we should know" />
+          <Textarea rows={2} value={note} onChange={(e) => setNote(e.target.value)} placeholder="Anything we should know" className="rounded-xl text-xs" />
         </div>
-        <Button onClick={() => submit.mutate()} disabled={submit.isPending} className="w-full">
-          <BellRing className="h-4 w-4" /> {submit.isPending ? "Sending…" : "Call an usher"}
+        <Button onClick={() => submit.mutate()} disabled={submit.isPending} className="h-11 w-full rounded-xl font-bold">
+          <BellRing className="mr-1.5 h-4 w-4" /> {submit.isPending ? "Sending…" : "Call an usher"}
         </Button>
       </Card>
 
       <section>
-        <h3 className="mb-2 text-sm font-semibold uppercase tracking-wider text-muted-foreground">Recent requests</h3>
+        <h3 className="mb-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">Recent requests</h3>
         {myRequests.length === 0 ? (
           <p className="text-sm text-muted-foreground">No requests yet.</p>
         ) : (
-          <div className="space-y-2">
+          <div className="space-y-2.5">
             {myRequests.map((r) => (
-              <Card key={r.id} className="border-0 p-3 shadow-card">
+              <Card key={r.id} className="border-0 bg-surface rounded-2xl p-4 shadow-card">
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-semibold">{r.reason}</p>

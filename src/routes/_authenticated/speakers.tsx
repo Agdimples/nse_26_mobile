@@ -25,7 +25,7 @@ function SpeakersPage() {
   });
 
   return (
-    <div className="pb-16">
+    <div className="pb-24">
       <NsePageHeader
         title="Speakers"
         subtitle={`${speakers.length} keynote lecturers & industry leaders`}
@@ -41,10 +41,10 @@ function SpeakersPage() {
               params={{ speakerId: sp.id }}
               className="block transition active:scale-[0.98]"
             >
-              <Card className="h-full overflow-hidden border-0 p-4 shadow-card hover:bg-muted/30">
+              <Card className="h-full overflow-hidden border-0 bg-surface rounded-2xl p-4 shadow-card transition-shadow hover:shadow-md">
                 <Avatar className="mx-auto h-20 w-20 border-2 border-border shadow-sm">
                   <AvatarImage src={sp.avatar_url ?? undefined} />
-                  <AvatarFallback className="text-base font-semibold">{initials(sp.name)}</AvatarFallback>
+                  <AvatarFallback className="text-base font-bold bg-primary-soft text-primary">{initials(sp.name)}</AvatarFallback>
                 </Avatar>
                 <p className="mt-3 text-center text-sm font-bold leading-tight text-foreground">{sp.name}</p>
                 {sp.title && (

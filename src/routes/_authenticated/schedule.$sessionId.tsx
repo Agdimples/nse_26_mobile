@@ -64,7 +64,7 @@ function SessionDetail() {
   if (!session) return <div className="p-6 text-sm text-muted-foreground">Session not found.</div>;
 
   return (
-    <div className="pb-16">
+    <div className="pb-24">
       <div className="relative overflow-hidden rounded-b-[24px] bg-brand-gradient px-4 pb-6 pt-4 text-white shadow-elevated">
         <div className="hero-sheen pointer-events-none absolute inset-0" />
         <div className="relative">
@@ -82,7 +82,7 @@ function SessionDetail() {
             />
             <div className="min-w-0 flex-1">
               {session.track && (
-                <Badge className="mb-2 bg-white/15 text-white hover:bg-white/20">{session.track}</Badge>
+                <Badge className="mb-2 bg-white/15 text-white hover:bg-white/20 border-0">{session.track}</Badge>
               )}
               <h1 className="text-xl font-extrabold leading-tight">{session.title}</h1>
               <div className="mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-white/80">
@@ -118,19 +118,21 @@ function SessionDetail() {
 
         {session.description && (
           <section>
-            <h3 className="mb-2 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-              About
+            <h3 className="mb-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+              About Session
             </h3>
-            <p className="text-sm leading-relaxed">{session.description}</p>
+            <Card className="border-0 bg-surface rounded-2xl p-4 shadow-card">
+              <p className="text-sm leading-relaxed text-muted-foreground">{session.description}</p>
+            </Card>
           </section>
         )}
 
         {session.session_speakers && session.session_speakers.length > 0 && (
           <section>
-            <h3 className="mb-2 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-              Speakers
+            <h3 className="mb-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+              Session Speakers
             </h3>
-            <div className="space-y-2">
+            <div className="space-y-2.5">
               {session.session_speakers.map((ss) => {
                 const sp = ss.speakers;
                 if (!sp) return null;
@@ -139,14 +141,14 @@ function SessionDetail() {
                     key={sp.id}
                     to="/speakers/$speakerId"
                     params={{ speakerId: sp.id }}
-                    className="flex items-center gap-3 rounded-xl border border-border bg-surface p-3"
+                    className="flex items-center gap-3.5 rounded-2xl border-0 bg-surface p-3.5 shadow-card transition-shadow hover:shadow-md"
                   >
-                    <Avatar className="h-12 w-12">
+                    <Avatar className="h-12 w-12 border border-border shadow-sm">
                       <AvatarImage src={sp.avatar_url ?? undefined} />
-                      <AvatarFallback>{initials(sp.name)}</AvatarFallback>
+                      <AvatarFallback className="font-bold text-xs bg-primary-soft text-primary">{initials(sp.name)}</AvatarFallback>
                     </Avatar>
                     <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm font-semibold">{sp.name}</p>
+                      <p className="truncate text-sm font-bold text-foreground">{sp.name}</p>
                       <p className="truncate text-xs text-muted-foreground">
                         {[sp.title, sp.company].filter(Boolean).join(" · ")}
                       </p>

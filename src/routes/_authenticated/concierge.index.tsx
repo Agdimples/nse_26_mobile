@@ -33,25 +33,27 @@ const tiles = [
 
 function ConciergeHub() {
   return (
-    <div className="pb-12">
+    <div className="pb-24">
       <NsePageHeader
         title="Concierge"
         subtitle="Convenience services & attendee assistance"
         backTo="/home"
       />
 
-      <div className="space-y-3 px-4 pt-4">
+      <div className="space-y-3.5 px-4 pt-4">
         {tiles.map(({ to, label, desc, icon: Icon, tone }) => (
           <Link key={to} to={to} className="block transition active:scale-[0.99]">
-            <Card className="flex items-center gap-3 border-0 p-4 shadow-card hover:bg-muted/30">
-              <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${tone}`}>
-                <Icon className="h-5 w-5" />
+            <Card className="flex items-center gap-3.5 border-0 bg-surface p-4 rounded-2xl shadow-card transition-shadow hover:shadow-md">
+              <span className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl shadow-inner ${tone}`}>
+                <Icon className="h-6 w-6" />
               </span>
               <div className="min-w-0 flex-1">
                 <p className="text-sm font-bold text-foreground">{label}</p>
-                <p className="mt-0.5 line-clamp-1 text-xs text-muted-foreground">{desc}</p>
+                <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{desc}</p>
               </div>
-              <span className="text-muted-foreground">›</span>
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-muted/60 text-muted-foreground">
+                <span className="text-sm font-bold">›</span>
+              </div>
             </Card>
           </Link>
         ))}

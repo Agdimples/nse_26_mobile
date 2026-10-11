@@ -74,7 +74,7 @@ function AdminLayout() {
   );
 
   return (
-    <div className="pb-16">
+    <div className="pb-24">
       <div className="relative overflow-hidden rounded-b-[20px] bg-brand-gradient px-4 pb-4 pt-4 text-white shadow-elevated">
         <div className="hero-sheen pointer-events-none absolute inset-0" />
         <div className="relative flex items-center justify-between">

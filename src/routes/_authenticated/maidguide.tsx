@@ -55,25 +55,27 @@ const tiles = [
 
 function MaidguidePage() {
   return (
-    <div className="space-y-4 pb-16">
+    <div className="space-y-4 pb-24">
       <NsePageHeader
         title="Maidguide"
         subtitle={`Your guide to ${EVENT_CONFIG.venue.name} and Maiduguri.`}
         backTo="/home"
       />
 
-      <div className="grid grid-cols-1 gap-3 px-4">
+      <div className="grid grid-cols-1 gap-3.5 px-4">
         {tiles.map(({ to, label, description, icon: Icon, tone }) => (
           <Link key={to} to={to} className="block transition active:scale-[0.99]">
-            <Card className="flex items-center gap-4 border-0 p-4 shadow-card">
-              <span className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${tone}`}>
+            <Card className="flex items-center gap-3.5 border-0 bg-surface rounded-2xl p-4 shadow-card transition-shadow hover:shadow-md">
+              <span className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl shadow-inner ${tone}`}>
                 <Icon className="h-6 w-6" />
               </span>
               <div className="min-w-0 flex-1">
-                <p className="text-sm font-semibold">{label}</p>
-                <p className="mt-0.5 text-xs text-muted-foreground">{description}</p>
+                <p className="text-sm font-bold text-foreground">{label}</p>
+                <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{description}</p>
               </div>
-              <span className="text-muted-foreground">›</span>
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-muted/60 text-muted-foreground">
+                <span className="text-sm font-bold">›</span>
+              </div>
             </Card>
           </Link>
         ))}

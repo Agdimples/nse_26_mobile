@@ -37,7 +37,7 @@ function SpeakerDetail() {
   if (!speaker) return <div className="p-6 text-sm text-muted-foreground">Loading…</div>;
 
   return (
-    <div className="pb-16">
+    <div className="pb-24">
       <div className="relative overflow-hidden rounded-b-[28px] bg-brand-gradient px-4 pb-8 pt-4 text-white shadow-elevated">
         <div className="hero-sheen pointer-events-none absolute inset-0" />
         <div className="relative">
@@ -77,17 +77,19 @@ function SpeakerDetail() {
       <div className="space-y-5 px-4 py-5">
         {speaker.bio && (
           <section>
-            <h3 className="mb-2 text-sm font-semibold uppercase tracking-wider text-muted-foreground">About</h3>
-            <p className="text-sm leading-relaxed text-muted-foreground whitespace-pre-line">{speaker.bio}</p>
+            <h3 className="mb-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">About</h3>
+            <Card className="border-0 bg-surface rounded-2xl p-4 shadow-card">
+              <p className="text-sm leading-relaxed text-muted-foreground whitespace-pre-line">{speaker.bio}</p>
+            </Card>
           </section>
         )}
 
         {sessions.length > 0 && (
           <section>
-            <h3 className="mb-2 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+            <h3 className="mb-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
               Sessions
             </h3>
-            <div className="space-y-2">
+            <div className="space-y-2.5">
               {sessions.map((s) => (
                 <Link
                   key={s!.id}
@@ -95,11 +97,11 @@ function SpeakerDetail() {
                   params={{ sessionId: s!.id }}
                   className="block transition active:scale-[0.99]"
                 >
-                  <Card className="border-0 p-3 shadow-card">
-                    <p className="text-sm font-semibold">{s!.title}</p>
+                  <Card className="border-0 bg-surface rounded-2xl p-4 shadow-card transition-shadow hover:shadow-md">
+                    <p className="text-sm font-bold text-foreground">{s!.title}</p>
                     <p className="mt-1 text-xs text-muted-foreground">
                       Day {s!.day} · {formatTimeRange(s!.starts_at, s!.ends_at)}
-                      {s!.room ? ` · ${s!.room}` : ""}
+                      {s!.room ? ` · 📍 ${s!.room}` : ""}
                     </p>
                   </Card>
                 </Link>

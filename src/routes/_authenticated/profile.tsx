@@ -68,7 +68,7 @@ function ProfilePage() {
   });
 
   return (
-    <div className="pb-16">
+    <div className="pb-24">
       <NsePageHeader
         title="Your Profile"
         subtitle="How other attendees see you in the network"
@@ -76,11 +76,11 @@ function ProfilePage() {
       />
 
       <div className="space-y-4 px-4 pt-4">
-        <Card className="border-0 p-5 shadow-card">
+        <Card className="border-0 bg-surface rounded-2xl p-5 shadow-card">
           <div className="mb-5 flex items-center gap-4">
-            <Avatar className="h-16 w-16">
+            <Avatar className="h-16 w-16 border-2 border-border shadow-sm">
               <AvatarImage src={form.avatar_url || undefined} />
-              <AvatarFallback className="text-lg">{initials(form.display_name || "?")}</AvatarFallback>
+              <AvatarFallback className="text-lg font-bold bg-primary-soft text-primary">{initials(form.display_name || "?")}</AvatarFallback>
             </Avatar>
             <div className="flex-1 space-y-1">
               <Label className="text-xs">Avatar URL</Label>
@@ -88,7 +88,7 @@ function ProfilePage() {
                 value={form.avatar_url}
                 onChange={(e) => setForm({ ...form, avatar_url: e.target.value })}
                 placeholder="https://…"
-                className="text-xs"
+                className="text-xs rounded-xl"
               />
             </div>
           </div>
@@ -96,21 +96,21 @@ function ProfilePage() {
           <div className="space-y-4">
             <div className="space-y-1.5">
               <Label htmlFor="dn">Display name</Label>
-              <Input id="dn" value={form.display_name} onChange={(e) => setForm({ ...form, display_name: e.target.value })} />
+              <Input id="dn" value={form.display_name} onChange={(e) => setForm({ ...form, display_name: e.target.value })} className="rounded-xl" />
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1.5">
                 <Label htmlFor="title">Title</Label>
-                <Input id="title" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder="Engineer" />
+                <Input id="title" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder="e.g. Senior Civil Engineer" className="rounded-xl" />
               </div>
               <div className="space-y-1.5">
-                <Label htmlFor="company">Company</Label>
-                <Input id="company" value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} placeholder="Paystack" />
+                <Label htmlFor="company">Company / Branch</Label>
+                <Input id="company" value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} placeholder="e.g. NSE Maiduguri Branch" className="rounded-xl" />
               </div>
             </div>
             <div className="space-y-1.5">
               <Label htmlFor="bio">Bio</Label>
-              <Textarea id="bio" rows={3} value={form.bio} onChange={(e) => setForm({ ...form, bio: e.target.value })} placeholder="A line or two about you." />
+              <Textarea id="bio" rows={3} value={form.bio} onChange={(e) => setForm({ ...form, bio: e.target.value })} placeholder="A line or two about your engineering discipline and focus." className="rounded-xl" />
             </div>
             <div className="flex items-center justify-between rounded-lg border border-border p-3">
               <div>

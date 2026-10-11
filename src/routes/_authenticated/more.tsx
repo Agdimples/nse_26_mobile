@@ -59,7 +59,7 @@ function MorePage() {
   }
 
   return (
-    <div className="pb-16">
+    <div className="pb-24">
       <NsePageHeader
         title="More"
         subtitle="Wi-Fi, settings & resources"
@@ -68,21 +68,20 @@ function MorePage() {
 
       <div className="space-y-4 px-4 pt-4">
 
-
-      <Card className="border-0 p-4 shadow-card">
-        <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-soft text-warning-foreground">
+      <Card className="border-0 bg-surface rounded-2xl p-4 shadow-card">
+        <div className="flex items-center gap-3.5">
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-accent-soft text-warning-foreground shadow-inner">
             <Wifi className="h-5 w-5" />
           </div>
           <div className="flex-1">
-            <p className="text-xs uppercase tracking-wider text-muted-foreground">Conference Wi-Fi</p>
-            <p className="font-mono text-sm font-semibold">{EVENT_CONFIG.wifi.ssid}</p>
+            <p className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Conference Wi-Fi</p>
+            <p className="font-mono text-sm font-bold text-foreground">{EVENT_CONFIG.wifi.ssid}</p>
             <p className="font-mono text-xs text-muted-foreground">Password: {EVENT_CONFIG.wifi.password}</p>
           </div>
         </div>
       </Card>
 
-      <Card className="overflow-hidden border-0 shadow-card">
+      <Card className="overflow-hidden border-0 bg-surface rounded-2xl shadow-card">
         <ul className="divide-y divide-border">
           {items.map(({ to, label, icon: Icon }) => (
             <li key={to}>

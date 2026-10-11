@@ -82,6 +82,7 @@ export function GoogleOutdoorMap() {
         zoom: 14,
         tilt: 45,
         heading: 0,
+        mapId: "DEMO_MAP_ID",
         mapTypeId: "roadmap",
         disableDefaultUI: true,
         zoomControl: true,

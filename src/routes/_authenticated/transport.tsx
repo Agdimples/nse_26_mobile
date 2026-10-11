@@ -23,7 +23,7 @@ function TransportPage() {
   const { defaultPolicy, policyDescriptions, buses, scheduleTemplate } = TRANSPORT;
 
   return (
-    <div className="pb-16">
+    <div className="pb-24">
       <NsePageHeader
         title="Transport"
         subtitle={`Delegate shuttles · ${buses.length} buses`}
@@ -32,7 +32,7 @@ function TransportPage() {
 
       <div className="px-4 pt-4">
       {/* Policy card */}
-      <Card className="border-0 p-4 shadow-card">
+      <Card className="border-0 bg-surface rounded-2xl p-4 shadow-card">
         <div className="flex items-center gap-2">
           <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary-soft text-primary">
             <Bus className="h-5 w-5" />
@@ -51,7 +51,7 @@ function TransportPage() {
         <h3 className="mb-2 text-sm font-bold uppercase tracking-wide text-muted-foreground">
           Daily schedule
         </h3>
-        <Card className="border-0 p-4 shadow-card">
+        <Card className="border-0 bg-surface rounded-2xl p-4 shadow-card">
           <div className="space-y-2.5">
             {scheduleTemplate.map((s) => (
               <div key={s.label} className="flex items-center gap-3">
@@ -80,7 +80,7 @@ function TransportPage() {
           {buses.map((bus) => {
             const hotel = HOTELS.find((h) => h.id === bus.hotelId);
             return (
-              <Card key={bus.id} className="border-0 p-4 shadow-card">
+              <Card key={bus.id} className="border-0 bg-surface rounded-2xl p-4 shadow-card">
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2">
