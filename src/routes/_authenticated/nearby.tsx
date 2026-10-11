@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { NsePageHeader } from "@/components/app/NsePageHeader";
 import { useMemo, useState } from "react";
 import { Card } from "@/components/ui/card";
@@ -84,7 +84,13 @@ function NearbyPage() {
         title="Nearby"
         subtitle={`${total} key places around ${VENUE_DATA.venue.shortName}`}
         backTo="/home"
-      />
+      >
+        <Button size="sm" variant="secondary" asChild className="h-7 text-xs bg-white/20 text-white hover:bg-white/30 border-0">
+          <Link to="/map">
+            <MapPin className="mr-1 h-3 w-3" /> 3D Map
+          </Link>
+        </Button>
+      </NsePageHeader>
 
       <div className="px-4 pt-4">
       {/* Search */}
@@ -223,9 +229,17 @@ function PoiCard({ poi }: { poi: NearbyPoi }) {
           </div>
         </div>
         <Button size="sm" variant="outline" asChild className="shrink-0">
-          <a href={mapsUrl} target="_blank" rel="noreferrer" aria-label={`Directions to ${poi.name}`}>
+          <Link
+            to="/directions"
+            search={{
+              lat: poi.latitude ?? undefined,
+              lng: poi.longitude ?? undefined,
+              name: poi.name,
+            }}
+            aria-label={`Directions to ${poi.name}`}
+          >
             <Navigation className="h-3.5 w-3.5" />
-          </a>
+          </Link>
         </Button>
       </div>
     </Card>

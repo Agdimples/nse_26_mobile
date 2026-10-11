@@ -21,6 +21,7 @@ export const Route = createFileRoute("/_authenticated/admin")({
 type AdminTab = {
   to:
     | "/admin"
+    | "/admin/exhibitors"
     | "/admin/sessions"
     | "/admin/speakers"
     | "/admin/accommodations"
@@ -38,6 +39,7 @@ type AdminTab = {
 
 const tabs: ReadonlyArray<AdminTab> = [
   { to: "/admin", label: "Overview", exact: true, roles: ["super_admin", "front_desk", "kitchen", "program", "logistics", "comms"] },
+  { to: "/admin/exhibitors", label: "Exhibitors", roles: ["super_admin", "admin"] },
   { to: "/admin/sessions", label: "Sessions", roles: ["program"] },
   { to: "/admin/speakers", label: "Speakers", roles: ["program"] },
   { to: "/admin/accommodations", label: "Hotels", roles: ["logistics"] },

@@ -11,15 +11,15 @@ export const Route = createFileRoute("/_authenticated/maidguide")({
 const tiles = [
   {
     to: "/map",
-    label: "Venue & Outdoor Map",
-    description: "Floor plan, hotspots, and 24 researched places on the map.",
+    label: "3D Venue & Outdoor Map",
+    description: "Floor plan, realistic 3D buildings, 47 hotels & Maiduguri places.",
     icon: MapPin,
     tone: "bg-primary-soft text-primary",
   },
   {
     to: "/directions",
-    label: "Live Directions",
-    description: "Turn-by-turn directions around Maiduguri.",
+    label: "3D Live Directions",
+    description: "Turn-by-turn routing with walk/drive modes & 3D camera.",
     icon: Navigation,
     tone: "bg-accent-soft text-warning-foreground",
   },

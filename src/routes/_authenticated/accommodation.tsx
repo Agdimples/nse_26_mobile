@@ -97,10 +97,17 @@ function AccommodationPage() {
         subtitle={`${HOTELS.length} delegate hotels · official masterlist`}
         backTo="/home"
       >
-        <Badge variant="secondary" className="shrink-0 bg-white/15 text-white hover:bg-white/15">
-          <BedDouble className="mr-1 h-3 w-3" />
-          {HOTELS.reduce((sum, h) => sum + (Number(h.roomSummary?.match(/\d+/)?.[0]) || 0), 0)}+ rooms
-        </Badge>
+        <div className="flex items-center gap-1.5">
+          <Button size="sm" variant="secondary" asChild className="h-7 text-xs bg-white/20 text-white hover:bg-white/30 border-0">
+            <Link to="/map">
+              <MapPin className="mr-1 h-3 w-3" /> 3D Map
+            </Link>
+          </Button>
+          <Badge variant="secondary" className="shrink-0 bg-white/15 text-white hover:bg-white/15">
+            <BedDouble className="mr-1 h-3 w-3" />
+            {HOTELS.reduce((sum, h) => sum + (Number(h.roomSummary?.match(/\d+/)?.[0]) || 0), 0)}+ rooms
+          </Badge>
+        </div>
       </NsePageHeader>
 
       <div className="px-4 pt-4">
@@ -274,9 +281,16 @@ function HotelCard({ hotel }: { hotel: Hotel }) {
             </Button>
           )}
           <Button size="sm" asChild className="flex-1">
-            <a href={mapsUrl} target="_blank" rel="noreferrer">
-              <Navigation className="h-3.5 w-3.5" /> Directions
-            </a>
+            <Link
+              to="/directions"
+              search={{
+                lat: hotel.latitude ?? undefined,
+                lng: hotel.longitude ?? undefined,
+                name: hotel.name,
+              }}
+            >
+              <Navigation className="h-3.5 w-3.5 mr-1" /> Directions
+            </Link>
           </Button>
         </div>
       </div>
