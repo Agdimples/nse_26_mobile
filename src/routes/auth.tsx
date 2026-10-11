@@ -95,6 +95,13 @@ function AuthPage() {
     <div className="flex min-h-screen flex-col bg-brand-gradient px-5 py-10 text-white">
       <div className="mx-auto w-full max-w-sm">
         <div className="mb-8 text-center">
+          <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-white/10 p-2 shadow-inner backdrop-blur-md">
+            <img
+              src="/nse_crest.png"
+              alt="NSE Crest"
+              className="h-12 w-12 rounded-full bg-white p-1 object-contain shadow"
+            />
+          </div>
           <p className="text-xs font-medium uppercase tracking-[0.25em] text-white/80">
             {EVENT_CONFIG.dates}
           </p>

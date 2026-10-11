@@ -48,17 +48,22 @@ function ChatbotPage() {
 
   return (
     <div className="flex h-[calc(100dvh-7.5rem)] flex-col">
-      <div className="bg-brand-gradient px-4 pb-4 pt-3 text-white">
-        <button onClick={() => navigate({ to: "/home" })} className="mb-2 inline-flex items-center gap-1 text-sm text-white/80">
-          <ArrowLeft className="h-4 w-4" /> Home
-        </button>
-        <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/20">
-            <Sparkles className="h-5 w-5" />
-          </div>
-          <div>
-            <h1 className="text-base font-bold">AI Concierge</h1>
-            <p className="text-xs text-white/70">Ask anything about {EVENT_CONFIG.shortName}</p>
+      <div className="relative overflow-hidden rounded-b-[20px] bg-brand-gradient px-4 pb-4 pt-3 text-white shadow-elevated">
+        <div className="hero-sheen pointer-events-none absolute inset-0" />
+        <div className="relative">
+          <button onClick={() => navigate({ to: "/home" })} className="mb-2 inline-flex items-center gap-1 text-sm text-white/80 hover:text-white">
+            <ArrowLeft className="h-4 w-4" /> Home
+          </button>
+          <div className="flex items-center gap-3">
+            <img
+              src="/nse_crest.png"
+              alt="NSE crest"
+              className="h-9 w-9 rounded-full bg-white p-1 shadow"
+            />
+            <div>
+              <h1 className="text-base font-bold">AI Concierge</h1>
+              <p className="text-xs text-white/70">Ask anything about {EVENT_CONFIG.shortName}</p>
+            </div>
           </div>
         </div>
       </div>

@@ -37,16 +37,18 @@ function SpeakerDetail() {
   if (!speaker) return <div className="p-6 text-sm text-muted-foreground">Loading…</div>;
 
   return (
-    <div>
-      <div className="bg-brand-gradient px-4 pb-8 pt-4 text-white">
-        <button
-          onClick={() => navigate({ to: "/speakers" })}
-          className="mb-3 inline-flex items-center gap-1 text-sm text-white/80"
-        >
-          <ArrowLeft className="h-4 w-4" /> All speakers
-        </button>
-        <div className="flex flex-col items-center text-center">
-          <Avatar className="h-28 w-28 border-4 border-white/20">
+    <div className="pb-16">
+      <div className="relative overflow-hidden rounded-b-[28px] bg-brand-gradient px-4 pb-8 pt-4 text-white shadow-elevated">
+        <div className="hero-sheen pointer-events-none absolute inset-0" />
+        <div className="relative">
+          <button
+            onClick={() => navigate({ to: "/speakers" })}
+            className="mb-3 inline-flex items-center gap-1 text-sm text-white/80 hover:text-white"
+          >
+            <ArrowLeft className="h-4 w-4" /> All speakers
+          </button>
+          <div className="flex flex-col items-center text-center">
+            <Avatar className="h-28 w-28 border-4 border-white/20 shadow-lg">
             <AvatarImage src={speaker.avatar_url ?? undefined} />
             <AvatarFallback className="text-xl">{initials(speaker.name)}</AvatarFallback>
           </Avatar>
@@ -70,12 +72,13 @@ function SpeakerDetail() {
           </div>
         </div>
       </div>
+      </div>
 
       <div className="space-y-5 px-4 py-5">
         {speaker.bio && (
           <section>
             <h3 className="mb-2 text-sm font-semibold uppercase tracking-wider text-muted-foreground">About</h3>
-            <p className="text-sm leading-relaxed">{speaker.bio}</p>
+            <p className="text-sm leading-relaxed text-muted-foreground whitespace-pre-line">{speaker.bio}</p>
           </section>
         )}
 
@@ -86,7 +89,12 @@ function SpeakerDetail() {
             </h3>
             <div className="space-y-2">
               {sessions.map((s) => (
-                <Link key={s!.id} to="/schedule/$sessionId" params={{ sessionId: s!.id }}>
+                <Link
+                  key={s!.id}
+                  to="/schedule/$sessionId"
+                  params={{ sessionId: s!.id }}
+                  className="block transition active:scale-[0.99]"
+                >
                   <Card className="border-0 p-3 shadow-card">
                     <p className="text-sm font-semibold">{s!.title}</p>
                     <p className="mt-1 text-xs text-muted-foreground">

@@ -20,6 +20,7 @@ import {
   HelpCircle,
   Info,
 } from "lucide-react";
+import { NsePageHeader } from "@/components/app/NsePageHeader";
 import { EVENT_CONFIG } from "@/lib/event-config";
 import { toast } from "sonner";
 
@@ -33,7 +34,7 @@ const items = [
   { to: "/emergency", label: "Emergency", icon: ShieldAlert },
   { to: "/transport", label: "Transport", icon: Bus },
   { to: "/faq", label: "Conference Guide (FAQ)", icon: HelpCircle },
-  { to: "/about", label: "About NSE", icon: Info },
+  { to: "/about", label: "About Maiduguri 2026", icon: Info },
   { to: "/profile", label: "Edit profile", icon: User },
 ] as const;
 
@@ -57,12 +58,16 @@ function MorePage() {
     await refreshRoles();
   }
 
-
   return (
-    <div className="space-y-5 px-4 pt-5">
-      <div>
-        <h2 className="text-xl font-bold">More</h2>
-      </div>
+    <div className="pb-16">
+      <NsePageHeader
+        title="More"
+        subtitle="Wi-Fi, settings & resources"
+        backTo="/home"
+      />
+
+      <div className="space-y-4 px-4 pt-4">
+
 
       <Card className="border-0 p-4 shadow-card">
         <div className="flex items-center gap-3">
@@ -154,6 +159,8 @@ function MorePage() {
       <p className="pt-4 text-center text-xs text-muted-foreground">
         {EVENT_CONFIG.name} {EVENT_CONFIG.year}
       </p>
+      </div>
     </div>
   );
 }
+

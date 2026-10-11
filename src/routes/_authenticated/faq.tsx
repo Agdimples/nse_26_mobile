@@ -50,7 +50,7 @@ function FaqPage() {
   }, [results]);
 
   return (
-    <div className="pb-6">
+    <div className="pb-16">
       <NsePageHeader
         title="Conference Guide"
         subtitle={`${searchFaqs("").length} answers to common questions`}

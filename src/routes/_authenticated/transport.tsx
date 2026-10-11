@@ -23,7 +23,7 @@ function TransportPage() {
   const { defaultPolicy, policyDescriptions, buses, scheduleTemplate } = TRANSPORT;
 
   return (
-    <div className="pb-6">
+    <div className="pb-16">
       <NsePageHeader
         title="Transport"
         subtitle={`Delegate shuttles · ${buses.length} buses`}

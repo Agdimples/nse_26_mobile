@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Card } from "@/components/ui/card";
+import { NsePageHeader } from "@/components/app/NsePageHeader";
 import { BellRing, UtensilsCrossed, ReceiptText } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/concierge/")({
@@ -24,7 +25,7 @@ const tiles = [
   {
     to: "/concierge/orders",
     label: "My Orders & Requests",
-    desc: "View status of food orders.",
+    desc: "View status of food orders and active requests.",
     icon: ReceiptText,
     tone: "bg-accent-soft text-warning-foreground",
   },
@@ -32,23 +33,23 @@ const tiles = [
 
 function ConciergeHub() {
   return (
-    <div className="space-y-5 px-4 pt-5">
-      <div>
-        <h2 className="text-xl font-bold">Concierge</h2>
-        <p className="text-sm text-muted-foreground">
-          Convenience services for attendees.
-        </p>
-      </div>
-      <div className="space-y-3">
+    <div className="pb-12">
+      <NsePageHeader
+        title="Concierge"
+        subtitle="Convenience services & attendee assistance"
+        backTo="/home"
+      />
+
+      <div className="space-y-3 px-4 pt-4">
         {tiles.map(({ to, label, desc, icon: Icon, tone }) => (
-          <Link key={to} to={to}>
-            <Card className="flex items-center gap-3 border-0 p-4 shadow-card transition active:scale-[0.99]">
-              <span className={`flex h-11 w-11 items-center justify-center rounded-xl ${tone}`}>
+          <Link key={to} to={to} className="block transition active:scale-[0.99]">
+            <Card className="flex items-center gap-3 border-0 p-4 shadow-card hover:bg-muted/30">
+              <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${tone}`}>
                 <Icon className="h-5 w-5" />
               </span>
               <div className="min-w-0 flex-1">
-                <p className="text-sm font-semibold">{label}</p>
-                <p className="truncate text-xs text-muted-foreground">{desc}</p>
+                <p className="text-sm font-bold text-foreground">{label}</p>
+                <p className="mt-0.5 line-clamp-1 text-xs text-muted-foreground">{desc}</p>
               </div>
               <span className="text-muted-foreground">›</span>
             </Card>

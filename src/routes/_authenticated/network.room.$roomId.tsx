@@ -77,7 +77,7 @@ function RoomChatPage() {
 
   return (
     <div className="flex h-[calc(100dvh-7.5rem)] flex-col">
-      <div className="bg-brand-gradient px-4 pb-3 pt-3 text-white">
+      <div className="rounded-b-[20px] bg-brand-gradient px-4 pb-3.5 pt-3 text-white shadow-sm">
         <button onClick={() => navigate({ to: "/network" })} className="mb-2 inline-flex items-center gap-1 text-sm text-white/80">
           <ArrowLeft className="h-4 w-4" /> Network
         </button>

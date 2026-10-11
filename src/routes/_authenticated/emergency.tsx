@@ -70,7 +70,7 @@ function EmergencyPage() {
   });
 
   return (
-    <div className="pb-6">
+    <div className="pb-16">
       <NsePageHeader
         title="Emergency"
         subtitle="Tap a contact to call immediately."

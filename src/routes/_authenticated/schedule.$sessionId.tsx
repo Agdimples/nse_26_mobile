@@ -64,21 +64,33 @@ function SessionDetail() {
   if (!session) return <div className="p-6 text-sm text-muted-foreground">Session not found.</div>;
 
   return (
-    <div>
-      <div className="bg-brand-gradient px-4 pb-6 pt-4 text-white">
-        <button
-          onClick={() => navigate({ to: "/schedule" })}
-          className="mb-3 inline-flex items-center gap-1 text-sm text-white/80"
-        >
-          <ArrowLeft className="h-4 w-4" /> Back to schedule
-        </button>
-        {session.track && (
-          <Badge className="mb-2 bg-white/15 text-white hover:bg-white/20">{session.track}</Badge>
-        )}
-        <h1 className="text-2xl font-bold leading-tight">{session.title}</h1>
-        <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-white/80">
-          <span>⏱ {formatTimeRange(session.starts_at, session.ends_at)}</span>
-          {session.room && <span>📍 {session.room}</span>}
+    <div className="pb-16">
+      <div className="relative overflow-hidden rounded-b-[24px] bg-brand-gradient px-4 pb-6 pt-4 text-white shadow-elevated">
+        <div className="hero-sheen pointer-events-none absolute inset-0" />
+        <div className="relative">
+          <button
+            onClick={() => navigate({ to: "/schedule" })}
+            className="mb-3 inline-flex items-center gap-1 text-sm text-white/80 hover:text-white"
+          >
+            <ArrowLeft className="h-4 w-4" /> Back to schedule
+          </button>
+          <div className="flex items-start gap-3">
+            <img
+              src="/nse_crest.png"
+              alt="NSE crest"
+              className="mt-1 h-9 w-9 shrink-0 rounded-full bg-white p-1 shadow"
+            />
+            <div className="min-w-0 flex-1">
+              {session.track && (
+                <Badge className="mb-2 bg-white/15 text-white hover:bg-white/20">{session.track}</Badge>
+              )}
+              <h1 className="text-xl font-extrabold leading-tight">{session.title}</h1>
+              <div className="mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-white/80">
+                <span>⏱ {formatTimeRange(session.starts_at, session.ends_at)}</span>
+                {session.room && <span>📍 {session.room}</span>}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 

@@ -5,6 +5,7 @@ import { GoogleOutdoorMap } from "@/components/app/GoogleOutdoorMap";
 import { EVENT_CONFIG } from "@/lib/event-config";
 import { Card } from "@/components/ui/card";
 import { MapPin } from "lucide-react";
+import { NsePageHeader } from "@/components/app/NsePageHeader";
 
 type Search = { room?: string };
 
@@ -39,15 +40,19 @@ function MapPage() {
   }, [room]);
 
   return (
-    <div className="px-4 pt-5">
-      <h2 className="text-xl font-bold">Map</h2>
-      <p className="text-sm text-muted-foreground">{EVENT_CONFIG.venue.name}</p>
+    <div className="pb-16">
+      <NsePageHeader
+        title="Venue & 3D Map"
+        subtitle={`${EVENT_CONFIG.venue.name} · Indoor & outdoor`}
+        backTo="/home"
+      />
 
-      <Tabs value={tab} onValueChange={(v) => setTab(v as "venue" | "outdoor")} className="mt-4">
-        <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="venue">Venue</TabsTrigger>
-          <TabsTrigger value="outdoor">Outdoor</TabsTrigger>
-        </TabsList>
+      <div className="space-y-4 px-4 pt-4">
+        <Tabs value={tab} onValueChange={(v) => setTab(v as "venue" | "outdoor")}>
+          <TabsList className="grid w-full grid-cols-2 rounded-xl bg-muted/60 p-1">
+            <TabsTrigger value="venue" className="rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm">Venue Plan</TabsTrigger>
+            <TabsTrigger value="outdoor" className="rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm">3D Outdoor Map</TabsTrigger>
+          </TabsList>
 
         <TabsContent value="venue" className="mt-4">
           <Card className="overflow-hidden border-0 shadow-card">
@@ -102,6 +107,7 @@ function MapPage() {
           </p>
         </TabsContent>
       </Tabs>
+      </div>
     </div>
   );
 }

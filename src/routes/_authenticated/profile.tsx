@@ -11,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { initials } from "@/lib/format";
-import { ArrowLeft } from "lucide-react";
+import { NsePageHeader } from "@/components/app/NsePageHeader";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/profile")({
@@ -68,16 +68,14 @@ function ProfilePage() {
   });
 
   return (
-    <div>
-      <div className="bg-brand-gradient px-4 pb-6 pt-4 text-white">
-        <button onClick={() => navigate({ to: "/more" })} className="mb-3 inline-flex items-center gap-1 text-sm text-white/80">
-          <ArrowLeft className="h-4 w-4" /> Back
-        </button>
-        <h1 className="text-xl font-bold">Your profile</h1>
-        <p className="mt-1 text-sm text-white/70">How other attendees see you in the network.</p>
-      </div>
+    <div className="pb-16">
+      <NsePageHeader
+        title="Your Profile"
+        subtitle="How other attendees see you in the network"
+        backTo="/more"
+      />
 
-      <div className="px-4 py-5">
+      <div className="space-y-4 px-4 pt-4">
         <Card className="border-0 p-5 shadow-card">
           <div className="mb-5 flex items-center gap-4">
             <Avatar className="h-16 w-16">

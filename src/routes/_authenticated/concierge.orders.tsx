@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ChevronLeft } from "lucide-react";
+import { NsePageHeader } from "@/components/app/NsePageHeader";
 import { formatRelative } from "@/lib/format";
 
 export const Route = createFileRoute("/_authenticated/concierge/orders")({
@@ -41,11 +41,14 @@ function OrdersPage() {
   }, [user, qc]);
 
   return (
-    <div className="space-y-5 px-4 pt-5 pb-8">
-      <Link to="/concierge" className="inline-flex items-center text-sm text-muted-foreground">
-        <ChevronLeft className="h-4 w-4" /> Concierge
-      </Link>
-      <h2 className="text-xl font-bold">My orders & requests</h2>
+    <div className="pb-16">
+      <NsePageHeader
+        title="My Orders & Requests"
+        subtitle="Track meal orders and concierge requests"
+        backTo="/concierge"
+      />
+
+      <div className="space-y-4 px-4 pt-4">
 
       <section>
         <h3 className="mb-2 text-sm font-semibold uppercase tracking-wider text-muted-foreground">Food orders</h3>
@@ -73,7 +76,7 @@ function OrdersPage() {
           </div>
         )}
       </section>
-
+      </div>
     </div>
   );
 }

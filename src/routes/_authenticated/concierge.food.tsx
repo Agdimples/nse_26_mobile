@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/sheet";
 import { ChevronLeft, ShoppingBag, Plus, Minus } from "lucide-react";
 import { toast } from "sonner";
+import { NsePageHeader } from "@/components/app/NsePageHeader";
 
 export const Route = createFileRoute("/_authenticated/concierge/food")({
   component: FoodPage,
@@ -135,19 +136,25 @@ function FoodPage() {
   }
 
   return (
-    <div className="space-y-5 px-4 pt-5 pb-28">
-      <Link to="/concierge" className="inline-flex items-center text-sm text-muted-foreground">
-        <ChevronLeft className="h-4 w-4" /> Concierge
-      </Link>
-      <div className="flex items-end justify-between">
-        <div>
-          <h2 className="text-xl font-bold">Food Menu</h2>
-          <p className="text-sm text-muted-foreground">
-            Complimentary from the organizers. Pick one item per section.
-          </p>
+    <div className="pb-32">
+      <NsePageHeader
+        title="Food Menu"
+        subtitle="Complimentary delegate dining"
+        backTo="/concierge"
+      >
+        <div className="mt-2 flex items-center justify-between text-xs">
+          <span className="text-white/80">Pick 1 item per course</span>
+          <Link
+            to="/concierge/orders"
+            className="rounded-full bg-white/20 px-2.5 py-1 font-semibold text-white backdrop-blur transition hover:bg-white/30"
+          >
+            My orders →
+          </Link>
         </div>
-        <Link to="/concierge/orders" className="text-xs font-medium text-primary">My orders →</Link>
-      </div>
+      </NsePageHeader>
+
+      <div className="space-y-4 px-4 pt-4">
+
 
       {categories.map((cat) => {
         const catItems = items.filter((i) => i.category_id === cat.id);
@@ -262,6 +269,8 @@ function FoodPage() {
           </SheetContent>
         </Sheet>
       )}
+      </div>
     </div>
   );
 }
+

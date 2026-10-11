@@ -91,7 +91,7 @@ function AccommodationPage() {
   }, [sort, cap, query]);
 
   return (
-    <div className="pb-6">
+    <div className="pb-16">
       <NsePageHeader
         title="Accommodation"
         subtitle={`${HOTELS.length} delegate hotels · official masterlist`}

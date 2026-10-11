@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useRef, useState, useMemo, lazy, Suspense } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { NsePageHeader } from "@/components/app/NsePageHeader";
 import { useGoogleMaps } from "@/lib/google-maps";
 import { EVENT_CONFIG } from "@/lib/event-config";
 import { HOTELS } from "@/lib/reference";
@@ -243,21 +244,12 @@ export function DirectionsPage() {
   const googleMapsAppUrl = `https://www.google.com/maps/dir/?api=1&origin=${origin.lat},${origin.lng}&destination=${dest.lat},${dest.lng}&travelmode=${mode === "DRIVE" ? "driving" : "walking"}`;
 
   return (
-    <div className="pb-8">
-      {/* Header */}
-      <div className="bg-brand-gradient px-4 pb-5 pt-4 text-white">
-        <button
-          onClick={() => navigate({ to: "/home" })}
-          className="mb-3 inline-flex items-center gap-1 text-sm text-white/80 hover:text-white"
-        >
-          <ArrowLeft className="h-4 w-4" /> Home
-        </button>
-        <h1 className="text-xl font-bold">Live Directions & Navigation</h1>
-        <p className="mt-1 text-sm text-white/85 inline-flex items-center gap-1">
-          <MapPin className="h-3.5 w-3.5 text-accent" /> To:{" "}
-          <span className="font-semibold">{dest.name}</span>
-        </p>
-      </div>
+    <div className="pb-16">
+      <NsePageHeader
+        title="Live Directions"
+        subtitle={`To: ${dest.name}`}
+        backTo="/home"
+      />
 
       <div className="px-4 pt-4 space-y-3">
         {/* Origin Selector Card */}

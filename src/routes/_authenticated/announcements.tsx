@@ -22,7 +22,7 @@ function AnnouncementsPage() {
   });
 
   return (
-    <div className="pb-6">
+    <div className="pb-16">
       <NsePageHeader
         title="Announcements"
         subtitle="Official updates from the organisers."

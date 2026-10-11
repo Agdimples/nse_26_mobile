@@ -74,24 +74,42 @@ function AdminLayout() {
   );
 
   return (
-    <div>
-      <div className="bg-brand-gradient px-4 pb-4 pt-4 text-white">
-        <h1 className="text-xl font-bold">Admin</h1>
-        <p className="text-sm text-white/70">
-          {myRoles.length > 0
-            ? `Signed in as ${myRoles.map((r) => ROLE_LABEL[r]).join(" + ")}`
-            : "Manage conference content"}
-        </p>
+    <div className="pb-16">
+      <div className="relative overflow-hidden rounded-b-[20px] bg-brand-gradient px-4 pb-4 pt-4 text-white shadow-elevated">
+        <div className="hero-sheen pointer-events-none absolute inset-0" />
+        <div className="relative flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <img
+              src="/nse_crest.png"
+              alt="NSE crest"
+              className="h-9 w-9 rounded-full bg-white p-1 shadow"
+            />
+            <div>
+              <h1 className="text-xl font-extrabold leading-tight">Admin Console</h1>
+              <p className="text-xs text-white/75">
+                {myRoles.length > 0
+                  ? `Signed in as ${myRoles.map((r) => ROLE_LABEL[r]).join(" + ")}`
+                  : "Manage conference content"}
+              </p>
+            </div>
+          </div>
+          <Link
+            to="/home"
+            className="inline-flex items-center gap-1 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold text-white transition hover:bg-white/25"
+          >
+            Exit
+          </Link>
+        </div>
       </div>
-      <div className="-mx-1 flex gap-1 overflow-x-auto border-b border-border px-4 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="-mx-1 flex gap-1 overflow-x-auto border-b border-border bg-surface/50 px-4 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {visible.map((t) => {
           const active = t.exact ? pathname === t.to : pathname.startsWith(t.to);
           return (
             <Link
               key={t.to}
               to={t.to}
-              className={`shrink-0 rounded-full px-3 py-1.5 text-xs font-medium transition ${
-                active ? "bg-primary text-primary-foreground" : "text-muted-foreground"
+              className={`shrink-0 rounded-full px-3 py-1.5 text-xs font-semibold transition ${
+                active ? "bg-primary text-primary-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
               }`}
             >
               {t.label}

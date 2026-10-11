@@ -79,7 +79,7 @@ function NearbyPage() {
   const shown = grouped.reduce((n, [, list]) => n + list.length, 0);
 
   return (
-    <div className="pb-6">
+    <div className="pb-16">
       <NsePageHeader
         title="Nearby"
         subtitle={`${total} key places around ${VENUE_DATA.venue.shortName}`}

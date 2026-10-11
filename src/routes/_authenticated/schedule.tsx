@@ -15,6 +15,8 @@ import { useAuth } from "@/lib/auth";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
+import { NsePageHeader } from "@/components/app/NsePageHeader";
+
 export const Route = createFileRoute("/_authenticated/schedule")({
   component: SchedulePage,
 });
@@ -31,24 +33,37 @@ function SchedulePage() {
   }
 
   return (
-    <div>
-      <div className="sticky top-0 z-10 -mt-px border-b border-border bg-background/95 backdrop-blur">
-        <div className="px-4 pt-4">
-          <h2 className="text-xl font-bold">Schedule</h2>
-          <Tabs value={view} onValueChange={(v) => setView(v as "sessions" | "speakers")} className="mt-3">
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="sessions">Sessions</TabsTrigger>
-              <TabsTrigger value="speakers">Speakers</TabsTrigger>
-            </TabsList>
-          </Tabs>
-        </div>
-        <div className="h-3" />
-      </div>
+    <div className="pb-16">
+      <NsePageHeader
+        title="Programme & Schedule"
+        subtitle="Sessions, timings & keynote speakers"
+        backTo="/home"
+      >
+        <Tabs value={view} onValueChange={(v) => setView(v as "sessions" | "speakers")} className="mt-2 w-full">
+          <TabsList className="grid w-full grid-cols-2 bg-black/25 p-1 text-white">
+            <TabsTrigger
+              value="sessions"
+              className="text-xs font-semibold data-[state=active]:bg-white data-[state=active]:text-primary"
+            >
+              Sessions
+            </TabsTrigger>
+            <TabsTrigger
+              value="speakers"
+              className="text-xs font-semibold data-[state=active]:bg-white data-[state=active]:text-primary"
+            >
+              Speakers
+            </TabsTrigger>
+          </TabsList>
+        </Tabs>
+      </NsePageHeader>
 
-      {view === "sessions" ? <SessionsList /> : <SpeakersList />}
+      <div className="pt-2">
+        {view === "sessions" ? <SessionsList /> : <SpeakersList />}
+      </div>
     </div>
   );
 }
+
 
 
 // Conference days derived from EVENT_CONFIG start/end (Nov 28 - Dec 4 2026).
@@ -226,7 +241,7 @@ function SpeakersList() {
       <p className="text-sm text-muted-foreground">{speakers.length} amazing people</p>
       <div className="mt-4 grid grid-cols-2 gap-3">
         {speakers.map((sp) => (
-          <Link key={sp.id} to="/speakers/$speakerId" params={{ speakerId: sp.id }}>
+          <Link key={sp.id} to="/speakers/$speakerId" params={{ speakerId: sp.id }} className="block">
             <Card className="overflow-hidden border-0 p-4 shadow-card">
               <Avatar className="mx-auto h-20 w-20">
                 <AvatarImage src={sp.avatar_url ?? undefined} />

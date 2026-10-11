@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { ChevronLeft, BellRing } from "lucide-react";
 import { toast } from "sonner";
+import { NsePageHeader } from "@/components/app/NsePageHeader";
 import { formatRelative } from "@/lib/format";
 
 export const Route = createFileRoute("/_authenticated/concierge/usher")({
@@ -81,14 +82,15 @@ function UsherPage() {
   });
 
   return (
-    <div className="space-y-5 px-4 pt-5 pb-8">
-      <Link to="/concierge" className="inline-flex items-center text-sm text-muted-foreground">
-        <ChevronLeft className="h-4 w-4" /> Concierge
-      </Link>
-      <div>
-        <h2 className="text-xl font-bold">Beckon an Usher</h2>
-        <p className="text-sm text-muted-foreground">An event staffer will come to you.</p>
-      </div>
+    <div className="pb-16">
+      <NsePageHeader
+        title="Beckon an Usher"
+        subtitle="An event staffer will come to your location"
+        backTo="/concierge"
+      />
+
+      <div className="space-y-4 px-4 pt-4">
+
 
       <Card className="space-y-3 border-0 p-4 shadow-card">
         <div className="space-y-1">
@@ -136,6 +138,7 @@ function UsherPage() {
           </div>
         )}
       </section>
+      </div>
     </div>
   );
 }

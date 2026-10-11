@@ -49,7 +49,7 @@ function HomePage() {
   const countdown = countdownLabel();
 
   return (
-    <div className="pb-6">
+    <div className="pb-16">
       {/* NseHeroHeader equivalent */}
       <section className="relative overflow-hidden rounded-b-[30px] bg-brand-gradient px-4 pb-6 pt-4 text-white shadow-elevated">
         <div className="hero-sheen pointer-events-none absolute inset-0" />

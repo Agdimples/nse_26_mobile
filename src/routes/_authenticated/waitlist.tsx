@@ -6,6 +6,7 @@ import { useAuth } from "@/lib/auth";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { formatRelative } from "@/lib/format";
+import { NsePageHeader } from "@/components/app/NsePageHeader";
 import { ConciergeBell, UtensilsCrossed } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/waitlist")({
@@ -57,13 +58,18 @@ function WaitlistPage() {
   const total = orders.length + ushers.length;
 
   return (
-    <div className="space-y-5 px-4 pt-5 pb-8">
-      <div>
-        <h2 className="text-xl font-bold">Waitlist</h2>
-        <p className="text-sm text-muted-foreground">
-          {total === 0 ? "Nothing pending. You're all caught up." : `${total} active request${total === 1 ? "" : "s"}`}
-        </p>
-      </div>
+    <div className="pb-16">
+      <NsePageHeader
+        title="Activity & Requests"
+        subtitle={
+          total === 0
+            ? "You're all caught up — no pending requests"
+            : `${total} active concierge request${total === 1 ? "" : "s"}`
+        }
+        backTo="/home"
+      />
+
+      <div className="space-y-4 px-4 pt-4">
 
       <Section title="Usher beckons" icon={ConciergeBell} emptyHref="/concierge/usher" emptyLabel="Beckon an usher">
         {ushers.map((u) => (
@@ -100,6 +106,7 @@ function WaitlistPage() {
           </Card>
         ))}
       </Section>
+      </div>
     </div>
   );
 }
