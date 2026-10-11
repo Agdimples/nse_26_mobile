@@ -12,7 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import {
   Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetFooter,
 } from "@/components/ui/sheet";
-import { ChevronLeft, ShoppingBag, Plus, Minus } from "lucide-react";
+import { ChevronLeft, ShoppingBag, Plus, Minus, Utensils } from "lucide-react";
 import { toast } from "sonner";
 import { NsePageHeader } from "@/components/app/NsePageHeader";
 
@@ -214,6 +214,19 @@ function FoodPage() {
           </section>
         );
       })}
+
+      {items.length === 0 && (
+        <Card className="border-0 p-8 text-center shadow-card bg-surface">
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-soft text-primary">
+            <Utensils className="h-6 w-6" />
+          </div>
+          <h3 className="mt-3 text-base font-bold">Meal Service</h3>
+          <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
+            The conference catering team is preparing today's complimentary delegate meals.
+            Menu items will be published here once dining service commences.
+          </p>
+        </Card>
+      )}
 
       {totalQty > 0 && (
         <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>

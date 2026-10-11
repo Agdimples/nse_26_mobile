@@ -125,14 +125,14 @@ function HomePage() {
             {/* Direct Action Buttons */}
             <div className="mt-4 flex items-center justify-center gap-2">
               <Button size="sm" asChild className="h-8 bg-accent text-accent-foreground font-bold hover:bg-accent/90 border-0 shadow">
-                <a href={info.registrationPortal ?? "https://conference.nse.org.ng/registration"} target="_blank" rel="noreferrer">
-                  Register Now
-                  <ExternalLink className="ml-1 h-3 w-3" />
-                </a>
+                <Link to="/schedule">
+                  View Programme
+                  <ArrowRight className="ml-1 h-3 w-3" />
+                </Link>
               </Button>
               <Button size="sm" variant="secondary" asChild className="h-8 bg-white/20 text-white hover:bg-white/30 border-0">
-                <Link to="/schedule">
-                  View Schedule
+                <Link to="/about">
+                  Conference Guide
                   <ArrowRight className="ml-1 h-3 w-3" />
                 </Link>
               </Button>

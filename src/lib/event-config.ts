@@ -30,6 +30,5 @@ export const EVENT_CONFIG = {
   partnershipEmail: "mimusa@nse.org.ng",
   email: "conference@nse.org.ng",
   portalUrl: "https://conference.nse.org.ng",
-  registrationUrl: "https://conference.nse.org.ng/registration",
 } as const;
 

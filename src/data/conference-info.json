@@ -8,7 +8,6 @@
   "chairman": "Engr. Mohammed Kabir Wanori, FNSE",
   "logoUrl": "https://nse.org.ng/wp-content/uploads/2021/09/NSEHeaderReal.png",
   "officialSite": "https://conference.nse.org.ng/",
-  "registrationPortal": "https://conference.nse.org.ng/registration",
   "aboutSummary": "The Nigerian Society of Engineers (NSE) Conference is a flagship annual gathering that convenes engineers, policymakers, academics, and industry leaders to exchange knowledge, strengthen professional capacity, influence policy, and showcase innovative solutions. The conference serves as a strategic platform for advancing the engineering profession while addressing Nigeria’s critical development priorities.\n\nThis year’s edition is expected to attract over 10,000 delegates from across engineering disciplines, academia, manufacturing, government, and the private sector. The conference will feature keynote lectures, technical and panel sessions, exhibitions, and high-level networking opportunities.\n\nAligned with the theme, “Engineering Innovation for Enhanced Security and Sustainable National Development,” the conference will explore how emerging engineering innovations can strengthen national security architecture, drive resilient infrastructure, and support sustainable economic growth. Emphasis will be placed on leveraging technology, local ingenuity and multidisciplinary collaboration to enhance stability, improve infrastructure systems, and deliver long-term development outcomes for Nigeria.",
   "stats": [
     {
@@ -83,52 +82,6 @@
       "summary": "Engineering project tours across Maiduguri, spouses heritage visit, and airport shuttle transfers for departing delegates."
     }
   ],
-  "fees": {
-    "earlyBird": {
-      "period": "3rd March – 31st August, 2026",
-      "items": [
-        { "category": "Fellow", "amount": "₦120,000", "benefits": ["Professional networking", "Technical Sessions", "Exhibition", "Welfare/Cultural Night", "Tour/Industrial Visit", "Gala Night/Dinner"] },
-        { "category": "Corporate & Associate Members", "amount": "₦75,000", "benefits": ["Professional networking", "Technical Sessions", "Exhibition", "Welfare/Cultural Night", "Tour/Industrial Visit", "Gala Night/Dinner"] },
-        { "category": "Spouse", "amount": "₦25,000", "benefits": ["Spouses’ Programme", "Tour/Industrial Visit", "Welfare/Cultural Night", "Gala Night/Dinner"] },
-        { "category": "Graduates & Students", "amount": "₦20,000", "benefits": ["Professional networking", "Young Engineers Programme", "Welfare/Cultural Night", "Tour/Industrial Visit", "Innovative Competition", "Gala Night/Dinner"] },
-        { "category": "Virtual Attendee", "amount": "₦60,000", "benefits": ["Professional networking", "Technical Sessions", "Exhibition"] },
-        { "category": "International Delegate", "amount": "$500", "benefits": ["Professional networking", "Technical Sessions", "Exhibition", "Welfare/Cultural Night", "Tour/Industrial Visit", "Gala Night/Dinner"] }
-      ]
-    },
-    "lateRegistration": {
-      "period": "1st Sept. – 23rd Nov., 2026",
-      "items": [
-        { "category": "Fellow", "amount": "₦135,000", "benefits": ["Professional networking", "Technical Sessions", "Exhibition", "Welfare/Cultural Night", "Tour/Industrial Visit", "Gala Night/Dinner"] },
-        { "category": "Corporate & Associate Members", "amount": "₦85,000", "benefits": ["Professional networking", "Technical Sessions", "Exhibition", "Welfare/Cultural Night", "Tour/Industrial Visit", "Gala Night/Dinner"] },
-        { "category": "Non-Members", "amount": "₦85,000", "benefits": ["Professional networking", "Technical Sessions", "Welfare/Cultural Night", "Tour/Industrial Visit", "Exhibition", "Gala Night/Dinner"] },
-        { "category": "Spouse", "amount": "₦30,000", "benefits": ["Spouses’ Programme", "Tour/Industrial Visit", "Welfare/Cultural Night", "Gala Night/Dinner"] },
-        { "category": "Graduates & Students", "amount": "₦25,000", "benefits": ["Professional networking", "Young Engineers Programme", "Welfare/Cultural Night", "Tour/Industrial Visit", "Innovative Competition", "Gala Night/Dinner"] },
-        { "category": "Virtual Attendee", "amount": "₦70,000", "benefits": ["Professional networking", "Technical Sessions", "Exhibition"] },
-        { "category": "International Delegate", "amount": "$500", "benefits": ["Professional networking", "Technical Sessions", "Exhibition", "Welfare/Cultural Night", "Tour/Industrial Visit", "Gala Night/Dinner"] }
-      ]
-    }
-  },
-  "guidelines": {
-    "individual": [
-      "Visit the registration portal at https://conference.nse.org.ng/registration",
-      "On the landing page, choose the Individual Registration option",
-      "For Members, enter your Membership number to auto-load your details; for Non-Members, enter your details manually",
-      "Select either Physical or Virtual delegate mode",
-      "Optionally tick 'Include Spouse Details' if your spouse is attending",
-      "Click 'Add Delegate' and preview your details under the Delegate list on the right (edit if needed)",
-      "Choose your preferred payment processor (Paystack or Remita)",
-      "Click 'Pay and Submit'. Instant confirmation will be sent upon payment"
-    ],
-    "group": [
-      "Visit the registration portal at https://conference.nse.org.ng/registration",
-      "On the landing page, choose the Group Registration option",
-      "Enter Group Details (Group Name, Address) and nominate the primary contact person",
-      "Add delegates by membership number or delegate details",
-      "Review the consolidated list and verify fees",
-      "Choose preferred payment processor (Paystack or Remita) and submit",
-      "Instant confirmation and receipts issued to group coordinator and delegates"
-    ]
-  },
   "enquiries": {
     "registration": "+234 201 330 1060 (Ext. 4815, 4852, 4851, 4861)",
     "technical": "+234 201 330 1060 (Ext. 4833)",

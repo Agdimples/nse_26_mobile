@@ -50,27 +50,9 @@ export const Route = createFileRoute("/api/chat")({
             model: gateway("google/gemini-3-flash-preview"),
             system: `You are the friendly AI concierge for ${EVENT_CONFIG.name} ${EVENT_CONFIG.year} (${EVENT_CONFIG.brandName}) — ${EVENT_CONFIG.tagline}. The conference runs ${EVENT_CONFIG.dates} at ${EVENT_CONFIG.venue.name}, ${EVENT_CONFIG.venue.address}.
 
-Be concise, warm, and confident. Answer questions about the schedule, speakers, venue, hotels, registration fees, and emergency contacts. When asked about timing or location, give specific answers. If the user asks something outside the conference, politely steer them back.
+Be concise, warm, and confident. Answer questions about the schedule, sessions, speakers, venue halls, delegate shuttles, hotels, and emergency contacts. When asked about timing or location, give specific answers. If the user asks something outside the conference, politely steer them back.
 
 Use markdown formatting (bold, lists) when it helps readability.
-
-CONFERENCE FEES & REGISTRATION:
-- Portal: https://conference.nse.org.ng/registration (Payment via Paystack or Remita)
-- Early Bird (3rd March – 31st August, 2026):
-  * Fellows: ₦120,000
-  * Corporate & Associate Members: ₦75,000
-  * Spouses: ₦25,000
-  * Graduates & Students: ₦20,000
-  * Virtual Attendees: ₦60,000
-  * International Delegates: $500
-- Late Registration (1st Sept. – 23rd Nov., 2026):
-  * Fellows: ₦135,000
-  * Corporate & Associate Members: ₦85,000
-  * Non-Members: ₦85,000
-  * Spouses: ₦30,000
-  * Graduates & Students: ₦25,000
-  * Virtual Attendees: ₦70,000
-  * International Delegates: $500
 
 OFFICIAL SECRETARIAT ENQUIRIES:
 - Registration Desk: +234 201 330 1060 (Ext. 4815, 4852, 4851, 4861)
