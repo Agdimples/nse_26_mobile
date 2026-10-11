@@ -251,7 +251,6 @@ function SuperOverview({ isSuper }: { isSuper: boolean }) {
   const openOrders = s ? s.ordersByStatus.pending + s.ordersByStatus.preparing + s.ordersByStatus.ready : 0;
   const openUshers = s ? s.ushersByStatus.pending + s.ushersByStatus.acknowledged : 0;
   const maxSignups = Math.max(1, ...(s?.signupsByDay ?? []).map((d) => d.count));
-  const maxSessions = Math.max(1, ...(s?.sessionsByDay ?? []).map((d) => d.count));
 
   return (
     <div className="space-y-4">
@@ -325,30 +324,6 @@ function SuperOverview({ isSuper }: { isSuper: boolean }) {
         </p>
       </Card>
 
-      {/* Programme readiness — sessions per day */}
-      <Card className="border-0 p-4 shadow-card">
-        <div className="flex items-center justify-between">
-          <p className="text-sm font-semibold">Programme readiness</p>
-          <Link to="/admin/sessions" className="flex items-center gap-0.5 text-xs font-medium text-primary">
-            Manage <ArrowRight className="h-3 w-3" />
-          </Link>
-        </div>
-        <div className="mt-3 flex h-24 items-end gap-2">
-          {(s?.sessionsByDay ?? []).map(({ day, count }) => (
-            <div key={day} className="flex flex-1 flex-col items-center gap-1">
-              <span className="text-[10px] font-semibold text-foreground">{count || ""}</span>
-              <div
-                className={`w-full rounded-t-sm ${count > 0 ? "bg-primary" : "bg-destructive/30"}`}
-                style={{ height: `${Math.max(6, (count / maxSessions) * 56)}px` }}
-              />
-              <span className="text-[9px] text-muted-foreground">D{day}</span>
-            </div>
-          ))}
-        </div>
-        <p className="mt-2 text-[11px] text-muted-foreground">
-          {s?.sessions ?? 0} sessions · {s?.speakers ?? 0} speakers · {s?.hotels ?? 0} partner hotels
-        </p>
-      </Card>
 
       {/* Kitchen funnel */}
       <Card className="border-0 p-4 shadow-card">
