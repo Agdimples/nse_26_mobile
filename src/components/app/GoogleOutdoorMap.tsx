@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useGoogleMaps, DEFAULT_MAP_CENTER } from "@/lib/google-maps";
-import { VENUE_DATA, HOTELS, hotelMinRate, formatNGN, hotelDistanceKm, type Hotel } from "@/lib/reference";
+import { VENUE_DATA, HOTELS, hotelMinRate, hotelDistanceKm, type Hotel } from "@/lib/reference";
+import { formatNGN } from "@/lib/format";
 import { EVENT_CONFIG } from "@/lib/event-config";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";

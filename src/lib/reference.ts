@@ -199,3 +199,5 @@ export function haversineKm(
       Math.sin(dLng / 2) ** 2;
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
+
+export { formatNGN } from "./format";
