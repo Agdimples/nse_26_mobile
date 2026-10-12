@@ -41,7 +41,7 @@ export function GoogleOutdoorMap() {
   const mapInstanceRef = useRef<any>(null);
   const markersRef = useRef<any[]>([]);
 
-  const [tilt, setTilt] = useState<number>(45);
+  const [tilt, setTilt] = useState<number>(0);
   const [heading, setHeading] = useState<number>(0);
   const [mapType, setMapType] = useState<"roadmap" | "hybrid">("roadmap");
   const [activeFilter, setActiveFilter] = useState<FilterCategory>("all");
@@ -75,7 +75,7 @@ export function GoogleOutdoorMap() {
       const map = new window.google.maps.Map(mapContainerRef.current, {
         center: DEFAULT_MAP_CENTER,
         zoom: 14,
-        tilt: 45,
+        tilt: 0,
         heading: 0,
         mapId: "DEMO_MAP_ID",
         mapTypeId: "roadmap",
