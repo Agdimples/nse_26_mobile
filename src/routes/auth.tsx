@@ -9,6 +9,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
 import { toast } from "sonner";
 import { EVENT_CONFIG } from "@/lib/event-config";
+import { CaptchaField } from "@/components/auth/CaptchaField";
+import { turnstileEnabled } from "@/lib/turnstile";
 
 /**
  * Real provider status is baked in at build time (see vite.config.ts):
@@ -35,7 +37,18 @@ function AuthPage() {
   const [roleCode, setRoleCode] = useState("");
   const [signInRoleCode, setSignInRoleCode] = useState("");
   const [busy, setBusy] = useState(false);
+  // Cloudflare Turnstile: the solved token + a nonce that remounts the widget
+  // (tokens are single-use, so a retry needs a fresh challenge).
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [captchaNonce, setCaptchaNonce] = useState(0);
   const navigate = useNavigate();
+
+  // Only block submit when protection is actually configured.
+  const captchaPending = turnstileEnabled && !captchaToken;
+  const resetCaptcha = () => {
+    setCaptchaToken(null);
+    setCaptchaNonce((n) => n + 1);
+  };
 
   // Already signed in? Send users to the app (effect, not a thrown redirect —
   // throwing during render crashes the route instead of navigating).
@@ -47,17 +60,30 @@ function AuthPage() {
 
   async function signIn(e: React.FormEvent) {
     e.preventDefault();
+    if (captchaPending) {
+      return toast.error("Please complete the human verification check first.");
+    }
     setBusy(true);
     if (signInRoleCode.trim()) stashPendingRoleCode(signInRoleCode);
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+      options: captchaToken ? { captchaToken } : undefined,
+    });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) {
+      resetCaptcha();
+      return toast.error(error.message);
+    }
     toast.success("Welcome back!");
     void navigate({ to: "/home", replace: true });
   }
 
   async function signUp(e: React.FormEvent) {
     e.preventDefault();
+    if (captchaPending) {
+      return toast.error("Please complete the human verification check first.");
+    }
     setBusy(true);
     if (roleCode.trim()) stashPendingRoleCode(roleCode);
     const { error } = await supabase.auth.signUp({
@@ -66,10 +92,14 @@ function AuthPage() {
       options: {
         emailRedirectTo: `${window.location.origin}/home`,
         data: { full_name: fullName },
+        ...(captchaToken ? { captchaToken } : {}),
       },
     });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) {
+      resetCaptcha();
+      return toast.error(error.message);
+    }
     toast.success("Account created! Check your inbox to confirm your email.");
   }
 
@@ -140,7 +170,8 @@ function AuthPage() {
                     autoCapitalize="characters"
                   />
                 </div>
-                <Button type="submit" className="w-full" disabled={busy}>
+                <CaptchaField onToken={setCaptchaToken} nonce={captchaNonce} />
+                <Button type="submit" className="w-full" disabled={busy || captchaPending}>
                   {busy ? "Signing in…" : "Sign in"}
                 </Button>
               </form>
@@ -175,7 +206,8 @@ function AuthPage() {
                     Leave blank to join as an attendee. Codes are applied on first sign-in.
                   </p>
                 </div>
-                <Button type="submit" className="w-full" disabled={busy}>
+                <CaptchaField onToken={setCaptchaToken} nonce={captchaNonce} />
+                <Button type="submit" className="w-full" disabled={busy || captchaPending}>
                   {busy ? "Creating account…" : "Create account"}
                 </Button>
               </form>

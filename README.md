@@ -11,6 +11,26 @@ flutter run
 
 Supabase credentials: root `.env` (`SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`).
 
+## Bot protection (Cloudflare Turnstile)
+
+Sign-up and sign-in are gated by a Cloudflare Turnstile challenge. Turnstile
+is a privacy-friendly reCAPTCHA alternative and is one of the CAPTCHA providers
+Supabase Auth validates natively (hCaptcha is the other).
+
+To turn it on:
+
+1. Create a Turnstile widget at
+   <https://dash.cloudflare.com/?to=/:account/turnstile> (add your app's hostname).
+2. Copy the **Site Key** into `.env` as `VITE_TURNSTILE_SITE_KEY` (the site key is
+   public and safe to ship to the browser).
+3. In the Supabase dashboard, go to **Authentication → Bot and Abuse Protection**,
+   enable CAPTCHA protection, choose **Turnstile**, and paste the **Secret Key**.
+
+With the site key unset, the widget is hidden and no token is sent — so the app
+keeps working while Supabase's CAPTCHA protection is disabled. Set both the site
+key (here) and the secret key (Supabase) to enforce it. The secret key is never
+stored in this repo.
+
 ## What's in the app
 
 | Area | Screens |
