@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Layers, Maximize2 } from "lucide-react";
-import "leaflet/dist/leaflet.css";
+import { Layers, Maximize2, AlertTriangle, Loader2 } from "lucide-react";
+import { useGoogleMaps } from "@/lib/google-maps";
 
 interface DirectionsInteractiveMapProps {
   dest: { lat: number; lng: number; name: string };
@@ -9,10 +9,18 @@ interface DirectionsInteractiveMapProps {
   encodedPolyline?: string;
 }
 
-// Decode Google encoded polyline to [[lat, lng], ...]
-function decodePolyline(encoded: string): Array<[number, number]> {
+// Minimal shape of the Google Maps objects we touch, so we don't need `any`.
+type LatLngLiteral = { lat: number; lng: number };
+type GMap = {
+  setMapTypeId: (t: string) => void;
+  fitBounds: (b: unknown, padding?: number) => void;
+};
+type GMapsOverlay = { setMap: (m: unknown) => void };
+
+// Decode Google encoded polyline to [{ lat, lng }, ...]
+function decodePolyline(encoded: string): LatLngLiteral[] {
   if (!encoded) return [];
-  const points: Array<[number, number]> = [];
+  const points: LatLngLiteral[] = [];
   let index = 0;
   const len = encoded.length;
   let lat = 0;
@@ -27,8 +35,7 @@ function decodePolyline(encoded: string): Array<[number, number]> {
       result |= (b & 0x1f) << shift;
       shift += 5;
     } while (b >= 0x20);
-    const dlat = (result & 1) !== 0 ? ~(result >> 1) : result >> 1;
-    lat += dlat;
+    lat += (result & 1) !== 0 ? ~(result >> 1) : result >> 1;
 
     shift = 0;
     result = 0;
@@ -37,226 +44,201 @@ function decodePolyline(encoded: string): Array<[number, number]> {
       result |= (b & 0x1f) << shift;
       shift += 5;
     } while (b >= 0x20);
-    const dlng = (result & 1) !== 0 ? ~(result >> 1) : result >> 1;
-    lng += dlng;
+    lng += (result & 1) !== 0 ? ~(result >> 1) : result >> 1;
 
-    points.push([lat / 1e5, lng / 1e5]);
+    points.push({ lat: lat / 1e5, lng: lng / 1e5 });
   }
   return points;
 }
 
+function pinElement(color: string, emoji: string, size: number) {
+  const el = document.createElement("div");
+  el.style.display = "flex";
+  el.style.alignItems = "center";
+  el.style.justifyContent = "center";
+  el.style.width = `${size}px`;
+  el.style.height = `${size}px`;
+  el.style.borderRadius = "9999px";
+  el.style.backgroundColor = color;
+  el.style.border = "3px solid #ffffff";
+  el.style.boxShadow = "0 2px 8px rgba(0,0,0,0.4)";
+  el.style.color = "#ffffff";
+  el.style.fontSize = `${Math.round(size * 0.55)}px`;
+  el.style.cursor = "pointer";
+  el.innerText = emoji;
+  return el;
+}
+
+/**
+ * Interactive Google Maps (vector) route map — no Leaflet, no raster tiles.
+ * Falls back to nothing but an explicit error state if the Maps JS API cannot
+ * load; there is deliberately no second map provider.
+ */
 export function DirectionsInteractiveMap({
   dest,
   origin,
   encodedPolyline,
 }: DirectionsInteractiveMapProps) {
+  const { ready, authFailed, error } = useGoogleMaps();
   const containerRef = useRef<HTMLDivElement>(null);
-  const mapRef = useRef<any>(null);
-  const layerGroupRef = useRef<any>(null);
-  const tileLayerRef = useRef<any>(null);
-  const [mapType, setMapType] = useState<"streets" | "satellite">("streets");
+  const mapRef = useRef<GMap | null>(null);
+  const overlaysRef = useRef<GMapsOverlay[]>([]);
+  const [mapType, setMapType] = useState<"roadmap" | "hybrid">("roadmap");
+  const [initFailed, setInitFailed] = useState(false);
 
-  // Initialize Leaflet Map
+  // Initialise the map once the JS API is ready.
   useEffect(() => {
-    if (typeof window === "undefined" || !containerRef.current) return;
-    let isCancelled = false;
-
-    import("leaflet").then((mod) => {
-      if (isCancelled || !containerRef.current) return;
-      const L = mod.default || mod;
-
-      if (mapRef.current) {
-        mapRef.current.remove();
-        mapRef.current = null;
-      }
-
-      const map = L.map(containerRef.current, {
-        center: [dest.lat, dest.lng],
+    if (!ready || !containerRef.current || mapRef.current) return;
+    try {
+      const map = new window.google.maps.Map(containerRef.current, {
+        center: { lat: dest.lat, lng: dest.lng },
         zoom: 14,
-        scrollWheelZoom: false,
+        mapId: "DEMO_MAP_ID",
+        mapTypeId: "roadmap",
+        disableDefaultUI: true,
         zoomControl: true,
-      });
-
-      mapRef.current = map;
-
-      const streets = L.tileLayer(
-        "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
-        {
-          attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; OpenStreetMap',
-          maxZoom: 20,
+        zoomControlOptions: {
+          position: window.google.maps.ControlPosition.RIGHT_BOTTOM,
         },
-      ).addTo(map);
+      });
+      mapRef.current = map;
+    } catch (err) {
+      console.warn("[DirectionsMap] Initialisation failed:", err);
+      setInitFailed(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ready]);
 
-      tileLayerRef.current = streets;
-
-      const layerGroup = L.layerGroup().addTo(map);
-      layerGroupRef.current = layerGroup;
-
-      setTimeout(() => map.invalidateSize(), 250);
-      const handleResize = () => map.invalidateSize();
-      window.addEventListener("resize", handleResize);
-    });
-
-    return () => {
-      isCancelled = true;
-      if (mapRef.current) {
-        mapRef.current.remove();
-        mapRef.current = null;
-      }
-    };
-  }, []);
-
-  // Sync Streets vs Satellite Tiles
+  // Reflect the satellite/roadmap toggle.
   useEffect(() => {
-    if (!mapRef.current) return;
-    import("leaflet").then((mod) => {
-      const L = mod.default || mod;
-      const map = mapRef.current;
-      if (!map) return;
-
-      if (tileLayerRef.current) {
-        map.removeLayer(tileLayerRef.current);
-      }
-
-      if (mapType === "satellite") {
-        tileLayerRef.current = L.tileLayer(
-          "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-          {
-            attribution: "Imagery &copy; Esri",
-            maxZoom: 18,
-          },
-        ).addTo(map);
-      } else {
-        tileLayerRef.current = L.tileLayer(
-          "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
-          {
-            attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; OpenStreetMap',
-            maxZoom: 20,
-          },
-        ).addTo(map);
-      }
-    });
+    if (mapRef.current) mapRef.current.setMapTypeId(mapType);
   }, [mapType]);
 
-  // Sync Markers & Route Polyline
+  // Draw markers + route polyline whenever the route data changes.
   useEffect(() => {
-    if (!mapRef.current || !layerGroupRef.current) return;
+    if (!ready || !mapRef.current) return;
+    const g = window.google.maps;
+    const map = mapRef.current;
 
-    import("leaflet").then((mod) => {
-      const L = mod.default || mod;
-      const map = mapRef.current;
-      const layerGroup = layerGroupRef.current;
-      if (!map || !layerGroup) return;
+    overlaysRef.current.forEach((o) => o.setMap(null));
+    overlaysRef.current = [];
 
-      layerGroup.clearLayers();
+    const bounds = new g.LatLngBounds();
+    bounds.extend({ lat: dest.lat, lng: dest.lng });
 
-      // Destination Marker
-      const destIcon = L.divIcon({
-        className: "",
-        html: '<div style="display:flex;width:34px;height:34px;border-radius:9999px;background:#C9A227;border:3px solid #ffffff;box-shadow:0 3px 10px rgba(0,0,0,0.45);align-items:center;justify-content:center;color:#ffffff;font-size:16px;cursor:pointer;">📍</div>',
-        iconSize: [34, 34],
-        iconAnchor: [17, 17],
-      });
-      L.marker([dest.lat, dest.lng], { icon: destIcon })
-        .addTo(layerGroup)
-        .bindPopup(`<strong>${dest.name}</strong>`);
-
-      // Origin Marker
-      if (origin) {
-        const originIcon = L.divIcon({
-          className: "",
-          html: '<div style="display:flex;width:24px;height:24px;border-radius:9999px;background:#123E73;border:2.5px solid #ffffff;box-shadow:0 2px 8px rgba(0,0,0,0.4);align-items:center;justify-content:center;color:#ffffff;font-size:11px;">•</div>',
-          iconSize: [24, 24],
-          iconAnchor: [12, 12],
+    const applyMarker = (position: LatLngLiteral, title: string, color: string, emoji: string, size: number) => {
+      if (g.marker?.AdvancedMarkerElement) {
+        const marker = new g.marker.AdvancedMarkerElement({
+          map,
+          position,
+          title,
+          content: pinElement(color, emoji, size),
         });
-        L.marker([origin.lat, origin.lng], { icon: originIcon })
-          .addTo(layerGroup)
-          .bindPopup(`<strong>${origin.label}</strong>`);
-      }
-
-      // Route Polyline
-      let routePoints: Array<[number, number]> = [];
-      if (encodedPolyline) {
-        routePoints = decodePolyline(encodedPolyline);
-      }
-
-      if (routePoints.length > 1) {
-        L.polyline(routePoints, {
-          color: "#123E73",
-          weight: 5,
-          opacity: 0.9,
-          lineJoin: "round",
-        }).addTo(layerGroup);
-
-        const bounds = L.latLngBounds(routePoints);
-        map.fitBounds(bounds, { padding: [40, 40] });
-      } else if (origin) {
-        // Direct line if polyline isn't available
-        L.polyline(
-          [
-            [origin.lat, origin.lng],
-            [dest.lat, dest.lng],
-          ],
-          {
-            color: "#123E73",
-            weight: 4,
-            opacity: 0.8,
-            dashArray: "6, 8",
-          },
-        ).addTo(layerGroup);
-
-        const bounds = L.latLngBounds([
-          [origin.lat, origin.lng],
-          [dest.lat, dest.lng],
-        ]);
-        map.fitBounds(bounds, { padding: [40, 40] });
+        overlaysRef.current.push(marker);
       } else {
-        map.panTo([dest.lat, dest.lng]);
+        const marker = new g.Marker({
+          map,
+          position,
+          title,
+          icon: {
+            path: g.SymbolPath.CIRCLE,
+            scale: size / 2,
+            fillColor: color,
+            fillOpacity: 1,
+            strokeColor: "#ffffff",
+            strokeWeight: 2.5,
+          },
+        });
+        overlaysRef.current.push(marker);
       }
-    });
-  }, [dest.lat, dest.lng, origin?.lat, origin?.lng, encodedPolyline]);
+    };
+
+    applyMarker({ lat: dest.lat, lng: dest.lng }, dest.name, "#C9A227", "📍", 34);
+
+    if (origin) {
+      applyMarker({ lat: origin.lat, lng: origin.lng }, origin.label, "#123E73", "•", 24);
+      bounds.extend({ lat: origin.lat, lng: origin.lng });
+    }
+
+    const routePoints = encodedPolyline ? decodePolyline(encodedPolyline) : [];
+
+    if (routePoints.length > 1) {
+      const line = new g.Polyline({
+        path: routePoints,
+        map,
+        strokeColor: "#123E73",
+        strokeWeight: 5,
+        strokeOpacity: 0.9,
+      });
+      overlaysRef.current.push(line);
+      routePoints.forEach((p) => bounds.extend(p));
+    } else if (origin) {
+      // Straight guide line when a live route polyline isn't available yet.
+      const line = new g.Polyline({
+        path: [
+          { lat: origin.lat, lng: origin.lng },
+          { lat: dest.lat, lng: dest.lng },
+        ],
+        map,
+        strokeColor: "#123E73",
+        strokeWeight: 4,
+        strokeOpacity: 0.8,
+      });
+      overlaysRef.current.push(line);
+    }
+
+    map.fitBounds(bounds, 48);
+  }, [ready, dest.lat, dest.lng, dest.name, origin, encodedPolyline]);
 
   function fitRoute() {
     if (!mapRef.current) return;
-    import("leaflet").then((mod) => {
-      const L = mod.default || mod;
-      const map = mapRef.current;
-      if (!map) return;
-      const points = encodedPolyline ? decodePolyline(encodedPolyline) : [];
-      if (points.length > 1) {
-        map.fitBounds(L.latLngBounds(points), { padding: [40, 40] });
-      } else if (origin) {
-        const bounds = L.latLngBounds([
-          [origin.lat, origin.lng],
-          [dest.lat, dest.lng],
-        ]);
-        map.fitBounds(bounds, { padding: [40, 40] });
-      } else {
-        map.panTo([dest.lat, dest.lng]);
-      }
-    });
+    const g = window.google.maps;
+    const bounds = new g.LatLngBounds();
+    bounds.extend({ lat: dest.lat, lng: dest.lng });
+    if (origin) bounds.extend({ lat: origin.lat, lng: origin.lng });
+    (encodedPolyline ? decodePolyline(encodedPolyline) : []).forEach((p) => bounds.extend(p));
+    mapRef.current.fitBounds(bounds, 48);
+  }
+
+  if (authFailed || error || initFailed) {
+    return (
+      <div className="flex aspect-[4/3] w-full flex-col items-center justify-center gap-2 bg-muted/30 p-6 text-center">
+        <AlertTriangle className="h-6 w-6 text-destructive" />
+        <p className="text-sm font-semibold">Route map unavailable</p>
+        <p className="max-w-xs text-xs text-muted-foreground">
+          {error ??
+            "Google Maps couldn't load this route. Check that the Maps JavaScript API is enabled for the API key."}
+        </p>
+      </div>
+    );
   }
 
   return (
     <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
       <div ref={containerRef} className="h-full w-full" />
 
-      {/* Map Controls */}
-      <div className="absolute left-3 top-3 z-[400] flex flex-col gap-1.5">
+      {!ready && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-muted/50 text-muted-foreground">
+          <Loader2 className="h-5 w-5 animate-spin text-primary" />
+          <span className="text-xs font-medium">Loading map…</span>
+        </div>
+      )}
+
+      <div className="absolute left-3 top-3 z-10 flex flex-col gap-1.5">
         <Button
           size="sm"
           variant="secondary"
-          onClick={() => setMapType((t) => (t === "streets" ? "satellite" : "streets"))}
-          className="h-8 px-2 text-xs font-semibold shadow-md gap-1 bg-white/95 text-foreground hover:bg-white"
+          onClick={() => setMapType((t) => (t === "roadmap" ? "hybrid" : "roadmap"))}
+          className="h-8 gap-1 bg-white/95 px-2 text-xs font-semibold text-foreground shadow-md hover:bg-white"
         >
           <Layers className="h-3.5 w-3.5 text-primary" />
-          <span>{mapType === "satellite" ? "Satellite" : "Map"}</span>
+          <span>{mapType === "hybrid" ? "Satellite" : "Map"}</span>
         </Button>
         <Button
           size="sm"
           variant="secondary"
           onClick={fitRoute}
-          className="h-8 px-2 text-xs font-semibold shadow-md gap-1 bg-white/95 text-foreground hover:bg-white"
+          className="h-8 gap-1 bg-white/95 px-2 text-xs font-semibold text-foreground shadow-md hover:bg-white"
         >
           <Maximize2 className="h-3.5 w-3.5 text-primary" />
           <span>Fit</span>
