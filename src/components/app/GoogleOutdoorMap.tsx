@@ -7,8 +7,6 @@ import { EVENT_CONFIG } from "@/lib/event-config";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ClientOnly } from "./ClientOnly";
-import { OsmOutdoorMap } from "./OsmOutdoorMap";
 import {
   Compass,
   RotateCw,
@@ -19,6 +17,7 @@ import {
   Building2,
   X,
   Eye,
+  AlertTriangle,
 } from "lucide-react";
 
 type FilterCategory = "all" | "venue" | "hotels" | "hospitals" | "security" | "airport" | "food";
@@ -56,16 +55,6 @@ export function GoogleOutdoorMap() {
     phone?: string;
     hotel?: Hotel;
   } | null>(null);
-
-  // If Google Maps fails authentication (e.g. Firebase App Check enforcement on Google Cloud)
-  // or script loading fails, immediately render the interactive OSM & Satellite map via client-only lazy load.
-  if (authFailed || error || initFailed) {
-    return (
-      <ClientOnly fallback={<div className="h-[430px] w-full rounded-2xl bg-muted/30 animate-pulse" />}>
-        {() => <OsmOutdoorMap />}
-      </ClientOnly>
-    );
-  }
 
   // Initialize Map
   useEffect(() => {
@@ -154,7 +143,7 @@ export function GoogleOutdoorMap() {
             address: h.location,
             lat: h.latitude,
             lng: h.longitude,
-            phone: h.contactPhone,
+            phone: h.contactPhone ?? undefined,
             hotel: h,
           });
         }
@@ -277,6 +266,37 @@ export function GoogleOutdoorMap() {
     if (!mapInstanceRef.current) return;
     mapInstanceRef.current.panTo(DEFAULT_MAP_CENTER);
     mapInstanceRef.current.setZoom(15);
+  }
+
+  // Google Maps failure state. There is deliberately no swap to a second map
+  // provider here: the old silent OpenStreetMap fallback hid real key/API
+  // problems behind a map that looked "broken" and unused. If Maps cannot
+  // load, show the actual reason instead.
+  if (authFailed || error || initFailed) {
+    const reason =
+      error ??
+      (authFailed
+        ? "Google rejected this API key. Enable the Maps JavaScript API and include it in the key's API restrictions."
+        : "The map failed to initialise in this browser.");
+
+    return (
+      <Card className="border-0 p-6 text-center shadow-card">
+        <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-destructive/10">
+          <AlertTriangle className="h-5 w-5 text-destructive" />
+        </div>
+        <p className="mt-3 text-sm font-bold">Google Maps couldn't load</p>
+        <p className="mx-auto mt-1 max-w-xs text-xs text-muted-foreground">{reason}</p>
+        <Button size="sm" variant="outline" className="mt-4" asChild>
+          <a
+            href={`https://www.google.com/maps/search/?api=1&query=${DEFAULT_MAP_CENTER.lat},${DEFAULT_MAP_CENTER.lng}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Open venue area in Google Maps ↗
+          </a>
+        </Button>
+      </Card>
+    );
   }
 
   return (
