@@ -5,6 +5,7 @@ import { useAuth } from "@/lib/auth";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { formatTimeRange, initials } from "@/lib/format";
 import { ArrowLeft, BookmarkPlus, BookmarkCheck, Navigation, MapPin } from "lucide-react";
 import { toast } from "sonner";
