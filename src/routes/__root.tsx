@@ -13,6 +13,7 @@ import appCss from "../styles.css?url";
 import { AuthProvider } from "@/lib/auth";
 import { Toaster } from "@/components/ui/sonner";
 import { RouteProgress } from "@/components/app/RouteProgress";
+import { ServiceWorkerRegistrar } from "@/components/app/ServiceWorkerRegistrar";
 import { EVENT_CONFIG } from "@/lib/event-config";
 
 function NotFoundComponent() {
@@ -92,7 +93,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "icon", href: "/favicon.ico" },
-      { rel: "apple-touch-icon", href: "/nse_crest.png" },
+      { rel: "apple-touch-icon", href: "/icons/icon-192.png" },
+      // Required for installability — and the Android TWA wrapper in
+      // `android/` is generated from this manifest.
+      { rel: "manifest", href: "/manifest.json" },
       { rel: "stylesheet", href: appCss },
     ],
   }),
@@ -121,6 +125,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
+        <ServiceWorkerRegistrar />
         <RouteProgress />
         <Outlet />
         <Toaster richColors position="top-center" />

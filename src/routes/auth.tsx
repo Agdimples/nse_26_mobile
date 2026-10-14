@@ -241,7 +241,11 @@ function AuthPage() {
         </Card>
 
         <p className="mt-6 text-center text-xs text-white/60">
-          By signing in you agree to the conference code of conduct.
+          By signing in you agree to the conference code of conduct. See our{" "}
+          <Link to="/privacy" className="underline hover:text-white">
+            Privacy Policy
+          </Link>
+          .
         </p>
         <p className="mt-2 text-center text-xs">
           <Link to="/" className="text-white/70 hover:text-white">← Back</Link>

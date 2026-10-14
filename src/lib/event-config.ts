@@ -5,7 +5,7 @@ export const EVENT_CONFIG = {
   fullName: "2026 International Engineering Conference, Exhibition and Annual General Meeting",
   brandName: "Maiduguri 2026",
   // The app's display brand (header title, AI concierge subtitle).
-  shortName: "Conference Companion",
+  shortName: "My Conference Companion",
   tagline: "Engineering Innovation for Enhanced Security and Sustainable National Development",
   dates: "Monday, 30th Nov. – Friday, 4th Dec., 2026",
   venue: {

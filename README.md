@@ -1,4 +1,4 @@
-# Conference Companion
+# My Conference Companion
 
 Flutter app (iOS + Android) for **NSE International Conference 2026** — Maiduguri, Borno State.
 

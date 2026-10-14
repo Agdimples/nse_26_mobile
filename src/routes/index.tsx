@@ -12,7 +12,7 @@ export const Route = createFileRoute("/")({
   },
   head: () => ({
     meta: [
-      { title: `${EVENT_CONFIG.name} ${EVENT_CONFIG.year} — Your Conference Companion` },
+      { title: `${EVENT_CONFIG.name} ${EVENT_CONFIG.year} — ${EVENT_CONFIG.shortName}` },
       { name: "description", content: `Schedule, speakers, venue map, networking, and live directions for ${EVENT_CONFIG.name} ${EVENT_CONFIG.year}.` },
     ],
   }),

@@ -19,6 +19,7 @@ import {
   Bus,
   HelpCircle,
   Info,
+  ShieldCheck,
 } from "lucide-react";
 import { NsePageHeader } from "@/components/app/NsePageHeader";
 import { EVENT_CONFIG } from "@/lib/event-config";
@@ -35,6 +36,7 @@ const items = [
   { to: "/transport", label: "Transport", icon: Bus },
   { to: "/faq", label: "Conference Guide (FAQ)", icon: HelpCircle },
   { to: "/about", label: "About Maiduguri 2026", icon: Info },
+  { to: "/privacy", label: "Privacy policy", icon: ShieldCheck },
   { to: "/profile", label: "Edit profile", icon: User },
 ] as const;
 
