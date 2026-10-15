@@ -37,6 +37,13 @@ function AuthPage() {
   const [roleCode, setRoleCode] = useState("");
   const [signInRoleCode, setSignInRoleCode] = useState("");
   const [busy, setBusy] = useState(false);
+  // Email OTP confirmation (signup) and password recovery (forgot-password/OTP).
+  const [tab, setTab] = useState<"signin" | "signup" | "forgot">("signin");
+  const [otpMode, setOtpMode] = useState<"signup" | null>(null);
+  const [otp, setOtp] = useState("");
+  const [resetStage, setResetStage] = useState<"request" | "code" | "newpass">("request");
+  const [newPass, setNewPass] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
   // Cloudflare Turnstile: the solved token + a nonce that remounts the widget
   // (tokens are single-use, so a retry needs a fresh challenge).
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
@@ -86,7 +93,7 @@ function AuthPage() {
     }
     setBusy(true);
     if (roleCode.trim()) stashPendingRoleCode(roleCode);
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -100,7 +107,90 @@ function AuthPage() {
       resetCaptcha();
       return toast.error(error.message);
     }
-    toast.success("Account created! Check your inbox to confirm your email.");
+    if (data.session) {
+      // Email confirmation is disabled for this project — straight in.
+      toast.success("Account created — welcome!");
+      void navigate({ to: "/home", replace: true });
+      return;
+    }
+    // Confirmation required: the email carries a 6-digit code (template uses
+    // {{ .Token }}). Show the OTP entry until the user verifies.
+    setOtpMode("signup");
+    toast.info("Account created — check your email for the 6-digit code.");
+  }
+
+  async function verifySignUpOtp(e: React.FormEvent) {
+    e.preventDefault();
+    setBusy(true);
+    const { error } = await supabase.auth.verifyOtp({
+      email,
+      token: otp.trim(),
+      type: "signup",
+    });
+    setBusy(false);
+    if (error) return toast.error(error.message);
+    setOtpMode(null);
+    setOtp("");
+    toast.success("Email confirmed — welcome aboard!");
+    void navigate({ to: "/home", replace: true });
+  }
+
+  async function resendSignupCode() {
+    setBusy(true);
+    const { error } = await supabase.auth.resend({ type: "signup", email });
+    setBusy(false);
+    if (error) return toast.error(error.message);
+    toast.success("A new code is on its way.");
+  }
+
+  async function requestReset(e: React.FormEvent) {
+    e.preventDefault();
+    setBusy(true);
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/home`,
+    });
+    setBusy(false);
+    if (error) return toast.error(error.message);
+    setResetStage("code");
+    toast.info("Reset code sent — check your email.");
+  }
+
+  async function resendRecoveryCode() {
+    setBusy(true);
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/home`,
+    });
+    setBusy(false);
+    if (error) return toast.error(error.message);
+    toast.success("A new code is on its way.");
+  }
+
+  async function verifyRecoveryOtp(e: React.FormEvent) {
+    e.preventDefault();
+    setBusy(true);
+    const { error } = await supabase.auth.verifyOtp({
+      email,
+      token: otp.trim(),
+      type: "recovery",
+    });
+    setBusy(false);
+    if (error) return toast.error(error.message);
+    setOtp("");
+    setResetStage("newpass");
+  }
+
+  async function setNewPassword(e: React.FormEvent) {
+    e.preventDefault();
+    if (newPass !== confirmPass) return toast.error("The two passwords do not match.");
+    setBusy(true);
+    const { error } = await supabase.auth.updateUser({ password: newPass });
+    setBusy(false);
+    if (error) return toast.error(error.message);
+    setResetStage("request");
+    setNewPass("");
+    setConfirmPass("");
+    toast.success("Password updated — you are now signed in.");
+    void navigate({ to: "/home", replace: true });
   }
 
   async function signInWithGoogle() {
@@ -141,11 +231,65 @@ function AuthPage() {
           <p className="mt-2 text-sm text-white/70">{EVENT_CONFIG.tagline}</p>
         </div>
 
+        {otpMode !== null && (
+          <Card className="p-5 mb-3 space-y-3">
+            <div>
+              <h3 className="text-sm font-bold">Confirm your email</h3>
+              <p className="mt-1 text-xs text-muted-foreground">
+                We sent a 6-digit code to <span className="font-medium">{email}</span>. Enter it below to
+                activate your account.
+              </p>
+            </div>
+            <form onSubmit={verifySignUpOtp} className="space-y-3">
+              <Input
+                inputMode="numeric"
+                pattern="[0-9]*"
+                maxLength={6}
+                autoFocus
+                required
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+                className="text-center text-lg font-mono tracking-[0.4em]"
+                placeholder="••••••"
+                aria-label="6-digit confirmation code"
+              />
+              <Button type="submit" className="w-full" disabled={busy || otp.trim().length < 6}>
+                {busy ? "Verifying…" : "Verify & continue"}
+              </Button>
+            </form>
+            <button
+              type="button"
+              className="w-full text-xs text-muted-foreground hover:text-foreground"
+              disabled={busy}
+              onClick={() => void resendSignupCode()}
+            >
+              Didn't get it? Resend code
+            </button>
+            <button
+              type="button"
+              className="w-full text-xs text-muted-foreground hover:text-foreground"
+              disabled={busy}
+              onClick={() => {
+                setOtpMode(null);
+                setOtp("");
+                setTab("signin");
+              }}
+            >
+              Back to sign in
+            </button>
+          </Card>
+        )}
+
         <Card className="p-5">
-          <Tabs defaultValue="signin">
-            <TabsList className="grid w-full grid-cols-2">
+          <Tabs
+            value={tab}
+            onValueChange={(v) => setTab(v as "signin" | "signup" | "forgot")}
+            className={otpMode ? "hidden" : undefined}
+          >
+            <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="signin">Sign in</TabsTrigger>
               <TabsTrigger value="signup">Sign up</TabsTrigger>
+              <TabsTrigger value="forgot">Forgot</TabsTrigger>
             </TabsList>
 
             <TabsContent value="signin" className="mt-5 space-y-4">
@@ -211,6 +355,99 @@ function AuthPage() {
                   {busy ? "Creating account…" : "Create account"}
                 </Button>
               </form>
+            </TabsContent>
+
+            <TabsContent value="forgot" className="mt-5 space-y-4">
+              {resetStage === "request" && (
+                <form onSubmit={requestReset} className="space-y-3">
+                  <p className="text-xs text-muted-foreground">
+                    Enter the email you registered with — we'll send a 6-digit code to confirm it's you.
+                  </p>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="fp-email">Email</Label>
+                    <Input
+                      id="fp-email"
+                      type="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
+                  <Button type="submit" className="w-full" disabled={busy || !email}>
+                    {busy ? "Sending…" : "Send reset code"}
+                  </Button>
+                </form>
+              )}
+              {resetStage === "code" && (
+                <form onSubmit={verifyRecoveryOtp} className="space-y-3">
+                  <p className="text-xs text-muted-foreground">
+                    Enter the 6-digit code sent to <span className="font-medium">{email}</span>.
+                  </p>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="fp-otp">6-digit code</Label>
+                    <Input
+                      id="fp-otp"
+                      inputMode="numeric"
+                      pattern="[0-9]*"
+                      maxLength={6}
+                      autoFocus
+                      required
+                      value={otp}
+                      onChange={(e) => setOtp(e.target.value)}
+                      className="text-center text-lg font-mono tracking-[0.4em]"
+                      placeholder="••••••"
+                    />
+                  </div>
+                  <Button type="submit" className="w-full" disabled={busy || otp.trim().length < 6}>
+                    {busy ? "Verifying…" : "Verify code"}
+                  </Button>
+                  <button
+                    type="button"
+                    className="w-full text-xs text-muted-foreground hover:text-foreground"
+                    disabled={busy}
+                    onClick={() => void resendRecoveryCode()}
+                  >
+                    Didn't get it? Resend code
+                  </button>
+                  <button
+                    type="button"
+                    className="w-full text-xs text-muted-foreground hover:text-foreground"
+                    onClick={() => setResetStage("request")}
+                  >
+                    Wrong email? Start over
+                  </button>
+                </form>
+              )}
+              {resetStage === "newpass" && (
+                <form onSubmit={setNewPassword} className="space-y-3">
+                  <p className="text-xs text-muted-foreground">Code verified — now set a new password.</p>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="fp-new">New password</Label>
+                    <Input
+                      id="fp-new"
+                      type="password"
+                      required
+                      minLength={6}
+                      value={newPass}
+                      onChange={(e) => setNewPass(e.target.value)}
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="fp-confirm">Confirm new password</Label>
+                    <Input
+                      id="fp-confirm"
+                      type="password"
+                      required
+                      minLength={6}
+                      value={confirmPass}
+                      onChange={(e) => setConfirmPass(e.target.value)}
+                    />
+                  </div>
+                  <Button type="submit" className="w-full" disabled={busy}>
+                    {busy ? "Updating…" : "Update password"}
+                  </Button>
+                </form>
+              )}
             </TabsContent>
           </Tabs>
 

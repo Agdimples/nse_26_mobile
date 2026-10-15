@@ -128,7 +128,145 @@ function ProfilePage() {
             {save.isPending ? "Saving…" : "Save profile"}
           </Button>
         </Card>
+
+        {user?.email && <ChangePasswordCard email={user.email} />}
       </div>
     </div>
+  );
+}
+
+// Security-sensitive change: require a fresh email OTP before the password
+// can be replaced. Flow: send code (sign-in OTP, no account creation) →
+// verify → set the new password.
+function ChangePasswordCard({ email }: { email: string }) {
+  const [stage, setStage] = useState<"idle" | "code" | "confirm">("idle");
+  const [otp, setOtp] = useState("");
+  const [pw, setPw] = useState("");
+  const [pw2, setPw2] = useState("");
+  const [busy, setBusy] = useState(false);
+
+  async function sendCode() {
+    setBusy(true);
+    const { error } = await supabase.auth.signInWithOtp({
+      email,
+      options: { shouldCreateUser: false },
+    });
+    setBusy(false);
+    if (error) return toast.error(error.message);
+    setStage("code");
+    toast.info("A 6-digit confirmation code was sent to your email.");
+  }
+
+  async function submitStage(e: React.FormEvent) {
+    e.preventDefault();
+    setBusy(true);
+    if (stage === "code") {
+      const { error } = await supabase.auth.verifyOtp({
+        email,
+        token: otp.trim(),
+        type: "email",
+      });
+      setBusy(false);
+      if (error) return toast.error(error.message);
+      toast.success("Code verified — now choose your new password.");
+      setStage("confirm");
+      return;
+    }
+    if (pw.length < 6) {
+      setBusy(false);
+      return toast.error("Use at least 6 characters.");
+    }
+    if (pw !== pw2) {
+      setBusy(false);
+      return toast.error("The two passwords do not match.");
+    }
+    const { error } = await supabase.auth.updateUser({ password: pw });
+    setBusy(false);
+    if (error) return toast.error(error.message);
+    toast.success("Password changed.");
+    setStage("idle");
+    setOtp("");
+    setPw("");
+    setPw2("");
+  }
+
+  return (
+    <Card className="border-0 bg-surface rounded-2xl p-5 shadow-card">
+      <p className="text-sm font-bold">Change password</p>
+      <p className="mt-1 text-xs text-muted-foreground">
+        Protected by a 6-digit code sent to <span className="font-medium">{email}</span>.
+      </p>
+      {stage === "idle" ? (
+        <Button variant="outline" className="mt-4 w-full" disabled={busy} onClick={() => void sendCode()}>
+          {busy ? "Sending…" : "Email me a confirmation code"}
+        </Button>
+      ) : (
+        <form onSubmit={submitStage} className="mt-4 space-y-3">
+          {stage === "code" && (
+            <div className="space-y-1.5">
+              <Label htmlFor="pw-otp">6-digit code</Label>
+              <Input
+                id="pw-otp"
+                inputMode="numeric"
+                pattern="[0-9]*"
+                maxLength={6}
+                autoFocus
+                required
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+                className="text-center font-mono tracking-[0.4em]"
+                placeholder="••••••"
+              />
+            </div>
+          )}
+          {stage === "confirm" && (
+            <>
+              <div className="space-y-1.5">
+                <Label htmlFor="pw-new">New password</Label>
+                <Input
+                  id="pw-new"
+                  type="password"
+                  required
+                  minLength={6}
+                  value={pw}
+                  onChange={(e) => setPw(e.target.value)}
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="pw-confirm">Confirm new password</Label>
+                <Input
+                  id="pw-confirm"
+                  type="password"
+                  required
+                  minLength={6}
+                  value={pw2}
+                  onChange={(e) => setPw2(e.target.value)}
+                />
+              </div>
+            </>
+          )}
+          <Button
+            type="submit"
+            className="w-full"
+            disabled={busy || (stage === "code" && otp.trim().length < 6)}
+          >
+            {busy ? "Working…" : stage === "code" ? "Verify code" : "Change password"}
+          </Button>
+          <button
+            type="button"
+            className="w-full text-xs text-muted-foreground hover:text-foreground"
+            disabled={busy}
+            onClick={() => {
+              setStage("idle");
+              setOtp("");
+              setPw("");
+              setPw2("");
+            }}
+          >
+            Cancel
+          </button>
+        </form>
+      )}
+    </Card>
   );
 }
