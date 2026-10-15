@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { createLovableAiGatewayProvider } from "@/lib/ai-gateway.server";
+import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 import { convertToModelMessages, streamText, type UIMessage } from "ai";
 import { createClient } from "@supabase/supabase-js";
 import type { Database } from "@/integrations/supabase/types";
@@ -15,7 +15,15 @@ export const Route = createFileRoute("/api/chat")({
             return new Response("Messages required", { status: 400 });
           }
 
-          const key = process.env.LOVABLE_API_KEY;
+          // Gemini direct (Google's OpenAI-compatible endpoint). Preference:
+          // a dedicated GEMINI_API_KEY, else the existing GOOGLE_MAPS_API_KEY
+          // (same GCP project — both work once the Generative Language API is
+          // enabled for the project), keeping LOVABLE_API_KEY as a legacy
+          // fallback.
+          const key =
+            process.env.GEMINI_API_KEY ??
+            process.env.GOOGLE_MAPS_API_KEY ??
+            process.env.LOVABLE_API_KEY;
           if (!key) {
             return new Response(JSON.stringify({ error: "The AI concierge is not connected yet — please check back soon." }), {
               status: 503,
@@ -45,9 +53,14 @@ export const Route = createFileRoute("/api/chat")({
             });
           }
 
-          const gateway = createLovableAiGatewayProvider(key);
+          const gemini = createOpenAICompatible({
+            name: "google-gemini",
+            baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
+            apiKey: key,
+            headers: { Authorization: `Bearer ${key}` },
+          });
           const result = streamText({
-            model: gateway("google/gemini-3-flash-preview"),
+            model: gemini("gemini-2.5-flash"),
             system: `You are the friendly AI concierge for ${EVENT_CONFIG.name} ${EVENT_CONFIG.year} (${EVENT_CONFIG.brandName}) — ${EVENT_CONFIG.tagline}. The conference runs ${EVENT_CONFIG.dates} at ${EVENT_CONFIG.venue.name}, ${EVENT_CONFIG.venue.address}.
 
 Be concise, warm, and confident. Answer questions about the schedule, sessions, speakers, venue halls, delegate shuttles, hotels, and emergency contacts. When asked about timing or location, give specific answers. If the user asks something outside the conference, politely steer them back.
