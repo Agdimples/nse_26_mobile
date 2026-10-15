@@ -22,7 +22,7 @@ export const Route = createFileRoute("/_authenticated/schedule")({
 });
 
 function SchedulePage() {
-  const [view, setView] = useState<"sessions" | "speakers">("sessions");
+  const [view, setView] = useState<"sessions" | "speakers" | "exhibitors">("sessions");
   // Deep links hit /schedule/$sessionId directly: render the child detail
   // instead of the tabs + list when a session route is active.
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -39,8 +39,8 @@ function SchedulePage() {
         subtitle="Sessions, timings & keynote speakers"
         backTo="/home"
       >
-        <Tabs value={view} onValueChange={(v) => setView(v as "sessions" | "speakers")} className="mt-2 w-full">
-          <TabsList className="grid w-full grid-cols-2 bg-black/25 p-1 text-white">
+        <Tabs value={view} onValueChange={(v) => setView(v as "sessions" | "speakers" | "exhibitors")} className="mt-2 w-full">
+          <TabsList className="grid w-full grid-cols-3 bg-black/25 p-1 text-white">
             <TabsTrigger
               value="sessions"
               className="text-xs font-semibold data-[state=active]:bg-white data-[state=active]:text-primary"
@@ -53,12 +53,18 @@ function SchedulePage() {
             >
               Speakers
             </TabsTrigger>
+            <TabsTrigger
+              value="exhibitors"
+              className="text-xs font-semibold data-[state=active]:bg-white data-[state=active]:text-primary"
+            >
+              Exhibitors
+            </TabsTrigger>
           </TabsList>
         </Tabs>
       </NsePageHeader>
 
       <div className="pt-2">
-        {view === "sessions" ? <SessionsList /> : <SpeakersList />}
+        {view === "sessions" ? <SessionsList /> : view === "speakers" ? <SpeakersList /> : <ExhibitorsList />}
       </div>
     </div>
   );
@@ -267,6 +273,104 @@ function SpeakersList() {
           </Link>
         ))}
       </div>
+    </div>
+  );
+}
+
+function ExhibitorsList() {
+  // The `exhibitors` table is not yet in the generated Database types, so we
+  // type it locally — same approach the admin ExhibitorsPage uses.
+  type ExhibitorRow = {
+    id: string;
+    company_name: string;
+    logo_url?: string | null;
+    booth_number?: string | null;
+    signage_text?: string | null;
+    contact_name?: string | null;
+    contact_email?: string | null;
+    contact_phone?: string | null;
+    is_approved?: boolean;
+  };
+  const { data: exhibitors = [] } = useQuery<ExhibitorRow[]>({
+    queryKey: ["exhibitors"],
+    queryFn: async () => {
+      const { data, error } = await (supabase as any)
+        .from("exhibitors")
+        .select("id,company_name,logo_url,booth_number,signage_text,contact_name,contact_email,contact_phone,is_approved")
+        .order("company_name");
+      if (error) {
+        console.warn("Could not fetch exhibitors:", error);
+        return [];
+      }
+      // Show only approved booths; hide anything still pending set-up.
+      return ((data ?? []) as ExhibitorRow[]).filter((e) => e.is_approved !== false);
+    },
+  });
+
+  return (
+    <div className="px-4 pb-24 pt-4">
+      <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+        {exhibitors.length} Exhibitors & Showcase Stands
+      </p>
+      {exhibitors.length === 0 ? (
+        <Card className="mt-4 border-0 bg-surface p-4 shadow-card">
+          <p className="text-xs leading-relaxed text-muted-foreground">
+            The exhibition hall is being set up. Exhibiting companies will appear here as booths are
+            confirmed — check back closer to the conference.
+          </p>
+        </Card>
+      ) : (
+        <div className="mt-4 space-y-3">
+          {exhibitors.map((ex) => (
+            <Card key={ex.id} className="border-0 bg-surface rounded-2xl p-4 shadow-card">
+              <div className="flex items-start gap-3">
+                <Avatar className="h-12 w-12 border border-border shadow-sm">
+                  <AvatarImage src={ex.logo_url ?? undefined} />
+                  <AvatarFallback className="text-sm font-bold bg-primary-soft text-primary">
+                    {initials(ex.company_name)}
+                  </AvatarFallback>
+                </Avatar>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center justify-between gap-2">
+                    <p className="text-sm font-bold leading-tight text-foreground">{ex.company_name}</p>
+                    {ex.booth_number && (
+                      <Badge variant="outline" className="shrink-0 text-[10px] font-bold uppercase text-primary">
+                        Booth {ex.booth_number}
+                      </Badge>
+                    )}
+                  </div>
+                  {ex.signage_text && (
+                    <p className="mt-1 text-[11px] leading-snug text-muted-foreground">{ex.signage_text}</p>
+                  )}
+                  {ex.contact_name && (
+                    <p className="mt-1 text-[11px] text-muted-foreground">
+                      Contact: {ex.contact_name}
+                      {ex.contact_phone ? ` · ${ex.contact_phone}` : ""}
+                    </p>
+                  )}
+                  {(ex.contact_email || ex.contact_phone) && (
+                    <div className="mt-1.5 flex flex-wrap gap-2 text-[11px]">
+                      {ex.contact_email && (
+                        <a href={`mailto:${ex.contact_email}`} className="font-semibold text-primary hover:underline">
+                          Email
+                        </a>
+                      )}
+                      {ex.contact_phone && (
+                        <a
+                          href={`tel:${ex.contact_phone.replace(/\s+/g, "")}`}
+                          className="font-semibold text-primary hover:underline"
+                        >
+                          Call
+                        </a>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </Card>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

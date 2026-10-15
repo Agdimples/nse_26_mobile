@@ -97,18 +97,14 @@ function AboutPage() {
           {/* Tab 1: About the Conference */}
           <TabsContent value="about" className="mt-4 space-y-4">
             <Card className="border-0 p-4 shadow-card">
-              <h3 className="text-sm font-bold text-foreground">About the Conference</h3>
-              <p className="mt-2 text-xs leading-relaxed text-muted-foreground whitespace-pre-line">
-                {info.aboutSummary}
+              <h3 className="text-sm font-bold text-foreground">About the Nigerian Society of Engineers (NSE)</h3>
+              <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                The Nigerian Society of Engineers (NSE) — founded in 1958 — is the umbrella
+                professional body for engineers in Nigeria. It advances the engineering profession
+                through standard-setting, professional development and policy input on national
+                infrastructure and technology, and it is the organiser of the annual International
+                Engineering Conference, Exhibition and Annual General Meeting.
               </p>
-
-              <div className="mt-4 border-t border-border pt-3">
-                <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                  Conference Chairman
-                </p>
-                <p className="text-sm font-bold text-foreground">{info.chairman}</p>
-              </div>
-
               <div className="mt-3 flex gap-3 text-xs">
                 <a
                   href={info.officialSite}
@@ -121,8 +117,23 @@ function AboutPage() {
               </div>
             </Card>
 
-            {/* Sub-committees */}
+            <Card className="border-0 p-4 shadow-card">
+              <h3 className="text-sm font-bold text-foreground">About This Year&rsquo;s Conference</h3>
+              <p className="mt-2 text-xs leading-relaxed text-muted-foreground whitespace-pre-line">
+                {info.aboutSummary}
+              </p>
+            </Card>
+
+            {/* Conference leadership — chairman and committee chairs presented at equal weight */}
             <div className="grid gap-3 sm:grid-cols-2">
+              <Card className="border-0 p-3.5 shadow-card">
+                <p className="text-xs font-bold text-foreground">Conference Chairman</p>
+                <p className="mt-1 text-[11px] text-primary">{info.chairman}</p>
+                <p className="mt-1 text-[11px] text-muted-foreground">
+                  Leads the National Organizing Committee for the conference and its sub-committees.
+                </p>
+              </Card>
+
               <Card className="border-0 p-3.5 shadow-card">
                 <p className="text-xs font-bold text-foreground">{info.entertainment.title}</p>
                 <p className="text-[11px] text-primary">Chair: {info.entertainment.chair}</p>

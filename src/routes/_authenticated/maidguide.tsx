@@ -40,7 +40,7 @@ const tiles = [
   {
     to: "/transport",
     label: "Shuttle Transport",
-    description: "10 delegate buses, marshals and daily schedule.",
+    description: "50 delegate buses, marshals and daily schedule.",
     icon: Bus,
     tone: "bg-primary-soft text-primary",
   },
