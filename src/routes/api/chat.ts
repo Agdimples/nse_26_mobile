@@ -60,7 +60,7 @@ export const Route = createFileRoute("/api/chat")({
             headers: { Authorization: `Bearer ${key}` },
           });
           const result = streamText({
-            model: gemini("gemini-2.5-flash"),
+            model: gemini("gemini-3.8-flash"), // current-only model name for new Gemini API keys (2.5-flash is retired for new users)
             system: `You are the friendly AI concierge for ${EVENT_CONFIG.name} ${EVENT_CONFIG.year} (${EVENT_CONFIG.brandName}) — ${EVENT_CONFIG.tagline}. The conference runs ${EVENT_CONFIG.dates} at ${EVENT_CONFIG.venue.name}, ${EVENT_CONFIG.venue.address}.
 
 Be concise, warm, and confident. Answer questions about the schedule, sessions, speakers, venue halls, delegate shuttles, hotels, and emergency contacts. When asked about timing or location, give specific answers. If the user asks something outside the conference, politely steer them back.
