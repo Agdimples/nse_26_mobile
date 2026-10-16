@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -16,6 +16,16 @@ export const Route = createFileRoute("/_authenticated/network")({
 });
 
 function NetworkPage() {
+  // Child routes (/network/room/$roomId and /network/$userId) replace this
+  // list entirely — without this handoff, tapping a chat room or a person
+  // navigates but the list stays on screen and nothing appears to happen.
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const showingChild = /^\/network\/.+/.test(pathname);
+
+  if (showingChild) {
+    return <Outlet />;
+  }
+
   const { user } = useAuth();
   const [q, setQ] = useState("");
 
