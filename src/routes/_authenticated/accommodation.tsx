@@ -17,7 +17,6 @@ import {
   HOTELS,
   hotelMinRate,
   hotelDistanceKm,
-  hasHotelPhotos,
   type Hotel,
 } from "@/lib/reference";
 import { formatNGN } from "@/lib/format";
@@ -191,7 +190,6 @@ function AccommodationPage() {
 function HotelCard({ hotel }: { hotel: Hotel }) {
   const minRate = hotelMinRate(hotel);
   const distKm = hotelDistanceKm(hotel);
-  const hasPhotos = hasHotelPhotos(hotel);
 
   // Build the ordered image list: preview paths from the images array
   const imageUrls = hotel.images.map((img) => img.preview).filter(Boolean);
@@ -202,7 +200,6 @@ function HotelCard({ hotel }: { hotel: Hotel }) {
         images={imageUrls}
         shortName={hotel.shortName}
         alt={hotel.name}
-        heightClass={hasPhotos ? "h-52" : "h-24"}
       />
       <div className="space-y-2.5 p-4">
         <div className="flex items-start justify-between gap-2">

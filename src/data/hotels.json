@@ -7,7 +7,7 @@
     "shortName": "Solace",
     "tone": "Calm delegate base",
     "location": "No. 37 Losho Road, opposite Lagos Street, Maiduguri",
-    "distanceToVenue": "5.5 KM",
+    "distanceToVenue": "3.3 KM",
     "contactPhone": "0816 466 5927",
     "description": "A Maiduguri accommodation option documented through the supplied photo set, tariff sheet and public listings. Public records place it at No. 37 Losho Road opposite Lagos Street and list hotel facilities including restaurant, Wi-Fi, breakfast and airport pickup.",
     "roomSummary": "30 rooms (sheet)",
@@ -84,7 +84,7 @@
     "shortName": "Golden Sand",
     "tone": "Resort-style stay",
     "location": "No. 4 Muhammadu Indimi Way, opposite NTA Headquarters, Maiduguri",
-    "distanceToVenue": "5.5 KM",
+    "distanceToVenue": "3.9 KM",
     "contactPhone": "0816 466 5927",
     "description": "A polished hotel option with public listing details that mention 4-star accommodation, an outdoor swimming pool, restaurant service, airport transfers, room service, free WiFi, and breakfast options including halal meals.",
     "roomSummary": "23 rooms (sheet)",
@@ -95,7 +95,7 @@
       "Outdoor pool, restaurant service, airport transfers, room service and WiFi listed publicly",
       "Contact: 0816 466 5927",
       "Rooms: 23",
-      "Distance to venue: 5.5 KM"
+      "Distance to venue: 3.9 km"
     ],
     "rooms": [
       {
@@ -151,77 +151,9 @@
       {
         "preview": "/hotels/golden-sand/preview/010.webp",
         "thumb": "/hotels/golden-sand/thumb/010.webp"
-      },
-      {
-        "preview": "/hotels/golden-sand/preview/011.webp",
-        "thumb": "/hotels/golden-sand/thumb/011.webp"
-      },
-      {
-        "preview": "/hotels/golden-sand/preview/012.webp",
-        "thumb": "/hotels/golden-sand/thumb/012.webp"
-      },
-      {
-        "preview": "/hotels/golden-sand/preview/013.webp",
-        "thumb": "/hotels/golden-sand/thumb/013.webp"
-      },
-      {
-        "preview": "/hotels/golden-sand/preview/014.webp",
-        "thumb": "/hotels/golden-sand/thumb/014.webp"
-      },
-      {
-        "preview": "/hotels/golden-sand/preview/015.webp",
-        "thumb": "/hotels/golden-sand/thumb/015.webp"
-      },
-      {
-        "preview": "/hotels/golden-sand/preview/016.webp",
-        "thumb": "/hotels/golden-sand/thumb/016.webp"
-      },
-      {
-        "preview": "/hotels/golden-sand/preview/017.webp",
-        "thumb": "/hotels/golden-sand/thumb/017.webp"
-      },
-      {
-        "preview": "/hotels/golden-sand/preview/018.webp",
-        "thumb": "/hotels/golden-sand/thumb/018.webp"
-      },
-      {
-        "preview": "/hotels/golden-sand/preview/019.webp",
-        "thumb": "/hotels/golden-sand/thumb/019.webp"
-      },
-      {
-        "preview": "/hotels/golden-sand/preview/020.webp",
-        "thumb": "/hotels/golden-sand/thumb/020.webp"
-      },
-      {
-        "preview": "/hotels/golden-sand/preview/021.webp",
-        "thumb": "/hotels/golden-sand/thumb/021.webp"
-      },
-      {
-        "preview": "/hotels/golden-sand/preview/022.webp",
-        "thumb": "/hotels/golden-sand/thumb/022.webp"
-      },
-      {
-        "preview": "/hotels/golden-sand/preview/023.webp",
-        "thumb": "/hotels/golden-sand/thumb/023.webp"
-      },
-      {
-        "preview": "/hotels/golden-sand/preview/024.webp",
-        "thumb": "/hotels/golden-sand/thumb/024.webp"
-      },
-      {
-        "preview": "/hotels/golden-sand/preview/025.webp",
-        "thumb": "/hotels/golden-sand/thumb/025.webp"
-      },
-      {
-        "preview": "/hotels/golden-sand/preview/026.webp",
-        "thumb": "/hotels/golden-sand/thumb/026.webp"
-      },
-      {
-        "preview": "/hotels/golden-sand/preview/027.webp",
-        "thumb": "/hotels/golden-sand/thumb/027.webp"
       }
     ],
-    "photoCount": 27,
+    "photoCount": 10,
     "latitude": 11.80963,
     "longitude": 13.13686
   },
@@ -233,7 +165,7 @@
     "shortName": "Grand Polo",
     "tone": "Executive convenience",
     "location": "Polo Field, Maiduguri",
-    "distanceToVenue": "4.5 KM",
+    "distanceToVenue": "3.9 KM",
     "contactPhone": "0907 274 9452",
     "description": "A convenient delegate-facing hotel around the Polo Field area. Public listings for Polo Grand Hotel mention breakfast, WiFi, parking, air conditioning, daily housekeeping, laundry facilities, and a 24-hour front desk.",
     "roomSummary": "54 rooms (sheet)",
@@ -244,7 +176,7 @@
       "Breakfast, WiFi, parking, front desk and laundry support listed publicly",
       "Contact: 0907 274 9452",
       "Rooms: 54",
-      "Distance to venue: 4.5 KM"
+      "Distance to venue: 3.9 KM"
     ],
     "rooms": [
       {
@@ -292,49 +224,9 @@
       {
         "preview": "/hotels/grand-polo/preview/007.webp",
         "thumb": "/hotels/grand-polo/thumb/007.webp"
-      },
-      {
-        "preview": "/hotels/grand-polo/preview/008.webp",
-        "thumb": "/hotels/grand-polo/thumb/008.webp"
-      },
-      {
-        "preview": "/hotels/grand-polo/preview/009.webp",
-        "thumb": "/hotels/grand-polo/thumb/009.webp"
-      },
-      {
-        "preview": "/hotels/grand-polo/preview/010.webp",
-        "thumb": "/hotels/grand-polo/thumb/010.webp"
-      },
-      {
-        "preview": "/hotels/grand-polo/preview/011.webp",
-        "thumb": "/hotels/grand-polo/thumb/011.webp"
-      },
-      {
-        "preview": "/hotels/grand-polo/preview/012.webp",
-        "thumb": "/hotels/grand-polo/thumb/012.webp"
-      },
-      {
-        "preview": "/hotels/grand-polo/preview/013.webp",
-        "thumb": "/hotels/grand-polo/thumb/013.webp"
-      },
-      {
-        "preview": "/hotels/grand-polo/preview/014.webp",
-        "thumb": "/hotels/grand-polo/thumb/014.webp"
-      },
-      {
-        "preview": "/hotels/grand-polo/preview/015.webp",
-        "thumb": "/hotels/grand-polo/thumb/015.webp"
-      },
-      {
-        "preview": "/hotels/grand-polo/preview/016.webp",
-        "thumb": "/hotels/grand-polo/thumb/016.webp"
-      },
-      {
-        "preview": "/hotels/grand-polo/preview/017.webp",
-        "thumb": "/hotels/grand-polo/thumb/017.webp"
       }
     ],
-    "photoCount": 17,
+    "photoCount": 7,
     "latitude": 11.80493,
     "longitude": 13.14862
   },
@@ -346,7 +238,7 @@
     "shortName": "Grand Pinnacle",
     "tone": "Luxury hotel",
     "location": "Jimna Road / Bulumkutu-Pompomari Road, Maiduguri",
-    "distanceToVenue": "7.2 KM",
+    "distanceToVenue": "8.9 KM",
     "contactPhone": "0803 892 4133",
     "description": "A public-listed Maiduguri hotel around the Jimna and Bulumkutu-Pompomari Road area. The supplied tariff sheet lists room and hall rates and notes weekend complimentary breakfast for one person per room.",
     "roomSummary": "Categories priced",
@@ -356,7 +248,7 @@
       "Tariff sheet lists executive, deluxe, suite and chalet room options",
       "Sheet notes VAT and service charge included",
       "Contact: 0803 892 4133",
-      "Distance to venue: 7.2 KM"
+      "Distance to venue: 8.9 KM"
     ],
     "rooms": [
       {
@@ -402,7 +294,7 @@
     "shortName": "City Star",
     "tone": "Central comfort",
     "location": "Maiduguri, Borno State",
-    "distanceToVenue": "5 KM",
+    "distanceToVenue": "2.6 KM",
     "contactPhone": "0809 740 0003, 0808 022 3610",
     "description": "A practical city hotel option for delegates who need a neat, accessible base in Maiduguri. The photo set presents rooms, shared areas, and service spaces clearly for fast accommodation review.",
     "roomSummary": "20 rooms (sheet)",
@@ -413,7 +305,7 @@
       "Prepared for negotiated room categories and rates",
       "Contact: 0809 740 0003, 0808 022 3610",
       "Rooms: 20",
-      "Distance to venue: 5 KM"
+      "Distance to venue: 2.6 KM"
     ],
     "rooms": [
       {
@@ -469,73 +361,9 @@
       {
         "preview": "/hotels/city-star/preview/010.webp",
         "thumb": "/hotels/city-star/thumb/010.webp"
-      },
-      {
-        "preview": "/hotels/city-star/preview/011.webp",
-        "thumb": "/hotels/city-star/thumb/011.webp"
-      },
-      {
-        "preview": "/hotels/city-star/preview/012.webp",
-        "thumb": "/hotels/city-star/thumb/012.webp"
-      },
-      {
-        "preview": "/hotels/city-star/preview/013.webp",
-        "thumb": "/hotels/city-star/thumb/013.webp"
-      },
-      {
-        "preview": "/hotels/city-star/preview/014.webp",
-        "thumb": "/hotels/city-star/thumb/014.webp"
-      },
-      {
-        "preview": "/hotels/city-star/preview/015.webp",
-        "thumb": "/hotels/city-star/thumb/015.webp"
-      },
-      {
-        "preview": "/hotels/city-star/preview/016.webp",
-        "thumb": "/hotels/city-star/thumb/016.webp"
-      },
-      {
-        "preview": "/hotels/city-star/preview/017.webp",
-        "thumb": "/hotels/city-star/thumb/017.webp"
-      },
-      {
-        "preview": "/hotels/city-star/preview/018.webp",
-        "thumb": "/hotels/city-star/thumb/018.webp"
-      },
-      {
-        "preview": "/hotels/city-star/preview/019.webp",
-        "thumb": "/hotels/city-star/thumb/019.webp"
-      },
-      {
-        "preview": "/hotels/city-star/preview/020.webp",
-        "thumb": "/hotels/city-star/thumb/020.webp"
-      },
-      {
-        "preview": "/hotels/city-star/preview/021.webp",
-        "thumb": "/hotels/city-star/thumb/021.webp"
-      },
-      {
-        "preview": "/hotels/city-star/preview/022.webp",
-        "thumb": "/hotels/city-star/thumb/022.webp"
-      },
-      {
-        "preview": "/hotels/city-star/preview/023.webp",
-        "thumb": "/hotels/city-star/thumb/023.webp"
-      },
-      {
-        "preview": "/hotels/city-star/preview/024.webp",
-        "thumb": "/hotels/city-star/thumb/024.webp"
-      },
-      {
-        "preview": "/hotels/city-star/preview/025.webp",
-        "thumb": "/hotels/city-star/thumb/025.webp"
-      },
-      {
-        "preview": "/hotels/city-star/preview/026.webp",
-        "thumb": "/hotels/city-star/thumb/026.webp"
       }
     ],
-    "photoCount": 26
+    "photoCount": 10
   },
   {
     "id": "amada",
@@ -545,7 +373,7 @@
     "shortName": "Amada",
     "tone": "Modern city stay",
     "location": "No. 1 Magira Road / Shehu Sanda Kyari Crescent, Maiduguri",
-    "distanceToVenue": "3.7 KM",
+    "distanceToVenue": "3.0 KM",
     "contactPhone": "0816 726 1763",
     "description": "A publicly listed Maiduguri hotel with references to modern hospitality, air-conditioned rooms, room service, refrigerators, suites, and a central city position. The supplied inspection set adds current visual evidence for delegate review.",
     "roomSummary": "25 rooms (sheet)",
@@ -556,7 +384,7 @@
       "Central Maiduguri location captured across travel/map listings",
       "Contact: 0816 726 1763",
       "Rooms: 25",
-      "Distance to venue: 3.7 KM"
+      "Distance to venue: 3.0 KM"
     ],
     "rooms": [
       {
@@ -608,25 +436,9 @@
       {
         "preview": "/hotels/amada/preview/008.webp",
         "thumb": "/hotels/amada/thumb/008.webp"
-      },
-      {
-        "preview": "/hotels/amada/preview/009.webp",
-        "thumb": "/hotels/amada/thumb/009.webp"
-      },
-      {
-        "preview": "/hotels/amada/preview/010.webp",
-        "thumb": "/hotels/amada/thumb/010.webp"
-      },
-      {
-        "preview": "/hotels/amada/preview/011.webp",
-        "thumb": "/hotels/amada/thumb/011.webp"
-      },
-      {
-        "preview": "/hotels/amada/preview/012.webp",
-        "thumb": "/hotels/amada/thumb/012.webp"
       }
     ],
-    "photoCount": 12,
+    "photoCount": 8,
     "latitude": 11.81363,
     "longitude": 13.15043
   },
@@ -638,7 +450,7 @@
     "shortName": "State Hotel",
     "tone": "Government hotel",
     "location": "Off Lafiya Road, behind GRA Police Station, Maiduguri",
-    "distanceToVenue": "4.2 KM",
+    "distanceToVenue": "2.5 KM",
     "contactPhone": "0806 889 6400",
     "description": "A long-standing Maiduguri hotel with an official web presence under Borno Hotels Limited. Public information places it off Lafiya Road behind the GRA Police Station, while the supplied management notice confirms new room rates effective 1 June 2026.",
     "roomSummary": "30 rooms (sheet)",
@@ -649,7 +461,7 @@
       "Borno Hotels Limited notice confirms updated room rates effective 1 June 2026",
       "Contact: 0806 889 6400",
       "Rooms: 30",
-      "Distance to venue: 4.2 KM"
+      "Distance to venue: 2.5 KM"
     ],
     "rooms": [
       {
@@ -715,7 +527,7 @@
     "shortName": "Kelrich",
     "tone": "New hotel option",
     "location": "No. 15 Pompomari Alauma Road Bypass / V422+849 behind Umar Alad Filling Station, Maiduguri",
-    "distanceToVenue": "3.9 KM",
+    "distanceToVenue": "10.1 KM",
     "contactPhone": "0802 447 8888",
     "description": "A newly added Maiduguri accommodation option located around Pompomari Alauma Road Bypass, behind Umar Alad Filling Station. The supplied room photos show furnished suite, studio, executive and VIP-style rooms, with wider room inventory still pending confirmation.",
     "roomSummary": "79 rooms (sheet)",
@@ -726,7 +538,7 @@
       "Suite, Studio, Executive, VIP and Deluxe rates supplied; wider delegate allocation still pending",
       "Contact: 0802 447 8888",
       "Rooms: 79",
-      "Distance to venue: 3.9 KM"
+      "Distance to venue: 10.1 KM"
     ],
     "rooms": [
       {
@@ -770,17 +582,11 @@
       {
         "preview": "/hotels/kelrich-hotel/preview/005.webp",
         "thumb": "/hotels/kelrich-hotel/thumb/005.webp"
-      },
-      {
-        "preview": "/hotels/kelrich-hotel/preview/006.webp",
-        "thumb": "/hotels/kelrich-hotel/thumb/006.webp"
-      },
-      {
-        "preview": "/hotels/kelrich-hotel/preview/007.webp",
-        "thumb": "/hotels/kelrich-hotel/thumb/007.webp"
       }
     ],
-    "photoCount": 7
+    "photoCount": 5,
+    "latitude": 11.8507856,
+    "longitude": 13.0977706
   },
   {
     "id": "rb-hotel",
@@ -790,7 +596,7 @@
     "shortName": "RB Hotel",
     "tone": "GRA suites",
     "location": "7 Agoja Road, GRA, Maiduguri",
-    "distanceToVenue": "5.4 KM",
+    "distanceToVenue": "4.4 km KM",
     "contactPhone": "0706 136 6090, 0808 437 1255",
     "description": "A GRA Maiduguri hotel option with public references to ensuite rooms, halls and 24-hour service. Included for CPC accommodation inspection routing.",
     "roomSummary": "27 rooms (sheet)",
@@ -801,7 +607,7 @@
       "Room photos and tariff sheet still pending",
       "Contact: 0706 136 6090, 0808 437 1255",
       "Rooms: 27",
-      "Distance to venue: 5.4 KM"
+      "Distance to venue: 4.4 KM"
     ],
     "rooms": [
       {
@@ -825,8 +631,51 @@
         "rate": "N75,500"
       }
     ],
-    "images": [],
-    "photoCount": 0
+    "images": [
+      {
+        "preview": "/hotels/rb-hotel/preview/001.jpg",
+        "thumb": "/hotels/rb-hotel/thumb/001.webp"
+      },
+      {
+        "preview": "/hotels/rb-hotel/preview/002.jpg",
+        "thumb": "/hotels/rb-hotel/thumb/002.webp"
+      },
+      {
+        "preview": "/hotels/rb-hotel/preview/003.jpg",
+        "thumb": "/hotels/rb-hotel/thumb/003.webp"
+      },
+      {
+        "preview": "/hotels/rb-hotel/preview/004.jpg",
+        "thumb": "/hotels/rb-hotel/thumb/004.webp"
+      },
+      {
+        "preview": "/hotels/rb-hotel/preview/005.jpg",
+        "thumb": "/hotels/rb-hotel/thumb/005.webp"
+      },
+      {
+        "preview": "/hotels/rb-hotel/preview/006.jpg",
+        "thumb": "/hotels/rb-hotel/thumb/006.webp"
+      },
+      {
+        "preview": "/hotels/rb-hotel/preview/007.jpg",
+        "thumb": "/hotels/rb-hotel/thumb/007.webp"
+      },
+      {
+        "preview": "/hotels/rb-hotel/preview/008.jpg",
+        "thumb": "/hotels/rb-hotel/thumb/008.webp"
+      },
+      {
+        "preview": "/hotels/rb-hotel/preview/009.jpg",
+        "thumb": "/hotels/rb-hotel/thumb/009.webp"
+      },
+      {
+        "preview": "/hotels/rb-hotel/preview/010.jpg",
+        "thumb": "/hotels/rb-hotel/thumb/010.webp"
+      }
+    ],
+    "photoCount": 10,
+    "latitude": 11.8051729,
+    "longitude": 13.1537726
   },
   {
     "id": "zairan",
@@ -891,7 +740,7 @@
     "shortName": "Nanne & Boi",
     "tone": "Old GRA suites",
     "location": "No. 19 Onitsha Street, Adjacent Airforce Officers Mess, Off Circular Road, Old GRA, Maiduguri",
-    "distanceToVenue": "ICC route/time pending official logistics confirmation",
+    "distanceToVenue": "4.0 Km",
     "contactPhone": "0703 050 9184",
     "description": "A Maiduguri suite hotel in Old GRA with a strong public Hotels.ng presence and online room photos. Public listings place it off Circular Road near the Airforce Officers Mess corridor.",
     "roomSummary": "100 rooms (sheet)",
@@ -902,7 +751,7 @@
       "Located in Old GRA, Maiduguri",
       "Contact: 0703 050 9184",
       "Rooms: 100",
-      "Distance to venue: ICC route/time pending official logistics confirmation"
+      "Distance to venue: 4.0 KM"
     ],
     "rooms": [
       {
@@ -956,7 +805,7 @@
     "shortName": "Aiba Resort",
     "tone": "Sports resort stay",
     "location": "Aiba Resort Crescent, No. 1 Moduganari Bypass, behind WTC Quarters, Maiduguri",
-    "distanceToVenue": "ICC route/time pending official logistics confirmation",
+    "distanceToVenue": "2.9 KM",
     "contactPhone": "0703 050 9184",
     "description": "A Maiduguri resort-style accommodation option with public references to sport facilities and a Moduganari Bypass location. The supplied tariff sheet also lists rooms, chalets, and paid leisure facilities.",
     "roomSummary": "45 rooms (sheet)",
@@ -967,7 +816,7 @@
       "Located around Moduganari Bypass, behind WTC Quarters",
       "Contact: 0703 050 9184",
       "Rooms: 45",
-      "Distance to venue: ICC route/time pending official logistics confirmation"
+      "Distance to venue: 2.9 KM"
     ],
     "rooms": [
       {
@@ -997,11 +846,29 @@
     ],
     "images": [
       {
-        "preview": "/hotels/aiba-sport-resort/preview/001.webp",
-        "thumb": "/hotels/aiba-sport-resort/thumb/001.webp"
+        "preview": "/hotels/aiba-sport-resort/preview/001.jpg",
+        "thumb": "/hotels/aiba-sport-resort/thumb/001.jpg"
+      },
+      {
+        "preview": "/hotels/aiba-sport-resort/preview/002.jpg",
+        "thumb": "/hotels/aiba-sport-resort/thumb/002.jpg"
+      },
+      {
+        "preview": "/hotels/aiba-sport-resort/preview/003.jpg",
+        "thumb": "/hotels/aiba-sport-resort/thumb/003.jpg"
+      },
+      {
+        "preview": "/hotels/aiba-sport-resort/preview/004.jpg",
+        "thumb": "/hotels/aiba-sport-resort/thumb/004.jpg"
+      },
+      {
+        "preview": "/hotels/aiba-sport-resort/preview/005.jpg",
+        "thumb": "/hotels/aiba-sport-resort/thumb/005.jpg"
       }
     ],
-    "photoCount": 1
+    "photoCount": 5,
+    "latitude": 11.8306862,
+    "longitude": 13.1375864
   },
   {
     "id": "barwee",
@@ -1011,7 +878,7 @@
     "shortName": "Barwee",
     "tone": "Luxury suites",
     "location": "Maiduguri-Potiskum Road, Maiduguri",
-    "distanceToVenue": "ICC route/time pending official logistics confirmation",
+    "distanceToVenue": "9.8 km",
     "contactPhone": "0706 650 2891",
     "description": "A public-listed Maiduguri hotel on the Maiduguri-Potiskum Road corridor, positioned as a comfortable suite-style option. The supplied tariff sheet lists reception rates for standard luxury and suite categories.",
     "roomSummary": "Categories priced",
@@ -1021,7 +888,7 @@
       "Tariff sheet lists chalet, royal suite, mini royal suite and luxury standard options",
       "Sheet notes restaurant and outdoor catering service availability",
       "Contact: 0706 650 2891",
-      "Distance to venue: ICC route/time pending official logistics confirmation"
+      "Distance to venue: 9.8 kn"
     ],
     "rooms": [
       {
@@ -1073,41 +940,11 @@
       {
         "preview": "/hotels/barwee/preview/008.webp",
         "thumb": "/hotels/barwee/thumb/008.webp"
-      },
-      {
-        "preview": "/hotels/barwee/preview/009.webp",
-        "thumb": "/hotels/barwee/thumb/009.webp"
-      },
-      {
-        "preview": "/hotels/barwee/preview/010.webp",
-        "thumb": "/hotels/barwee/thumb/010.webp"
-      },
-      {
-        "preview": "/hotels/barwee/preview/011.webp",
-        "thumb": "/hotels/barwee/thumb/011.webp"
-      },
-      {
-        "preview": "/hotels/barwee/preview/012.webp",
-        "thumb": "/hotels/barwee/thumb/012.webp"
-      },
-      {
-        "preview": "/hotels/barwee/preview/013.webp",
-        "thumb": "/hotels/barwee/thumb/013.webp"
-      },
-      {
-        "preview": "/hotels/barwee/preview/014.webp",
-        "thumb": "/hotels/barwee/thumb/014.webp"
-      },
-      {
-        "preview": "/hotels/barwee/preview/015.webp",
-        "thumb": "/hotels/barwee/thumb/015.webp"
-      },
-      {
-        "preview": "/hotels/barwee/preview/016.webp",
-        "thumb": "/hotels/barwee/thumb/016.webp"
       }
     ],
-    "photoCount": 16
+    "photoCount": 8,
+    "latitude": 11.8379523,
+    "longitude": 13.0775101
   },
   {
     "id": "dujima",
@@ -1117,7 +954,7 @@
     "shortName": "Dujima",
     "tone": "Established hospitality",
     "location": "Kashim Ibrahim Road, Maiduguri",
-    "distanceToVenue": "ICC route/time pending official logistics confirmation",
+    "distanceToVenue": "3.4 km",
     "contactPhone": "0814 064 3051",
     "description": "An established Maiduguri hotel with official-site references to rooms, dining, event halls, and a hospitality legacy. Public listings also note 24-hour front desk support, restaurant service, parking, air conditioning and business-friendly services.",
     "roomSummary": "37 rooms (sheet)",
@@ -1128,7 +965,7 @@
       "Hotels.ng notes 24-hour front desk and support services",
       "Contact: 0814 064 3051",
       "Rooms: 37",
-      "Distance to venue: ICC route/time pending official logistics confirmation"
+      "Distance to venue: 3.4 km"
     ],
     "rooms": [
       {
@@ -1182,7 +1019,9 @@
         "thumb": "/hotels/dujima-hotel/thumb/008.webp"
       }
     ],
-    "photoCount": 8
+    "photoCount": 8,
+    "latitude": 11.8487185,
+    "longitude": 13.1377884
   },
   {
     "id": "desert-view",
@@ -1192,7 +1031,7 @@
     "shortName": "Desert View",
     "tone": "Budget city option",
     "location": "Dapcharima Road, off Sokoto Road, Maiduguri",
-    "distanceToVenue": "4.5 KM",
+    "distanceToVenue": "4.6 KM",
     "contactPhone": "0806 511 9443",
     "description": "A public-listed budget hotel option in Maiduguri, referenced around Dapcharima Road off Sokoto Road and noted as being near the Maiduguri International Airport corridor. The newly supplied room photos add current visual evidence for delegate screening.",
     "roomSummary": "14 rooms (sheet)",
@@ -1203,7 +1042,7 @@
       "Plistbooking public rates seen during Firecrawl research; tariff sheet still pending",
       "Contact: 0806 511 9443",
       "Rooms: 14",
-      "Distance to venue: 4.5 KM"
+      "Distance to venue: 4.6 KM"
     ],
     "rooms": [
       {
@@ -1227,13 +1066,11 @@
       {
         "preview": "/hotels/desert-view/preview/004.webp",
         "thumb": "/hotels/desert-view/thumb/004.webp"
-      },
-      {
-        "preview": "/hotels/desert-view/preview/005.webp",
-        "thumb": "/hotels/desert-view/thumb/005.webp"
       }
     ],
-    "photoCount": 5
+    "photoCount": 4,
+    "latitude": 11.8487185,
+    "longitude": 13.1501372
   },
   {
     "id": "djado",
@@ -1243,7 +1080,7 @@
     "shortName": "D'jado",
     "tone": "UNIMAID access",
     "location": "No. 91 Bama Road, opposite University of Maiduguri, Maiduguri",
-    "distanceToVenue": "8 KM",
+    "distanceToVenue": "7.1 KM",
     "contactPhone": "0906 511 0643",
     "description": "A compact hotel option near UNIMAID Gate One. Public conference accommodation data lists executive, deluxe and suite room categories, while company registry context identifies hotel, laundry, catering and restaurant services.",
     "roomSummary": "32 rooms (sheet)",
@@ -1254,7 +1091,7 @@
       "Hotel, laundry, catering and restaurant services listed publicly",
       "Contact: 0906 511 0643",
       "Rooms: 32",
-      "Distance to venue: 8 KM"
+      "Distance to venue: 7.1 KM"
     ],
     "rooms": [
       {
@@ -1292,7 +1129,9 @@
         "thumb": "/hotels/djado-hotel/thumb/005.webp"
       }
     ],
-    "photoCount": 5
+    "photoCount": 5,
+    "latitude": 11.8041731,
+    "longitude": 13.187745
   },
   {
     "id": "dujima-annex",
@@ -1377,7 +1216,7 @@
     "shortName": "Garki Guest",
     "tone": "Value rooms",
     "location": "Maiduguri, Borno State",
-    "distanceToVenue": "1.6 KM",
+    "distanceToVenue": "12.8 KM",
     "contactPhone": "0814 064 3051, 0703 310 2009",
     "description": "A value accommodation option represented by separate Main and Annex tariff sheets. The sheets show VAT, consumption tax and service charge included in the listed prices.",
     "roomSummary": "Main + annex rooms (sheet)",
@@ -1389,7 +1228,7 @@
       "Rates include VAT, consumption tax and service charge according to the sheets",
       "Contact: 0814 064 3051, 0703 310 2009",
       "Rooms: 37",
-      "Distance to venue: 1.6 KM"
+      "Distance to venue: 12.8 KM"
     ],
     "rooms": [
       {
@@ -1453,81 +1292,9 @@
       {
         "preview": "/hotels/garki-guest/preview/010.webp",
         "thumb": "/hotels/garki-guest/thumb/010.webp"
-      },
-      {
-        "preview": "/hotels/garki-guest/preview/011.webp",
-        "thumb": "/hotels/garki-guest/thumb/011.webp"
-      },
-      {
-        "preview": "/hotels/garki-guest/preview/012.webp",
-        "thumb": "/hotels/garki-guest/thumb/012.webp"
-      },
-      {
-        "preview": "/hotels/garki-guest/preview/013.webp",
-        "thumb": "/hotels/garki-guest/thumb/013.webp"
-      },
-      {
-        "preview": "/hotels/garki-guest/preview/014.webp",
-        "thumb": "/hotels/garki-guest/thumb/014.webp"
-      },
-      {
-        "preview": "/hotels/garki-guest/preview/015.webp",
-        "thumb": "/hotels/garki-guest/thumb/015.webp"
-      },
-      {
-        "preview": "/hotels/garki-guest/preview/016.webp",
-        "thumb": "/hotels/garki-guest/thumb/016.webp"
-      },
-      {
-        "preview": "/hotels/garki-guest/preview/017.webp",
-        "thumb": "/hotels/garki-guest/thumb/017.webp"
-      },
-      {
-        "preview": "/hotels/garki-guest/preview/018.webp",
-        "thumb": "/hotels/garki-guest/thumb/018.webp"
-      },
-      {
-        "preview": "/hotels/garki-guest/preview/019.webp",
-        "thumb": "/hotels/garki-guest/thumb/019.webp"
-      },
-      {
-        "preview": "/hotels/garki-guest/preview/020.webp",
-        "thumb": "/hotels/garki-guest/thumb/020.webp"
-      },
-      {
-        "preview": "/hotels/garki-guest/preview/021.webp",
-        "thumb": "/hotels/garki-guest/thumb/021.webp"
-      },
-      {
-        "preview": "/hotels/garki-guest/preview/022.webp",
-        "thumb": "/hotels/garki-guest/thumb/022.webp"
-      },
-      {
-        "preview": "/hotels/garki-guest/preview/023.webp",
-        "thumb": "/hotels/garki-guest/thumb/023.webp"
-      },
-      {
-        "preview": "/hotels/garki-guest/preview/024.webp",
-        "thumb": "/hotels/garki-guest/thumb/024.webp"
-      },
-      {
-        "preview": "/hotels/garki-guest/preview/025.webp",
-        "thumb": "/hotels/garki-guest/thumb/025.webp"
-      },
-      {
-        "preview": "/hotels/garki-guest/preview/026.webp",
-        "thumb": "/hotels/garki-guest/thumb/026.webp"
-      },
-      {
-        "preview": "/hotels/garki-guest/preview/027.webp",
-        "thumb": "/hotels/garki-guest/thumb/027.webp"
-      },
-      {
-        "preview": "/hotels/garki-guest/preview/028.webp",
-        "thumb": "/hotels/garki-guest/thumb/028.webp"
       }
     ],
-    "photoCount": 28,
+    "photoCount": 10,
     "latitude": 11.8444,
     "longitude": 13.09588
   },
@@ -1539,8 +1306,8 @@
     "shortName": "Khanan",
     "tone": "New hotel option",
     "location": "Baga Road, before Maimalari Barracks, Maiduguri",
-    "distanceToVenue": "9 KM",
-    "contactPhone": null,
+    "distanceToVenue": "10.5 KM",
+    "contactPhone": "07032917177",
     "description": "A newly added Maiduguri accommodation option for delegate consideration. Supplied rates confirm the core room categories, while public social listings place the hotel on Baga Road before Maimalari Barracks.",
     "roomSummary": "3 room categories",
     "rateStatus": "Rates listed",
@@ -1548,7 +1315,7 @@
       "Supplied categories: Standard, Super and Premium",
       "Rates now listed for quick accommodation planning",
       "Public social listings reference Baga Road before Maimalari Barracks",
-      "Distance to venue: 9 KM"
+      "Distance to venue: 10.5 KM"
     ],
     "rooms": [
       {
@@ -1596,77 +1363,11 @@
       {
         "preview": "/hotels/khanan-hotel/preview/008.webp",
         "thumb": "/hotels/khanan-hotel/thumb/008.webp"
-      },
-      {
-        "preview": "/hotels/khanan-hotel/preview/009.webp",
-        "thumb": "/hotels/khanan-hotel/thumb/009.webp"
-      },
-      {
-        "preview": "/hotels/khanan-hotel/preview/010.webp",
-        "thumb": "/hotels/khanan-hotel/thumb/010.webp"
-      },
-      {
-        "preview": "/hotels/khanan-hotel/preview/011.webp",
-        "thumb": "/hotels/khanan-hotel/thumb/011.webp"
-      },
-      {
-        "preview": "/hotels/khanan-hotel/preview/012.webp",
-        "thumb": "/hotels/khanan-hotel/thumb/012.webp"
-      },
-      {
-        "preview": "/hotels/khanan-hotel/preview/013.webp",
-        "thumb": "/hotels/khanan-hotel/thumb/013.webp"
-      },
-      {
-        "preview": "/hotels/khanan-hotel/preview/014.webp",
-        "thumb": "/hotels/khanan-hotel/thumb/014.webp"
-      },
-      {
-        "preview": "/hotels/khanan-hotel/preview/015.webp",
-        "thumb": "/hotels/khanan-hotel/thumb/015.webp"
-      },
-      {
-        "preview": "/hotels/khanan-hotel/preview/016.webp",
-        "thumb": "/hotels/khanan-hotel/thumb/016.webp"
-      },
-      {
-        "preview": "/hotels/khanan-hotel/preview/017.webp",
-        "thumb": "/hotels/khanan-hotel/thumb/017.webp"
-      },
-      {
-        "preview": "/hotels/khanan-hotel/preview/018.webp",
-        "thumb": "/hotels/khanan-hotel/thumb/018.webp"
-      },
-      {
-        "preview": "/hotels/khanan-hotel/preview/019.webp",
-        "thumb": "/hotels/khanan-hotel/thumb/019.webp"
-      },
-      {
-        "preview": "/hotels/khanan-hotel/preview/020.webp",
-        "thumb": "/hotels/khanan-hotel/thumb/020.webp"
-      },
-      {
-        "preview": "/hotels/khanan-hotel/preview/021.webp",
-        "thumb": "/hotels/khanan-hotel/thumb/021.webp"
-      },
-      {
-        "preview": "/hotels/khanan-hotel/preview/022.webp",
-        "thumb": "/hotels/khanan-hotel/thumb/022.webp"
-      },
-      {
-        "preview": "/hotels/khanan-hotel/preview/023.webp",
-        "thumb": "/hotels/khanan-hotel/thumb/023.webp"
-      },
-      {
-        "preview": "/hotels/khanan-hotel/preview/024.webp",
-        "thumb": "/hotels/khanan-hotel/thumb/024.webp"
-      },
-      {
-        "preview": "/hotels/khanan-hotel/preview/025.webp",
-        "thumb": "/hotels/khanan-hotel/thumb/025.webp"
       }
     ],
-    "photoCount": 25
+    "photoCount": 8,
+    "latitude": 11.8860439,
+    "longitude": 13.1085045
   },
   {
     "id": "muna",
@@ -1676,7 +1377,7 @@
     "shortName": "Muna",
     "tone": "Guest inn",
     "location": "Shehu Laminu Way, Old GRA, Maiduguri",
-    "distanceToVenue": "5.7 KM",
+    "distanceToVenue": "2.9 KM",
     "contactPhone": "0803 262 5065",
     "description": "A public-listed Maiduguri guest inn option. The supplied Muna Hotels Limited tariff sheet places the hotel around Shehu Laminu Way, Old GRA, Maiduguri and confirms 14 rooms across luxury suite, deluxe and standard categories.",
     "roomSummary": "7 rooms (sheet)",
@@ -1687,7 +1388,7 @@
       "Local inspection photos added for initial room-condition review",
       "Contact: 0803 262 5065",
       "Rooms: 7",
-      "Distance to venue: 5.7 KM"
+      "Distance to venue: 2.9 KM"
     ],
     "rooms": [
       {
@@ -1718,8 +1419,8 @@
       }
     ],
     "photoCount": 3,
-    "latitude": 11.81322,
-    "longitude": 13.15169
+    "latitude": 11.8133642,
+    "longitude": 13.1490614
   },
   {
     "id": "command-guest-inn",
@@ -1729,7 +1430,7 @@
     "shortName": "Command Guest",
     "tone": "Barracks-area lodge",
     "location": "1145 Baga Road, Beside Maimalari Barracks, Maiduguri",
-    "distanceToVenue": "5.7 KM",
+    "distanceToVenue": "11.0 KM",
     "contactPhone": "0808 675 7682",
     "description": "A Maiduguri lodge option associated with the Maimalari Barracks area and listed on Hotels.ng. Public social references describe lodging, restaurant, bar, swimming pool and banquet facilities.",
     "roomSummary": "50 rooms (sheet)",
@@ -1740,7 +1441,7 @@
       "Public social posts reference room rates from about N18,000 per night",
       "Contact: 0808 675 7682",
       "Rooms: 50",
-      "Distance to venue: 5.7 KM"
+      "Distance to venue: 11.0 KM"
     ],
     "rooms": [
       {
@@ -1754,11 +1455,25 @@
     ],
     "images": [
       {
-        "preview": "/hotels/command-guest-inn/preview/001.webp",
-        "thumb": "/hotels/command-guest-inn/thumb/001.webp"
+        "preview": "/hotels/command-guest-inn/preview/001.jpg",
+        "thumb": "/hotels/command-guest-inn/thumb/001.jpg"
+      },
+      {
+        "preview": "/hotels/command-guest-inn/preview/002.jpg",
+        "thumb": "/hotels/command-guest-inn/thumb/002.jpg"
+      },
+      {
+        "preview": "/hotels/command-guest-inn/preview/003.jpg",
+        "thumb": "/hotels/command-guest-inn/thumb/003.jpg"
+      },
+      {
+        "preview": "/hotels/command-guest-inn/preview/003.jpg",
+        "thumb": "/hotels/command-guest-inn/thumb/003.jpg"
       }
     ],
-    "photoCount": 1
+    "photoCount": 4,
+    "latitude": 11.8920252,
+    "longitude": 13.1090509
   },
   {
     "id": "bajele-hotels",
@@ -1768,7 +1483,7 @@
     "shortName": "Bajele",
     "tone": "Apartment option",
     "location": "Maiduguri, Borno State",
-    "distanceToVenue": "ICC route/time pending official logistics confirmation",
+    "distanceToVenue": "9.1 KM",
     "contactPhone": null,
     "description": "A Maiduguri hotel/apartment option included from the supplied accommodation folder. Public online listings did not yet confirm address, contact, rates or room photos, so it is included conservatively pending confirmation.",
     "roomSummary": "10 rooms (sheet); rates pending",
@@ -1778,7 +1493,7 @@
       "Public searches returned unrelated Maiduguri hotel/apartment results, so no unverified phone or rate was copied",
       "Room photos and tariff sheet still pending",
       "Rooms: 10",
-      "Distance to venue: ICC route/time pending official logistics confirmation"
+      "Distance to venue: 9.1 KM"
     ],
     "rooms": [
       {
@@ -1788,71 +1503,21 @@
     ],
     "images": [
       {
-        "preview": "/hotels/barwee/preview/001.webp",
-        "thumb": "/hotels/barwee/thumb/001.webp"
+        "preview": "/hotels/bajele/preview/001.png",
+        "thumb": "/hotels/bajele/thumb/001.png"
       },
-      {
-        "preview": "/hotels/barwee/preview/002.webp",
-        "thumb": "/hotels/barwee/thumb/002.webp"
+       {
+        "preview": "/hotels/bajele/preview/002.jpg",
+        "thumb": "/hotels/bajele/thumb/002.jpg"
       },
-      {
-        "preview": "/hotels/barwee/preview/003.webp",
-        "thumb": "/hotels/barwee/thumb/003.webp"
-      },
-      {
-        "preview": "/hotels/barwee/preview/004.webp",
-        "thumb": "/hotels/barwee/thumb/004.webp"
-      },
-      {
-        "preview": "/hotels/barwee/preview/005.webp",
-        "thumb": "/hotels/barwee/thumb/005.webp"
-      },
-      {
-        "preview": "/hotels/barwee/preview/006.webp",
-        "thumb": "/hotels/barwee/thumb/006.webp"
-      },
-      {
-        "preview": "/hotels/barwee/preview/007.webp",
-        "thumb": "/hotels/barwee/thumb/007.webp"
-      },
-      {
-        "preview": "/hotels/barwee/preview/008.webp",
-        "thumb": "/hotels/barwee/thumb/008.webp"
-      },
-      {
-        "preview": "/hotels/barwee/preview/009.webp",
-        "thumb": "/hotels/barwee/thumb/009.webp"
-      },
-      {
-        "preview": "/hotels/barwee/preview/010.webp",
-        "thumb": "/hotels/barwee/thumb/010.webp"
-      },
-      {
-        "preview": "/hotels/barwee/preview/011.webp",
-        "thumb": "/hotels/barwee/thumb/011.webp"
-      },
-      {
-        "preview": "/hotels/barwee/preview/012.webp",
-        "thumb": "/hotels/barwee/thumb/012.webp"
-      },
-      {
-        "preview": "/hotels/barwee/preview/013.webp",
-        "thumb": "/hotels/barwee/thumb/013.webp"
-      },
-      {
-        "preview": "/hotels/barwee/preview/014.webp",
-        "thumb": "/hotels/barwee/thumb/014.webp"
-      },
-      {
-        "preview": "/hotels/barwee/preview/015.webp",
-        "thumb": "/hotels/barwee/thumb/015.webp"
-      },
-      {
-        "preview": "/hotels/barwee/preview/016.webp",
-        "thumb": "/hotels/barwee/thumb/016.webp"
+       {
+        "preview": "/hotels/bajele/preview/003.jpg",
+        "thumb": "/hotels/bajele/thumb/003.jpg"
       }
     ],
-    "photoCount": 16
+    "photoCount": 3,
+    "latitude": 11.8392099,
+    "longitude": 13.0849743
   },
   {
     "id": "galaxy-hotel",

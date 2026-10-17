@@ -262,7 +262,7 @@ function HotelForm({ close, editing }: { close: () => void; editing: Hotel | nul
               images={validImages}
               shortName={form.name || "Preview"}
               alt="Preview"
-              heightClass="h-48"
+              className="aspect-[16/9] sm:aspect-auto sm:h-48"
               autoPlayMs={0}
             />
             <p className="px-3 py-1.5 text-center text-[10px] text-muted-foreground">
