@@ -27,7 +27,7 @@ function AboutPage() {
     <div className="space-y-4 pb-24">
       <NsePageHeader
         title="Maiduguri 2026"
-        subtitle="Official conference guide, programme & secretariat"
+        subtitle="Official about conference , programme & secretariat"
         backTo="/home"
       />
 

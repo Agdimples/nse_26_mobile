@@ -18,10 +18,10 @@ import {
   hotelMinRate,
   hotelDistanceKm,
   hasHotelPhotos,
-  hotelPhotoUrl,
   type Hotel,
 } from "@/lib/reference";
 import { formatNGN } from "@/lib/format";
+import { HotelImageSlider } from "@/components/app/HotelImageSlider";
 
 export const Route = createFileRoute("/_authenticated/accommodation")({
   component: AccommodationPage,
@@ -192,29 +192,18 @@ function HotelCard({ hotel }: { hotel: Hotel }) {
   const minRate = hotelMinRate(hotel);
   const distKm = hotelDistanceKm(hotel);
   const hasPhotos = hasHotelPhotos(hotel);
-  const mapsUrl =
-    hotel.latitude != null && hotel.longitude != null
-      ? `https://www.google.com/maps/dir/?api=1&destination=${hotel.latitude},${hotel.longitude}`
-      : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-          `${hotel.name}, ${hotel.location}`,
-        )}`;
+
+  // Build the ordered image list: preview paths from the images array
+  const imageUrls = hotel.images.map((img) => img.preview).filter(Boolean);
 
   return (
     <Card className="overflow-hidden border-0 bg-surface rounded-2xl p-0 shadow-card transition-shadow hover:shadow-md">
-      {hasPhotos ? (
-        <img
-          src={hotelPhotoUrl(hotel)}
-          alt={hotel.name}
-          className="h-44 w-full object-cover"
-          loading="lazy"
-        />
-      ) : (
-        <div className="flex h-24 w-full items-center justify-center bg-gradient-to-br from-primary-soft via-accent-soft to-primary-soft">
-          <span className="text-2xl font-black tracking-tight text-primary/70">
-            {hotel.shortName}
-          </span>
-        </div>
-      )}
+      <HotelImageSlider
+        images={imageUrls}
+        shortName={hotel.shortName}
+        alt={hotel.name}
+        heightClass={hasPhotos ? "h-52" : "h-24"}
+      />
       <div className="space-y-2.5 p-4">
         <div className="flex items-start justify-between gap-2">
           <div className="min-w-0">

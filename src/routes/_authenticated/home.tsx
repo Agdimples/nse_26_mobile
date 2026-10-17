@@ -132,7 +132,7 @@ function HomePage() {
               </Button>
               <Button size="sm" variant="secondary" asChild className="h-8 bg-white/20 text-white hover:bg-white/30 border-0">
                 <Link to="/about">
-                  Conference Guide
+                  About Conference
                   <ArrowRight className="ml-1 h-3 w-3" />
                 </Link>
               </Button>

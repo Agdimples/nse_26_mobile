@@ -42,7 +42,7 @@ stored in this repo.
 | **Concierge** | Usher, Food, Errands, My orders |
 | **Social** | Chat rooms, Delegate directory, DMs |
 | **Safety** | Announcements, Emergency contacts |
-| **AI** | On-device conference guide |
+| **AI** | On-device about conference |
 | **Admin** | Role-gated dashboards and queues |
 
 ## Reference data

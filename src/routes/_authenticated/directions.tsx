@@ -28,7 +28,7 @@ export const Route = createFileRoute("/_authenticated/directions")({
   component: DirectionsPage,
 });
 
-export function DirectionsPage() {
+function DirectionsPage() {
   const { lat, lng, name } = Route.useSearch();
 
   const dest = useMemo(

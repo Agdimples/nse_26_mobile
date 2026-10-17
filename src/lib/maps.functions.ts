@@ -45,7 +45,7 @@ function getMapsApiKey(): string {
 }
 
 export const searchNearby = createServerFn({ method: "POST" })
-  .inputValidator((input: { category?: string; query?: string }) => {
+  .validator((input: { category?: string; query?: string }) => {
     return {
       category: typeof input.category === "string" ? input.category.slice(0, 50) : undefined,
       query: typeof input.query === "string" ? input.query.slice(0, 100) : undefined,
@@ -141,7 +141,7 @@ export type DirectionsRoute = {
 };
 
 export const getDirections = createServerFn({ method: "POST" })
-  .inputValidator((input: {
+  .validator((input: {
     originLat: number;
     originLng: number;
     destLat: number;

@@ -18,7 +18,7 @@
       "Public address: No. 37 Losho Road, opposite Lagos Street, Maiduguri",
       "Contact: 0816 466 5927",
       "Rooms: 30",
-      "Distance to venue: 5.5 KM"
+      "Distance to venue: 3.3 km "
     ],
     "rooms": [
       {
@@ -70,77 +70,11 @@
       {
         "preview": "/hotels/solce/preview/009.webp",
         "thumb": "/hotels/solce/thumb/009.webp"
-      },
-      {
-        "preview": "/hotels/solce/preview/010.webp",
-        "thumb": "/hotels/solce/thumb/010.webp"
-      },
-      {
-        "preview": "/hotels/solce/preview/011.webp",
-        "thumb": "/hotels/solce/thumb/011.webp"
-      },
-      {
-        "preview": "/hotels/solce/preview/012.webp",
-        "thumb": "/hotels/solce/thumb/012.webp"
-      },
-      {
-        "preview": "/hotels/solce/preview/013.webp",
-        "thumb": "/hotels/solce/thumb/013.webp"
-      },
-      {
-        "preview": "/hotels/solce/preview/014.webp",
-        "thumb": "/hotels/solce/thumb/014.webp"
-      },
-      {
-        "preview": "/hotels/solce/preview/015.webp",
-        "thumb": "/hotels/solce/thumb/015.webp"
-      },
-      {
-        "preview": "/hotels/solce/preview/016.webp",
-        "thumb": "/hotels/solce/thumb/016.webp"
-      },
-      {
-        "preview": "/hotels/solce/preview/017.webp",
-        "thumb": "/hotels/solce/thumb/017.webp"
-      },
-      {
-        "preview": "/hotels/solce/preview/018.webp",
-        "thumb": "/hotels/solce/thumb/018.webp"
-      },
-      {
-        "preview": "/hotels/solce/preview/019.webp",
-        "thumb": "/hotels/solce/thumb/019.webp"
-      },
-      {
-        "preview": "/hotels/solce/preview/020.webp",
-        "thumb": "/hotels/solce/thumb/020.webp"
-      },
-      {
-        "preview": "/hotels/solce/preview/021.webp",
-        "thumb": "/hotels/solce/thumb/021.webp"
-      },
-      {
-        "preview": "/hotels/solce/preview/022.webp",
-        "thumb": "/hotels/solce/thumb/022.webp"
-      },
-      {
-        "preview": "/hotels/solce/preview/023.webp",
-        "thumb": "/hotels/solce/thumb/023.webp"
-      },
-      {
-        "preview": "/hotels/solce/preview/024.webp",
-        "thumb": "/hotels/solce/thumb/024.webp"
-      },
-      {
-        "preview": "/hotels/solce/preview/025.webp",
-        "thumb": "/hotels/solce/thumb/025.webp"
-      },
-      {
-        "preview": "/hotels/solce/preview/026.webp",
-        "thumb": "/hotels/solce/thumb/026.webp"
       }
     ],
-    "photoCount": 26
+    "photoCount": 9,
+    "latitude": 11.8221988,
+    "longitude": 13.1638305
   },
   {
     "id": "golden-sand",

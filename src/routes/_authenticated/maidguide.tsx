@@ -46,7 +46,7 @@ const tiles = [
   },
   {
     to: "/faq",
-    label: "Conference Guide",
+    label: "About Conference",
     description: "40 searchable answers — wifi, badges, meals…",
     icon: HelpCircle,
     tone: "bg-accent-soft text-warning-foreground",
