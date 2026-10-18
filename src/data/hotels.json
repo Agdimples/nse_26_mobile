@@ -66,7 +66,7 @@
   },
   {
     "id": "solce",
-    "rank": 1,
+    "rank": 2,
     "qualityTier": "premier",
     "name": "Solace Suites & Homes",
     "shortName": "Solace",
@@ -155,7 +155,7 @@
   },
   {
     "id": "golden-sand",
-    "rank": 2,
+    "rank": 3,
     "qualityTier": "premier",
     "name": "Golden Sand Hotels",
     "shortName": "Golden Sand",
@@ -176,16 +176,20 @@
     ],
     "rooms": [
       {
-        "label": "Superior",
-        "rate": "N64,900"
+        "label": "Standard Room",
+        "rate": "N65,000"
       },
       {
-        "label": "Business Suite",
-        "rate": "N88,550"
+        "label": "Executive Suite",
+        "rate": "N80,000"
       },
       {
-        "label": "Royal Suite",
-        "rate": "N118,100"
+        "label": "Luxury Suite",
+        "rate": "N90,000"
+      },
+      {
+        "label": "Diplomatic Suite",
+        "rate": "N150,000"
       }
     ],
     "images": [
@@ -236,7 +240,7 @@
   },
   {
     "id": "grand-polo",
-    "rank": 3,
+    "rank": 4,
     "qualityTier": "premier",
     "name": "Grand Polo Hotel",
     "shortName": "Grand Polo",
@@ -258,19 +262,15 @@
     "rooms": [
       {
         "label": "Standard Room",
-        "rate": "N65,000"
+        "rate": "N60,000 (15% discount)"
+      },
+      {
+        "label": "Premium Room",
+        "rate": "N80,000 (15% discount)"
       },
       {
         "label": "Executive Suite",
-        "rate": "N80,000"
-      },
-      {
-        "label": "Luxury Suite",
-        "rate": "N90,000"
-      },
-      {
-        "label": "Diplomatic Suite",
-        "rate": "N150,000"
+        "rate": "N115,000 (15% discount)"
       }
     ],
     "images": [
@@ -308,62 +308,6 @@
     "longitude": 13.14862
   },
   {
-    "id": "grand-pinnacle",
-    "rank": 4,
-    "qualityTier": "premier",
-    "name": "Grand Pinnacle Luxury Hotel",
-    "shortName": "Grand Pinnacle",
-    "tone": "Luxury hotel",
-    "location": "Jimna Road / Bulumkutu-Pompomari Road, Maiduguri",
-    "distanceToVenue": "8.9 KM",
-    "contactPhone": "0803 892 4133",
-    "description": "A public-listed Maiduguri hotel around the Jimna and Bulumkutu-Pompomari Road area. The supplied tariff sheet lists room and hall rates and notes weekend complimentary breakfast for one person per room.",
-    "roomSummary": "Categories priced",
-    "rateStatus": "Rates listed",
-    "highlights": [
-      "Hotels.ng places Grand Pinnacle Luxury Hotel along Jimna Road / Bulumkutu-Pompomari Road",
-      "Tariff sheet lists executive, deluxe, suite and chalet room options",
-      "Sheet notes VAT and service charge included",
-      "Contact: 0803 892 4133",
-      "Distance to venue: 8.9 KM"
-    ],
-    "rooms": [
-      {
-        "label": "Standard Room",
-        "rate": "N60,000 (15% discount)"
-      },
-      {
-        "label": "Premium Room",
-        "rate": "N80,000 (15% discount)"
-      },
-      {
-        "label": "Executive Suite",
-        "rate": "N115,000 (15% discount)"
-      }
-    ],
-    "images": [
-      {
-        "preview": "/hotels/grand-pinnacle/preview/001.webp",
-        "thumb": "/hotels/grand-pinnacle/thumb/001.webp"
-      },
-      {
-        "preview": "/hotels/grand-pinnacle/preview/002.webp",
-        "thumb": "/hotels/grand-pinnacle/thumb/002.webp"
-      },
-      {
-        "preview": "/hotels/grand-pinnacle/preview/003.webp",
-        "thumb": "/hotels/grand-pinnacle/thumb/003.webp"
-      },
-      {
-        "preview": "/hotels/grand-pinnacle/preview/004.webp",
-        "thumb": "/hotels/grand-pinnacle/thumb/004.webp"
-      }
-    ],
-    "photoCount": 4,
-    "latitude": 11.8403,
-    "longitude": 13.09494
-  },
-  {
     "id": "city-star",
     "rank": 5,
     "qualityTier": "premier",
@@ -386,16 +330,20 @@
     ],
     "rooms": [
       {
-        "label": "Executive",
-        "rate": "N45,000"
+        "label": "Standard Room",
+        "rate": "N68,000"
       },
       {
-        "label": "Deluxe",
-        "rate": "N45,000"
+        "label": "Deluxe Room",
+        "rate": "N78,000"
       },
       {
-        "label": "Suite",
-        "rate": "N60,000"
+        "label": "Studio",
+        "rate": "N88,500"
+      },
+      {
+        "label": "Luxury",
+        "rate": "N115,000"
       }
     ],
     "images": [
@@ -520,154 +468,8 @@
     "longitude": 13.15043
   },
   {
-    "id": "borno-state-hotel",
-    "rank": 7,
-    "qualityTier": "premier",
-    "name": "Borno State Hotel",
-    "shortName": "State Hotel",
-    "tone": "Government hotel",
-    "location": "Off Lafiya Road, behind GRA Police Station, Maiduguri",
-    "distanceToVenue": "2.5 KM",
-    "contactPhone": "0806 889 6400",
-    "description": "A long-standing Maiduguri hotel with an official web presence under Borno Hotels Limited. Public information places it off Lafiya Road behind the GRA Police Station, while the supplied management notice confirms new room rates effective 1 June 2026.",
-    "roomSummary": "30 rooms (sheet)",
-    "rateStatus": "New rates listed",
-    "highlights": [
-      "Official site references Borno State Hotel Maiduguri",
-      "Public address places it off Lafiya Road behind GRA Police Station",
-      "Borno Hotels Limited notice confirms updated room rates effective 1 June 2026",
-      "Contact: 0806 889 6400",
-      "Rooms: 30",
-      "Distance to venue: 2.5 KM"
-    ],
-    "rooms": [
-      {
-        "label": "Chalet",
-        "rate": "N85,000 (VAT & service incl.)"
-      },
-      {
-        "label": "Standard Room",
-        "rate": "N68,000"
-      },
-      {
-        "label": "Deluxe Room",
-        "rate": "N78,000"
-      },
-      {
-        "label": "Studio",
-        "rate": "N88,500"
-      },
-      {
-        "label": "Luxury",
-        "rate": "N115,000"
-      }
-    ],
-    "images": [
-      {
-        "preview": "/hotels/borno-state-hotel/preview/001.webp",
-        "thumb": "/hotels/borno-state-hotel/thumb/001.webp"
-      },
-      {
-        "preview": "/hotels/borno-state-hotel/preview/002.webp",
-        "thumb": "/hotels/borno-state-hotel/thumb/002.webp"
-      },
-      {
-        "preview": "/hotels/borno-state-hotel/preview/003.webp",
-        "thumb": "/hotels/borno-state-hotel/thumb/003.webp"
-      },
-      {
-        "preview": "/hotels/borno-state-hotel/preview/004.webp",
-        "thumb": "/hotels/borno-state-hotel/thumb/004.webp"
-      },
-      {
-        "preview": "/hotels/borno-state-hotel/preview/005.webp",
-        "thumb": "/hotels/borno-state-hotel/thumb/005.webp"
-      },
-      {
-        "preview": "/hotels/borno-state-hotel/preview/006.webp",
-        "thumb": "/hotels/borno-state-hotel/thumb/006.webp"
-      },
-      {
-        "preview": "/hotels/borno-state-hotel/preview/007.webp",
-        "thumb": "/hotels/borno-state-hotel/thumb/007.webp"
-      }
-    ],
-    "photoCount": 7,
-    "latitude": 11.81748,
-    "longitude": 13.15082
-  },
-  {
-    "id": "kelrich-hotel",
-    "rank": 8,
-    "qualityTier": "premier",
-    "name": "Kelrich Hotel Ltd",
-    "shortName": "Kelrich",
-    "tone": "New hotel option",
-    "location": "No. 15 Pompomari Alauma Road Bypass / V422+849 behind Umar Alad Filling Station, Maiduguri",
-    "distanceToVenue": "10.1 KM",
-    "contactPhone": "0802 447 8888",
-    "description": "A newly added Maiduguri accommodation option located around Pompomari Alauma Road Bypass, behind Umar Alad Filling Station. The supplied room photos show furnished suite, studio, executive and VIP-style rooms, with wider room inventory still pending confirmation.",
-    "roomSummary": "79 rooms (sheet)",
-    "rateStatus": "Suite, Studio, Executive, VIP and Deluxe rates listed",
-    "highlights": [
-      "Public listing places it behind Umar Alad Filling Station around Airport Road/Pompomari Bypass",
-      "Suite, Studio, Executive and VIP room photos added for visual review",
-      "Suite, Studio, Executive, VIP and Deluxe rates supplied; wider delegate allocation still pending",
-      "Contact: 0802 447 8888",
-      "Rooms: 79",
-      "Distance to venue: 10.1 KM"
-    ],
-    "rooms": [
-      {
-        "label": "Standard",
-        "rate": "N30,000"
-      },
-      {
-        "label": "Royal Double",
-        "rate": "N45,000"
-      },
-      {
-        "label": "VIP",
-        "rate": "N85,000"
-      },
-      {
-        "label": "Executive VIP",
-        "rate": "N95,000"
-      },
-      {
-        "label": "Suites",
-        "rate": "N135,000"
-      }
-    ],
-    "images": [
-      {
-        "preview": "/hotels/kelrich-hotel/preview/001.webp",
-        "thumb": "/hotels/kelrich-hotel/thumb/001.webp"
-      },
-      {
-        "preview": "/hotels/kelrich-hotel/preview/002.webp",
-        "thumb": "/hotels/kelrich-hotel/thumb/002.webp"
-      },
-      {
-        "preview": "/hotels/kelrich-hotel/preview/003.webp",
-        "thumb": "/hotels/kelrich-hotel/thumb/003.webp"
-      },
-      {
-        "preview": "/hotels/kelrich-hotel/preview/004.webp",
-        "thumb": "/hotels/kelrich-hotel/thumb/004.webp"
-      },
-      {
-        "preview": "/hotels/kelrich-hotel/preview/005.webp",
-        "thumb": "/hotels/kelrich-hotel/thumb/005.webp"
-      }
-    ],
-    "photoCount": 5,
-    "latitude": 11.8507856,
-    "longitude": 13.0977706
-  },
-  {
     "id": "rb-hotel",
-    "rank": 9,
+    "rank": 7,
     "qualityTier": "pending",
     "name": "RB Hotel and Suites",
     "shortName": "RB Hotel",
@@ -677,7 +479,7 @@
     "contactPhone": "0706 136 6090, 0808 437 1255",
     "description": "A GRA Maiduguri hotel option with public references to ensuite rooms, halls and 24-hour service. Included for CPC accommodation inspection routing.",
     "roomSummary": "27 rooms (sheet)",
-    "rateStatus": "Rates pending",
+    "rateStatus": "Rates listed",
     "highlights": [
       "Public listing places RB Hotel and Suites on Agoja Road, GRA Maiduguri",
       "CPC inspection contact: 0802 447 8888",
@@ -688,24 +490,20 @@
     ],
     "rooms": [
       {
-        "label": "Studio",
-        "rate": "N35,500"
+        "label": "Standard",
+        "rate": "N45,000"
       },
       {
         "label": "Deluxe",
-        "rate": "N48,500"
+        "rate": "N52,000"
       },
       {
-        "label": "Executive",
-        "rate": "N58,500"
-      },
-      {
-        "label": "VIP",
-        "rate": "N68,500"
+        "label": "Classic",
+        "rate": "N58,000"
       },
       {
         "label": "Suite",
-        "rate": "N75,500"
+        "rate": "N80,000"
       }
     ],
     "images": [
@@ -755,63 +553,77 @@
     "longitude": 13.1537726
   },
   {
-    "id": "zairan",
-    "rank": 10,
-    "qualityTier": "pending",
-    "name": "Zairan Hotel",
-    "shortName": "Zairan",
-    "tone": "Inspection-only option",
-    "location": "Maiduguri, Borno State",
-    "distanceToVenue": "ICC route/time pending official logistics confirmation",
-    "contactPhone": "0803 357 9896, 0913 230 6750",
-    "description": "A newly supplied Maiduguri accommodation option currently documented through local inspection photos. Public listings did not confirm enough detail, so it is included conservatively pending a rate sheet, address confirmation and room inventory.",
-    "roomSummary": "45 rooms (sheet)",
-    "rateStatus": "Rates pending",
+    "id": "kelrich-hotel",
+    "rank": 8,
+    "qualityTier": "premier",
+    "name": "Kelrich Hotel Ltd",
+    "shortName": "Kelrich",
+    "tone": "New hotel option",
+    "location": "No. 15 Pompomari Alauma Road Bypass / V422+849 behind Umar Alad Filling Station, Maiduguri",
+    "distanceToVenue": "10.1 KM",
+    "contactPhone": "0802 447 8888",
+    "description": "A newly added Maiduguri accommodation option located around Pompomari Alauma Road Bypass, behind Umar Alad Filling Station. The supplied room photos show furnished suite, studio, executive and VIP-style rooms, with wider room inventory still pending confirmation.",
+    "roomSummary": "79 rooms (sheet)",
+    "rateStatus": "Suite, Studio, Executive, VIP and Deluxe rates listed",
     "highlights": [
-      "Six local inspection photos added for initial room and bathroom review",
-      "Public listing and exact address still need confirmation",
-      "Room categories, rates and delegate allocation still pending",
-      "Contact: 0803 357 9896, 0913 230 6750",
-      "Rooms: 45",
-      "Distance to venue: ICC route/time pending official logistics confirmation"
+      "Public listing places it behind Umar Alad Filling Station around Airport Road/Pompomari Bypass",
+      "Suite, Studio, Executive and VIP room photos added for visual review",
+      "Suite, Studio, Executive, VIP and Deluxe rates supplied; wider delegate allocation still pending",
+      "Contact: 0802 447 8888",
+      "Rooms: 79",
+      "Distance to venue: 10.1 KM"
     ],
     "rooms": [
       {
-        "label": "Rates",
-        "rate": "Pending"
+        "label": "Studio",
+        "rate": "N35,500"
+      },
+      {
+        "label": "Deluxe",
+        "rate": "N48,500"
+      },
+      {
+        "label": "Executive",
+        "rate": "N58,500"
+      },
+      {
+        "label": "VIP",
+        "rate": "N68,500"
+      },
+      {
+        "label": "Suite",
+        "rate": "N75,500"
       }
     ],
     "images": [
       {
-        "preview": "/hotels/zairan/preview/001.webp",
-        "thumb": "/hotels/zairan/thumb/001.webp"
+        "preview": "/hotels/kelrich-hotel/preview/001.webp",
+        "thumb": "/hotels/kelrich-hotel/thumb/001.webp"
       },
       {
-        "preview": "/hotels/zairan/preview/002.webp",
-        "thumb": "/hotels/zairan/thumb/002.webp"
+        "preview": "/hotels/kelrich-hotel/preview/002.webp",
+        "thumb": "/hotels/kelrich-hotel/thumb/002.webp"
       },
       {
-        "preview": "/hotels/zairan/preview/003.webp",
-        "thumb": "/hotels/zairan/thumb/003.webp"
+        "preview": "/hotels/kelrich-hotel/preview/003.webp",
+        "thumb": "/hotels/kelrich-hotel/thumb/003.webp"
       },
       {
-        "preview": "/hotels/zairan/preview/004.webp",
-        "thumb": "/hotels/zairan/thumb/004.webp"
+        "preview": "/hotels/kelrich-hotel/preview/004.webp",
+        "thumb": "/hotels/kelrich-hotel/thumb/004.webp"
       },
       {
-        "preview": "/hotels/zairan/preview/005.webp",
-        "thumb": "/hotels/zairan/thumb/005.webp"
-      },
-      {
-        "preview": "/hotels/zairan/preview/006.webp",
-        "thumb": "/hotels/zairan/thumb/006.webp"
+        "preview": "/hotels/kelrich-hotel/preview/005.webp",
+        "thumb": "/hotels/kelrich-hotel/thumb/005.webp"
       }
     ],
-    "photoCount": 6
+    "photoCount": 5,
+    "latitude": 11.8507856,
+    "longitude": 13.0977706
   },
   {
     "id": "nanne-and-boi",
-    "rank": 11,
+    "rank": 9,
     "qualityTier": "premier",
     "name": "Nanne and Boi Suites",
     "shortName": "Nanne & Boi",
@@ -876,7 +688,7 @@
   },
   {
     "id": "aiba-sport-resort",
-    "rank": 12,
+    "rank": 10,
     "qualityTier": "premier",
     "name": "Aiba Sport Resort",
     "shortName": "Aiba Resort",
@@ -918,7 +730,7 @@
       },
       {
         "label": "Chalets",
-        "rate": "N1,080,000"
+        "rate": "N180,000"
       }
     ],
     "images": [
@@ -948,84 +760,512 @@
     "longitude": 13.1375864
   },
   {
-    "id": "barwee",
-    "rank": 13,
+    "id": "borno-state-hotel",
+    "rank": 11,
     "qualityTier": "premier",
-    "name": "Barwee Luxury Suites",
-    "shortName": "Barwee",
-    "tone": "Luxury suites",
-    "location": "Maiduguri-Potiskum Road, Maiduguri",
-    "distanceToVenue": "9.8 km",
-    "contactPhone": "0706 650 2891",
-    "description": "A public-listed Maiduguri hotel on the Maiduguri-Potiskum Road corridor, positioned as a comfortable suite-style option. The supplied tariff sheet lists reception rates for standard luxury and suite categories.",
-    "roomSummary": "Categories priced",
-    "rateStatus": "Rates listed",
+    "name": "Borno State Hotel",
+    "shortName": "State Hotel",
+    "tone": "Government hotel",
+    "location": "Off Lafiya Road, behind GRA Police Station, Maiduguri",
+    "distanceToVenue": "2.5 KM",
+    "contactPhone": "0806 889 6400",
+    "description": "A long-standing Maiduguri hotel with an official web presence under Borno Hotels Limited. Public information places it off Lafiya Road behind the GRA Police Station, while the supplied management notice confirms new room rates effective 1 June 2026.",
+    "roomSummary": "30 rooms (sheet)",
+    "rateStatus": "New rates listed",
     "highlights": [
-      "Hotels.ng and map/travel listings place the hotel in Maiduguri",
-      "Tariff sheet lists chalet, royal suite, mini royal suite and luxury standard options",
-      "Sheet notes restaurant and outdoor catering service availability",
-      "Contact: 0706 650 2891",
-      "Distance to venue: 9.8 kn"
+      "Official site references Borno State Hotel Maiduguri",
+      "Public address places it off Lafiya Road behind GRA Police Station",
+      "Borno Hotels Limited notice confirms updated room rates effective 1 June 2026",
+      "Contact: 0806 889 6400",
+      "Rooms: 30",
+      "Distance to venue: 2.5 KM"
     ],
     "rooms": [
       {
-        "label": "Luxury Standard",
-        "rate": "N35,000"
+        "label": "Standard",
+        "rate": "N30,000"
       },
       {
-        "label": "Mini Royal Suites",
+        "label": "Royal Double",
         "rate": "N45,000"
       },
       {
-        "label": "Royal Suites",
-        "rate": "N55,000"
+        "label": "VIP",
+        "rate": "N85,000"
       },
       {
-        "label": "Chalet",
-        "rate": "N60,000 (restaurant & outdoor catering available)"
+        "label": "Executive VIP",
+        "rate": "N95,000"
+      },
+      {
+        "label": "Suites",
+        "rate": "N135,000"
       }
     ],
     "images": [
       {
-        "preview": "/hotels/barwee/preview/001.webp",
-        "thumb": "/hotels/barwee/thumb/001.webp"
+        "preview": "/hotels/borno-state-hotel/preview/001.webp",
+        "thumb": "/hotels/borno-state-hotel/thumb/001.webp"
       },
       {
-        "preview": "/hotels/barwee/preview/002.webp",
-        "thumb": "/hotels/barwee/thumb/002.webp"
+        "preview": "/hotels/borno-state-hotel/preview/002.webp",
+        "thumb": "/hotels/borno-state-hotel/thumb/002.webp"
       },
       {
-        "preview": "/hotels/barwee/preview/003.webp",
-        "thumb": "/hotels/barwee/thumb/003.webp"
+        "preview": "/hotels/borno-state-hotel/preview/003.webp",
+        "thumb": "/hotels/borno-state-hotel/thumb/003.webp"
       },
       {
-        "preview": "/hotels/barwee/preview/004.webp",
-        "thumb": "/hotels/barwee/thumb/004.webp"
+        "preview": "/hotels/borno-state-hotel/preview/004.webp",
+        "thumb": "/hotels/borno-state-hotel/thumb/004.webp"
       },
       {
-        "preview": "/hotels/barwee/preview/005.webp",
-        "thumb": "/hotels/barwee/thumb/005.webp"
+        "preview": "/hotels/borno-state-hotel/preview/005.webp",
+        "thumb": "/hotels/borno-state-hotel/thumb/005.webp"
       },
       {
-        "preview": "/hotels/barwee/preview/006.webp",
-        "thumb": "/hotels/barwee/thumb/006.webp"
+        "preview": "/hotels/borno-state-hotel/preview/006.webp",
+        "thumb": "/hotels/borno-state-hotel/thumb/006.webp"
       },
       {
-        "preview": "/hotels/barwee/preview/007.webp",
-        "thumb": "/hotels/barwee/thumb/007.webp"
+        "preview": "/hotels/borno-state-hotel/preview/007.webp",
+        "thumb": "/hotels/borno-state-hotel/thumb/007.webp"
+      }
+    ],
+    "photoCount": 7,
+    "latitude": 11.81748,
+    "longitude": 13.15082
+  },
+  {
+    "id": "prime-lodge",
+    "rank": 12,
+    "qualityTier": "standard",
+    "name": "Prime Lodge",
+    "shortName": "Prime",
+    "tone": "City-centre lodge",
+    "location": "Off Circular Road, Abba Kyari / Abba Kolo Street, Maiduguri",
+    "distanceToVenue": "4.9 km",
+    "contactPhone": "0702 681 3147",
+    "description": "Lodge off Circular Road in the Abba Kyari/Abba Kolo Street area, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
+    "roomSummary": "Categories priced",
+    "rateStatus": "Rates listed",
+    "highlights": [
+      "ContaFct: 0702 681 3147",
+      "Distance to venue: 4.9 km"
+    ],
+    "rooms": [
+      {
+        "label": "Single",
+        "rate": "N45,000"
       },
       {
-        "preview": "/hotels/barwee/preview/008.webp",
-        "thumb": "/hotels/barwee/thumb/008.webp"
+        "label": "Suite",
+        "rate": "N70,000"
+      },
+      {
+        "label": "Executive",
+        "rate": "N85,000"
+      },
+      {
+        "label": "Penthouse",
+        "rate": "N150,000"
+      }
+    ],
+    "images": [
+      {
+        "preview": "/hotels/prime/001.jpg",
+        "thumb": "/hotels/prime/thumb/001.jpg"
+      },
+      {
+        "preview": "/hotels/prime/002.jpg",
+        "thumb": "/hotels/prime/thumb/002.jpg"
+      },
+      {
+        "preview": "/hotels/prime/003.jpg",
+        "thumb": "/hotels/prime/thumb/003.jpg"
+      },
+      {
+        "preview": "/hotels/prime/004.jpg",
+        "thumb": "/hotels/prime/thumb/004.jpg"
+      }
+    ],
+    "photoCount": 4,
+    "latitude": 11.8128047,
+    "longitude": 13.1324383
+  },
+  {
+    "id": "imperial-hotel",
+    "rank": 13,
+    "qualityTier": "standard",
+    "name": "Imperial Hotel",
+    "shortName": "Imperial",
+    "tone": "Old GRA stay",
+    "location": "Old GRA, Circular Road, Maiduguri",
+    "distanceToVenue": "Distance pending official logistics confirmation",
+    "contactPhone": null,
+    "description": "Hotel in the Old GRA on Circular Road, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
+    "roomSummary": "Categories priced",
+    "rateStatus": "Rates pending",
+    "highlights": [],
+    "rooms": [
+      {
+        "label": "Rates",
+        "rate": "Pending"
+      }
+    ],
+    "images": [],
+    "photoCount": 0
+  },
+  {
+    "id": "jemdove-homes",
+    "rank": 14,
+    "qualityTier": "standard",
+    "name": "Jemdove Homes and Apartments",
+    "shortName": "Jemdove",
+    "tone": "Low-cost estate apartments",
+    "location": "A8 Federal Low-Cost Housing Estate, Maiduguri",
+    "distanceToVenue": "8.7 km",
+    "contactPhone": "0701 036 2776",
+    "description": "Apartment-style accommodation in the Federal Low-Cost Housing Estate, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
+    "roomSummary": "Categories priced",
+    "rateStatus": "Rates listed",
+    "highlights": [
+      "Contact: 0701 036 2776",
+      "Distance to venue: 8.7 km"
+    ],
+    "rooms": [
+      {
+        "label": "Rates",
+        "rate": "N150,000"
+      }
+    ],
+    "images": [
+      {
+        "preview": "/hotels/jemdove/01.webp",
+        "thumb": "/hotels/jemdove/thumb/01.webp"
+      },
+      {
+        "preview": "/hotels/jemdove/02.webp",
+        "thumb": "/hotels/jemdove/thumb/02.webp"
+      },
+      {
+        "preview": "/hotels/jemdove/03.webp",
+        "thumb": "/hotels/jemdove/thumb/03.webp"
+      },
+      {
+        "preview": "/hotels/jemdove/04.webp",
+        "thumb": "/hotels/jemdove/thumb/04.webp"
+      }
+    ],
+    "photoCount": 4,
+    "latitude": 11.8619699,
+    "longitude": 13.1211453
+  },
+  {
+    "id": "cityden-apartments",
+    "rank": 15,
+    "qualityTier": "standard",
+    "name": "Cityden Apartments",
+    "shortName": "Cityden",
+    "tone": "Agoja-area serviced apartments",
+    "location": "No. 3 Abu Zar Algifarri Road, off Muhammed Goni Street (Agoja area), Old GRA, Maiduguri",
+    "distanceToVenue": "4.0 KM",
+    "contactPhone": "0806 110 5548, 0802 550 1048",
+    "description": "Serviced apartments off Muhammed Goni Street in the Agoja area of Old GRA, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
+    "roomSummary": "20 rooms (sheet)",
+    "rateStatus": "Rates listed",
+    "highlights": [
+      "Contact: 0806 110 5548, 0802 550 1048",
+      "Rooms: 20",
+      "Distance to venue: 4.0 KM"
+    ],
+    "rooms": [
+      {
+        "label": "Executive Suite",
+        "rate": "N70,000"
+      },
+      {
+        "label": "Diplomatic Suite",
+        "rate": "N80,000"
+      },
+      {
+        "label": "Classic Suite",
+        "rate": "N90,000"
+      },
+      {
+        "label": "VIP Suite",
+        "rate": "N120,000"
+      },
+      {
+        "label": "Chalet Suite",
+        "rate": "N150,000"
+      }
+    ],
+    "images": [
+      {
+        "preview": "/hotels/cityden/01.png",
+        "thumb": "/hotels/cityden/thumb/01.png"
+      },
+      {
+        "preview": "/hotels/cityden/02.png",
+        "thumb": "/hotels/cityden/thumb/02.png"
+      },
+      {
+        "preview": "/hotels/cityden/03.png",
+        "thumb": "/hotels/cityden/thumb/03.png"
+      },
+      {
+        "preview": "/hotels/cityden/04.png",
+        "thumb": "/hotels/cityden/thumb/04.png"
+      },
+      {
+        "preview": "/hotels/cityden/05.png",
+        "thumb": "/hotels/cityden/thumb/05.png"
+      },
+      {
+        "preview": "/hotels/cityden/06.png",
+        "thumb": "/hotels/cityden/thumb/06.png"
+      },
+      {
+        "preview": "/hotels/cityden/07.png",
+        "thumb": "/hotels/cityden/thumb/07.png"
+      }
+    ],
+    "photoCount": 7,
+    "latitude": 11.8044584,
+    "longitude": 13.1503513
+  },
+  {
+    "id": "grand-pinnacle",
+    "rank": 16,
+    "qualityTier": "premier",
+    "name": "Grand Pinnacle Luxury Hotel",
+    "shortName": "Grand Pinnacle",
+    "tone": "Luxury hotel",
+    "location": "Jimna Road / Bulumkutu-Pompomari Road, Maiduguri",
+    "distanceToVenue": "8.9 KM",
+    "contactPhone": "0803 892 4133",
+    "description": "A public-listed Maiduguri hotel around the Jimna and Bulumkutu-Pompomari Road area. The supplied tariff sheet lists room and hall rates and notes weekend complimentary breakfast for one person per room.",
+    "roomSummary": "Categories priced",
+    "rateStatus": "Rates listed",
+    "highlights": [
+      "Hotels.ng places Grand Pinnacle Luxury Hotel along Jimna Road / Bulumkutu-Pompomari Road",
+      "Tariff sheet lists executive, deluxe, suite and chalet room options",
+      "Sheet notes VAT and service charge included",
+      "Contact: 0803 892 4133",
+      "Distance to venue: 8.9 KM"
+    ],
+    "rooms": [
+      {
+        "label": "Executive",
+        "rate": "N45,000"
+      },
+      {
+        "label": "Deluxe",
+        "rate": "N45,000"
+      },
+      {
+        "label": "Suite",
+        "rate": "N60,000"
+      },
+      {
+        "label": "Chalet",
+        "rate": "N85,000"
+      }
+    ],
+    "images": [
+      {
+        "preview": "/hotels/grand-pinnacle/preview/001.webp",
+        "thumb": "/hotels/grand-pinnacle/thumb/001.webp"
+      },
+      {
+        "preview": "/hotels/grand-pinnacle/preview/002.webp",
+        "thumb": "/hotels/grand-pinnacle/thumb/002.webp"
+      },
+      {
+        "preview": "/hotels/grand-pinnacle/preview/003.webp",
+        "thumb": "/hotels/grand-pinnacle/thumb/003.webp"
+      },
+      {
+        "preview": "/hotels/grand-pinnacle/preview/004.webp",
+        "thumb": "/hotels/grand-pinnacle/thumb/004.webp"
+      }
+    ],
+    "photoCount": 4,
+    "latitude": 11.8403,
+    "longitude": 13.09494
+  },
+  {
+    "id": "khanan-hotel",
+    "rank": 17,
+    "qualityTier": "standard",
+    "name": "Khanan Hotel",
+    "shortName": "Khanan",
+    "tone": "New hotel option",
+    "location": "Baga Road, before Maimalari Barracks, Maiduguri",
+    "distanceToVenue": "10.5 KM",
+    "contactPhone": "07032917177",
+    "description": "A newly added Maiduguri accommodation option for delegate consideration. Supplied rates confirm the core room categories, while public social listings place the hotel on Baga Road before Maimalari Barracks.",
+    "roomSummary": "3 room categories",
+    "rateStatus": "Rates listed",
+    "highlights": [
+      "Supplied categories: Standard, Super and Premium",
+      "Rates now listed for quick accommodation planning",
+      "Public social listings reference Baga Road before Maimalari Barracks",
+      "Distance to venue: 10.5 KM"
+    ],
+    "rooms": [
+      {
+        "label": "Standard",
+        "rate": "N35,000"
+      },
+      {
+        "label": "Super",
+        "rate": "N45,000"
+      },
+      {
+        "label": "Premium",
+        "rate": "N55,000"
+      }
+    ],
+    "images": [
+      {
+        "preview": "/hotels/khanan-hotel/preview/001.webp",
+        "thumb": "/hotels/khanan-hotel/thumb/001.webp"
+      },
+      {
+        "preview": "/hotels/khanan-hotel/preview/002.webp",
+        "thumb": "/hotels/khanan-hotel/thumb/002.webp"
+      },
+      {
+        "preview": "/hotels/khanan-hotel/preview/003.webp",
+        "thumb": "/hotels/khanan-hotel/thumb/003.webp"
+      },
+      {
+        "preview": "/hotels/khanan-hotel/preview/004.webp",
+        "thumb": "/hotels/khanan-hotel/thumb/004.webp"
+      },
+      {
+        "preview": "/hotels/khanan-hotel/preview/005.webp",
+        "thumb": "/hotels/khanan-hotel/thumb/005.webp"
+      },
+      {
+        "preview": "/hotels/khanan-hotel/preview/006.webp",
+        "thumb": "/hotels/khanan-hotel/thumb/006.webp"
+      },
+      {
+        "preview": "/hotels/khanan-hotel/preview/007.webp",
+        "thumb": "/hotels/khanan-hotel/thumb/007.webp"
+      },
+      {
+        "preview": "/hotels/khanan-hotel/preview/008.webp",
+        "thumb": "/hotels/khanan-hotel/thumb/008.webp"
       }
     ],
     "photoCount": 8,
-    "latitude": 11.8379523,
-    "longitude": 13.0775101
+    "latitude": 11.8860439,
+    "longitude": 13.1085045
+  },
+  {
+    "id": "bajele-hotels",
+    "rank": 18,
+    "qualityTier": "pending",
+    "name": "Bajele Hotels and Apartments",
+    "shortName": "Bajele",
+    "tone": "Apartment option",
+    "location": "Maiduguri, Borno State",
+    "distanceToVenue": "9.1 KM",
+    "contactPhone": null,
+    "description": "A Maiduguri hotel/apartment option included from the supplied accommodation folder. Public online listings did not yet confirm address, contact, rates or room photos, so it is included conservatively pending confirmation.",
+    "roomSummary": "10 rooms (sheet); rates pending",
+    "rateStatus": "Rates pending",
+    "highlights": [
+      "Included from supplied local hotel folder",
+      "Public searches returned unrelated Maiduguri hotel/apartment results, so no unverified phone or rate was copied",
+      "Room photos and tariff sheet still pending",
+      "Rooms: 10",
+      "Distance to venue: 9.1 KM"
+    ],
+    "rooms": [
+      {
+        "label": "Rates",
+        "rate": "Pending"
+      }
+    ],
+    "images": [
+      {
+        "preview": "/hotels/bajele/preview/001.png",
+        "thumb": "/hotels/bajele/thumb/001.png"
+      },
+      {
+        "preview": "/hotels/bajele/preview/002.jpg",
+        "thumb": "/hotels/bajele/thumb/002.jpg"
+      },
+      {
+        "preview": "/hotels/bajele/preview/003.jpg",
+        "thumb": "/hotels/bajele/thumb/003.jpg"
+      }
+    ],
+    "photoCount": 3,
+    "latitude": 11.8392099,
+    "longitude": 13.0849743
+  },
+  {
+    "id": "command-guest-inn",
+    "rank": 19,
+    "qualityTier": "standard",
+    "name": "Command Guesthouse Maiduguri",
+    "shortName": "Command Guest",
+    "tone": "Barracks-area lodge",
+    "location": "1145 Baga Road, Beside Maimalari Barracks, Maiduguri",
+    "distanceToVenue": "11.0 KM",
+    "contactPhone": "0808 675 7682",
+    "description": "A Maiduguri lodge option associated with the Maimalari Barracks area and listed on Hotels.ng. Public social references describe lodging, restaurant, bar, swimming pool and banquet facilities.",
+    "roomSummary": "50 rooms (sheet)",
+    "rateStatus": "Public references from N18,000",
+    "highlights": [
+      "Listed on Hotels.ng as Command Guesthouse Maiduguri",
+      "Public address references place it on Baga Road beside Maimalari Barracks",
+      "Public social posts reference room rates from about N18,000 per night",
+      "Contact: 0808 675 7682",
+      "Rooms: 50",
+      "Distance to venue: 11.0 KM"
+    ],
+    "rooms": [
+      {
+        "label": "Standard rooms",
+        "rate": "From N20,500"
+      },
+      {
+        "label": "Larger rooms",
+        "rate": "Up to N27,500"
+      }
+    ],
+    "images": [
+      {
+        "preview": "/hotels/command-guest-inn/preview/001.jpg",
+        "thumb": "/hotels/command-guest-inn/thumb/001.jpg"
+      },
+      {
+        "preview": "/hotels/command-guest-inn/preview/002.jpg",
+        "thumb": "/hotels/command-guest-inn/thumb/002.jpg"
+      },
+      {
+        "preview": "/hotels/command-guest-inn/preview/003.jpg",
+        "thumb": "/hotels/command-guest-inn/thumb/003.jpg"
+      },
+      {
+        "preview": "/hotels/command-guest-inn/preview/003.jpg",
+        "thumb": "/hotels/command-guest-inn/thumb/003.jpg"
+      }
+    ],
+    "photoCount": 4,
+    "latitude": 11.8920252,
+    "longitude": 13.1090509
   },
   {
     "id": "dujima",
-    "rank": 14,
+    "rank": 20,
     "qualityTier": "standard",
     "name": "Dujima International Hotel",
     "shortName": "Dujima",
@@ -1101,57 +1341,84 @@
     "longitude": 13.1377884
   },
   {
-    "id": "desert-view",
-    "rank": 15,
+    "id": "barwee",
+    "rank": 21,
     "qualityTier": "premier",
-    "name": "Desert View Suites",
-    "shortName": "Desert View",
-    "tone": "Budget city option",
-    "location": "Dapcharima Road, off Sokoto Road, Maiduguri",
-    "distanceToVenue": "4.6 KM",
-    "contactPhone": "0806 511 9443",
-    "description": "A public-listed budget hotel option in Maiduguri, referenced around Dapcharima Road off Sokoto Road and noted as being near the Maiduguri International Airport corridor. The newly supplied room photos add current visual evidence for delegate screening.",
-    "roomSummary": "14 rooms (sheet)",
-    "rateStatus": "Public rates listed",
+    "name": "Barwee Luxury Suites",
+    "shortName": "Barwee",
+    "tone": "Luxury suites",
+    "location": "Maiduguri-Potiskum Road, Maiduguri",
+    "distanceToVenue": "9.8 km",
+    "contactPhone": "0706 650 2891",
+    "description": "A public-listed Maiduguri hotel on the Maiduguri-Potiskum Road corridor, positioned as a comfortable suite-style option. The supplied tariff sheet lists reception rates for standard luxury and suite categories.",
+    "roomSummary": "Categories priced",
+    "rateStatus": "Rates listed",
     "highlights": [
-      "Hotels.ng lists Desert View Suites in Maiduguri",
-      "Public listings place it at Dapcharima Road, off Sokoto Road",
-      "Plistbooking public rates seen during Firecrawl research; tariff sheet still pending",
-      "Contact: 0806 511 9443",
-      "Rooms: 14",
-      "Distance to venue: 4.6 KM"
+      "Hotels.ng and map/travel listings place the hotel in Maiduguri",
+      "Tariff sheet lists chalet, royal suite, mini royal suite and luxury standard options",
+      "Sheet notes restaurant and outdoor catering service availability",
+      "Contact: 0706 650 2891",
+      "Distance to venue: 9.8 kn"
     ],
     "rooms": [
       {
-        "label": "Standard Room",
-        "rate": "N21,829 - N30,409"
+        "label": "Luxury Standard",
+        "rate": "N35,000"
+      },
+      {
+        "label": "Mini Royal Suites",
+        "rate": "N45,000"
+      },
+      {
+        "label": "Royal Suites",
+        "rate": "N55,000"
+      },
+      {
+        "label": "Chalet",
+        "rate": "N60,000 (restaurant & outdoor catering available)"
       }
     ],
     "images": [
       {
-        "preview": "/hotels/desert-view/preview/001.webp",
-        "thumb": "/hotels/desert-view/thumb/001.webp"
+        "preview": "/hotels/barwee/preview/001.webp",
+        "thumb": "/hotels/barwee/thumb/001.webp"
       },
       {
-        "preview": "/hotels/desert-view/preview/002.webp",
-        "thumb": "/hotels/desert-view/thumb/002.webp"
+        "preview": "/hotels/barwee/preview/002.webp",
+        "thumb": "/hotels/barwee/thumb/002.webp"
       },
       {
-        "preview": "/hotels/desert-view/preview/003.webp",
-        "thumb": "/hotels/desert-view/thumb/003.webp"
+        "preview": "/hotels/barwee/preview/003.webp",
+        "thumb": "/hotels/barwee/thumb/003.webp"
       },
       {
-        "preview": "/hotels/desert-view/preview/004.webp",
-        "thumb": "/hotels/desert-view/thumb/004.webp"
+        "preview": "/hotels/barwee/preview/004.webp",
+        "thumb": "/hotels/barwee/thumb/004.webp"
+      },
+      {
+        "preview": "/hotels/barwee/preview/005.webp",
+        "thumb": "/hotels/barwee/thumb/005.webp"
+      },
+      {
+        "preview": "/hotels/barwee/preview/006.webp",
+        "thumb": "/hotels/barwee/thumb/006.webp"
+      },
+      {
+        "preview": "/hotels/barwee/preview/007.webp",
+        "thumb": "/hotels/barwee/thumb/007.webp"
+      },
+      {
+        "preview": "/hotels/barwee/preview/008.webp",
+        "thumb": "/hotels/barwee/thumb/008.webp"
       }
     ],
-    "photoCount": 4,
-    "latitude": 11.8487185,
-    "longitude": 13.1501372
+    "photoCount": 8,
+    "latitude": 11.8379523,
+    "longitude": 13.0775101
   },
   {
     "id": "djado",
-    "rank": 16,
+    "rank": 22,
     "qualityTier": "premier",
     "name": "D'jado Hotel",
     "shortName": "D'jado",
@@ -1211,83 +1478,8 @@
     "longitude": 13.187745
   },
   {
-    "id": "dujima-annex",
-    "rank": 17,
-    "qualityTier": "premier",
-    "name": "Dujima International Hotel Annex",
-    "shortName": "Dujima Annex",
-    "tone": "Cash-rate branch",
-    "location": "Wulari Ward / off Sir Kashim Way, Maiduguri",
-    "distanceToVenue": "2.8 KM",
-    "contactPhone": "0806 873 2382",
-    "description": "An annex-style Dujima option documented by the supplied cash-rate sheet. It appears to operate under the Dujima International Hotels brand with separate room tariffs and hall rates.",
-    "roomSummary": "30 rooms (sheet)",
-    "rateStatus": "Rates listed",
-    "highlights": [
-      "Cash-rate sheet lists single, standard, single luxury, executive studio, governor's lodge and presidential suite",
-      "Sheet notes 7.5% VAT included",
-      "Conference hall and banquet hall rates are also listed",
-      "Contact: 0806 873 2382",
-      "Rooms: 30",
-      "Distance to venue: 2.8 KM"
-    ],
-    "rooms": [
-      {
-        "label": "Single",
-        "rate": "N18,000"
-      },
-      {
-        "label": "Standard",
-        "rate": "N21,000"
-      },
-      {
-        "label": "Single Luxury",
-        "rate": "N25,000"
-      },
-      {
-        "label": "Executive Studio",
-        "rate": "N32,000"
-      },
-      {
-        "label": "Governor's Lodge",
-        "rate": "N38,000"
-      },
-      {
-        "label": "Presidential Suite",
-        "rate": "N50,000"
-      }
-    ],
-    "images": [
-      {
-        "preview": "/hotels/dujima-annex/preview/001.webp",
-        "thumb": "/hotels/dujima-annex/thumb/001.webp"
-      },
-      {
-        "preview": "/hotels/dujima-annex/preview/002.webp",
-        "thumb": "/hotels/dujima-annex/thumb/002.webp"
-      },
-      {
-        "preview": "/hotels/dujima-annex/preview/003.webp",
-        "thumb": "/hotels/dujima-annex/thumb/003.webp"
-      },
-      {
-        "preview": "/hotels/dujima-annex/preview/004.webp",
-        "thumb": "/hotels/dujima-annex/thumb/004.webp"
-      },
-      {
-        "preview": "/hotels/dujima-annex/preview/005.webp",
-        "thumb": "/hotels/dujima-annex/thumb/005.webp"
-      },
-      {
-        "preview": "/hotels/dujima-annex/preview/006.webp",
-        "thumb": "/hotels/dujima-annex/thumb/006.webp"
-      }
-    ],
-    "photoCount": 6
-  },
-  {
     "id": "garki-guest",
-    "rank": 18,
+    "rank": 23,
     "qualityTier": "standard",
     "name": "Garki Guest Inn Main & Annex",
     "shortName": "Garki Guest",
@@ -1376,79 +1568,151 @@
     "longitude": 13.09588
   },
   {
-    "id": "khanan-hotel",
-    "rank": 19,
-    "qualityTier": "standard",
-    "name": "Khanan Hotel",
-    "shortName": "Khanan",
-    "tone": "New hotel option",
-    "location": "Baga Road, before Maimalari Barracks, Maiduguri",
-    "distanceToVenue": "10.5 KM",
-    "contactPhone": "07032917177",
-    "description": "A newly added Maiduguri accommodation option for delegate consideration. Supplied rates confirm the core room categories, while public social listings place the hotel on Baga Road before Maimalari Barracks.",
-    "roomSummary": "3 room categories",
+    "id": "garki-annex",
+    "rank": 24,
+    "qualityTier": "value",
+    "name": "Garki Guest Inn Annex",
+    "shortName": "Garki Annex",
+    "tone": "Annex of Garki Guest Inn",
+    "location": "Maiduguri 610111, Borno",
+    "distanceToVenue": "10 KM",
+    "contactPhone": "0703 310 2009",
+    "description": "Annex property of Garki Guest Inn, listed separately in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
+    "roomSummary": "33 rooms (sheet)",
     "rateStatus": "Rates listed",
     "highlights": [
-      "Supplied categories: Standard, Super and Premium",
-      "Rates now listed for quick accommodation planning",
-      "Public social listings reference Baga Road before Maimalari Barracks",
-      "Distance to venue: 10.5 KM"
+      "Contact: 0703 310 2009",
+      "Rooms: 33",
+      "Distance to venue: 10 KM"
     ],
     "rooms": [
       {
+        "label": "Single",
+        "rate": "N17,000"
+      },
+      {
+        "label": "Suite",
+        "rate": "N25,000"
+      }
+    ],
+    "images": [],
+    "photoCount": 0
+  },
+  {
+    "id": "zairan",
+    "rank": 25,
+    "qualityTier": "pending",
+    "name": "Zairan Hotel",
+    "shortName": "Zairan",
+    "tone": "Inspection-only option",
+    "location": "Maiduguri, Borno State",
+    "distanceToVenue": "ICC route/time pending official logistics confirmation",
+    "contactPhone": "0803 357 9896, 0913 230 6750",
+    "description": "A newly supplied Maiduguri accommodation option currently documented through local inspection photos. Public listings did not confirm enough detail, so it is included conservatively with supplied room rates pending address confirmation and room inventory.",
+    "roomSummary": "45 rooms (sheet)",
+    "rateStatus": "Rates listed",
+    "highlights": [
+      "Six local inspection photos added for initial room and bathroom review",
+      "Public listing and exact address still need confirmation",
+      "Room categories and rates supplied; delegate allocation still pending",
+      "Contact: 0803 357 9896, 0913 230 6750",
+      "Rooms: 45",
+      "Distance to venue: ICC route/time pending official logistics confirmation"
+    ],
+    "rooms": [
+      {
+        "label": "Single",
+        "rate": "N25,000"
+      },
+      {
         "label": "Standard",
-        "rate": "N35,000"
-      },
-      {
-        "label": "Super",
-        "rate": "N45,000"
-      },
-      {
-        "label": "Premium",
-        "rate": "N55,000"
+        "rate": "N30,000"
       }
     ],
     "images": [
       {
-        "preview": "/hotels/khanan-hotel/preview/001.webp",
-        "thumb": "/hotels/khanan-hotel/thumb/001.webp"
+        "preview": "/hotels/zairan/preview/001.webp",
+        "thumb": "/hotels/zairan/thumb/001.webp"
       },
       {
-        "preview": "/hotels/khanan-hotel/preview/002.webp",
-        "thumb": "/hotels/khanan-hotel/thumb/002.webp"
+        "preview": "/hotels/zairan/preview/002.webp",
+        "thumb": "/hotels/zairan/thumb/002.webp"
       },
       {
-        "preview": "/hotels/khanan-hotel/preview/003.webp",
-        "thumb": "/hotels/khanan-hotel/thumb/003.webp"
+        "preview": "/hotels/zairan/preview/003.webp",
+        "thumb": "/hotels/zairan/thumb/003.webp"
       },
       {
-        "preview": "/hotels/khanan-hotel/preview/004.webp",
-        "thumb": "/hotels/khanan-hotel/thumb/004.webp"
+        "preview": "/hotels/zairan/preview/004.webp",
+        "thumb": "/hotels/zairan/thumb/004.webp"
       },
       {
-        "preview": "/hotels/khanan-hotel/preview/005.webp",
-        "thumb": "/hotels/khanan-hotel/thumb/005.webp"
+        "preview": "/hotels/zairan/preview/005.webp",
+        "thumb": "/hotels/zairan/thumb/005.webp"
       },
       {
-        "preview": "/hotels/khanan-hotel/preview/006.webp",
-        "thumb": "/hotels/khanan-hotel/thumb/006.webp"
-      },
-      {
-        "preview": "/hotels/khanan-hotel/preview/007.webp",
-        "thumb": "/hotels/khanan-hotel/thumb/007.webp"
-      },
-      {
-        "preview": "/hotels/khanan-hotel/preview/008.webp",
-        "thumb": "/hotels/khanan-hotel/thumb/008.webp"
+        "preview": "/hotels/zairan/preview/006.webp",
+        "thumb": "/hotels/zairan/thumb/006.webp"
       }
     ],
-    "photoCount": 8,
-    "latitude": 11.8860439,
-    "longitude": 13.1085045
+    "photoCount": 6
+  },
+  {
+    "id": "desert-view",
+    "rank": 26,
+    "qualityTier": "premier",
+    "name": "Desert View Suites",
+    "shortName": "Desert View",
+    "tone": "Budget city option",
+    "location": "Dapcharima Road, off Sokoto Road, Maiduguri",
+    "distanceToVenue": "4.6 KM",
+    "contactPhone": "0806 511 9443",
+    "description": "A public-listed budget hotel option in Maiduguri, referenced around Dapcharima Road off Sokoto Road and noted as being near the Maiduguri International Airport corridor. The newly supplied room photos add current visual evidence for delegate screening.",
+    "roomSummary": "14 rooms (sheet)",
+    "rateStatus": "Public rates listed",
+    "highlights": [
+      "Hotels.ng lists Desert View Suites in Maiduguri",
+      "Public listings place it at Dapcharima Road, off Sokoto Road",
+      "Plistbooking public rates seen during Firecrawl research; tariff sheet still pending",
+      "Contact: 0806 511 9443",
+      "Rooms: 14",
+      "Distance to venue: 4.6 KM"
+    ],
+    "rooms": [
+      {
+        "label": "Standard Room",
+        "rate": "N30,000"
+      },
+      {
+        "label": "Presidential",
+        "rate": "N40,000"
+      }
+    ],
+    "images": [
+      {
+        "preview": "/hotels/desert-view/preview/001.webp",
+        "thumb": "/hotels/desert-view/thumb/001.webp"
+      },
+      {
+        "preview": "/hotels/desert-view/preview/002.webp",
+        "thumb": "/hotels/desert-view/thumb/002.webp"
+      },
+      {
+        "preview": "/hotels/desert-view/preview/003.webp",
+        "thumb": "/hotels/desert-view/thumb/003.webp"
+      },
+      {
+        "preview": "/hotels/desert-view/preview/004.webp",
+        "thumb": "/hotels/desert-view/thumb/004.webp"
+      }
+    ],
+    "photoCount": 4,
+    "latitude": 11.8487185,
+    "longitude": 13.1501372
   },
   {
     "id": "muna",
-    "rank": 20,
+    "rank": 27,
     "qualityTier": "standard",
     "name": "Muna Hotels Limited",
     "shortName": "Muna",
@@ -1500,105 +1764,8 @@
     "longitude": 13.1490614
   },
   {
-    "id": "command-guest-inn",
-    "rank": 21,
-    "qualityTier": "standard",
-    "name": "Command Guesthouse Maiduguri",
-    "shortName": "Command Guest",
-    "tone": "Barracks-area lodge",
-    "location": "1145 Baga Road, Beside Maimalari Barracks, Maiduguri",
-    "distanceToVenue": "11.0 KM",
-    "contactPhone": "0808 675 7682",
-    "description": "A Maiduguri lodge option associated with the Maimalari Barracks area and listed on Hotels.ng. Public social references describe lodging, restaurant, bar, swimming pool and banquet facilities.",
-    "roomSummary": "50 rooms (sheet)",
-    "rateStatus": "Public references from N18,000",
-    "highlights": [
-      "Listed on Hotels.ng as Command Guesthouse Maiduguri",
-      "Public address references place it on Baga Road beside Maimalari Barracks",
-      "Public social posts reference room rates from about N18,000 per night",
-      "Contact: 0808 675 7682",
-      "Rooms: 50",
-      "Distance to venue: 11.0 KM"
-    ],
-    "rooms": [
-      {
-        "label": "Standard rooms",
-        "rate": "From N20,500"
-      },
-      {
-        "label": "Larger rooms",
-        "rate": "Up to N27,500"
-      }
-    ],
-    "images": [
-      {
-        "preview": "/hotels/command-guest-inn/preview/001.jpg",
-        "thumb": "/hotels/command-guest-inn/thumb/001.jpg"
-      },
-      {
-        "preview": "/hotels/command-guest-inn/preview/002.jpg",
-        "thumb": "/hotels/command-guest-inn/thumb/002.jpg"
-      },
-      {
-        "preview": "/hotels/command-guest-inn/preview/003.jpg",
-        "thumb": "/hotels/command-guest-inn/thumb/003.jpg"
-      },
-      {
-        "preview": "/hotels/command-guest-inn/preview/003.jpg",
-        "thumb": "/hotels/command-guest-inn/thumb/003.jpg"
-      }
-    ],
-    "photoCount": 4,
-    "latitude": 11.8920252,
-    "longitude": 13.1090509
-  },
-  {
-    "id": "bajele-hotels",
-    "rank": 22,
-    "qualityTier": "pending",
-    "name": "Bajele Hotels and Apartments",
-    "shortName": "Bajele",
-    "tone": "Apartment option",
-    "location": "Maiduguri, Borno State",
-    "distanceToVenue": "9.1 KM",
-    "contactPhone": null,
-    "description": "A Maiduguri hotel/apartment option included from the supplied accommodation folder. Public online listings did not yet confirm address, contact, rates or room photos, so it is included conservatively pending confirmation.",
-    "roomSummary": "10 rooms (sheet); rates pending",
-    "rateStatus": "Rates pending",
-    "highlights": [
-      "Included from supplied local hotel folder",
-      "Public searches returned unrelated Maiduguri hotel/apartment results, so no unverified phone or rate was copied",
-      "Room photos and tariff sheet still pending",
-      "Rooms: 10",
-      "Distance to venue: 9.1 KM"
-    ],
-    "rooms": [
-      {
-        "label": "Rates",
-        "rate": "Pending"
-      }
-    ],
-    "images": [
-      {
-        "preview": "/hotels/bajele/preview/001.png",
-        "thumb": "/hotels/bajele/thumb/001.png"
-      },
-      {
-        "preview": "/hotels/bajele/preview/002.jpg",
-        "thumb": "/hotels/bajele/thumb/002.jpg"
-      },
-      {
-        "preview": "/hotels/bajele/preview/003.jpg",
-        "thumb": "/hotels/bajele/thumb/003.jpg"
-      }
-    ],
-    "photoCount": 3,
-    "latitude": 11.8392099,
-    "longitude": 13.0849743
-  },
-  {
     "id": "galaxy-hotel",
-    "rank": 23,
+    "rank": 28,
     "qualityTier": "pending",
     "name": "Galaxy Guest Palace Maiduguri",
     "shortName": "Galaxy",
@@ -1641,7 +1808,7 @@
   },
   {
     "id": "glopet-hotel",
-    "rank": 24,
+    "rank": 29,
     "qualityTier": "pending",
     "name": "Glopet Resorts Hotel & Event Center",
     "shortName": "Glopet",
@@ -1684,98 +1851,8 @@
     "longitude": 13.097039
   },
   {
-    "id": "unimaid-guest-inn",
-    "rank": 25,
-    "qualityTier": "pending",
-    "name": "UNIMAID Guest House",
-    "shortName": "UNIMAID Guest",
-    "tone": "Campus guest house",
-    "location": "University of Maiduguri, Maiduguri",
-    "distanceToVenue": "7.3 km ",
-    "contactPhone": "0706 962 5892",
-    "description": "A University of Maiduguri guest-house option with public references to standard, classic, deluxe and luxury-suite room categories. A public conference accommodation listing provides a reservation contact number.",
-    "roomSummary": "8 rooms (sheet)",
-    "rateStatus": "Rates pending",
-    "highlights": [
-      "Public listing references 20 standard, 5 classic, 3 deluxe and 2 luxury suites",
-      "Located at the University of Maiduguri",
-      "Public reservation contact listed as 07069625892",
-      "Contact: 0706 962 5892",
-      "Rooms: 8",
-      "Distance to venue: 7.3 km "
-    ],
-    "rooms": [
-      {
-        "label": "Mini suite",
-        "rate": "N18,000"
-      },
-      {
-        "label": "Chalet",
-        "rate": "N25,000"
-      },
-      {
-        "label": "Luxury suites",
-        "rate": "N22,000"
-      },
-      {
-        "label": "Executive suite",
-        "rate": "N30,000"
-      }
-    ],
-    "images": [
-      {
-        "preview": "/hotels/unimaid-guest-inn/preview/001.webp",
-        "thumb": "/hotels/unimaid-guest-inn/thumb/001.webp"
-      },
-      {
-        "preview": "/hotels/unimaid-guest-inn/preview/002.webp",
-        "thumb": "/hotels/unimaid-guest-inn/thumb/002.webp"
-      }
-    ],
-    "photoCount": 2,
-    "latitude": 11.80752,
-    "longitude": 13.19229
-  },
-  {
-    "id": "yerwa-guest-inn",
-    "rank": 26,
-    "qualityTier": "pending",
-    "name": "Yerwa Guest Inn",
-    "shortName": "Yerwa Guest",
-    "tone": "Yerwa city stay",
-    "location": "Yerwa, Maiduguri, Borno State",
-    "distanceToVenue": "5.2 KM",
-    "contactPhone": null,
-    "description": "A Maiduguri guest inn associated with the Yerwa area and referenced publicly on Facebook. Public posts mention comfortable rooms, gym, outdoor pool and restaurant facilities.",
-    "roomSummary": "Rooms pending",
-    "rateStatus": "Rates pending",
-    "highlights": [
-      "Public Facebook page describes rooms, gym, pool and restaurant",
-      "Included from supplied local hotel folder",
-      "Exact address, phone number, rates and downloadable public photos still need confirmation",
-      "Distance to venue: 5.2 KM"
-    ],
-    "rooms": [
-      {
-        "label": "Rates",
-        "rate": "Pending"
-      }
-    ],
-    "images": [
-      {
-        "preview": "/hotels/yerwa/preview/001.webp",
-        "thumb": "/hotels/yerwa/thumb/001.webp"
-      },
-      {
-        "preview": "/hotels/yerwa/preview/002.webp",
-        "thumb": "/hotels/yerwa/thumb/002.webp"
-      }
-    ],
-    "photoCount": 2
-  },
-  {
     "id": "lale-guest-house",
-    "rank": 28,
+    "rank": 30,
     "qualityTier": "value",
     "name": "Lale Guest House",
     "shortName": "Lale",
@@ -1828,8 +1905,121 @@
     "longitude": 13.1722376
   },
   {
-    "id": "prime-lodge",
-    "rank": 29,
+    "id": "yerwa-guest-inn",
+    "rank": 31,
+    "qualityTier": "pending",
+    "name": "Yerwa Guest Inn",
+    "shortName": "Yerwa Guest",
+    "tone": "Yerwa city stay",
+    "location": "Yerwa, Maiduguri, Borno State",
+    "distanceToVenue": "5.2 KM",
+    "contactPhone": null,
+    "description": "A Maiduguri guest inn associated with the Yerwa area and referenced publicly on Facebook. Public posts mention comfortable rooms, gym, outdoor pool and restaurant facilities.",
+    "roomSummary": "Rooms pending",
+    "rateStatus": "Rates pending",
+    "highlights": [
+      "Public Facebook page describes rooms, gym, pool and restaurant",
+      "Included from supplied local hotel folder",
+      "Exact address, phone number, rates and downloadable public photos still need confirmation",
+      "Distance to venue: 5.2 KM"
+    ],
+    "rooms": [
+      {
+        "label": "Rates",
+        "rate": "Pending"
+      }
+    ],
+    "images": [
+      {
+        "preview": "/hotels/yerwa/preview/001.webp",
+        "thumb": "/hotels/yerwa/thumb/001.webp"
+      },
+      {
+        "preview": "/hotels/yerwa/preview/002.webp",
+        "thumb": "/hotels/yerwa/thumb/002.webp"
+      }
+    ],
+    "photoCount": 2
+  },
+  {
+    "id": "unimaid-guest-inn",
+    "rank": 32,
+    "qualityTier": "pending",
+    "name": "UNIMAID Guest House",
+    "shortName": "UNIMAID Guest",
+    "tone": "Campus guest house",
+    "location": "University of Maiduguri, Maiduguri",
+    "distanceToVenue": "7.3 km ",
+    "contactPhone": "0706 962 5892",
+    "description": "A University of Maiduguri guest-house option with public references to standard, classic, deluxe and luxury-suite room categories. A public conference accommodation listing provides a reservation contact number.",
+    "roomSummary": "8 rooms (sheet)",
+    "rateStatus": "Rates pending",
+    "highlights": [
+      "Public listing references 20 standard, 5 classic, 3 deluxe and 2 luxury suites",
+      "Located at the University of Maiduguri",
+      "Public reservation contact listed as 07069625892",
+      "Contact: 0706 962 5892",
+      "Rooms: 8",
+      "Distance to venue: 7.3 km "
+    ],
+    "rooms": [
+      {
+        "label": "Mini suite",
+        "rate": "N18,000"
+      },
+      {
+        "label": "Chalet",
+        "rate": "N25,000"
+      },
+      {
+        "label": "Luxury suites",
+        "rate": "N22,000"
+      },
+      {
+        "label": "Executive suite",
+        "rate": "N30,000"
+      }
+    ],
+    "images": [
+      {
+        "preview": "/hotels/unimaid-guest-inn/preview/001.webp",
+        "thumb": "/hotels/unimaid-guest-inn/thumb/001.webp"
+      },
+      {
+        "preview": "/hotels/unimaid-guest-inn/preview/002.webp",
+        "thumb": "/hotels/unimaid-guest-inn/thumb/002.webp"
+      }
+    ],
+    "photoCount": 2,
+    "latitude": 11.80752,
+    "longitude": 13.19229
+  },
+  {
+    "id": "umth-guest-house",
+    "rank": 33,
+    "qualityTier": "value",
+    "name": "UMTH Guest House",
+    "shortName": "UMTH",
+    "tone": "Teaching-hospital guest house",
+    "location": "University of Maiduguri Teaching Hospital, Maiduguri",
+    "distanceToVenue": "Distance pending official logistics confirmation",
+    "contactPhone": null,
+    "description": "Guest house of the University of Maiduguri Teaching Hospital, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
+    "roomSummary": "Categories priced",
+    "rateStatus": "Rates pending",
+    "highlights": [],
+    "rooms": [
+      {
+        "label": "Rates",
+        "rate": "Pending"
+      }
+    ],
+    "images": [],
+    "photoCount": 0
+  },
+  {
+    "id": "prime-lodge-2",
+    "rank": 34,
     "qualityTier": "standard",
     "name": "Prime Lodge",
     "shortName": "Prime",
@@ -1885,31 +2075,8 @@
     "longitude": 13.1324383
   },
   {
-    "id": "imperial-hotel",
-    "rank": 31,
-    "qualityTier": "standard",
-    "name": "Imperial Hotel",
-    "shortName": "Imperial",
-    "tone": "Old GRA stay",
-    "location": "Old GRA, Circular Road, Maiduguri",
-    "distanceToVenue": "Distance pending official logistics confirmation",
-    "contactPhone": null,
-    "description": "Hotel in the Old GRA on Circular Road, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
-    "roomSummary": "Categories priced",
-    "rateStatus": "Rates pending",
-    "highlights": [],
-    "rooms": [
-      {
-        "label": "Rates",
-        "rate": "Pending"
-      }
-    ],
-    "images": [],
-    "photoCount": 0
-  },
-  {
     "id": "house-174",
-    "rank": 32,
+    "rank": 35,
     "qualityTier": "standard",
     "name": "House 174",
     "shortName": "House 174",
@@ -1954,194 +2121,8 @@
     "longitude": 13.1519505
   },
   {
-    "id": "jemdove-homes",
-    "rank": 33,
-    "qualityTier": "standard",
-    "name": "Jemdove Homes and Apartments",
-    "shortName": "Jemdove",
-    "tone": "Low-cost estate apartments",
-    "location": "A8 Federal Low-Cost Housing Estate, Maiduguri",
-    "distanceToVenue": "8.7 km",
-    "contactPhone": "0701 036 2776",
-    "description": "Apartment-style accommodation in the Federal Low-Cost Housing Estate, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
-    "roomSummary": "Categories priced",
-    "rateStatus": "Rates listed",
-    "highlights": [
-      "Contact: 0701 036 2776",
-      "Distance to venue: 8.7 km"
-    ],
-    "rooms": [
-      {
-        "label": "Executive Suite",
-        "rate": "N70,000"
-      },
-      {
-        "label": "Diplomatic Suite",
-        "rate": "N80,000"
-      }
-    ],
-    "images": [
-      {
-        "preview": "/hotels/jemdove/01.webp",
-        "thumb": "/hotels/jemdove/thumb/01.webp"
-      },
-      {
-        "preview": "/hotels/jemdove/02.webp",
-        "thumb": "/hotels/jemdove/thumb/02.webp"
-      },
-      {
-        "preview": "/hotels/jemdove/03.webp",
-        "thumb": "/hotels/jemdove/thumb/03.webp"
-      },
-      {
-        "preview": "/hotels/jemdove/04.webp",
-        "thumb": "/hotels/jemdove/thumb/04.webp"
-      }
-    ],
-    "photoCount": 4,
-    "latitude": 11.8619699,
-    "longitude": 13.1211453
-  },
-  {
-    "id": "cityden-apartments",
-    "rank": 34,
-    "qualityTier": "standard",
-    "name": "Cityden Apartments",
-    "shortName": "Cityden",
-    "tone": "Agoja-area serviced apartments",
-    "location": "No. 3 Abu Zar Algifarri Road, off Muhammed Goni Street (Agoja area), Old GRA, Maiduguri",
-    "distanceToVenue": "4.0 KM",
-    "contactPhone": "0806 110 5548, 0802 550 1048",
-    "description": "Serviced apartments off Muhammed Goni Street in the Agoja area of Old GRA, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
-    "roomSummary": "20 rooms (sheet)",
-    "rateStatus": "Rates listed",
-    "highlights": [
-      "Contact: 0806 110 5548, 0802 550 1048",
-      "Rooms: 20",
-      "Distance to venue: 4.0 KM"
-    ],
-    "rooms": [
-      {
-        "label": "Classic Suite",
-        "rate": "N90,000"
-      },
-      {
-        "label": "VIP Suite",
-        "rate": "N120,000"
-      },
-      {
-        "label": "Chalet Suite",
-        "rate": "N150,000"
-      }
-    ],
-    "images": [
-      {
-        "preview": "/hotels/cityden/01.png",
-        "thumb": "/hotels/cityden/thumb/01.png"
-      },
-      {
-        "preview": "/hotels/cityden/02.png",
-        "thumb": "/hotels/cityden/thumb/02.png"
-      },
-      {
-        "preview": "/hotels/cityden/03.png",
-        "thumb": "/hotels/cityden/thumb/03.png"
-      },
-      {
-        "preview": "/hotels/cityden/04.png",
-        "thumb": "/hotels/cityden/thumb/04.png"
-      },
-      {
-        "preview": "/hotels/cityden/05.png",
-        "thumb": "/hotels/cityden/thumb/05.png"
-      },
-      {
-        "preview": "/hotels/cityden/06.png",
-        "thumb": "/hotels/cityden/thumb/06.png"
-      },
-      {
-        "preview": "/hotels/cityden/07.png",
-        "thumb": "/hotels/cityden/thumb/07.png"
-      }
-    ],
-    "photoCount": 7,
-    "latitude": 11.8044584,
-    "longitude": 13.1503513
-  },
-  {
-    "id": "lake-chad-hotel",
-    "rank": 35,
-    "qualityTier": "value",
-    "name": "Lake Chad Hotel",
-    "shortName": "Lake Chad",
-    "tone": "Value stay on Kashim Ibrahim Road",
-    "location": "Kashim Ibrahim Road, Maiduguri",
-    "distanceToVenue": "10 KM",
-    "contactPhone": "0906 686 3917, 0814 408 4721",
-    "description": "Value hotel on Kashim Ibrahim Road, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
-    "roomSummary": "Categories priced",
-    "rateStatus": "Rates listed",
-    "highlights": [
-      "Contact: 0906 686 3917, 0814 408 4721",
-      "Distance to venue: 10 KM"
-    ],
-    "rooms": [
-      {
-        "label": "Standard",
-        "rate": "N20,000"
-      },
-      {
-        "label": "Deluxe / Luxury",
-        "rate": "N23,000"
-      },
-      {
-        "label": "Executive",
-        "rate": "N25,000"
-      },
-      {
-        "label": "Double Room",
-        "rate": "N30,000"
-      }
-    ],
-    "images": [],
-    "photoCount": 0,
-    "latitude": 11.839199,
-    "longitude": 13.1413143
-  },
-  {
-    "id": "garki-annex",
-    "rank": 36,
-    "qualityTier": "value",
-    "name": "Garki Guest Inn Annex",
-    "shortName": "Garki Annex",
-    "tone": "Annex of Garki Guest Inn",
-    "location": "Maiduguri 610111, Borno",
-    "distanceToVenue": "10 KM",
-    "contactPhone": "0703 310 2009",
-    "description": "Annex property of Garki Guest Inn, listed separately in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
-    "roomSummary": "33 rooms (sheet)",
-    "rateStatus": "Rates listed",
-    "highlights": [
-      "Contact: 0703 310 2009",
-      "Rooms: 33",
-      "Distance to venue: 10 KM"
-    ],
-    "rooms": [
-      {
-        "label": "Single",
-        "rate": "N17,000"
-      },
-      {
-        "label": "Suite",
-        "rate": "N25,000"
-      }
-    ],
-    "images": [],
-    "photoCount": 0
-  },
-  {
     "id": "rahama-lodge",
-    "rank": 37,
+    "rank": 36,
     "qualityTier": "value",
     "name": "Rahama Lodge",
     "shortName": "Rahama",
@@ -2190,31 +2171,8 @@
     "longitude": 13.1447511
   },
   {
-    "id": "umth-guest-house",
-    "rank": 38,
-    "qualityTier": "value",
-    "name": "UMTH Guest House",
-    "shortName": "UMTH",
-    "tone": "Teaching-hospital guest house",
-    "location": "University of Maiduguri Teaching Hospital, Maiduguri",
-    "distanceToVenue": "Distance pending official logistics confirmation",
-    "contactPhone": null,
-    "description": "Guest house of the University of Maiduguri Teaching Hospital, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
-    "roomSummary": "Categories priced",
-    "rateStatus": "Rates pending",
-    "highlights": [],
-    "rooms": [
-      {
-        "label": "Rates",
-        "rate": "Pending"
-      }
-    ],
-    "images": [],
-    "photoCount": 0
-  },
-  {
     "id": "starlight-peace",
-    "rank": 39,
+    "rank": 37,
     "qualityTier": "standard",
     "name": "Starlight Peace & Luxury Hotel",
     "shortName": "Starlight",
@@ -2224,20 +2182,112 @@
     "contactPhone": null,
     "description": "Hotel opposite Maimalari Barracks on Baga Road, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
     "roomSummary": "Categories priced",
-    "rateStatus": "Rates pending",
+    "rateStatus": "Rates listed",
     "highlights": [],
     "rooms": [
       {
         "label": "Rates",
-        "rate": "Pending"
+        "rate": "N20,000"
       }
     ],
-    "images": [],
-    "photoCount": 0
+    "images": [
+      {
+        "preview": "/hotels/starlight/ST02.webp",
+        "thumb": "/hotels/starlight/ST02.webp"
+      },
+      {
+        "preview": "/hotels/starlight/ST05.webp",
+        "thumb": "/hotels/starlight/ST05.webp"
+      },
+      {
+        "preview": "/hotels/starlight/ST04.webp",
+        "thumb": "/hotels/starlight/ST04.webp"
+      },
+      {
+        "preview": "/hotels/starlight/ST01.webp",
+        "thumb": "/hotels/starlight/ST01.webp"
+      }
+    ],
+    "photoCount": 4
+  },
+  {
+    "id": "dujima-annex",
+    "rank": 38,
+    "qualityTier": "premier",
+    "name": "Dujima International Hotel Annex",
+    "shortName": "Dujima Annex",
+    "tone": "Cash-rate branch",
+    "location": "Wulari Ward / off Sir Kashim Way, Maiduguri",
+    "distanceToVenue": "2.8 KM",
+    "contactPhone": "0806 873 2382",
+    "description": "An annex-style Dujima option documented by the supplied cash-rate sheet. It appears to operate under the Dujima International Hotels brand with separate room tariffs and hall rates.",
+    "roomSummary": "30 rooms (sheet)",
+    "rateStatus": "Rates listed",
+    "highlights": [
+      "Cash-rate sheet lists single, standard, single luxury, executive studio, governor's lodge and presidential suite",
+      "Sheet notes 7.5% VAT included",
+      "Conference hall and banquet hall rates are also listed",
+      "Contact: 0806 873 2382",
+      "Rooms: 30",
+      "Distance to venue: 2.8 KM"
+    ],
+    "rooms": [
+      {
+        "label": "Single",
+        "rate": "N18,000"
+      },
+      {
+        "label": "Standard",
+        "rate": "N21,000"
+      },
+      {
+        "label": "Single Luxury",
+        "rate": "N25,000"
+      },
+      {
+        "label": "Executive Studio",
+        "rate": "N32,000"
+      },
+      {
+        "label": "Governor's Lodge",
+        "rate": "N38,000"
+      },
+      {
+        "label": "Presidential Suite",
+        "rate": "N50,000"
+      }
+    ],
+    "images": [
+      {
+        "preview": "/hotels/dujima-annex/preview/001.webp",
+        "thumb": "/hotels/dujima-annex/thumb/001.webp"
+      },
+      {
+        "preview": "/hotels/dujima-annex/preview/002.webp",
+        "thumb": "/hotels/dujima-annex/thumb/002.webp"
+      },
+      {
+        "preview": "/hotels/dujima-annex/preview/003.webp",
+        "thumb": "/hotels/dujima-annex/thumb/003.webp"
+      },
+      {
+        "preview": "/hotels/dujima-annex/preview/004.webp",
+        "thumb": "/hotels/dujima-annex/thumb/004.webp"
+      },
+      {
+        "preview": "/hotels/dujima-annex/preview/005.webp",
+        "thumb": "/hotels/dujima-annex/thumb/005.webp"
+      },
+      {
+        "preview": "/hotels/dujima-annex/preview/006.webp",
+        "thumb": "/hotels/dujima-annex/thumb/006.webp"
+      }
+    ],
+    "photoCount": 6
   },
   {
     "id": "haske-guest-inn",
-    "rank": 40,
+    "rank": 39,
     "qualityTier": "value",
     "name": "Haske Guest Inn",
     "shortName": "Haske",
@@ -2266,69 +2316,48 @@
     "photoCount": 0
   },
   {
-    "id": "travel-heaven",
-    "rank": 41,
+    "id": "lake-chad-hotel",
+    "rank": 40,
     "qualityTier": "value",
-    "name": "Travel Heaven",
-    "shortName": "Travel Heaven",
-    "tone": "Budget stay on Gubio Road",
-    "location": "W33W+7R6 Gubio Road, Maiduguri",
-    "distanceToVenue": "Distance pending official logistics confirmation",
-    "contactPhone": "0803 256 1263",
-    "description": "Budget accommodation on Gubio Road, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
-    "roomSummary": "20 rooms (sheet)",
+    "name": "Lake Chad Hotel",
+    "shortName": "Lake Chad",
+    "tone": "Value stay on Kashim Ibrahim Road",
+    "location": "Kashim Ibrahim Road, Maiduguri",
+    "distanceToVenue": "10 KM",
+    "contactPhone": "0906 686 3917, 0814 408 4721",
+    "description": "Value hotel on Kashim Ibrahim Road, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
+    "roomSummary": "Categories priced",
     "rateStatus": "Rates listed",
     "highlights": [
-      "Contact: 0803 256 1263",
-      "Rooms: 20"
+      "Contact: 0906 686 3917, 0814 408 4721",
+      "Distance to venue: 10 KM"
     ],
     "rooms": [
-      {
-        "label": "Single",
-        "rate": "N15,000"
-      },
       {
         "label": "Standard",
         "rate": "N20,000"
-      }
-    ],
-    "images": [],
-    "photoCount": 0
-  },
-  {
-    "id": "peace-lodge",
-    "rank": 42,
-    "qualityTier": "value",
-    "name": "Peace Lodge",
-    "shortName": "Peace",
-    "tone": "Budget stay by Baga Road",
-    "location": "Adjacent Maximum Prison, Baga Road, Maiduguri",
-    "distanceToVenue": "6 KM",
-    "contactPhone": "0813 967 8380",
-    "description": "Budget lodge adjacent the Maximum Correctional Centre on Baga Road, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
-    "roomSummary": "12 rooms (sheet)",
-    "rateStatus": "Rates listed",
-    "highlights": [
-      "Contact: 0813 967 8380",
-      "Rooms: 12",
-      "Distance to venue: 6 KM"
-    ],
-    "rooms": [
-      {
-        "label": "Single",
-        "rate": "N13,000"
       },
       {
-        "label": "Standard",
-        "rate": "N15,000"
+        "label": "Deluxe / Luxury",
+        "rate": "N23,000"
+      },
+      {
+        "label": "Executive",
+        "rate": "N25,000"
+      },
+      {
+        "label": "Double Room",
+        "rate": "N30,000"
       }
     ],
     "images": [],
-    "photoCount": 0
+    "photoCount": 0,
+    "latitude": 11.839199,
+    "longitude": 13.1413143
   },
   {
     "id": "ali-chairman",
-    "rank": 43,
+    "rank": 41,
     "qualityTier": "value",
     "name": "Ali Chairman Guest Inn",
     "shortName": "Ali Chairman",
@@ -2358,6 +2387,67 @@
     "photoCount": 0
   },
   {
+    "id": "travel-heaven",
+    "rank": 42,
+    "qualityTier": "value",
+    "name": "Travel Heaven",
+    "shortName": "Travel Heaven",
+    "tone": "Budget stay on Gubio Road",
+    "location": "W33W+7R6 Gubio Road, Maiduguri",
+    "distanceToVenue": "Distance pending official logistics confirmation",
+    "contactPhone": "0803 256 1263",
+    "description": "Budget accommodation on Gubio Road, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
+    "roomSummary": "20 rooms (sheet)",
+    "rateStatus": "Rates listed",
+    "highlights": [
+      "Contact: 0803 256 1263",
+      "Rooms: 20"
+    ],
+    "rooms": [
+      {
+        "label": "Single",
+        "rate": "N15,000"
+      },
+      {
+        "label": "Standard",
+        "rate": "N20,000"
+      }
+    ],
+    "images": [],
+    "photoCount": 0
+  },
+  {
+    "id": "peace-lodge",
+    "rank": 43,
+    "qualityTier": "value",
+    "name": "Peace Lodge",
+    "shortName": "Peace",
+    "tone": "Budget stay by Baga Road",
+    "location": "Adjacent Maximum Prison, Baga Road, Maiduguri",
+    "distanceToVenue": "6 KM",
+    "contactPhone": "0813 967 8380",
+    "description": "Budget lodge adjacent the Maximum Correctional Centre on Baga Road, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
+    "roomSummary": "12 rooms (sheet)",
+    "rateStatus": "Rates listed",
+    "highlights": [
+      "Contact: 0813 967 8380",
+      "Rooms: 12",
+      "Distance to venue: 6 KM"
+    ],
+    "rooms": [
+      {
+        "label": "Single",
+        "rate": "N13,000"
+      },
+      {
+        "label": "Standard",
+        "rate": "N15,000"
+      }
+    ],
+    "images": [],
+    "photoCount": 0
+  },
+  {
     "id": "horizontal-inn",
     "rank": 44,
     "qualityTier": "value",
@@ -2377,16 +2467,8 @@
     ],
     "rooms": [
       {
-        "label": "Studio",
-        "rate": "N18,000"
-      },
-      {
-        "label": "Deluxe",
-        "rate": "N25,000"
-      },
-      {
-        "label": "Luxury",
-        "rate": "N35,000 (7.5% discount)"
+        "label": "Rates",
+        "rate": "N10,000"
       }
     ],
     "images": [],
