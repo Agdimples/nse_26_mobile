@@ -44,6 +44,10 @@ export interface NearbyPoi {
   note?: string;
   phone?: string;
   query?: string;
+  /** Restaurant-specific fields */
+  address?: string;
+  imageFolder?: string;
+  imageCount?: number;
 }
 
 export interface VenueData {
@@ -197,10 +201,10 @@ export function hotelPhotoUrl(hotel: Hotel, index = 0, thumb = true): string {
 export const POI_CATEGORY_ORDER = [
   "Airport",
   "Security",
+  "Restaurant",
   "Government",
   "Culture",
   "Hospital",
-  "Restaurant",
   "Pharmacy",
   "ATM",
   "Shopping",

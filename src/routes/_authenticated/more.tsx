@@ -34,7 +34,7 @@ const items = [
   { to: "/announcements", label: "Announcements", icon: Megaphone },
   { to: "/emergency", label: "Emergency", icon: ShieldAlert },
   { to: "/transport", label: "Transport", icon: Bus },
-  { to: "/faq", label: "Conference Guide (FAQ)", icon: HelpCircle },
+  { to: "/faq", label: "About Conference (FAQ)", icon: HelpCircle },
   { to: "/about", label: "About Maiduguri 2026", icon: Info },
   { to: "/privacy", label: "Privacy policy", icon: ShieldCheck },
   { to: "/profile", label: "Edit profile", icon: User },

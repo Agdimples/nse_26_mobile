@@ -37,12 +37,12 @@ stored in this repo.
 |------|---------|
 | **Core** | Auth, Home, Activity (waitlist), More |
 | **Programme** | Schedule, Session detail, Speakers |
-| **Venue** | Maidguide, Map (ICC + outdoor), Directions, Nearby |
+| **Venue** | Maiduguri, Map (ICC + outdoor), Directions, Nearby |
 | **Hotels** | 47 delegate hotels (bundled from the official masterlist) + Supabase |
 | **Concierge** | Usher, Food, Errands, My orders |
 | **Social** | Chat rooms, Delegate directory, DMs |
 | **Safety** | Announcements, Emergency contacts |
-| **AI** | On-device conference guide |
+| **AI** | On-device about conference |
 | **Admin** | Role-gated dashboards and queues |
 
 ## Reference data
