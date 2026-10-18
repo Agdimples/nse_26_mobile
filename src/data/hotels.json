@@ -32,6 +32,18 @@
       {
         "label": "Royal Suite",
         "rate": "N112,150"
+      },
+      {
+        "label": "Superior",
+        "rate": "N64,900"
+      },
+      {
+        "label": "Business Suite",
+        "rate": "N88,550"
+      },
+      {
+        "label": "Royal Suite",
+        "rate": "N118,100"
       }
     ],
     "images": [
