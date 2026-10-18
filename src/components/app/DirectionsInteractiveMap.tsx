@@ -202,7 +202,7 @@ export function DirectionsInteractiveMap({
 
   if (authFailed || error || initFailed) {
     return (
-      <div className="flex aspect-[4/3] w-full flex-col items-center justify-center gap-2 bg-muted/30 p-6 text-center">
+      <div className="flex h-full w-full flex-col items-center justify-center gap-2 bg-muted/30 p-6 text-center">
         <AlertTriangle className="h-6 w-6 text-destructive" />
         <p className="text-sm font-semibold">Route map unavailable</p>
         <p className="max-w-xs text-xs text-muted-foreground">
@@ -214,7 +214,7 @@ export function DirectionsInteractiveMap({
   }
 
   return (
-    <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
+    <div className="relative h-full w-full overflow-hidden bg-muted">
       <div ref={containerRef} className="h-full w-full" />
 
       {!ready && (

@@ -17,23 +17,79 @@ import {
   MapPin,
   Info,
   ArrowRight,
-  ExternalLink,
+  Zap,
 } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/home")({
   component: HomePage,
 });
 
-/* Homepage quick actions: 8 tiles in a balanced 4x2 grid */
+/* Quick-action tile config — colour palette per tile */
 const tools = [
-  { to: "/schedule", label: "Schedule", icon: Calendar, tint: "text-primary", bg: "bg-primary-soft" },
-  { to: "/concierge", label: "Concierge", icon: ConciergeBell, tint: "text-warning-foreground", bg: "bg-accent-soft" },
-  { to: "/network", label: "Network", icon: Users, tint: "text-success", bg: "bg-success-soft" },
-  { to: "/about", label: "About NSE", icon: Info, tint: "text-primary", bg: "bg-primary-soft" },
-  { to: "/maidguide", label: "Maiduguri", icon: Compass, tint: "text-primary", bg: "bg-primary-soft" },
-  { to: "/announcements", label: "Updates", icon: Megaphone, tint: "text-primary", bg: "bg-primary-soft" },
-  { to: "/map", label: "3D Map", icon: MapPin, tint: "text-warning-foreground", bg: "bg-accent-soft" },
-  { to: "/emergency", label: "Emergency", icon: HeartPulse, tint: "text-destructive", bg: "bg-destructive-soft" },
+  {
+    to: "/schedule",
+    label: "Schedule",
+    icon: Calendar,
+    gradient: "from-blue-500 to-blue-700",
+    shadow: "shadow-blue-500/30",
+    ring: "ring-blue-400/30",
+  },
+  {
+    to: "/concierge",
+    label: "Concierge",
+    icon: ConciergeBell,
+    gradient: "from-amber-400 to-orange-500",
+    shadow: "shadow-orange-400/30",
+    ring: "ring-orange-300/30",
+  },
+  {
+    to: "/network",
+    label: "Network",
+    icon: Users,
+    gradient: "from-emerald-500 to-teal-600",
+    shadow: "shadow-emerald-500/30",
+    ring: "ring-emerald-400/30",
+  },
+  {
+    to: "/about",
+    label: "About NSE",
+    icon: Info,
+    gradient: "from-violet-500 to-purple-700",
+    shadow: "shadow-violet-500/30",
+    ring: "ring-violet-400/30",
+  },
+  {
+    to: "/maidguide",
+    label: "Maiduguri",
+    icon: Compass,
+    gradient: "from-sky-400 to-cyan-600",
+    shadow: "shadow-sky-400/30",
+    ring: "ring-sky-300/30",
+  },
+  {
+    to: "/announcements",
+    label: "Updates",
+    icon: Megaphone,
+    gradient: "from-pink-500 to-rose-600",
+    shadow: "shadow-pink-500/30",
+    ring: "ring-pink-400/30",
+  },
+  {
+    to: "/map",
+    label: "3D Map",
+    icon: MapPin,
+    gradient: "from-indigo-500 to-blue-700",
+    shadow: "shadow-indigo-500/30",
+    ring: "ring-indigo-400/30",
+  },
+  {
+    to: "/emergency",
+    label: "Emergency",
+    icon: HeartPulse,
+    gradient: "from-red-500 to-rose-700",
+    shadow: "shadow-red-500/30",
+    ring: "ring-red-400/30",
+  },
 ] as const;
 
 function HomePage() {
@@ -158,17 +214,35 @@ function HomePage() {
 
         {/* Quick actions — 4-col grid with 8 actions */}
         <section>
-          <p className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-            Quick actions
-          </p>
-          <div className="rounded-3xl bg-surface px-2 py-4 shadow-card">
-            <div className="grid grid-cols-4 gap-x-1 gap-y-4">
-              {tools.map(({ to, label, icon: Icon, tint, bg }) => (
-                <Link key={to} to={to} className="flex flex-col items-center gap-1.5 transition active:scale-95">
-                  <span className={`flex h-[50px] w-[50px] items-center justify-center rounded-2xl ${bg}`}>
-                    <Icon className={`h-6 w-6 ${tint}`} />
+          <div className="mb-3 flex items-center justify-between">
+            <p className="text-sm font-bold text-foreground">Quick Actions</p>
+            <span className="flex items-center gap-1 rounded-full bg-primary-soft px-2.5 py-0.5 text-[11px] font-bold text-primary">
+              <Zap className="h-3 w-3" />
+              {tools.length} features
+            </span>
+          </div>
+
+          <div className="rounded-3xl bg-surface p-4 shadow-card">
+            <div className="grid grid-cols-4 gap-x-2 gap-y-5">
+              {tools.map(({ to, label, icon: Icon, gradient, shadow, ring }) => (
+                <Link
+                  key={to}
+                  to={to}
+                  className="group flex flex-col items-center gap-2 transition-transform active:scale-90"
+                >
+                  {/* Icon bubble */}
+                  <span
+                    className={`relative flex h-[54px] w-[54px] items-center justify-center rounded-[18px] bg-gradient-to-br ${gradient} shadow-lg ${shadow} ring-2 ${ring} transition-shadow group-active:shadow-md`}
+                  >
+                    {/* inner gloss */}
+                    <span className="pointer-events-none absolute inset-0 rounded-[18px] bg-gradient-to-b from-white/20 to-transparent" />
+                    <Icon className="h-6 w-6 text-white drop-shadow-sm" strokeWidth={2} />
                   </span>
-                  <span className="max-w-full truncate px-1 text-[11px] font-semibold">{label}</span>
+
+                  {/* Label */}
+                  <span className="max-w-[62px] text-center text-[11px] font-semibold leading-tight text-foreground/80">
+                    {label}
+                  </span>
                 </Link>
               ))}
             </div>

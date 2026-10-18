@@ -35,9 +35,29 @@
       }
     ],
     "images": [
-        {
+      {
         "preview": "/hotels/bamus/001.jpg",
-        "thumb": "/hotels/solce/thumb/001.jpg"
+        "thumb": "/hotels/bamus/thumb/001.jpg"
+      },
+      {
+        "preview": "/hotels/bamus/02.jpeg",
+        "thumb": "/hotels/bamus/thumb/02.jpeg"
+      },
+      {
+        "preview": "/hotels/bamus/03.jpeg",
+        "thumb": "/hotels/bamus/thumb/03.jpeg"
+      },
+      {
+        "preview": "/hotels/bamus/04.jpeg",
+        "thumb": "/hotels/bamus/thumb/04.jpeg"
+      },
+      {
+        "preview": "/hotels/bamus/05.jpeg",
+        "thumb": "/hotels/bamus/thumb/05.jpeg"
+      },
+      {
+        "preview": "/hotels/bamus/06.jpeg",
+        "thumb": "/hotels/bamus/thumb/06.jpeg"
       }
     ],
     "photoCount": 1,
@@ -1742,39 +1762,6 @@
     "photoCount": 2
   },
   {
-    "id": "sahel-hotel",
-    "rank": 27,
-    "qualityTier": "standard",
-    "name": "Sahel Hotel",
-    "shortName": "Sahel",
-    "tone": "Budget stay near UNIMAID",
-    "location": "Bama Road, opposite UNIMAID, Maiduguri",
-    "distanceToVenue": "6.4 km",
-    "contactPhone": "0703 261 6413",
-    "description": "Budget-friendly hotel opposite the University of Maiduguri on Bama Road, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
-    "roomSummary": "40 rooms (sheet)",
-    "rateStatus": "Rates listed",
-    "highlights": [
-      "Contact: 0703 261 6413",
-      "Rooms: 40",
-      "Distance to venue: 6.4 km"
-    ],
-    "rooms": [
-      {
-        "label": "Standard",
-        "rate": "N17,000"
-      },
-      {
-        "label": "Deluxe",
-        "rate": "N34,000"
-      }
-    ],
-    "images": [],
-    "photoCount": 2,
-    "latitude": 11.8029773,
-    "longitude": 13.1833708
-  },
-  {
     "id": "lale-guest-house",
     "rank": 28,
     "qualityTier": "value",
@@ -1916,7 +1903,7 @@
     "shortName": "House 174",
     "tone": "Boutique option in Polo GRA",
     "location": "Plot 176 Kamao, Polo Old GRA, Maiduguri",
-    "distanceToVenue": "5.8 KM",
+    "distanceToVenue": "4.7km",
     "contactPhone": "0805 933 3053",
     "description": "Small boutique property in the Polo Old GRA area, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
     "roomSummary": "3 rooms (sheet)",
@@ -1924,7 +1911,7 @@
     "highlights": [
       "Contact: 0805 933 3053",
       "Rooms: 3",
-      "Distance to venue: 5.8 KM"
+      "Distance to venue: 4.7km"
     ],
     "rooms": [
       {
@@ -1936,8 +1923,23 @@
         "rate": "N150,000"
       }
     ],
-    "images": [],
-    "photoCount": 0
+    "images": [
+      {
+        "preview": "/hotels/hause/01.jpg",
+        "thumb": "/hotels/prime/thumb/01.jpg"
+      },
+      {
+        "preview": "/hotels/hause/02.jpg",
+        "thumb": "/hotels/prime/thumb/02.jpg"
+      },
+      {
+        "preview": "/hotels/hause/03.jpg",
+        "thumb": "/hotels/prime/thumb/03.jpg"
+      }
+    ],
+    "photoCount": 3,
+    "latitude": 11.8001104,
+    "longitude": 13.1519505
   },
   {
     "id": "jemdove-homes",
@@ -1947,14 +1949,14 @@
     "shortName": "Jemdove",
     "tone": "Low-cost estate apartments",
     "location": "A8 Federal Low-Cost Housing Estate, Maiduguri",
-    "distanceToVenue": "5.5 KM",
+    "distanceToVenue": "8.7 km",
     "contactPhone": "0701 036 2776",
     "description": "Apartment-style accommodation in the Federal Low-Cost Housing Estate, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
     "roomSummary": "Categories priced",
     "rateStatus": "Rates listed",
     "highlights": [
       "Contact: 0701 036 2776",
-      "Distance to venue: 5.5 KM"
+      "Distance to venue: 8.7 km"
     ],
     "rooms": [
       {
@@ -1966,8 +1968,27 @@
         "rate": "N80,000"
       }
     ],
-    "images": [],
-    "photoCount": 0
+    "images": [
+      {
+        "preview": "/hotels/jemdove/01.webp",
+        "thumb": "/hotels/jemdove/thumb/01.webp"
+      },
+      {
+        "preview": "/hotels/jemdove/02.webp",
+        "thumb": "/hotels/jemdove/thumb/02.webp"
+      },
+      {
+        "preview": "/hotels/jemdove/03.webp",
+        "thumb": "/hotels/jemdove/thumb/03.webp"
+      },
+      {
+        "preview": "/hotels/jemdove/04.webp",
+        "thumb": "/hotels/jemdove/thumb/04.webp"
+      }
+    ],
+    "photoCount": 4,
+    "latitude": 11.8619699,
+    "longitude": 13.1211453
   },
   {
     "id": "cityden-apartments",
@@ -1977,7 +1998,7 @@
     "shortName": "Cityden",
     "tone": "Agoja-area serviced apartments",
     "location": "No. 3 Abu Zar Algifarri Road, off Muhammed Goni Street (Agoja area), Old GRA, Maiduguri",
-    "distanceToVenue": "8.4 KM",
+    "distanceToVenue": "4.0 KM",
     "contactPhone": "0806 110 5548, 0802 550 1048",
     "description": "Serviced apartments off Muhammed Goni Street in the Agoja area of Old GRA, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
     "roomSummary": "20 rooms (sheet)",
@@ -1985,7 +2006,7 @@
     "highlights": [
       "Contact: 0806 110 5548, 0802 550 1048",
       "Rooms: 20",
-      "Distance to venue: 8.4 KM"
+      "Distance to venue: 4.0 KM"
     ],
     "rooms": [
       {
@@ -2001,8 +2022,39 @@
         "rate": "N150,000"
       }
     ],
-    "images": [],
-    "photoCount": 0
+    "images": [
+      {
+        "preview": "/hotels/cityden/01.png",
+        "thumb": "/hotels/cityden/thumb/01.png"
+      },
+      {
+        "preview": "/hotels/cityden/02.png",
+        "thumb": "/hotels/cityden/thumb/02.png"
+      },
+      {
+        "preview": "/hotels/cityden/03.png",
+        "thumb": "/hotels/cityden/thumb/03.png"
+      },
+      {
+        "preview": "/hotels/cityden/04.png",
+        "thumb": "/hotels/cityden/thumb/04.png"
+      },
+      {
+        "preview": "/hotels/cityden/05.png",
+        "thumb": "/hotels/cityden/thumb/05.png"
+      },
+      {
+        "preview": "/hotels/cityden/06.png",
+        "thumb": "/hotels/cityden/thumb/06.png"
+      },
+      {
+        "preview": "/hotels/cityden/07.png",
+        "thumb": "/hotels/cityden/thumb/07.png"
+      }
+    ],
+    "photoCount": 7,
+    "latitude": 11.8044584,
+    "longitude": 13.1503513
   },
   {
     "id": "lake-chad-hotel",
@@ -2040,7 +2092,9 @@
       }
     ],
     "images": [],
-    "photoCount": 0
+    "photoCount": 0,
+    "latitude": 11.839199,
+    "longitude": 13.1413143
   },
   {
     "id": "garki-annex",
@@ -2081,7 +2135,7 @@
     "shortName": "Rahama",
     "tone": "Budget lodge on Damboa Road",
     "location": "R4CV+VW2, Yerwa Road, Damboa Road, Maiduguri",
-    "distanceToVenue": "10 KM",
+    "distanceToVenue": "2.4 km",
     "contactPhone": "0706 767 5556, 0803 256 1263",
     "description": "Large budget lodge on Yerwa/Damboa Road, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
     "roomSummary": "95 rooms (sheet)",
@@ -2089,7 +2143,7 @@
     "highlights": [
       "Contact: 0706 767 5556, 0803 256 1263",
       "Rooms: 95",
-      "Distance to venue: 10 KM"
+      "Distance to venue: 2.4km"
     ],
     "rooms": [
       {
@@ -2101,8 +2155,27 @@
         "rate": "N20,000"
       }
     ],
-    "images": [],
-    "photoCount": 0
+    "images": [
+      {
+        "preview": "/hotels/rahama/01.jpg",
+        "thumb": "/hotels/rahama/thumb/01.jpg"
+      },
+      {
+        "preview": "/hotels/rahama/02.jpg",
+        "thumb": "/hotels/rahama/thumb/02.jpg"
+      },
+      {
+        "preview": "/hotels/rahama/03.jpg",
+        "thumb": "/hotels/rahama/thumb/03.jpg"
+      },
+      {
+        "preview": "/hotels/rahama/04.jpg",
+        "thumb": "/hotels/rahama/thumb/04.jpg"
+      }
+    ],
+    "photoCount": 4,
+    "latitude": 11.8221462,
+    "longitude": 13.1447511
   },
   {
     "id": "umth-guest-house",
