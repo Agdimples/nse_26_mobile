@@ -1,5 +1,50 @@
 [
   {
+    "id": "bamus-suites",
+    "rank": 1,
+    "qualityTier": "standard",
+    "name": "Bamus Suites and Apartments",
+    "shortName": "Bamus",
+    "tone": "Serviced apartments by Lagos Street bridge",
+    "location": "No. 1 beside Lagos Street bridge, Maiduguri",
+    "distanceToVenue": "3.2 km",
+    "contactPhone": "0701 293 9350, 0806 998 8464",
+    "description": "Serviced suites and apartments beside the Lagos Street bridge, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
+    "roomSummary": "Categories priced",
+    "rateStatus": "Rates listed",
+    "highlights": [
+      "Contact: 0701 293 9350, 0806 998 8464",
+      "Distance to venue: 3.2 km "
+    ],
+    "rooms": [
+      {
+        "label": "Studio",
+        "rate": "N56,000"
+      },
+      {
+        "label": "Premium",
+        "rate": "N80,000 (N75,000 discounted)"
+      },
+      {
+        "label": "Executive",
+        "rate": "N90,000 (N85,000 discounted)"
+      },
+      {
+        "label": "Presidential Suite",
+        "rate": "N300,000 (N280,000 discounted)"
+      }
+    ],
+    "images": [
+        {
+        "preview": "/hotels/bamus/001.jpg",
+        "thumb": "/hotels/solce/thumb/001.jpg"
+      }
+    ],
+    "photoCount": 1,
+    "latitude": 11.8194328,
+    "longitude": 13.1709322
+  },
+  {
     "id": "solce",
     "rank": 1,
     "qualityTier": "premier",
@@ -1506,11 +1551,11 @@
         "preview": "/hotels/bajele/preview/001.png",
         "thumb": "/hotels/bajele/thumb/001.png"
       },
-       {
+      {
         "preview": "/hotels/bajele/preview/002.jpg",
         "thumb": "/hotels/bajele/thumb/002.jpg"
       },
-       {
+      {
         "preview": "/hotels/bajele/preview/003.jpg",
         "thumb": "/hotels/bajele/thumb/003.jpg"
       }
@@ -1527,7 +1572,7 @@
     "shortName": "Galaxy",
     "tone": "Bulumkutu stay",
     "location": "Behind Legacy off Coca Cola Road, Bulumkutu, Maiduguri",
-    "distanceToVenue": "ICC route/time pending official logistics confirmation",
+    "distanceToVenue": "8.5 KM",
     "contactPhone": null,
     "description": "A Maiduguri hotel option in the Bulumkutu corridor with public map/listing references to Galaxy Guest Palace. Public room-rate confirmation is still pending.",
     "roomSummary": "Rooms pending",
@@ -1536,7 +1581,7 @@
       "Public listing places it behind Legacy off Coca Cola Road, Bulumkutu",
       "Included for delegate review from supplied local hotel folder",
       "Rates and official contact number still need confirmation",
-      "Distance to venue: ICC route/time pending official logistics confirmation"
+      "Distance to venue: 8.5 KM"
     ],
     "rooms": [
       {
@@ -1548,9 +1593,19 @@
       {
         "preview": "/hotels/galaxy-hotel/preview/001.webp",
         "thumb": "/hotels/galaxy-hotel/thumb/001.webp"
+      },
+      {
+        "preview": "/hotels/galaxy-hotel/preview/02.jpg",
+        "thumb": "/hotels/galaxy-hotel/thumb/02.jpg"
+      },
+      {
+        "preview": "/hotels/galaxy-hotel/preview/03.jpg",
+        "thumb": "/hotels/galaxy-hotel/thumb/03.jpg"
       }
     ],
-    "photoCount": 1
+    "photoCount": 3,
+    "latitude": 11.8391563,
+    "longitude": 13.0912413
   },
   {
     "id": "glopet-hotel",
@@ -1560,7 +1615,7 @@
     "shortName": "Glopet",
     "tone": "Resort and events",
     "location": "7 Maiduguri - Monguno Road, Low-cost Junction, Maiduguri",
-    "distanceToVenue": "11 KM",
+    "distanceToVenue": "11.3 km",
     "contactPhone": null,
     "description": "A Maiduguri hotel and event-center option on the Maiduguri-Monguno Road corridor at low-cost junction. Public venue listings confirm the address and show hotel/event imagery.",
     "roomSummary": "8 rooms (sheet)",
@@ -1570,7 +1625,7 @@
       "Listed as hotel and event center in low-cost junction area",
       "Public reviews describe air-conditioned rooms; room rates and direct contact number still need confirmation",
       "Rooms: 8",
-      "Distance to venue: 11 KM"
+      "Distance to venue: 11.3 km"
     ],
     "rooms": [
       {
@@ -1580,15 +1635,21 @@
     ],
     "images": [
       {
-        "preview": "/hotels/glopet-hotel/preview/001.webp",
-        "thumb": "/hotels/glopet-hotel/thumb/001.webp"
+        "preview": "/hotels/glopet-hotel/preview/01.jpg",
+        "thumb": "/hotels/glopet-hotel/thumb/01.jpg"
+      },
+      {
+        "preview": "/hotels/glopet-hotel/preview/02.jpg",
+        "thumb": "/hotels/glopet-hotel/thumb/02.jpg"
       },
       {
         "preview": "/hotels/glopet-hotel/preview/002.webp",
         "thumb": "/hotels/glopet-hotel/thumb/002.webp"
       }
     ],
-    "photoCount": 2
+    "photoCount": 3,
+    "latitude": 11.9031776,
+    "longitude": 13.097039
   },
   {
     "id": "unimaid-guest-inn",
@@ -1598,7 +1659,7 @@
     "shortName": "UNIMAID Guest",
     "tone": "Campus guest house",
     "location": "University of Maiduguri, Maiduguri",
-    "distanceToVenue": "5.7 KM",
+    "distanceToVenue": "7.3 km ",
     "contactPhone": "0706 962 5892",
     "description": "A University of Maiduguri guest-house option with public references to standard, classic, deluxe and luxury-suite room categories. A public conference accommodation listing provides a reservation contact number.",
     "roomSummary": "8 rooms (sheet)",
@@ -1609,7 +1670,7 @@
       "Public reservation contact listed as 07069625892",
       "Contact: 0706 962 5892",
       "Rooms: 8",
-      "Distance to venue: 5.7 KM"
+      "Distance to venue: 7.3 km "
     ],
     "rooms": [
       {
@@ -1670,31 +1731,15 @@
     ],
     "images": [
       {
-        "preview": "/hotels/zairan/preview/001.webp",
-        "thumb": "/hotels/zairan/thumb/001.webp"
+        "preview": "/hotels/yerwa/preview/001.webp",
+        "thumb": "/hotels/yerwa/thumb/001.webp"
       },
       {
-        "preview": "/hotels/zairan/preview/002.webp",
-        "thumb": "/hotels/zairan/thumb/002.webp"
-      },
-      {
-        "preview": "/hotels/zairan/preview/003.webp",
-        "thumb": "/hotels/zairan/thumb/003.webp"
-      },
-      {
-        "preview": "/hotels/zairan/preview/004.webp",
-        "thumb": "/hotels/zairan/thumb/004.webp"
-      },
-      {
-        "preview": "/hotels/zairan/preview/005.webp",
-        "thumb": "/hotels/zairan/thumb/005.webp"
-      },
-      {
-        "preview": "/hotels/zairan/preview/006.webp",
-        "thumb": "/hotels/zairan/thumb/006.webp"
+        "preview": "/hotels/yerwa/preview/002.webp",
+        "thumb": "/hotels/yerwa/thumb/002.webp"
       }
     ],
-    "photoCount": 6
+    "photoCount": 2
   },
   {
     "id": "sahel-hotel",
@@ -1704,7 +1749,7 @@
     "shortName": "Sahel",
     "tone": "Budget stay near UNIMAID",
     "location": "Bama Road, opposite UNIMAID, Maiduguri",
-    "distanceToVenue": "5.5 KM",
+    "distanceToVenue": "6.4 km",
     "contactPhone": "0703 261 6413",
     "description": "Budget-friendly hotel opposite the University of Maiduguri on Bama Road, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
     "roomSummary": "40 rooms (sheet)",
@@ -1712,7 +1757,7 @@
     "highlights": [
       "Contact: 0703 261 6413",
       "Rooms: 40",
-      "Distance to venue: 5.5 KM"
+      "Distance to venue: 6.4 km"
     ],
     "rooms": [
       {
@@ -1725,7 +1770,9 @@
       }
     ],
     "images": [],
-    "photoCount": 0
+    "photoCount": 2,
+    "latitude": 11.8029773,
+    "longitude": 13.1833708
   },
   {
     "id": "lale-guest-house",
@@ -1735,7 +1782,7 @@
     "shortName": "Lale",
     "tone": "Value option on Bama Road",
     "location": "Bama Road, adjacent NUJ, Maiduguri",
-    "distanceToVenue": "5.5 KM",
+    "distanceToVenue": "4.2 km",
     "contactPhone": "0706 634 1555, 0802 871 4718",
     "description": "Value guest house adjacent the NUJ press centre on Bama Road, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
     "roomSummary": "27 rooms (sheet)",
@@ -1743,7 +1790,7 @@
     "highlights": [
       "Contact: 0706 634 1555, 0802 871 4718",
       "Rooms: 27",
-      "Distance to venue: 5.5 KM"
+      "Distance to venue: 4.2 km"
     ],
     "rooms": [
       {
@@ -1767,8 +1814,19 @@
         "rate": "N32,250"
       }
     ],
-    "images": [],
-    "photoCount": 0
+    "images": [
+      {
+        "preview": "/hotels/lale/001.jpg",
+        "thumb": "/hotels/lale/thumb/001.jpg"
+      },
+      {
+        "preview": "/hotels/lale/002.jpg",
+        "thumb": "/hotels/lale/thumb/002.jpg"
+      }
+    ],
+    "photoCount": 2,
+    "latitude": 11.818464,
+    "longitude": 13.1722376
   },
   {
     "id": "prime-lodge",
@@ -1778,13 +1836,14 @@
     "shortName": "Prime",
     "tone": "City-centre lodge",
     "location": "Off Circular Road, Abba Kyari / Abba Kolo Street, Maiduguri",
-    "distanceToVenue": "Distance pending official logistics confirmation",
+    "distanceToVenue": "4.9 km",
     "contactPhone": "0702 681 3147",
     "description": "Lodge off Circular Road in the Abba Kyari/Abba Kolo Street area, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
     "roomSummary": "Categories priced",
     "rateStatus": "Rates listed",
     "highlights": [
-      "Contact: 0702 681 3147"
+      "ContaFct: 0702 681 3147",
+      "Distance to venue: 4.9 km"
     ],
     "rooms": [
       {
@@ -1804,45 +1863,27 @@
         "rate": "N150,000"
       }
     ],
-    "images": [],
-    "photoCount": 0
-  },
-  {
-    "id": "bamus-suites",
-    "rank": 30,
-    "qualityTier": "standard",
-    "name": "Bamus Suites and Apartments",
-    "shortName": "Bamus",
-    "tone": "Serviced apartments by Lagos Street bridge",
-    "location": "No. 1 beside Lagos Street bridge, Maiduguri",
-    "distanceToVenue": "Distance pending official logistics confirmation",
-    "contactPhone": "0701 293 9350, 0806 998 8464",
-    "description": "Serviced suites and apartments beside the Lagos Street bridge, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
-    "roomSummary": "Categories priced",
-    "rateStatus": "Rates listed",
-    "highlights": [
-      "Contact: 0701 293 9350, 0806 998 8464"
-    ],
-    "rooms": [
+    "images": [
       {
-        "label": "Studio",
-        "rate": "N56,000"
+        "preview": "/hotels/prime/001.jpg",
+        "thumb": "/hotels/prime/thumb/001.jpg"
       },
       {
-        "label": "Premium",
-        "rate": "N80,000 (N75,000 discounted)"
+        "preview": "/hotels/prime/002.jpg",
+        "thumb": "/hotels/prime/thumb/002.jpg"
       },
       {
-        "label": "Executive",
-        "rate": "N90,000 (N85,000 discounted)"
+        "preview": "/hotels/prime/003.jpg",
+        "thumb": "/hotels/prime/thumb/003.jpg"
       },
       {
-        "label": "Presidential Suite",
-        "rate": "N300,000 (N280,000 discounted)"
+        "preview": "/hotels/prime/004.jpg",
+        "thumb": "/hotels/prime/thumb/004.jpg"
       }
     ],
-    "images": [],
-    "photoCount": 0
+    "photoCount": 4,
+    "latitude": 11.8128047,
+    "longitude": 13.1324383
   },
   {
     "id": "imperial-hotel",
