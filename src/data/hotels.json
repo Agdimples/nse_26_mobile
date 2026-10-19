@@ -710,10 +710,6 @@
         "thumb": "/hotels/rb-hotel/thumb/003.webp"
       },
       {
-        "preview": "/hotels/rb-hotel/preview/004.jpg",
-        "thumb": "/hotels/rb-hotel/thumb/004.webp"
-      },
-      {
         "preview": "/hotels/rb-hotel/preview/005.jpg",
         "thumb": "/hotels/rb-hotel/thumb/005.webp"
       },
@@ -770,10 +766,7 @@
       }
     ],
     "images": [
-      {
-        "preview": "/hotels/zairan/preview/001.webp",
-        "thumb": "/hotels/zairan/thumb/001.webp"
-      },
+     
       {
         "preview": "/hotels/zairan/preview/002.webp",
         "thumb": "/hotels/zairan/thumb/002.webp"
@@ -2091,8 +2084,21 @@
         "rate": "N30,000"
       }
     ],
-    "images": [],
-    "photoCount": 0,
+    "images": [
+      {
+        "preview": "/hotels/lake/01.jpg",
+        "thumb": "/hotels/lake/thumb/01.jpg"
+      },
+      {
+        "preview": "/hotels/lake/02.jpg",
+        "thumb": "/hotels/lake/thumb/02.jpg"
+      },
+      {
+        "preview": "/hotels/lake/03.jpg",
+        "thumb": "/hotels/lake/thumb/03.jpg"
+      }
+    ],
+    "photoCount": 3,
     "latitude": 11.839199,
     "longitude": 13.1413143
   },
@@ -2124,8 +2130,23 @@
         "rate": "N25,000"
       }
     ],
-    "images": [],
-    "photoCount": 0
+    "images": [
+      {
+        "preview": "/hotels/garki/01.jpg",
+        "thumb": "/hotels/garki/thumb/01.jpg"
+      },
+      {
+        "preview": "/hotels/garki/02.jpg",
+        "thumb": "/hotels/garki/thumb/02.jpg"
+      },
+      {
+        "preview": "/hotels/garki/03.jpg",
+        "thumb": "/hotels/garki/thumb/03.jpg"
+      }
+    ],
+    "photoCount": 0,
+    "latitude": 11.8444772,
+    "longitude": 13.0960245
   },
   {
     "id": "rahama-lodge",
@@ -2291,7 +2312,7 @@
     "shortName": "Peace",
     "tone": "Budget stay by Baga Road",
     "location": "Adjacent Maximum Prison, Baga Road, Maiduguri",
-    "distanceToVenue": "6 KM",
+    "distanceToVenue": "5.7 KM",
     "contactPhone": "0813 967 8380",
     "description": "Budget lodge adjacent the Maximum Correctional Centre on Baga Road, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
     "roomSummary": "12 rooms (sheet)",
@@ -2299,7 +2320,7 @@
     "highlights": [
       "Contact: 0813 967 8380",
       "Rooms: 12",
-      "Distance to venue: 6 KM"
+      "Distance to venue: 5.7 KM"
     ],
     "rooms": [
       {
@@ -2311,8 +2332,27 @@
         "rate": "N15,000"
       }
     ],
-    "images": [],
-    "photoCount": 0
+    "images": [
+      {
+        "preview": "/hotels/peace/01.jpg",
+        "thumb": "/hotels/peace/thumb/01.jpg"
+      },
+      {
+        "preview": "/hotels/peace/02.jpg",
+        "thumb": "/hotels/peace/thumb/02.jpg"
+      },
+      {
+        "preview": "/hotels/peace/03.jpg",
+        "thumb": "/hotels/peace/thumb/03.jpg"
+      },
+      {
+        "preview": "/hotels/peace/04.jpg",
+        "thumb": "/hotels/peace/thumb/04.jpg"
+      }
+    ],
+    "photoCount": 4,
+    "latitude": 11.8522856,
+    "longitude": 13.1346669
   },
   {
     "id": "ali-chairman",
@@ -2346,41 +2386,6 @@
     "photoCount": 0
   },
   {
-    "id": "horizontal-inn",
-    "rank": 44,
-    "qualityTier": "value",
-    "name": "Horizontal Guest Inn",
-    "shortName": "Horizontal",
-    "tone": "Budget stay with discount",
-    "location": "Maiduguri, Borno State",
-    "distanceToVenue": "7.8 KM",
-    "contactPhone": "0803 850 3548",
-    "description": "Budget guest inn offering a 7.5% discount, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
-    "roomSummary": "20 rooms (sheet)",
-    "rateStatus": "Rates listed",
-    "highlights": [
-      "Contact: 0803 850 3548",
-      "Rooms: 20",
-      "Distance to venue: 7.8 KM"
-    ],
-    "rooms": [
-      {
-        "label": "Studio",
-        "rate": "N18,000"
-      },
-      {
-        "label": "Deluxe",
-        "rate": "N25,000"
-      },
-      {
-        "label": "Luxury",
-        "rate": "N35,000 (7.5% discount)"
-      }
-    ],
-    "images": [],
-    "photoCount": 0
-  },
-  {
     "id": "tourist-hotel",
     "rank": 45,
     "qualityTier": "value",
@@ -2401,43 +2406,6 @@
       {
         "label": "Single",
         "rate": "N10,000"
-      }
-    ],
-    "images": [],
-    "photoCount": 0
-  },
-  {
-    "id": "mara-zaine",
-    "rank": 46,
-    "qualityTier": "value",
-    "name": "Mara Zaine",
-    "shortName": "Mara Zaine",
-    "tone": "Budget stay beside UMTH",
-    "location": "Beside UMTH, Gwange, Maiduguri",
-    "distanceToVenue": "7.0 KM",
-    "contactPhone": null,
-    "description": "Budget property beside the University of Maiduguri Teaching Hospital in Gwange, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
-    "roomSummary": "Categories priced",
-    "rateStatus": "Rates listed",
-    "highlights": [
-      "Distance to venue: 7.0 KM"
-    ],
-    "rooms": [
-      {
-        "label": "Single",
-        "rate": "N7,000"
-      },
-      {
-        "label": "Standard",
-        "rate": "N9,000"
-      },
-      {
-        "label": "Luxury",
-        "rate": "N10,000"
-      },
-      {
-        "label": "Executive",
-        "rate": "N15,000"
       }
     ],
     "images": [],

@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface HotelImageSliderProps {
@@ -15,67 +16,65 @@ interface HotelImageSliderProps {
    * max-height on wider screens — overridable by the caller.
    */
   className?: string;
-  /** Auto-play interval in ms. Set to 0 to disable. Defaults to 3500. */
-  autoPlayMs?: number;
 }
 
 /**
  * Professional image gallery slider for hotel cards.
  * - Responsive: aspect-ratio on mobile, capped height on desktop
- * - Smooth momentum swipe via embla-carousel
- * - Auto-plays through images with a pause-on-hover/touch
+ * - Smooth swipe / drag via embla-carousel
+ * - Manual left / right arrow navigation (no auto-play)
  * - Pill-shaped dot nav with active stretch indicator
- * - Gradient overlay keeps the dot nav readable on any image
+ * - Gradient overlay keeps the controls readable on any image
  * - N/total count badge in the top-right corner
+ * - Arrows fade in on hover (desktop) and are always visible on touch devices
  */
 export function HotelImageSlider({
   images,
   shortName,
   alt = "Hotel photo",
   className,
-  autoPlayMs = 3500,
 }: HotelImageSliderProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, dragFree: false });
   const [activeIndex, setActiveIndex] = useState(0);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const [isHovered, setIsHovered] = useState(false);
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
     setActiveIndex(emblaApi.selectedScrollSnap());
+    setCanScrollPrev(emblaApi.canScrollPrev());
+    setCanScrollNext(emblaApi.canScrollNext());
   }, [emblaApi]);
 
   useEffect(() => {
     if (!emblaApi) return;
     emblaApi.on("select", onSelect);
-    return () => { emblaApi.off("select", onSelect); };
+    emblaApi.on("reInit", onSelect);
+    onSelect(); // sync initial state
+    return () => {
+      emblaApi.off("select", onSelect);
+      emblaApi.off("reInit", onSelect);
+    };
   }, [emblaApi, onSelect]);
 
-  // Auto-play — pauses while the user is hovering/touching
-  useEffect(() => {
-    if (!emblaApi || autoPlayMs <= 0 || images.length <= 1) return;
+  const scrollPrev = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      emblaApi?.scrollPrev();
+    },
+    [emblaApi],
+  );
 
-    const start = () => {
-      timerRef.current = setInterval(() => emblaApi.scrollNext(), autoPlayMs);
-    };
-    const stop = () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
+  const scrollNext = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      emblaApi?.scrollNext();
+    },
+    [emblaApi],
+  );
 
-    if (!isHovered) start(); else stop();
-    return stop;
-  }, [emblaApi, autoPlayMs, images.length, isHovered]);
-
-  /**
-   * Root wrapper classes:
-   * - `aspect-[16/9]`  → natural 16:9 on narrow mobile (fills full width)
-   * - `sm:aspect-auto sm:h-56` → fixed 224 px on ≥640 px screens
-   * - `md:h-64`        → a bit taller on desktop cards
-   * - `lg:h-72`        → even taller on wide layouts
-   * The caller can override with `className`.
-   */
   const rootCls = cn(
-    "relative w-full overflow-hidden",
+    "relative w-full overflow-hidden group",
     "aspect-[16/9] sm:aspect-auto sm:h-56 md:h-64 lg:h-72",
     className,
   );
@@ -83,7 +82,12 @@ export function HotelImageSlider({
   // ── No images — branded gradient placeholder ──────────────────────────
   if (!images.length) {
     return (
-      <div className={cn(rootCls, "flex items-center justify-center bg-gradient-to-br from-primary-soft via-accent-soft to-primary-soft")}>
+      <div
+        className={cn(
+          rootCls,
+          "flex items-center justify-center bg-gradient-to-br from-primary-soft via-accent-soft to-primary-soft",
+        )}
+      >
         <span className="text-2xl font-black tracking-tight text-primary/70">
           {shortName ?? "Hotel"}
         </span>
@@ -107,14 +111,8 @@ export function HotelImageSlider({
 
   // ── Gallery slider ────────────────────────────────────────────────────
   return (
-    <div
-      className={rootCls}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onTouchStart={() => setIsHovered(true)}
-      onTouchEnd={() => setIsHovered(false)}
-    >
-      {/* Embla viewport — must fill the positioned parent */}
+    <div className={rootCls}>
+      {/* Embla viewport */}
       <div ref={emblaRef} className="absolute inset-0 overflow-hidden">
         <div className="flex h-full">
           {images.map((src, i) => (
@@ -133,8 +131,52 @@ export function HotelImageSlider({
         </div>
       </div>
 
+      {/* Left gradient scrim (behind prev arrow) */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-black/30 to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
+
+      {/* Right gradient scrim (behind next arrow) */}
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-black/30 to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
+
       {/* Bottom gradient scrim */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/60 to-transparent" />
+
+      {/* ← Prev arrow */}
+      <button
+        aria-label="Previous photo"
+        onClick={scrollPrev}
+        className={cn(
+          // Always visible on touch screens; fade in on desktop hover
+          "absolute left-2.5 top-1/2 -translate-y-1/2 z-10",
+          "flex h-8 w-8 items-center justify-center rounded-full",
+          "bg-black/40 backdrop-blur-sm text-white shadow-lg",
+          "border border-white/20",
+          "transition-all duration-200",
+          // on desktop: hidden until group-hover
+          "opacity-100 sm:opacity-0 sm:group-hover:opacity-100",
+          "hover:bg-black/65 hover:scale-110 active:scale-95",
+          !canScrollPrev && "cursor-default opacity-30 sm:opacity-0",
+        )}
+      >
+        <ChevronLeft className="h-4 w-4 stroke-[2.5]" />
+      </button>
+
+      {/* → Next arrow */}
+      <button
+        aria-label="Next photo"
+        onClick={scrollNext}
+        className={cn(
+          "absolute right-2.5 top-1/2 -translate-y-1/2 z-10",
+          "flex h-8 w-8 items-center justify-center rounded-full",
+          "bg-black/40 backdrop-blur-sm text-white shadow-lg",
+          "border border-white/20",
+          "transition-all duration-200",
+          "opacity-100 sm:opacity-0 sm:group-hover:opacity-100",
+          "hover:bg-black/65 hover:scale-110 active:scale-95",
+          !canScrollNext && "cursor-default opacity-30 sm:opacity-0",
+        )}
+      >
+        <ChevronRight className="h-4 w-4 stroke-[2.5]" />
+      </button>
 
       {/* Dot indicators */}
       <div className="absolute inset-x-0 bottom-2.5 flex items-center justify-center gap-1.5">
@@ -142,7 +184,10 @@ export function HotelImageSlider({
           <button
             key={i}
             aria-label={`Go to slide ${i + 1}`}
-            onClick={() => emblaApi?.scrollTo(i)}
+            onClick={(e) => {
+              e.stopPropagation();
+              emblaApi?.scrollTo(i);
+            }}
             className={cn(
               "rounded-full transition-all duration-300",
               i === activeIndex

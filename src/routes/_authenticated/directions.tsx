@@ -15,14 +15,12 @@ import {
   Navigation,
   MapPin,
   Phone,
-  Clock,
   Route as RouteIcon,
   ExternalLink,
   ChevronLeft,
   ChevronUp,
   ChevronDown,
   LocateFixed,
-  Utensils,
   CheckCircle2,
 } from "lucide-react";
 
@@ -153,7 +151,7 @@ function DirectionsPage() {
   const distanceKm = route ? (route.distanceMeters / 1000).toFixed(1) : null;
 
   // Sheet height classes
-  const sheetHeight = sheet === "peek" ? "h-[120px]" : sheet === "half" ? "h-[52vh]" : "h-[88vh]";
+  const sheetHeight = sheet === "peek" ? "h-[90px]" : sheet === "half" ? "h-[38vh]" : "h-[72vh]";
 
   return (
     /* Full-viewport container — no scroll on this level */
@@ -176,40 +174,15 @@ function DirectionsPage() {
         </ClientOnly>
       </div>
 
-      {/* ── Floating top bar ──────────────────────────────────────── */}
-      <div className="relative z-20 flex items-center gap-3 px-4 pt-12 pb-3 pointer-events-none">
-        {/* Back button */}
+      {/* ── Floating back button only ─────────────────────────────── */}
+      <div className="absolute left-4 top-12 z-20">
         <Link
           to="/nearby"
-          className="pointer-events-auto flex h-10 w-10 items-center justify-center rounded-full bg-white/95 shadow-lg backdrop-blur-sm transition hover:bg-white active:scale-95"
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-white/95 shadow-lg backdrop-blur-sm transition hover:bg-white active:scale-95"
           aria-label="Back to Nearby"
         >
           <ChevronLeft className="h-5 w-5 text-foreground" />
         </Link>
-
-        {/* Destination pill */}
-        <div className="pointer-events-auto flex-1 flex items-center gap-2.5 rounded-2xl bg-white/95 px-4 py-2.5 shadow-lg backdrop-blur-sm">
-          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amber-100">
-            <Utensils className="h-4 w-4 text-amber-600" />
-          </div>
-          <div className="min-w-0 flex-1">
-            <p className="truncate text-sm font-bold text-foreground leading-tight">{dest.name}</p>
-            {address && (
-              <p className="truncate text-[11px] text-muted-foreground leading-tight">{address}</p>
-            )}
-          </div>
-          {/* Route badge */}
-          {durationMin && distanceKm && (
-            <div className="shrink-0 flex items-center gap-1.5 rounded-xl bg-primary px-2.5 py-1">
-              <Clock className="h-3 w-3 text-primary-foreground" />
-              <span className="text-xs font-bold text-primary-foreground">{durationMin} min</span>
-              <span className="text-[10px] text-primary-foreground/70">· {distanceKm} km</span>
-            </div>
-          )}
-          {isPending && (
-            <Loader2 className="h-4 w-4 shrink-0 animate-spin text-primary" />
-          )}
-        </div>
       </div>
 
       {/* ── Floating right-side action buttons ───────────────────── */}
