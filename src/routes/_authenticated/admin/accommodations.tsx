@@ -263,7 +263,7 @@ function HotelForm({ close, editing }: { close: () => void; editing: Hotel | nul
               shortName={form.name || "Preview"}
               alt="Preview"
               className="aspect-[16/9] sm:aspect-auto sm:h-48"
-              autoPlayMs={0}
+              // autoPlayMs={0}
             />
             <p className="px-3 py-1.5 text-center text-[10px] text-muted-foreground">
               Preview · swipe or use dots to navigate
