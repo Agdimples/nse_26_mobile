@@ -44,6 +44,10 @@ export interface NearbyPoi {
   note?: string;
   phone?: string;
   query?: string;
+  /** Generic static image URL (used by Airport, ATM, Shopping etc.) */
+  image?: string;
+  /** Short display label shown on the card badge (e.g. "ROYAL PALACE") */
+  highlight?: string;
   /** Restaurant-specific fields */
   address?: string;
   imageFolder?: string;

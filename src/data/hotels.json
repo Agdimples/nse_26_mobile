@@ -890,31 +890,8 @@
     "longitude": 13.1324383
   },
   {
-    "id": "imperial-hotel",
-    "rank": 13,
-    "qualityTier": "standard",
-    "name": "Imperial Hotel",
-    "shortName": "Imperial",
-    "tone": "Old GRA stay",
-    "location": "Old GRA, Circular Road, Maiduguri",
-    "distanceToVenue": "Distance pending official logistics confirmation",
-    "contactPhone": null,
-    "description": "Hotel in the Old GRA on Circular Road, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
-    "roomSummary": "Categories priced",
-    "rateStatus": "Rates pending",
-    "highlights": [],
-    "rooms": [
-      {
-        "label": "Rates",
-        "rate": "Pending"
-      }
-    ],
-    "images": [],
-    "photoCount": 0
-  },
-  {
     "id": "jemdove-homes",
-    "rank": 14,
+    "rank": 13,
     "qualityTier": "standard",
     "name": "Jemdove Homes and Apartments",
     "shortName": "Jemdove",
@@ -959,7 +936,7 @@
   },
   {
     "id": "cityden-apartments",
-    "rank": 15,
+    "rank": 14,
     "qualityTier": "standard",
     "name": "Cityden Apartments",
     "shortName": "Cityden",
@@ -1033,7 +1010,7 @@
   },
   {
     "id": "grand-pinnacle",
-    "rank": 16,
+    "rank": 15,
     "qualityTier": "premier",
     "name": "Grand Pinnacle Luxury Hotel",
     "shortName": "Grand Pinnacle",
@@ -1093,7 +1070,7 @@
   },
   {
     "id": "khanan-hotel",
-    "rank": 17,
+    "rank": 16,
     "qualityTier": "standard",
     "name": "Khanan Hotel",
     "shortName": "Khanan",
@@ -1164,7 +1141,7 @@
   },
   {
     "id": "bajele-hotels",
-    "rank": 18,
+    "rank": 17,
     "qualityTier": "pending",
     "name": "Bajele Hotels and Apartments",
     "shortName": "Bajele",
@@ -1208,7 +1185,7 @@
   },
   {
     "id": "command-guest-inn",
-    "rank": 19,
+    "rank": 18,
     "qualityTier": "standard",
     "name": "Command Guesthouse Maiduguri",
     "shortName": "Command Guest",
@@ -1261,7 +1238,7 @@
   },
   {
     "id": "dujima",
-    "rank": 20,
+    "rank": 19,
     "qualityTier": "standard",
     "name": "Dujima International Hotel",
     "shortName": "Dujima",
@@ -1338,7 +1315,7 @@
   },
   {
     "id": "barwee",
-    "rank": 21,
+    "rank": 20,
     "qualityTier": "premier",
     "name": "Barwee Luxury Suites",
     "shortName": "Barwee",
@@ -1414,7 +1391,7 @@
   },
   {
     "id": "djado",
-    "rank": 22,
+    "rank": 21,
     "qualityTier": "premier",
     "name": "D'jado Hotel",
     "shortName": "D'jado",
@@ -1475,7 +1452,7 @@
   },
   {
     "id": "garki-guest",
-    "rank": 23,
+    "rank": 22,
     "qualityTier": "standard",
     "name": "Garki Guest Inn Main & Annex",
     "shortName": "Garki Guest",
@@ -1565,7 +1542,7 @@
   },
   {
     "id": "garki-annex",
-    "rank": 24,
+    "rank": 23,
     "qualityTier": "value",
     "name": "Garki Guest Inn Annex",
     "shortName": "Garki Annex",
@@ -1591,12 +1568,27 @@
         "rate": "N25,000"
       }
     ],
-    "images": [],
-    "photoCount": 0
+    "images": [
+      {
+        "preview": "/hotels/garki/preview/01.jpg",
+        "thumb": "/hotels/garki/thumb/010.jpg"
+      },
+      {
+        "preview": "/hotels/garki/preview/02.jpg",
+        "thumb": "/hotels/garki/thumb/010.jpg"
+      },
+      {
+        "preview": "/hotels/garki/preview/03.jpg",
+        "thumb": "/hotels/garki/thumb/010.jpg"
+      }
+    ],
+    "photoCount": 3,
+    "latitude": 11.8444772,
+    "longitude": 13.0960245
   },
   {
     "id": "zairan",
-    "rank": 25,
+    "rank": 24,
     "qualityTier": "pending",
     "name": "Zairan Hotel",
     "shortName": "Zairan",
@@ -1651,7 +1643,7 @@
   },
   {
     "id": "desert-view",
-    "rank": 26,
+    "rank": 25,
     "qualityTier": "premier",
     "name": "Desert View Suites",
     "shortName": "Desert View",
@@ -1704,7 +1696,7 @@
   },
   {
     "id": "muna",
-    "rank": 27,
+    "rank": 26,
     "qualityTier": "standard",
     "name": "Muna Hotels Limited",
     "shortName": "Muna",
@@ -1757,7 +1749,7 @@
   },
   {
     "id": "galaxy-hotel",
-    "rank": 28,
+    "rank": 27,
     "qualityTier": "pending",
     "name": "Galaxy Guest Palace Maiduguri",
     "shortName": "Galaxy",
@@ -1800,7 +1792,7 @@
   },
   {
     "id": "glopet-hotel",
-    "rank": 29,
+    "rank": 28,
     "qualityTier": "pending",
     "name": "Glopet Resorts Hotel & Event Center",
     "shortName": "Glopet",
@@ -1844,7 +1836,7 @@
   },
   {
     "id": "lale-guest-house",
-    "rank": 30,
+    "rank": 29,
     "qualityTier": "value",
     "name": "Lale Guest House",
     "shortName": "Lale",
@@ -1898,7 +1890,7 @@
   },
   {
     "id": "yerwa-guest-inn",
-    "rank": 31,
+    "rank": 30,
     "qualityTier": "pending",
     "name": "Yerwa Guest Inn",
     "shortName": "Yerwa Guest",
@@ -1931,11 +1923,13 @@
         "thumb": "/hotels/yerwa/thumb/002.webp"
       }
     ],
-    "photoCount": 2
+    "photoCount": 2,
+    "latitude": 12.1073056,
+    "longitude": 12.8466225
   },
   {
     "id": "unimaid-guest-inn",
-    "rank": 32,
+    "rank": 31,
     "qualityTier": "pending",
     "name": "UNIMAID Guest House",
     "shortName": "UNIMAID Guest",
@@ -1987,31 +1981,8 @@
     "longitude": 13.19229
   },
   {
-    "id": "umth-guest-house",
-    "rank": 33,
-    "qualityTier": "value",
-    "name": "UMTH Guest House",
-    "shortName": "UMTH",
-    "tone": "Teaching-hospital guest house",
-    "location": "University of Maiduguri Teaching Hospital, Maiduguri",
-    "distanceToVenue": "Distance pending official logistics confirmation",
-    "contactPhone": null,
-    "description": "Guest house of the University of Maiduguri Teaching Hospital, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
-    "roomSummary": "Categories priced",
-    "rateStatus": "Rates pending",
-    "highlights": [],
-    "rooms": [
-      {
-        "label": "Rates",
-        "rate": "Pending"
-      }
-    ],
-    "images": [],
-    "photoCount": 0
-  },
-  {
     "id": "prime-lodge-2",
-    "rank": 34,
+    "rank": 32,
     "qualityTier": "standard",
     "name": "Prime Lodge",
     "shortName": "Prime",
@@ -2068,7 +2039,7 @@
   },
   {
     "id": "house-174",
-    "rank": 35,
+    "rank": 33,
     "qualityTier": "standard",
     "name": "House 174",
     "shortName": "House 174",
@@ -2114,19 +2085,19 @@
   },
   {
     "id": "rahama-lodge",
-    "rank": 36,
+    "rank": 34,
     "qualityTier": "value",
     "name": "Rahama Lodge",
     "shortName": "Rahama",
     "tone": "Budget lodge on Damboa Road",
     "location": "R4CV+VW2, Yerwa Road, Damboa Road, Maiduguri",
     "distanceToVenue": "2.4 km",
-    "contactPhone": "0706 767 5556, 0803 256 1263",
+    "contactPhone": "0706 767 5556",
     "description": "Large budget lodge on Yerwa/Damboa Road, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
     "roomSummary": "95 rooms (sheet)",
     "rateStatus": "Rates listed",
     "highlights": [
-      "Contact: 0706 767 5556, 0803 256 1263",
+      "Contact: 0706 767 5556",
       "Rooms: 95",
       "Distance to venue: 2.4km"
     ],
@@ -2164,18 +2135,21 @@
   },
   {
     "id": "starlight-peace",
-    "rank": 37,
+    "rank": 35,
     "qualityTier": "standard",
     "name": "Starlight Peace & Luxury Hotel",
     "shortName": "Starlight",
     "tone": "Near Maimalari Barracks",
     "location": "Opposite Maimalari Barracks, Baga Road, Maiduguri",
-    "distanceToVenue": "Distance pending official logistics confirmation",
-    "contactPhone": null,
+    "distanceToVenue": "13.4 KM",
+    "contactPhone": "08032561263",
     "description": "Hotel opposite Maimalari Barracks on Baga Road, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
     "roomSummary": "Categories priced",
     "rateStatus": "Rates listed",
-    "highlights": [],
+    "highlights": [
+      "Contact: 0803 256 1263",
+      "Distance to venue: 13.4 KM"
+    ],
     "rooms": [
       {
         "label": "Rates",
@@ -2200,59 +2174,9 @@
         "thumb": "/hotels/starlight/ST01.webp"
       }
     ],
-    "photoCount": 4
-  },
-  {
-    "id": "dujima-annex",
-    "rank": 38,
-    "qualityTier": "premier",
-    "name": "Dujima International Hotel Annex",
-    "shortName": "Dujima Annex",
-    "tone": "Cash-rate branch",
-    "location": "Wulari Ward / off Sir Kashim Way, Maiduguri",
-    "distanceToVenue": "2.8 KM",
-    "contactPhone": "0806 873 2382",
-    "description": "An annex-style Dujima option documented by the supplied cash-rate sheet. It appears to operate under the Dujima International Hotels brand with separate room tariffs and hall rates.",
-    "roomSummary": "30 rooms (sheet)",
-    "rateStatus": "Rates listed",
-    "highlights": [
-      "Cash-rate sheet lists single, standard, single luxury, executive studio, governor's lodge and presidential suite",
-      "Sheet notes 7.5% VAT included",
-      "Conference hall and banquet hall rates are also listed",
-      "Contact: 0806 873 2382",
-      "Rooms: 30",
-      "Distance to venue: 2.8 KM"
-    ],
-    "rooms": [
-      {
-        "label": "Single",
-        "rate": "N18,000"
-      },
-      {
-        "label": "Standard",
-        "rate": "N21,000"
-      },
-      {
-        "label": "Single Luxury",
-        "rate": "N25,000"
-      },
-      {
-        "label": "Executive Studio",
-        "rate": "N32,000"
-      },
-      {
-        "label": "Governor's Lodge",
-        "rate": "N38,000"
-      },
-      {
-        "label": "Presidential Suite",
-        "rate": "N50,000"
-      }
-    ],
-    "images": [],
-    "photoCount": 0,
-    "latitude": 11.839199,
-    "longitude": 13.1413143
+    "photoCount": 4,
+    "latitude": 11.8888725,
+    "longitude": 13.0895104
   },
   {
     "id": "garki-annex",
@@ -2262,13 +2186,14 @@
     "shortName": "Haske",
     "tone": "Budget stay in Low-Cost",
     "location": "Gubio Road, Low-Cost, Maiduguri",
-    "distanceToVenue": "Distance pending official logistics confirmation",
+    "distanceToVenue": "9.9 KM",
     "contactPhone": "0806 863 8335",
     "description": "Budget guest inn on Gubio Road in the Low-Cost area, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
     "roomSummary": "75 rooms (sheet)",
     "rateStatus": "Rates listed",
     "highlights": [
       "Contact: 0806 863 8335",
+      "Distance to venue: 9.9 KM",
       "Rooms: 75"
     ],
     "rooms": [
@@ -2295,26 +2220,26 @@
         "thumb": "/hotels/garki/thumb/03.jpg"
       }
     ],
-    "photoCount": 0,
+    "photoCount": 3,
     "latitude": 11.8444772,
     "longitude": 13.0960245
   },
   {
     "id": "lake-chad-hotel",
-    "rank": 40,
+    "rank": 37,
     "qualityTier": "value",
     "name": "Lake Chad Hotel",
     "shortName": "Lake Chad",
     "tone": "Value stay on Kashim Ibrahim Road",
     "location": "Kashim Ibrahim Road, Maiduguri",
-    "distanceToVenue": "10 KM",
+    "distanceToVenue": "3.9 KM",
     "contactPhone": "0906 686 3917, 0814 408 4721",
     "description": "Value hotel on Kashim Ibrahim Road, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
     "roomSummary": "Categories priced",
     "rateStatus": "Rates listed",
     "highlights": [
       "Contact: 0906 686 3917, 0814 408 4721",
-      "Distance to venue: 10 KM"
+      "Distance to venue: 3.9 KM"
     ],
     "rooms": [
       {
@@ -2334,75 +2259,27 @@
         "rate": "N30,000"
       }
     ],
-    "images": [],
-    "photoCount": 0,
-    "latitude": 11.839199,
-    "longitude": 13.1413143
-  },
-  {
-    "id": "ali-chairman",
-    "rank": 41,
-    "qualityTier": "value",
-    "name": "Ali Chairman Guest Inn",
-    "shortName": "Ali Chairman",
-    "tone": "Budget stay on Custom Road",
-    "location": "R55R+2PV along Custom Road, Maiduguri",
-    "distanceToVenue": "2.9 KM",
-    "contactPhone": "0803 987 3187",
-    "description": "Budget guest inn along Custom Road, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
-    "roomSummary": "30 rooms (sheet)",
-    "rateStatus": "Rates listed",
-    "highlights": [
-      "Contact: 0803 987 3187",
-      "Rooms: 30",
-      "Distance to venue: 2.9 KM"
-    ],
-    "rooms": [
+    "images": [
       {
-        "label": "Single",
-        "rate": "N16,000"
+        "preview": "/hotels/lake/01.jpg",
+        "thumb": "/hotels/lake/thumb/01.jpg"
       },
       {
-        "label": "Standard",
-        "rate": "N28,000"
-      }
-    ],
-    "images": [],
-    "photoCount": 0
-  },
-  {
-    "id": "travel-heaven",
-    "rank": 42,
-    "qualityTier": "value",
-    "name": "Travel Heaven",
-    "shortName": "Travel Heaven",
-    "tone": "Budget stay on Gubio Road",
-    "location": "W33W+7R6 Gubio Road, Maiduguri",
-    "distanceToVenue": "Distance pending official logistics confirmation",
-    "contactPhone": "0803 256 1263",
-    "description": "Budget accommodation on Gubio Road, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
-    "roomSummary": "20 rooms (sheet)",
-    "rateStatus": "Rates listed",
-    "highlights": [
-      "Contact: 0803 256 1263",
-      "Rooms: 20"
-    ],
-    "rooms": [
-      {
-        "label": "Single",
-        "rate": "N15,000"
+        "preview": "/hotels/lake/02.jpg",
+        "thumb": "/hotels/lake/thumb/01.jpg"
       },
       {
-        "label": "Standard",
-        "rate": "N20,000"
+        "preview": "/hotels/lake/03.jpg",
+        "thumb": "/hotels/lake/thumb/01.jpg"
       }
     ],
-    "images": [],
-    "photoCount": 0
+    "photoCount": 3,
+    "latitude": 11.838973,
+    "longitude": 13.141462
   },
   {
     "id": "peace-lodge",
-    "rank": 43,
+    "rank": 38,
     "qualityTier": "value",
     "name": "Peace Lodge",
     "shortName": "Peace",
@@ -2452,13 +2329,13 @@
   },
   {
     "id": "ali-chairman",
-    "rank": 43,
+    "rank": 39,
     "qualityTier": "value",
     "name": "Ali Chairman Guest Inn",
     "shortName": "Ali Chairman",
     "tone": "Budget stay on Custom Road",
     "location": "R55R+2PV along Custom Road, Maiduguri",
-    "distanceToVenue": "2.9 KM",
+    "distanceToVenue": "6.7 KM",
     "contactPhone": "0803 987 3187",
     "description": "Budget guest inn along Custom Road, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
     "roomSummary": "30 rooms (sheet)",
@@ -2466,7 +2343,7 @@
     "highlights": [
       "Contact: 0803 987 3187",
       "Rooms: 30",
-      "Distance to venue: 2.9 KM"
+      "Distance to venue: 6.7 KM"
     ],
     "rooms": [
       {
@@ -2478,68 +2355,84 @@
         "rate": "N28,000"
       }
     ],
-    "images": [],
-    "photoCount": 0
-  },
-  {
-    "id": "horizontal-inn",
-    "rank": 44,
-    "qualityTier": "value",
-    "name": "Horizontal Guest Inn",
-    "shortName": "Horizontal",
-    "tone": "Budget stay with discount",
-    "location": "Maiduguri, Borno State",
-    "distanceToVenue": "7.8 KM",
-    "contactPhone": "0803 850 3548",
-    "description": "Budget guest inn offering a 7.5% discount, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
-    "roomSummary": "20 rooms (sheet)",
-    "rateStatus": "Rates listed",
-    "highlights": [
-      "Contact: 0803 850 3548",
-      "Rooms: 20",
-      "Distance to venue: 7.8 KM"
-    ],
-    "rooms": [
+    "images": [
       {
-        "label": "Studio",
-        "rate": "N18,000"
+        "preview": "/hotels/ali-chairman/01.jpg",
+        "thumb": "/hotels/ali-chairma/thumb/01.jpg"
       },
       {
-        "label": "Deluxe",
-        "rate": "N25,000"
+        "preview": "/hotels/ali-chairman/02.jpg",
+        "thumb": "/hotels/ali-chairma/thumb/02.jpg"
       },
       {
-        "label": "Luxury",
-        "rate": "N35,000 (7.5% discount)"
+        "preview": "/hotels/ali-chairman/03.jpg",
+        "thumb": "/hotels/ali-chairma/thumb/03.jpg"
+      },
+      {
+        "preview": "/hotels/ali-chairman/04.jpg",
+        "thumb": "/hotels/ali-chairma/thumb/04.jpg"
+      },
+      {
+        "preview": "/hotels/ali-chairman/05.jpg",
+        "thumb": "/hotels/ali-chairma/thumb/05.jpg"
       }
     ],
-    "images": [],
-    "photoCount": 0
+    "photoCount": 5,
+    "latitude": 11.8602298,
+    "longitude": 13.1579267
   },
   {
-    "id": "tourist-hotel",
-    "rank": 45,
+    "id": "wadai-guest-villa",
+    "rank": 40,
     "qualityTier": "value",
-    "name": "Tourist Hotel",
-    "shortName": "Tourist",
-    "tone": "Budget stay",
-    "location": "Maiduguri, Borno State",
-    "distanceToVenue": "7.7 KM",
-    "contactPhone": null,
-    "description": "Budget hotel listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
+    "name": "Wadai guest villa",
+    "shortName": "Wadai guest",
+    "tone": "Old GRA Maiduguri borno state",
+    "location": "No 26 Kyari Mohamed drive off gombole road, Maiduguri borno state Nigeria",
+    "distanceToVenue": "6.7 KM",
+    "contactPhone": "08022941451",
+    "description": "Budget guest inn along Custom Road, listed in the official masterlist. Data from the official Maiduguri hotels masterlist (Sheet1 (4), 23 Sep 2026).",
     "roomSummary": "30 rooms (sheet)",
     "rateStatus": "Rates listed",
     "highlights": [
+      "Contact: 08022941451",
       "Rooms: 30",
-      "Distance to venue: 7.7 KM"
+      "Distance to venue: 6.7 KM"
     ],
     "rooms": [
       {
-        "label": "Single",
-        "rate": "N10,000"
+        "label": "Deluxe Suites",
+        "rate": "N55,000"
+      },
+      {
+        "label": "Royal Suite",
+        "rate": "N75,000"
+      },
+      {
+        "label": "Executive Suite",
+        "rate": "N90,000"
+      },
+       {
+        "label": "Diplomatic Suite",
+        "rate": "N120,000"
       }
     ],
-    "images": [],
-    "photoCount": 0
+    "images": [
+      {
+        "preview": "/hotels/waide/01.jpeg",
+        "thumb": "/hotels/waide/thumb/01.jpeg"
+      },
+      {
+        "preview": "/hotels/waide/02.jpeg",
+        "thumb": "/hotels/waide/thumb/02.jpeg"
+      },
+       {
+        "preview": "/hotels/waide/02.jpeg",
+        "thumb": "/hotels/waide/thumb/02.jpeg"
+      }
+    ],
+    "photoCount": 5,
+    "latitude": 11.832778,
+    "longitude": 13.1516555
   }
 ]

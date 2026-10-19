@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { NsePageHeader } from "@/components/app/NsePageHeader";
-import { useMemo, useState, useCallback, useEffect, useRef } from "react";
+import { useMemo, useState, useCallback } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -77,9 +77,7 @@ function buildImageUrls(folder: string, count: number): string[] {
   });
 }
 
-// ─── Restaurant Image Carousel (auto-sliding) ────────────────────────────────
-
-const SLIDE_INTERVAL_MS = 3500;
+// ─── Restaurant Image Carousel (manual navigation) ───────────────────────────
 
 function RestaurantCard({ poi }: { poi: NearbyPoi }) {
   const images = poi.imageFolder
@@ -88,8 +86,6 @@ function RestaurantCard({ poi }: { poi: NearbyPoi }) {
 
   const [idx, setIdx] = useState(0);
   const [imgErrors, setImgErrors] = useState<Set<number>>(new Set());
-  const [paused, setPaused] = useState(false);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const navigate = useNavigate();
 
   const validImages = images.filter((_, i) => !imgErrors.has(i));
@@ -105,15 +101,6 @@ function RestaurantCard({ poi }: { poi: NearbyPoi }) {
     (e: React.MouseEvent) => { e.stopPropagation(); goTo(safeIdx + 1); },
     [goTo, safeIdx],
   );
-
-  // Auto-advance
-  useEffect(() => {
-    if (total <= 1 || paused) return;
-    timerRef.current = setInterval(() => {
-      setIdx((i) => (i + 1) % total);
-    }, SLIDE_INTERVAL_MS);
-    return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, [total, paused]);
 
   const specialties = poi.note ? parseSpecialties(poi.note) : [];
 
@@ -137,10 +124,6 @@ function RestaurantCard({ poi }: { poi: NearbyPoi }) {
       {/* ── Photo gallery ─────────────────────────────────── */}
       <div
         className="relative h-52 overflow-hidden bg-amber-50"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-        onTouchStart={() => setPaused(true)}
-        onTouchEnd={() => setPaused(false)}
       >
         {total === 0 ? (
           <div className="flex h-full items-center justify-center">
@@ -271,6 +254,362 @@ function RestaurantCard({ poi }: { poi: NearbyPoi }) {
           ))}
         </div>
       )}
+    </Card>
+  );
+}
+
+// ─── Airport Card (image banner + details) ────────────────────────────────────
+
+function AirportCard({ poi }: { poi: NearbyPoi }) {
+  const navigate = useNavigate();
+
+  function handleDirections(e: React.MouseEvent) {
+    e.stopPropagation();
+    navigate({
+      to: "/directions",
+      search: {
+        lat: poi.latitude ?? undefined,
+        lng: poi.longitude ?? undefined,
+        name: poi.name,
+      },
+    });
+  }
+
+  return (
+    <Card className="overflow-hidden border-0 bg-surface shadow-card transition-shadow hover:shadow-md rounded-2xl">
+      {/* ── Image banner ─────────────────────────────────────── */}
+      <div className="relative h-44 w-full overflow-hidden bg-sky-100">
+        {poi.image ? (
+          <img
+            src={poi.image}
+            alt={poi.name}
+            className="h-full w-full object-cover object-center"
+            loading="lazy"
+          />
+        ) : (
+          <div className="flex h-full items-center justify-center">
+            <Plane className="h-14 w-14 text-sky-200" />
+          </div>
+        )}
+
+        {/* Dark gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+
+        {/* IATA badge top-left */}
+        <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full bg-black/40 px-3 py-1 backdrop-blur-sm">
+          <Plane className="h-3.5 w-3.5 text-sky-300" />
+          <span className="text-[11px] font-bold tracking-widest text-sky-200 uppercase">
+            MIU
+          </span>
+        </div>
+
+        {/* Distance badge top-right */}
+        {poi.distanceKm != null && (
+          <div className="absolute right-3 top-3 rounded-full bg-black/40 px-2.5 py-1 backdrop-blur-sm">
+            <span className="text-[11px] font-semibold text-white">
+              {poi.distanceKm} km
+            </span>
+          </div>
+        )}
+
+        {/* Bottom overlay: name + directions button */}
+        <div className="absolute bottom-0 left-0 right-0 flex items-end justify-between gap-2 px-4 pb-3.5 pt-2">
+          <div className="min-w-0">
+            <h4 className="text-[15px] font-bold leading-tight text-white drop-shadow">
+              {poi.name}
+            </h4>
+            {poi.note && (
+              <p className="mt-0.5 text-[11px] text-sky-200/90">{poi.note}</p>
+            )}
+          </div>
+          <button
+            onClick={handleDirections}
+            className="flex shrink-0 items-center gap-1.5 rounded-full bg-sky-500 px-3 py-1.5 text-[12px] font-semibold text-white shadow-lg transition hover:bg-sky-600 active:scale-95"
+            aria-label={`Directions to ${poi.name}`}
+          >
+            <Navigation className="h-3.5 w-3.5" />
+            Directions
+          </button>
+        </div>
+      </div>
+
+      {/* ── Info row below image ──────────────────────────────── */}
+      <div className="flex items-center justify-between gap-3 px-4 py-3">
+        <div className="flex items-center gap-2 text-[13px] text-muted-foreground">
+          <MapPin className="h-3.5 w-3.5 shrink-0 text-sky-500" />
+          <span>~45 min from ICC · Airport Road</span>
+        </div>
+        {poi.phone && (
+          <a
+            href={`tel:${poi.phone.replace(/\s+/g, "")}`}
+            className="flex items-center gap-1 text-[12px] font-semibold text-primary"
+          >
+            <Phone className="h-3.5 w-3.5" />
+            {poi.phone}
+          </a>
+        )}
+      </div>
+    </Card>
+  );
+}
+
+// ─── Culture Card (image banner + details) ───────────────────────────────────
+
+function CultureCard({ poi }: { poi: NearbyPoi }) {
+  const label = (poi as any).highlight ?? "CULTURE";
+
+  return (
+    <Card className="overflow-hidden border-0 bg-surface shadow-card transition-shadow hover:shadow-md rounded-2xl">
+      {/* ── Image banner ─────────────────────────────────────── */}
+      <div className="relative h-44 w-full overflow-hidden bg-purple-50">
+        {poi.image ? (
+          <img
+            src={poi.image}
+            alt={poi.name}
+            className="h-full w-full object-cover object-center"
+            loading="lazy"
+          />
+        ) : (
+          <div className="flex h-full items-center justify-center">
+            <Church className="h-12 w-12 text-purple-200" />
+          </div>
+        )}
+
+        {/* Rich gradient: strong at bottom, soft at top */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
+
+        {/* Heritage badge top-left */}
+        <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full bg-black/45 px-2.5 py-1 backdrop-blur-sm">
+          <Church className="h-3 w-3 text-purple-300" />
+          <span className="text-[10px] font-bold tracking-widest text-purple-200 uppercase">
+            {label}
+          </span>
+        </div>
+
+        {/* Distance badge top-right */}
+        {poi.distanceKm != null && (
+          <div className="absolute right-3 top-3 rounded-full bg-black/45 px-2.5 py-1 backdrop-blur-sm">
+            <span className="text-[11px] font-semibold text-white">
+              {poi.distanceKm} km
+            </span>
+          </div>
+        )}
+
+        {/* Bottom overlay: name + directions */}
+        <div className="absolute bottom-0 left-0 right-0 flex items-end justify-between gap-2 px-4 pb-3.5 pt-2">
+          <div className="min-w-0">
+            <h4 className="text-[15px] font-bold leading-tight text-white drop-shadow line-clamp-1">
+              {poi.name}
+            </h4>
+            {poi.note && (
+              <p className="mt-0.5 text-[11px] text-purple-200/90 line-clamp-1">
+                {poi.note}
+              </p>
+            )}
+          </div>
+          <Link
+            to="/directions"
+            search={{
+              lat: poi.latitude ?? undefined,
+              lng: poi.longitude ?? undefined,
+              name: poi.name,
+            }}
+            className="flex shrink-0 items-center gap-1.5 rounded-full bg-purple-600 px-3 py-1.5 text-[12px] font-semibold text-white shadow-lg transition hover:bg-purple-700 active:scale-95"
+          >
+            <Navigation className="h-3.5 w-3.5" />
+            Directions
+          </Link>
+        </div>
+      </div>
+
+      {/* ── Info row below image ──────────────────────────────── */}
+      <div className="flex items-center gap-2 px-4 py-3">
+        <MapPin className="h-3.5 w-3.5 shrink-0 text-purple-500" />
+        <span className="text-[13px] text-muted-foreground">
+          {poi.distance} from ICC
+        </span>
+      </div>
+    </Card>
+  );
+}
+
+// ─── Government Card (image banner + details) ────────────────────────────────
+
+function GovernmentCard({ poi }: { poi: NearbyPoi }) {
+  const label = poi.name.toLowerCase().includes("borno")
+    ? "BORNO STATE"
+    : poi.name.toLowerCase().includes("lagos")
+    ? "LAGOS STATE"
+    : poi.name.toLowerCase().includes("yobe")
+    ? "YOBE STATE"
+    : "GOVT";
+
+  return (
+    <Card className="overflow-hidden border-0 bg-surface shadow-card transition-shadow hover:shadow-md rounded-2xl">
+      {/* ── Image banner ─────────────────────────────────────── */}
+      <div className="relative h-36 w-full overflow-hidden bg-blue-50">
+        {poi.image ? (
+          <img
+            src={poi.image}
+            alt={poi.name}
+            className="h-full w-full object-cover object-center"
+            loading="lazy"
+          />
+        ) : (
+          <div className="flex h-full items-center justify-center">
+            <Landmark className="h-12 w-12 text-blue-200" />
+          </div>
+        )}
+
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
+
+        {/* State label badge top-left */}
+        <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full bg-black/45 px-2.5 py-1 backdrop-blur-sm">
+          <Landmark className="h-3 w-3 text-blue-300" />
+          <span className="text-[10px] font-bold tracking-widest text-blue-200 uppercase">
+            {label}
+          </span>
+        </div>
+
+        {/* Distance badge top-right */}
+        {poi.distanceKm != null && (
+          <div className="absolute right-3 top-3 rounded-full bg-black/45 px-2.5 py-1 backdrop-blur-sm">
+            <span className="text-[11px] font-semibold text-white">
+              {poi.distanceKm} km
+            </span>
+          </div>
+        )}
+
+        {/* Bottom overlay: name + note */}
+        <div className="absolute bottom-0 left-0 right-0 px-4 pb-3 pt-2">
+          <h4 className="text-[14px] font-bold leading-tight text-white drop-shadow line-clamp-1">
+            {poi.name}
+          </h4>
+          {poi.note && (
+            <p className="mt-0.5 text-[11px] text-blue-200/90 line-clamp-1">
+              {poi.note}
+            </p>
+          )}
+        </div>
+      </div>
+
+      {/* ── Info row below image ──────────────────────────────── */}
+      <div className="flex items-center justify-between gap-2 px-4 py-3">
+        <div className="flex items-center gap-2 min-w-0">
+          <MapPin className="h-3.5 w-3.5 shrink-0 text-blue-500" />
+          <span className="text-[13px] text-muted-foreground truncate">
+            {poi.distance} from ICC
+          </span>
+        </div>
+        <Link
+          to="/directions"
+          search={{
+            lat: poi.latitude ?? undefined,
+            lng: poi.longitude ?? undefined,
+            name: poi.name,
+          }}
+          className="flex shrink-0 items-center gap-1.5 rounded-full bg-blue-600 px-3 py-1.5 text-[11px] font-semibold text-white shadow transition hover:bg-blue-700 active:scale-95"
+        >
+          <Navigation className="h-3 w-3" />
+          Directions
+        </Link>
+      </div>
+    </Card>
+  );
+}
+
+// ─── Security Card (image banner + details) ──────────────────────────────────
+
+function SecurityCard({ poi }: { poi: NearbyPoi }) {
+  // Decide icon label: Army vs Police vs other
+  const isArmy =
+    poi.name.toLowerCase().includes("army") ||
+    poi.name.toLowerCase().includes("cantonment") ||
+    poi.name.toLowerCase().includes("barracks");
+  const isPolice =
+    poi.name.toLowerCase().includes("police");
+
+  const typeLabel = isArmy ? "ARMY" : isPolice ? "POLICE" : "SECURITY";
+
+  return (
+    <Card className="overflow-hidden border-0 bg-surface shadow-card transition-shadow hover:shadow-md rounded-2xl">
+      {/* ── Image banner ─────────────────────────────────────── */}
+      <div className="relative h-36 w-full overflow-hidden bg-red-50">
+        {poi.image ? (
+          <img
+            src={poi.image}
+            alt={poi.name}
+            className="h-full w-full object-cover object-center"
+            loading="lazy"
+          />
+        ) : (
+          <div className="flex h-full items-center justify-center">
+            <Shield className="h-12 w-12 text-red-200" />
+          </div>
+        )}
+
+        {/* Dark gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
+
+        {/* Type badge top-left */}
+        <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full bg-black/45 px-2.5 py-1 backdrop-blur-sm">
+          <Shield className="h-3 w-3 text-red-300" />
+          <span className="text-[10px] font-bold tracking-widest text-red-200 uppercase">
+            {typeLabel}
+          </span>
+        </div>
+
+        {/* Distance badge top-right */}
+        {poi.distanceKm != null && (
+          <div className="absolute right-3 top-3 rounded-full bg-black/45 px-2.5 py-1 backdrop-blur-sm">
+            <span className="text-[11px] font-semibold text-white">
+              {poi.distanceKm} km
+            </span>
+          </div>
+        )}
+
+        {/* Bottom overlay: name + note */}
+        <div className="absolute bottom-0 left-0 right-0 px-4 pb-3 pt-2">
+          <h4 className="text-[14px] font-bold leading-tight text-white drop-shadow line-clamp-1">
+            {poi.name}
+          </h4>
+          {poi.note && (
+            <p className="mt-0.5 text-[11px] text-red-200/90 line-clamp-1">{poi.note}</p>
+          )}
+        </div>
+      </div>
+
+      {/* ── Info row below image ──────────────────────────────── */}
+      <div className="flex items-center justify-between gap-2 px-4 py-3">
+        <div className="flex items-center gap-2 min-w-0">
+          <MapPin className="h-3.5 w-3.5 shrink-0 text-red-500" />
+          <span className="text-[13px] text-muted-foreground truncate">{poi.distance} from ICC</span>
+        </div>
+        <div className="flex items-center gap-2 shrink-0">
+          {poi.phone && (
+            <a
+              href={`tel:${poi.phone.replace(/\s+/g, "")}`}
+              className="flex items-center gap-1 rounded-full border border-red-200 bg-red-50 px-2.5 py-1 text-[11px] font-semibold text-red-700 transition hover:bg-red-100"
+            >
+              <Phone className="h-3 w-3" />
+              Call
+            </a>
+          )}
+          <Link
+            to="/directions"
+            search={{
+              lat: poi.latitude ?? undefined,
+              lng: poi.longitude ?? undefined,
+              name: poi.name,
+            }}
+            className="flex items-center gap-1 rounded-full bg-red-600 px-2.5 py-1 text-[11px] font-semibold text-white shadow transition hover:bg-red-700 active:scale-95"
+          >
+            <Navigation className="h-3 w-3" />
+            Directions
+          </Link>
+        </div>
+      </div>
     </Card>
   );
 }
@@ -484,6 +823,34 @@ function NearbyPage() {
                   <div className="grid grid-cols-1 gap-4">
                     {pois.map((poi) => (
                       <RestaurantCard key={poi.id} poi={poi} />
+                    ))}
+                  </div>
+                ) : category === "Airport" ? (
+                  /* Airport card with image banner */
+                  <div className="space-y-3">
+                    {pois.map((poi) => (
+                      <AirportCard key={poi.id} poi={poi} />
+                    ))}
+                  </div>
+                ) : category === "Security" ? (
+                  /* Security cards with image banner */
+                  <div className="space-y-3">
+                    {pois.map((poi) => (
+                      <SecurityCard key={poi.id} poi={poi} />
+                    ))}
+                  </div>
+                ) : category === "Government" ? (
+                  /* Government cards with image banner */
+                  <div className="space-y-3">
+                    {pois.map((poi) => (
+                      <GovernmentCard key={poi.id} poi={poi} />
+                    ))}
+                  </div>
+                ) : category === "Culture" ? (
+                  /* Culture cards with image banner */
+                  <div className="space-y-3">
+                    {pois.map((poi) => (
+                      <CultureCard key={poi.id} poi={poi} />
                     ))}
                   </div>
                 ) : (

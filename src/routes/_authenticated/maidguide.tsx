@@ -31,12 +31,12 @@ const tiles = [
   {
     to: "/accommodation",
     label: "Hotels",
-    description: "The full 46-hotel delegate masterlist with rates and photos.",
+    description: "The full 40-hotel delegate masterlist with rates and photos.",
     icon: Hotel,
     gradient: "from-violet-500 to-purple-700",
     shadow: "shadow-violet-500/35",
     ring: "ring-violet-400/30",
-    badge: "46 hotels",
+    badge: "40 hotels",
   },
   {
     to: "/nearby",
