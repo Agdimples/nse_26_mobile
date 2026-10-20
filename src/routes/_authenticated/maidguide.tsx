@@ -11,7 +11,7 @@ const tiles = [
   {
     to: "/map",
     label: "3D Venue & Map",
-    description: "Floor plan, realistic 3D buildings, 47 hotels & Maiduguri places.",
+    description: "Floor plan, realistic 3D buildings, 40 hotels & Maiduguri places.",
     icon: MapPin,
     gradient: "from-blue-500 to-blue-700",
     shadow: "shadow-blue-500/35",

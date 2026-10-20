@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState, useMemo, useRef } from "react";
+import { useEffect, useState, useMemo, useRef, useCallback } from "react";
 import { Badge } from "@/components/ui/badge";
 import { EVENT_CONFIG } from "@/lib/event-config";
 import { HOTELS } from "@/lib/reference";
@@ -97,8 +97,99 @@ function DirectionsPage() {
   const [geoError, setGeoError] = useState<string | null>(null);
   const [geoLoading, setGeoLoading] = useState(false);
 
-  // bottom sheet state: "peek" (just summary), "half" (controls visible), "full" (all steps)
-  const [sheet, setSheet] = useState<"peek" | "half" | "full">("half");
+  // ── Bottom sheet drag logic ────────────────────────────────────────────────
+  // Three snap points (as viewport-height fractions): peek=~90px, half=38vh, full=72vh
+  const SNAPS = useMemo(() => {
+    const vh = typeof window !== "undefined" ? window.innerHeight : 800;
+    return [90, Math.round(vh * 0.38), Math.round(vh * 0.72)];
+  }, []);
+
+  const [sheetH, setSheetH] = useState<number>(() => {
+    const vh = typeof window !== "undefined" ? window.innerHeight : 800;
+    return Math.round(vh * 0.38);
+  });
+  const [isDragging, setIsDragging] = useState(false);
+  const dragStartY = useRef<number>(0);
+  const dragStartH = useRef<number>(0);
+  const sheetRef = useRef<HTMLDivElement>(null);
+  const animating = useRef(false);
+
+  // Snap to nearest snap point with spring-like animation
+  const snapTo = useCallback(
+    (targetH: number) => {
+      animating.current = true;
+      setSheetH(targetH);
+      setTimeout(() => { animating.current = false; }, 350);
+    },
+    [],
+  );
+
+  const findNearestSnap = useCallback(
+    (h: number) => {
+      return SNAPS.reduce((prev, curr) =>
+        Math.abs(curr - h) < Math.abs(prev - h) ? curr : prev,
+      );
+    },
+    [SNAPS],
+  );
+
+  const onPointerDown = useCallback(
+    (e: React.PointerEvent<HTMLButtonElement>) => {
+      e.currentTarget.setPointerCapture(e.pointerId);
+      dragStartY.current = e.clientY;
+      dragStartH.current = sheetH;
+      setIsDragging(true);
+    },
+    [sheetH],
+  );
+
+  const onPointerMove = useCallback(
+    (e: React.PointerEvent<HTMLButtonElement>) => {
+      if (!isDragging) return;
+      const delta = dragStartY.current - e.clientY; // drag up → positive
+      const next = Math.max(SNAPS[0], Math.min(SNAPS[SNAPS.length - 1], dragStartH.current + delta));
+      setSheetH(next);
+    },
+    [isDragging, SNAPS],
+  );
+
+  const onPointerUp = useCallback(
+    (e: React.PointerEvent<HTMLButtonElement>) => {
+      if (!isDragging) return;
+      setIsDragging(false);
+      const delta = dragStartY.current - e.clientY;
+      const rawH = dragStartH.current + delta;
+
+      // Velocity-based flick: if dragged fast (>40px), jump to next/prev snap
+      const vel = delta; // positive = flick up, negative = flick down
+      let target: number;
+      if (Math.abs(vel) > 40) {
+        const curIdx = SNAPS.indexOf(findNearestSnap(dragStartH.current));
+        if (vel > 0) target = SNAPS[Math.min(curIdx + 1, SNAPS.length - 1)];
+        else target = SNAPS[Math.max(curIdx - 1, 0)];
+      } else {
+        target = findNearestSnap(rawH);
+      }
+      snapTo(target);
+    },
+    [isDragging, SNAPS, findNearestSnap, snapTo],
+  );
+
+  // Tap (no significant drag movement) → cycle snap points
+  const onHandleTap = useCallback(
+    (e: React.PointerEvent<HTMLButtonElement>) => {
+      const delta = Math.abs(dragStartY.current - e.clientY);
+      if (delta > 8) return; // was a real drag, not a tap
+      const curIdx = SNAPS.indexOf(findNearestSnap(sheetH));
+      const next = SNAPS[(curIdx + 1) % SNAPS.length];
+      snapTo(next);
+    },
+    [SNAPS, sheetH, findNearestSnap, snapTo],
+  );
+
+  // Derived label for the handle hint
+  const sheetSnap = findNearestSnap(sheetH);
+  const sheetLabel = sheetSnap === SNAPS[0] ? "peek" : sheetSnap === SNAPS[1] ? "half" : "full";
 
   const dirFn = useServerFn(getDirections);
   const { data: route, mutate, isPending } = useMutation({
@@ -150,9 +241,6 @@ function DirectionsPage() {
   const durationMin = route ? Math.max(1, Math.round(route.durationSeconds / 60)) : null;
   const distanceKm = route ? (route.distanceMeters / 1000).toFixed(1) : null;
 
-  // Sheet height classes
-  const sheetHeight = sheet === "peek" ? "h-[90px]" : sheet === "half" ? "h-[38vh]" : "h-[72vh]";
-
   return (
     /* Full-viewport container — no scroll on this level */
     <div className="fixed inset-0 flex flex-col bg-background">
@@ -175,7 +263,7 @@ function DirectionsPage() {
       </div>
 
       {/* ── Floating back button only ─────────────────────────────── */}
-      <div className="absolute left-4 top-12 z-20">
+      {/* <div className="absolute left-4 top-12 z-20">
         <Link
           to="/nearby"
           className="flex h-10 w-10 items-center justify-center rounded-full bg-white/95 shadow-lg backdrop-blur-sm transition hover:bg-white active:scale-95"
@@ -183,7 +271,7 @@ function DirectionsPage() {
         >
           <ChevronLeft className="h-5 w-5 text-foreground" />
         </Link>
-      </div>
+      </div> */}
 
       {/* ── Floating right-side action buttons ───────────────────── */}
       <div className="absolute right-4 top-1/2 z-20 -translate-y-1/2 flex flex-col gap-2.5">
@@ -223,19 +311,35 @@ function DirectionsPage() {
 
       {/* ── Bottom sheet ──────────────────────────────────────────── */}
       <div
-        className={`absolute bottom-0 left-0 right-0 z-20 flex flex-col rounded-t-3xl bg-white/98 shadow-2xl backdrop-blur-md transition-all duration-300 ease-out ${sheetHeight}`}
-        style={{ willChange: "height" }}
+        ref={sheetRef}
+        className="absolute bottom-0 left-0 right-0 z-20 flex flex-col rounded-t-3xl bg-white/98 shadow-2xl backdrop-blur-md"
+        style={{
+          height: sheetH,
+          transition: isDragging ? "none" : "height 0.35s cubic-bezier(0.32, 0.72, 0, 1)",
+          willChange: "height",
+        }}
       >
-        {/* Drag handle + sheet toggle */}
+        {/* ── Drag handle ── touch/mouse draggable, tap to cycle ─── */}
         <button
-          onClick={() => setSheet(sheet === "peek" ? "half" : sheet === "half" ? "full" : "peek")}
-          className="flex w-full flex-col items-center gap-1 pt-3 pb-2"
-          aria-label="Toggle panel"
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={(e) => { onPointerUp(e); onHandleTap(e); }}
+          onPointerCancel={() => setIsDragging(false)}
+          className="flex w-full touch-none select-none flex-col items-center gap-1 pt-3 pb-2 cursor-grab active:cursor-grabbing"
+          style={{ touchAction: "none" }}
+          aria-label="Drag or tap to resize panel"
         >
-          <div className="h-1 w-10 rounded-full bg-muted-foreground/30" />
+          {/* Pill */}
+          <div
+            className="h-1 w-10 rounded-full transition-all duration-150"
+            style={{ background: isDragging ? "rgba(0,0,0,0.25)" : "rgba(0,0,0,0.15)" }}
+          />
+          {/* Hint label */}
           <div className="flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground/60">
-            {sheet === "full" ? <ChevronDown className="h-3 w-3" /> : <ChevronUp className="h-3 w-3" />}
-            {sheet === "full" ? "Collapse" : "Expand"}
+            {sheetLabel === "full"
+              ? <ChevronDown className="h-3 w-3" />
+              : <ChevronUp className="h-3 w-3" />}
+            {sheetLabel === "full" ? "Collapse" : "Expand"}
           </div>
         </button>
 

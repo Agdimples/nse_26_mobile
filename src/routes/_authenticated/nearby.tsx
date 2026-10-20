@@ -73,7 +73,7 @@ function parseSpecialties(note: string): string[] {
 function buildImageUrls(folder: string, count: number): string[] {
   return Array.from({ length: count }, (_, i) => {
     const num = String(i + 1).padStart(2, "0");
-    return `${folder}/${num}.jpg`;
+    return `${folder}/${num}.webp`;
   });
 }
 
