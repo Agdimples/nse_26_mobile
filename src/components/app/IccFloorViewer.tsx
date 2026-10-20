@@ -133,7 +133,8 @@ export function IccFloorViewer({
   }, []);
 
   function onWheel(e: React.WheelEvent<HTMLDivElement>) {
-    e.preventDefault();
+    // preventDefault is called by the native listener registered below.
+    // This synthetic handler only handles the zoom logic.
     const rect = containerRef.current!.getBoundingClientRect();
     zoomBy(
       e.deltaY < 0 ? ZOOM_STEP : 1 / ZOOM_STEP,
@@ -150,12 +151,13 @@ export function IccFloorViewer({
   }
 
   function onPointerMove(e: React.PointerEvent<HTMLDivElement>) {
-    if (!pointerRef.current) return;
-    setView((v) => ({
-      ...v,
-      tx: pointerRef.current!.tx + (e.clientX - pointerRef.current!.x),
-      ty: pointerRef.current!.ty + (e.clientY - pointerRef.current!.y),
-    }));
+    const p = pointerRef.current;
+    if (!p) return;
+    // Capture into local variable before setView — the ref may be nulled
+    // by onPointerUp before React's batched updater runs.
+    const dx = e.clientX - p.x;
+    const dy = e.clientY - p.y;
+    setView((v) => ({ ...v, tx: p.tx + dx, ty: p.ty + dy }));
   }
 
   function onPointerUp() { pointerRef.current = null; }
@@ -180,17 +182,18 @@ export function IccFloorViewer({
 
   function onTouchMove(e: React.TouchEvent<HTMLDivElement>) {
     if (e.touches.length === 2 && pinchRef.current) {
-      const factor = touchDist(e.touches) / pinchRef.current.dist;
+      const pinch = pinchRef.current;
+      const factor = touchDist(e.touches) / pinch.dist;
+      const baseScale = pinch.scale;
       setView((v) => ({
         ...v,
-        scale: Math.min(MAX_SCALE, Math.max(MIN_SCALE, pinchRef.current!.scale * factor)),
+        scale: Math.min(MAX_SCALE, Math.max(MIN_SCALE, baseScale * factor)),
       }));
     } else if (e.touches.length === 1 && pointerRef.current) {
-      setView((v) => ({
-        ...v,
-        tx: pointerRef.current!.tx + (e.touches[0].clientX - pointerRef.current!.x),
-        ty: pointerRef.current!.ty + (e.touches[0].clientY - pointerRef.current!.y),
-      }));
+      const p = pointerRef.current;
+      const dx = e.touches[0].clientX - p.x;
+      const dy = e.touches[0].clientY - p.y;
+      setView((v) => ({ ...v, tx: p.tx + dx, ty: p.ty + dy }));
     }
   }
 
@@ -220,13 +223,20 @@ export function IccFloorViewer({
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [zoomBy, resetView]);
 
-  // ── Non-passive touchmove (prevents page scroll during pinch) ─────────────
+  // ── Non-passive wheel + touchmove (prevents page scroll during zoom/pan) ──
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-    const h = (e: TouchEvent) => e.preventDefault();
-    el.addEventListener("touchmove", h, { passive: false });
-    return () => el.removeEventListener("touchmove", h);
+    // React 17+ attaches synthetic wheel/touch listeners as passive by default,
+    // so e.preventDefault() inside them is silently ignored. We register native
+    // non-passive listeners here to actually block the page scroll.
+    const blockScroll = (e: Event) => e.preventDefault();
+    el.addEventListener("wheel",     blockScroll, { passive: false });
+    el.addEventListener("touchmove", blockScroll, { passive: false });
+    return () => {
+      el.removeEventListener("wheel",     blockScroll);
+      el.removeEventListener("touchmove", blockScroll);
+    };
   }, []);
 
   // ── Debug polygon capture ─────────────────────────────────────────────────
@@ -428,11 +438,12 @@ export function IccFloorViewer({
               {/* SVG overlay */}
               {imgLoaded && imgRendered && (
                 <svg
+                  role="group"
+                  aria-label={`${floor.label} room overlays`}
                   className="absolute pointer-events-none"
                   width={imgRendered.w}
                   height={imgRendered.h}
                   style={{ left: "50%", top: "50%", transform: "translate(-50%,-50%)" }}
-                  aria-hidden="true"
                 >
                   {/* Room polygons */}
                   {mappedRooms.map((room) => {
@@ -492,41 +503,45 @@ export function IccFloorViewer({
                     );
                   })}
 
-                  {/* Debug capture points */}
-                  {debugMode && debugPoints.map(([fx, fy], i) => (
-                    <g key={i}>
-                      <circle
-                        cx={fx * imgRendered.w}
-                        cy={fy * imgRendered.h}
-                        r={5}
-                        fill="#F59E0B"
-                        stroke="#fff"
-                        strokeWidth={1.5}
-                      />
-                      <text
-                        x={fx * imgRendered.w + 7}
-                        y={fy * imgRendered.h - 3}
-                        fontSize={9}
-                        fill="#92400E"
-                        fontWeight="700"
-                        style={{ userSelect: "none" }}
-                      >
-                        {i + 1}
-                      </text>
+                  {/* Debug capture points — purely decorative, hidden from AT */}
+                  {debugMode && (
+                    <g aria-hidden="true">
+                      {debugPoints.map(([fx, fy], i) => (
+                        <g key={i}>
+                          <circle
+                            cx={fx * imgRendered.w}
+                            cy={fy * imgRendered.h}
+                            r={5}
+                            fill="#F59E0B"
+                            stroke="#fff"
+                            strokeWidth={1.5}
+                          />
+                          <text
+                            x={fx * imgRendered.w + 7}
+                            y={fy * imgRendered.h - 3}
+                            fontSize={9}
+                            fill="#92400E"
+                            fontWeight="700"
+                            style={{ userSelect: "none" }}
+                          >
+                            {i + 1}
+                          </text>
+                        </g>
+                      ))}
+                      {/* Debug polygon preview line */}
+                      {debugPoints.length >= 2 && (
+                        <polyline
+                          points={debugPoints
+                            .map(([fx, fy]) => `${fx * imgRendered.w},${fy * imgRendered.h}`)
+                            .join(" ")}
+                          fill="none"
+                          stroke="#F59E0B"
+                          strokeWidth={1.5}
+                          strokeDasharray="4 3"
+                          opacity={0.8}
+                        />
+                      )}
                     </g>
-                  ))}
-                  {/* Debug polygon preview line */}
-                  {debugMode && debugPoints.length >= 2 && (
-                    <polyline
-                      points={debugPoints
-                        .map(([fx, fy]) => `${fx * imgRendered.w},${fy * imgRendered.h}`)
-                        .join(" ")}
-                      fill="none"
-                      stroke="#F59E0B"
-                      strokeWidth={1.5}
-                      strokeDasharray="4 3"
-                      opacity={0.8}
-                    />
                   )}
                 </svg>
               )}

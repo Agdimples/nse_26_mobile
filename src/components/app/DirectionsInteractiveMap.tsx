@@ -7,13 +7,16 @@ interface DirectionsInteractiveMapProps {
   dest: { lat: number; lng: number; name: string };
   origin?: { lat: number; lng: number; label: string };
   encodedPolyline?: string;
+  /** Height in px of the bottom sheet currently covering the map. Used to
+   *  centre both pins in the *visible* area above the sheet. */
+  bottomInset?: number;
 }
 
 // Minimal shape of the Google Maps objects we touch, so we don't need `any`.
 type LatLngLiteral = { lat: number; lng: number };
 type GMap = {
   setMapTypeId: (t: string) => void;
-  fitBounds: (b: unknown, padding?: number) => void;
+  fitBounds: (b: unknown, padding?: number | { top: number; right: number; bottom: number; left: number }) => void;
 };
 type GMapsOverlay = { setMap: (m: unknown) => void };
 
@@ -78,6 +81,7 @@ export function DirectionsInteractiveMap({
   dest,
   origin,
   encodedPolyline,
+  bottomInset = 0,
 }: DirectionsInteractiveMapProps) {
   const { ready, authFailed, error } = useGoogleMaps();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -187,8 +191,8 @@ export function DirectionsInteractiveMap({
       overlaysRef.current.push(line);
     }
 
-    map.fitBounds(bounds, 48);
-  }, [ready, dest.lat, dest.lng, dest.name, origin, encodedPolyline]);
+    map.fitBounds(bounds, { top: 80, right: 60, bottom: bottomInset + 48, left: 60 });
+  }, [ready, dest.lat, dest.lng, dest.name, origin, encodedPolyline, bottomInset]);
 
   function fitRoute() {
     if (!mapRef.current) return;
@@ -197,7 +201,7 @@ export function DirectionsInteractiveMap({
     bounds.extend({ lat: dest.lat, lng: dest.lng });
     if (origin) bounds.extend({ lat: origin.lat, lng: origin.lng });
     (encodedPolyline ? decodePolyline(encodedPolyline) : []).forEach((p) => bounds.extend(p));
-    mapRef.current.fitBounds(bounds, 48);
+    mapRef.current.fitBounds(bounds, { top: 80, right: 60, bottom: bottomInset + 48, left: 60 });
   }
 
   if (authFailed || error || initFailed) {

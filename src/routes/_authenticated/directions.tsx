@@ -257,6 +257,7 @@ function DirectionsPage() {
               dest={dest}
               origin={origin}
               encodedPolyline={route?.encodedPolyline}
+              bottomInset={sheetH}
             />
           )}
         </ClientOnly>
