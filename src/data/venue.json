@@ -375,7 +375,7 @@
     {
       "id": "gumalti-store",
       "name": "Gumalti Store",
-      "category": "Restaurant",
+      "category": "Shopping",
       "latitude": 11.8340949,
       "longitude": 13.0962827,
       "note": "Provisions, toiletries, home essentials, basic necessities",
@@ -388,7 +388,7 @@
     {
       "id": "sahad-store",
       "name": "Sahad Store",
-      "category": "Restaurant",
+      "category": "Shopping",
       "latitude": 11.7957141,
       "longitude": 13.1275384,
       "note": "Groceries, fresh produce, household essentials, electronics, beverages, cosmetics, textiles",
@@ -505,7 +505,7 @@
     {
       "id": "hesan-store",
       "name": "Hesan Store",
-      "category": "Restaurant",
+      "category": "Shopping",
       "latitude": 11.8319718,
       "longitude": 13.1444838,
       "note": "Modern supermarket & gas / filling station",
@@ -567,18 +567,6 @@
       "image": "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&q=80"
     },
     {
-      "id": "zenith-atm",
-      "name": "Zenith Bank ATM",
-      "category": "ATM",
-      "distance": "0.5 km",
-      "distanceKm": 0.5,
-      "latitude": 11.835,
-      "longitude": 13.148,
-      "note": "Baga Road branch",
-      "query": "Zenith Bank ATM Baga Road Maiduguri",
-      "image": "https://images.unsplash.com/photo-1563013547-824ae1b704d3?w=400&q=80"
-    },
-    {
       "id": "monday-market",
       "name": "Monday Market",
       "category": "Shopping",
@@ -589,18 +577,6 @@
       "note": "Textiles, crafts, and local goods",
       "query": "Monday Market Maiduguri",
       "image": "https://images.unsplash.com/photo-1555529669-2269763671c8?w=400&q=80"
-    },
-    {
-      "id": "unimaid",
-      "name": "University of Maiduguri",
-      "category": "Spouses visit",
-      "distance": "4 km",
-      "distanceKm": 4,
-      "latitude": 11.808,
-      "longitude": 13.185,
-      "note": "Spouses programme cultural visit",
-      "query": "University of Maiduguri",
-      "image": "https://images.unsplash.com/photo-1562774053-701939374585?w=400&q=80"
     }
   ]
 }

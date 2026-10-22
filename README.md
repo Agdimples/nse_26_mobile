@@ -1,15 +1,19 @@
 # My Conference Companion
 
-Flutter app (iOS + Android) for **NSE International Conference 2026** — Maiduguri, Borno State.
+Web app for **NSE International Conference 2026** — Maiduguri, Borno State.
 
 ## Run locally
 
 ```bash
-flutter pub get
-flutter run
+npm install
+npm run dev
 ```
 
-Supabase credentials: root `.env` (`SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`).
+Configure Supabase in the root `.env.local` using `VITE_SUPABASE_URL` and
+`VITE_SUPABASE_ANON_KEY` (or `VITE_SUPABASE_PUBLISHABLE_KEY`). The URL must be
+the project root (for example, `https://<project-ref>.supabase.co`), not an API
+endpoint such as `/rest/v1` or `/auth/v1`. These are public client credentials;
+never put a service-role key in a `VITE_` variable.
 
 ## Bot protection (Cloudflare Turnstile)
 
@@ -21,7 +25,7 @@ To turn it on:
 
 1. Create a Turnstile widget at
    <https://dash.cloudflare.com/?to=/:account/turnstile> (add your app's hostname).
-2. Copy the **Site Key** into `.env` as `VITE_TURNSTILE_SITE_KEY` (the site key is
+2. Copy the **Site Key** into `.env.local` as `VITE_TURNSTILE_SITE_KEY` (the site key is
    public and safe to ship to the browser).
 3. In the Supabase dashboard, go to **Authentication → Bot and Abuse Protection**,
    enable CAPTCHA protection, choose **Turnstile**, and paste the **Secret Key**.

@@ -29,7 +29,6 @@ const CATEGORY_COLORS: Record<string, string> = {
   Airport: "#123E73",
   Security: "#C0392B",
   Restaurant: "#E67E22",
-  ATM: "#123E73",
   Government: "#123E73",
   Culture: "#C9A227",
 };
@@ -432,11 +431,6 @@ export function GoogleOutdoorMap() {
                 <Badge variant="outline" className="text-[10px] uppercase font-bold text-primary border-primary/25">
                   {selectedItem.category}
                 </Badge>
-                {selectedItem.hotel && (
-                  <Badge variant="secondary" className="text-[10px]">
-                    Rank #{selectedItem.hotel.rank}
-                  </Badge>
-                )}
               </div>
               <h3 className="mt-1 text-base font-bold leading-tight truncate">{selectedItem.title}</h3>
               {selectedItem.address && (
