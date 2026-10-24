@@ -1,0 +1,62 @@
+export const conferenceSchedule = [
+  {
+    date: "Monday, November 30, 2026",
+    events: [
+      { time: "8:00am - 6:00pm", title: "Registration/Arrival" },
+      { time: "9:30am - 10:30am", title: "Press Conference" },
+      { time: "10:00am - 1:00pm", title: "Fellowship Symposium" },
+      { time: "1:00pm", title: "Courtesy Visit to Host Governor" },
+      { time: "2:00pm - 4:00pm", title: "Fellowship Conferment Ceremony" },
+      { time: "6:00pm - 8:00pm", title: "Presidential Cocktail Party" }
+    ]
+  },
+  {
+    date: "Tuesday, December 1, 2026",
+    events: [
+      { time: "8:00am - 6:00pm", title: "Registration" },
+      { time: "10:00am - 12:30pm", title: "Opening Ceremony" },
+      { time: "12:30pm - 1:00pm", title: "Lunch Break" },
+      { time: "1:00pm - 5:00pm", title: "Spouses Programme" },
+      { time: "1:00pm - 5:00pm", title: "Young Engineers Programme" },
+      { time: "1:00pm - 2:10pm", title: "Panel Discussion Session 1" },
+      { time: "2:10pm - 2:40pm", title: "Poster Session 1 (All participants to visit the stand)" },
+      { time: "2:20pm - 3:30pm", title: "Panel Discussion Session 2" },
+      { time: "3:00pm - 3:30pm", title: "Poster Session 2 (All participants to visit the stand)" },
+      { time: "3:30pm - 4:40pm", title: "Panel Discussion Session 3" },
+      { time: "5:00pm - 8:00pm", title: "Election Manifesto" }
+    ]
+  },
+  {
+    date: "Wednesday, December 2, 2026",
+    events: [
+      { time: "9:00am - 6:00pm", title: "Registration" },
+      { time: "9:00am - 6:00pm", title: "Spouses Programme" },
+      { time: "9:00am - 6:00pm", title: "Young Engineers Programme" },
+      { time: "9:00am - 10:00am", title: "Leadership and Energy Talks" },
+      { time: "10:00am - 11:00am", title: "Technical Session 1" },
+      { time: "11:00am - 12:15pm", title: "Panel Discussion Session 4" },
+      { time: "12:15pm - 12:45pm", title: "Lunch Break" },
+      { time: "12:45pm - 2:00pm", title: "Panel Discussion Session 5" },
+      { time: "2:00pm - 2:30pm", title: "Poster Session 3 (All participants to visit the stand)" },
+      { time: "2:30pm - 4:00pm", title: "Panel Discussion Session 6" },
+      { time: "4:00pm - 6:00pm", title: "Group Dynamics Competition (Branches and Divisions)" },
+      { time: "6:00pm - 8:00pm", title: "Welfare/Cultural Night" }
+    ]
+  },
+  {
+    date: "Thursday, December 3, 2026",
+    events: [
+      { time: "9:00am - 10:00pm", title: "Presentation of Communique and Closing ceremony" },
+      { time: "10:00am - 1:00pm", title: "Annual General Meeting (AGM)" },
+      { time: "1:00pm - 2:00pm", title: "Lunch Break" },
+      { time: "6:00pm - 9:00pm", title: "Annual Dinner / Gala Night" }
+    ]
+  },
+  {
+    date: "Friday, December 4, 2026",
+    events: [
+      { time: "10:00am - 11:00am", title: "Closing Press Conference" },
+      { time: "11:00am", title: "Departure" }
+    ]
+  }
+];
