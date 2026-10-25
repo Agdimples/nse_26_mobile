@@ -20,8 +20,10 @@ import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authentic
 import { Route as AuthenticatedAnnouncementsRouteImport } from './routes/_authenticated/announcements'
 import { Route as AuthenticatedChatbotRouteImport } from './routes/_authenticated/chatbot'
 import { Route as AuthenticatedConciergeRouteImport } from './routes/_authenticated/concierge'
+import { Route as AuthenticatedConferenceRouteImport } from './routes/_authenticated/conference'
 import { Route as AuthenticatedDirectionsRouteImport } from './routes/_authenticated/directions'
 import { Route as AuthenticatedEmergencyRouteImport } from './routes/_authenticated/emergency'
+import { Route as AuthenticatedExhibitionRouteImport } from './routes/_authenticated/exhibition'
 import { Route as AuthenticatedFaqRouteImport } from './routes/_authenticated/faq'
 import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/home'
 import { Route as AuthenticatedMaidguideRouteImport } from './routes/_authenticated/maidguide'
@@ -112,6 +114,11 @@ const AuthenticatedConciergeRoute = AuthenticatedConciergeRouteImport.update({
   path: '/concierge',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedConferenceRoute = AuthenticatedConferenceRouteImport.update({
+  id: '/conference',
+  path: '/conference',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedDirectionsRoute = AuthenticatedDirectionsRouteImport.update({
   id: '/directions',
   path: '/directions',
@@ -120,6 +127,11 @@ const AuthenticatedDirectionsRoute = AuthenticatedDirectionsRouteImport.update({
 const AuthenticatedEmergencyRoute = AuthenticatedEmergencyRouteImport.update({
   id: '/emergency',
   path: '/emergency',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedExhibitionRoute = AuthenticatedExhibitionRouteImport.update({
+  id: '/exhibition',
+  path: '/exhibition',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedFaqRoute = AuthenticatedFaqRouteImport.update({
@@ -315,8 +327,10 @@ export interface FileRoutesByFullPath {
   '/announcements': typeof AuthenticatedAnnouncementsRoute
   '/chatbot': typeof AuthenticatedChatbotRoute
   '/concierge': typeof AuthenticatedConciergeRouteWithChildren
+  '/conference': typeof AuthenticatedConferenceRoute
   '/directions': typeof AuthenticatedDirectionsRoute
   '/emergency': typeof AuthenticatedEmergencyRoute
+  '/exhibition': typeof AuthenticatedExhibitionRoute
   '/faq': typeof AuthenticatedFaqRoute
   '/home': typeof AuthenticatedHomeRoute
   '/maidguide': typeof AuthenticatedMaidguideRoute
@@ -360,8 +374,10 @@ export interface FileRoutesByTo {
   '/accommodation': typeof AuthenticatedAccommodationRoute
   '/announcements': typeof AuthenticatedAnnouncementsRoute
   '/chatbot': typeof AuthenticatedChatbotRoute
+  '/conference': typeof AuthenticatedConferenceRoute
   '/directions': typeof AuthenticatedDirectionsRoute
   '/emergency': typeof AuthenticatedEmergencyRoute
+  '/exhibition': typeof AuthenticatedExhibitionRoute
   '/faq': typeof AuthenticatedFaqRoute
   '/home': typeof AuthenticatedHomeRoute
   '/maidguide': typeof AuthenticatedMaidguideRoute
@@ -409,8 +425,10 @@ export interface FileRoutesById {
   '/_authenticated/announcements': typeof AuthenticatedAnnouncementsRoute
   '/_authenticated/chatbot': typeof AuthenticatedChatbotRoute
   '/_authenticated/concierge': typeof AuthenticatedConciergeRouteWithChildren
+  '/_authenticated/conference': typeof AuthenticatedConferenceRoute
   '/_authenticated/directions': typeof AuthenticatedDirectionsRoute
   '/_authenticated/emergency': typeof AuthenticatedEmergencyRoute
+  '/_authenticated/exhibition': typeof AuthenticatedExhibitionRoute
   '/_authenticated/faq': typeof AuthenticatedFaqRoute
   '/_authenticated/home': typeof AuthenticatedHomeRoute
   '/_authenticated/maidguide': typeof AuthenticatedMaidguideRoute
@@ -458,8 +476,10 @@ export interface FileRouteTypes {
     | '/announcements'
     | '/chatbot'
     | '/concierge'
+    | '/conference'
     | '/directions'
     | '/emergency'
+    | '/exhibition'
     | '/faq'
     | '/home'
     | '/maidguide'
@@ -503,8 +523,10 @@ export interface FileRouteTypes {
     | '/accommodation'
     | '/announcements'
     | '/chatbot'
+    | '/conference'
     | '/directions'
     | '/emergency'
+    | '/exhibition'
     | '/faq'
     | '/home'
     | '/maidguide'
@@ -551,8 +573,10 @@ export interface FileRouteTypes {
     | '/_authenticated/announcements'
     | '/_authenticated/chatbot'
     | '/_authenticated/concierge'
+    | '/_authenticated/conference'
     | '/_authenticated/directions'
     | '/_authenticated/emergency'
+    | '/_authenticated/exhibition'
     | '/_authenticated/faq'
     | '/_authenticated/home'
     | '/_authenticated/maidguide'
@@ -676,6 +700,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedConciergeRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/conference': {
+      id: '/_authenticated/conference'
+      path: '/conference'
+      fullPath: '/conference'
+      preLoaderRoute: typeof AuthenticatedConferenceRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/directions': {
       id: '/_authenticated/directions'
       path: '/directions'
@@ -688,6 +719,13 @@ declare module '@tanstack/react-router' {
       path: '/emergency'
       fullPath: '/emergency'
       preLoaderRoute: typeof AuthenticatedEmergencyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/exhibition': {
+      id: '/_authenticated/exhibition'
+      path: '/exhibition'
+      fullPath: '/exhibition'
+      preLoaderRoute: typeof AuthenticatedExhibitionRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/faq': {
@@ -1025,8 +1063,10 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAnnouncementsRoute: typeof AuthenticatedAnnouncementsRoute
   AuthenticatedChatbotRoute: typeof AuthenticatedChatbotRoute
   AuthenticatedConciergeRoute: typeof AuthenticatedConciergeRouteWithChildren
+  AuthenticatedConferenceRoute: typeof AuthenticatedConferenceRoute
   AuthenticatedDirectionsRoute: typeof AuthenticatedDirectionsRoute
   AuthenticatedEmergencyRoute: typeof AuthenticatedEmergencyRoute
+  AuthenticatedExhibitionRoute: typeof AuthenticatedExhibitionRoute
   AuthenticatedFaqRoute: typeof AuthenticatedFaqRoute
   AuthenticatedHomeRoute: typeof AuthenticatedHomeRoute
   AuthenticatedMaidguideRoute: typeof AuthenticatedMaidguideRoute
@@ -1048,8 +1088,10 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAnnouncementsRoute: AuthenticatedAnnouncementsRoute,
   AuthenticatedChatbotRoute: AuthenticatedChatbotRoute,
   AuthenticatedConciergeRoute: AuthenticatedConciergeRouteWithChildren,
+  AuthenticatedConferenceRoute: AuthenticatedConferenceRoute,
   AuthenticatedDirectionsRoute: AuthenticatedDirectionsRoute,
   AuthenticatedEmergencyRoute: AuthenticatedEmergencyRoute,
+  AuthenticatedExhibitionRoute: AuthenticatedExhibitionRoute,
   AuthenticatedFaqRoute: AuthenticatedFaqRoute,
   AuthenticatedHomeRoute: AuthenticatedHomeRoute,
   AuthenticatedMaidguideRoute: AuthenticatedMaidguideRoute,

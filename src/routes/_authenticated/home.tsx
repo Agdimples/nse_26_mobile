@@ -27,8 +27,8 @@ export const Route = createFileRoute("/_authenticated/home")({
 /* Quick-action tile config — colour palette per tile */
 const tools = [
   {
-    to: "/schedule",
-    label: "Schedule",
+    to: "/conference",
+    label: "Conference",
     icon: Calendar,
     gradient: "from-blue-500 to-blue-700",
     shadow: "shadow-blue-500/30",
@@ -161,9 +161,7 @@ function HomePage() {
               <p className="text-[10px] font-bold uppercase tracking-wider text-emerald-300">
                 Theme
               </p>
-              <p className="mt-0.5 text-xs font-bold leading-snug text-white">
-                “{info.theme}”
-              </p>
+              <p className="mt-0.5 text-xs font-bold leading-snug text-white">“{info.theme}”</p>
             </div>
 
             {/* Dates & Venue */}
@@ -180,13 +178,22 @@ function HomePage() {
 
             {/* Direct Action Buttons */}
             <div className="mt-4 flex items-center justify-center gap-2">
-              <Button size="sm" asChild className="h-8 bg-accent text-accent-foreground font-bold hover:bg-accent/90 border-0 shadow">
-                <Link to="/schedule">
-                  View Programme
+              <Button
+                size="sm"
+                asChild
+                className="h-8 bg-accent text-accent-foreground font-bold hover:bg-accent/90 border-0 shadow"
+              >
+                <Link to="/conference">
+                  Explore Conference
                   <ArrowRight className="ml-1 h-3 w-3" />
                 </Link>
               </Button>
-              <Button size="sm" variant="secondary" asChild className="h-8 bg-white/20 text-white hover:bg-white/30 border-0">
+              <Button
+                size="sm"
+                variant="secondary"
+                asChild
+                className="h-8 bg-white/20 text-white hover:bg-white/30 border-0"
+              >
                 <Link to="/about">
                   About Conference
                   <ArrowRight className="ml-1 h-3 w-3" />
@@ -265,8 +272,7 @@ function HomePage() {
               {announcement?.title ?? "No updates yet"}
             </p>
             <p className="mt-1.5 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
-              {announcement?.body ??
-                "Conference announcements will appear here first."}
+              {announcement?.body ?? "Conference announcements will appear here first."}
             </p>
           </div>
         </Link>
@@ -279,9 +285,7 @@ function HomePage() {
             </span>
             <div className="min-w-0 flex-1">
               <p className="text-sm font-bold">Need anything?</p>
-              <p className="text-xs text-muted-foreground">
-                Call an usher or order a meal.
-              </p>
+              <p className="text-xs text-muted-foreground">Call an usher or order a meal.</p>
             </div>
             <span className="text-success">›</span>
           </div>
