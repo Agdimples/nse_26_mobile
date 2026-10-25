@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Navy splash with the brand crest centred, shown until the WebView paints
+     the first frame of the web app.
+
+     The logo lives in drawable-nodpi/ so Android shows it at its natural
+     bitmap size on every screen density; scaling it here (instead of letting
+     per-density mipmap scaling blow it up) is what keeps it from looking
+     chopped/cropped on high-density phones. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/backgroundColor" />
+    <item
+        android:gravity="center"
+        android:width="72dp"
+        android:height="86dp"
+        android:drawable="@drawable/splash_logo" />
+</layer-list>

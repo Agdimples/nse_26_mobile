@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.orivonedge.conferencecompanion",
+      "sha256_cert_fingerprints": [
+        "5C:DF:17:CE:14:63:BE:6A:FB:DF:71:B4:DC:63:73:73:5C:B5:CB:D7:C1:E6:B0:75:6E:70:2D:FA:A9:FF:FD:D3"
+      ]
+    }
+  }
+]

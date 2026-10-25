@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My Conference Companion</string>
+
+    <!-- Digital Asset Links statement. The authoritative file is hosted at
+         https://www.myconferencecompanion.com.ng/.well-known/assetlinks.json;
+         this only tells the TWA where to find it. -->
+    <string name="asset_statements" translatable="false">[{\"include\": \"https://www.myconferencecompanion.com.ng/.well-known/assetlinks.json\"}]</string>
+</resources>

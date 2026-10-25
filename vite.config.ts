@@ -46,6 +46,11 @@ export default defineConfig(({ mode }) => ({
   // environment / on Vercel once the provider is connected in Supabase).
   define: {
     __GOOGLE_OAUTH__: JSON.stringify(process.env.VITE_GOOGLE_OAUTH_ENABLED === "1"),
+    // Android builds define this to true; the web build must still define it
+    // (as false): src/lib/android-build.ts is sometimes executed
+    // untransformed (dev serve, SSR module graph), where a bare undeclared
+    // identifier is a hard ReferenceError that blanks the whole app.
+    __IS_ANDROID_BUILD__: JSON.stringify(false),
   },
   plugins: [
     nitroRawJsonCompat(),

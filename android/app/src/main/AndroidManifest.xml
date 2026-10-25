@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:theme="@style/Theme.ConferenceCompanion">
+
+        <!-- Digital Asset Links. The authoritative copy is served from
+             https://www.myconferencecompanion.com.ng/.well-known/assetlinks.json -->
+        <meta-data
+            android:name="asset_statements"
+            android:resource="@string/asset_statements" />
+
+        <!-- Full-offline launcher: the entire web app is bundled in the APK
+             (assets/web) and served on-device through WebViewAssetLoader.
+             This is the primary activity as of v1.0.6. -->
+        <activity
+            android:name="com.orivonedge.conferencecompanion.FullOfflineActivity"
+            android:exported="true"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.ConferenceCompanion.Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <!-- Custom Tab fallback for devices where WebViewAssetLoader is
+                 somehow unavailable; not used on Android 5+ with WebView. -->
+        </activity>
+
+        <!-- Crash reporter: shows the on-device error text instead of the
+             system "app has stopped" dialog. -->
+        <activity
+            android:name="com.orivonedge.conferencecompanion.CrashReportActivity"
+            android:exported="false"
+            android:label="App error report"
+            android:theme="@style/Theme.ConferenceCompanion" />
+
+        <!-- Legacy TWA launcher (kept for rollback to 1.0.5 behaviour if
+             ever needed; not launched by the user directly). -->
+        <activity
+            android:name="com.orivonedge.conferencecompanion.NoCrashLauncherActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.ConferenceCompanion.Splash">
+            <meta-data
+                android:name="android.support.customtabs.trusted.DEFAULT_URL"
+                android:value="https://www.myconferencecompanion.com.ng/" />
+            <meta-data
+                android:name="android.support.customtabs.trusted.STATUS_BAR_COLOR"
+                android:resource="@color/colorPrimaryDark" />
+            <meta-data
+                android:name="android.support.customtabs.trusted.NAVIGATION_BAR_COLOR"
+                android:resource="@color/navigationColor" />
+            <!-- Splash image transfer to Chrome REMOVED on purpose (v1.0.3).
+                 The FileProvider handoff path was implicated in an
+                 instant launch crash; Android 12+ shows the system
+                 splash from the launcher icon instead, which is fine. -->
+            <meta-data
+                android:name="android.support.customtabs.trusted.FILE_PROVIDER_AUTHORITY"
+                android:value="com.orivonedge.conferencecompanion.fileprovider" />
+
+            <!-- No MAIN/LAUNCHER intent-filter here: the offline launcher
+                 (FullOfflineActivity) is the user-facing entry point. -->
+        </activity>
+
+        <service
+            android:name="com.google.androidbrowserhelper.trusted.DelegationService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.support.customtabs.trusted.TRUSTED_WEB_ACTIVITY_SERVICE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.orivonedge.conferencecompanion.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
+    </application>
+
+</manifest>

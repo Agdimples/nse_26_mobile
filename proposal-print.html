@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Project Proposal — Custom E-Commerce Platform with Savings Wallet & Installment Tracking</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm 16mm 16mm; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: Calibri, "Segoe UI", Arial, sans-serif;
+    color: #1a1a1a;
+    font-size: 11pt;
+    line-height: 1.45;
+    margin: 0;
+  }
+  .masthead {
+    border-bottom: 3px solid #1f4e5f;
+    padding-bottom: 10px;
+    margin-bottom: 18px;
+  }
+  .masthead .brand {
+    font-size: 10pt; letter-spacing: 2px; text-transform: uppercase;
+    color: #1f4e5f; font-weight: 700; margin: 0 0 6px 0;
+  }
+  h1 {
+    font-size: 19pt; color: #17313b; margin: 0 0 8px 0; line-height: 1.2;
+  }
+  .meta { font-size: 10pt; color: #444444; }
+  .meta b { color: #17313b; }
+  h2 {
+    font-size: 13pt; color: #1f4e5f; margin: 22px 0 8px 0;
+    border-bottom: 1.5px solid #cfd9dc; padding-bottom: 3px;
+  }
+  h3 {
+    font-size: 11.5pt; color: #17313b; margin: 14px 0 6px 0;
+  }
+  p { margin: 6px 0; }
+  table {
+    width: 100%; border-collapse: collapse; margin: 8px 0 12px 0; font-size: 10pt;
+  }
+  th {
+    background: #1f4e5f; color: #ffffff; text-align: left;
+    padding: 6px 8px; font-weight: 600;
+  }
+  td { border-bottom: 1px solid #d9e2e5; padding: 6px 8px; vertical-align: top; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .total td { background: #eef4f5; font-weight: 700; border-top: 2px solid #1f4e5f; }
+  .note {
+    background: #f4f8f9; border-left: 4px solid #1f4e5f;
+    padding: 8px 12px; font-size: 10pt; color: #33454c; margin: 10px 0;
+  }
+  .req { color: #8c1d1d; font-weight: 700; }
+  ol { margin: 6px 0 6px 22px; padding: 0; }
+  li { margin: 4px 0; }
+  .sig { margin-top: 34px; }
+  .sigline { width: 260px; border-top: 1px solid #333; padding-top: 4px; font-size: 10pt; color: #444; margin-top: 40px; }
+  .small { font-size: 9.5pt; color: #666; }
+  .fee-highlight {
+    display: flex; gap: 14px; margin: 10px 0 14px 0;
+  }
+  .fee-box {
+    flex: 1; border: 2px solid #1f4e5f; border-radius: 6px; padding: 10px 14px; text-align: center;
+  }
+  .fee-box .amount { font-size: 17pt; font-weight: 800; color: #1f4e5f; }
+  .fee-box .label { font-size: 9.5pt; color: #4c4c4c; text-transform: uppercase; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <p class="brand">Daniel Nicholas — Software Development</p>
+</div>
+
+<h1>Project Proposal: Custom E-Commerce Platform with Customer Savings Wallet &amp; Installment Tracking</h1>
+
+<p class="meta"><b>Prepared for:</b> Eucharia Enwemadu (on behalf of the client organization)<br>
+<b>Prepared by:</b> Daniel Nicholas<br>
+<b>Date:</b> October 15, 2026 &nbsp;·&nbsp; <b>Quotation valid for:</b> 30 days from the date above</p>
+
+<h2>1. Executive Summary</h2>
+<p>This proposal details the technical scope, phased development structure, professional fee, and third-party costs for a custom e-commerce web platform equipped with <b>customer savings wallets</b> and <b>automated installment (credit) payment tracking</b>, integrated with local payment processors (Paystack or Monnify).</p>
+<p>Every monetary item in this document is assigned to exactly one of two owners so there is no ambiguity at any point:</p>
+<p><b>1. The development fee</b> — paid to the developer (Daniel Nicholas) for engineering the platform.<br>
+<b>2. Third-party costs</b> — paid directly by your organization to each provider (domain registrar, hosting, payment gateway, etc.), so your organization retains full ownership and administrative control of every digital asset.</p>
+
+<h2>2. Scope of Work and Phased Development Structure</h2>
+<p>Development is structured into <b>two milestones</b>, each independently valuable, testable, and separately paid, so that progress is always visible and risk is always shared.</p>
+
+<h3>Milestone 1 — E-Commerce Core &amp; Storefront — ₦350,000</h3>
+<table>
+  <tr><th>What your customers get</th><th>What your staff get</th></tr>
+  <tr><td>Professional storefront and product catalog</td><td>Core admin dashboard: products, orders, users</td></tr>
+  <tr><td>Secure customer registration and login</td><td>One bulk product import from your catalog file</td></tr>
+  <tr><td>Direct checkout via Paystack or Monnify</td><td>Order and payment status tracking</td></tr>
+</table>
+<p class="small"><b>Delivery:</b> 3–4 weeks from mobilization payment + confirmed prerequisites.</p>
+
+<h3>Milestone 2 — Financial Engine: Savings Wallet &amp; Installment Tracking — ₦350,000</h3>
+<table>
+  <tr><th>What your customers get</th><th>What your staff get</th></tr>
+  <tr><td>Savings wallet: save toward any purchase and watch progress</td><td>Wallet &amp; ledger admin screens with full transaction history</td></tr>
+  <tr><td>Pay-by-installment purchases (weekly or monthly schedules)</td><td>Automated repayment tracking, status and reminders</td></tr>
+  <tr><td>Automatic payment reminders</td><td>Credit repayment monitoring and reporting</td></tr>
+</table>
+
+<div class="note">
+<b>Architecture note.</b> Customer funds flow directly through the payment gateway to your organization's own settlement account. The system records and reconciles customer claims without holding pooled funds — intentionally keeping your operation outside the scope of CBN payment-servicing licensing for this use case.
+</div>
+<p class="small"><b>Delivery:</b> 2–3 weeks from acceptance of Milestone 1.</p>
+
+<h2>3. Investment</h2>
+
+<div class="fee-highlight">
+  <div class="fee-box"><div class="amount">₦700,000</div><div class="label">Total development fee<br>(payable to the developer)</div></div>
+</div>
+
+<table>
+  <tr><th>Milestone</th><th class="num">Total fee</th><th class="num">Mobilization (before work starts)</th><th class="num">On delivery &amp; acceptance</th></tr>
+  <tr><td>Milestone 1 — E-Commerce Core &amp; Storefront</td><td class="num">₦350,000</td><td class="num">₦175,000</td><td class="num">₦175,000</td></tr>
+  <tr><td>Milestone 2 — Savings Wallet &amp; Installment Engine</td><td class="num">₦350,000</td><td class="num">₦175,000</td><td class="num">₦175,000</td></tr>
+  <tr class="total"><td>Total development fee</td><td class="num">₦700,000</td><td class="num">₦350,000</td><td class="num">₦350,000</td></tr>
+</table>
+<p class="small">Development on each milestone begins strictly upon receipt of its mobilization payment.</p>
+
+<h3>Third-party costs — paid directly by your organization</h3>
+<p>These are <b>not included in the development fee</b>. Each item is paid by you, in your name, so your organization owns the account and its master credentials. Where setup assistance is required, provisioning is executed strictly using your official company email.</p>
+<table>
+  <tr><th>Item</th><th>Purpose</th><th class="num">Indicative cost (vendor pricing)</th></tr>
+  <tr><td>CAC business registration <span class="req">(required)</span></td><td>Gate for live Paystack/Monnify verification</td><td class="num">₦15,000–₦120,000 one-off</td></tr>
+  <tr><td>Business bank account <span class="req">(required)</span></td><td>Gateway settlement account in the registered name</td><td class="num">Free / min. balance per bank</td></tr>
+  <tr><td>Paystack or Monnify merchant account, live <span class="req">(required)</span></td><td>Customer payments and wallet funding</td><td class="num">Free setup; ~1.5% + ₦100/transaction</td></tr>
+  <tr><td>Domain name</td><td>Platform address customers visit</td><td class="num">~₦10,000–₦30,000 / year</td></tr>
+  <tr><td>Web hosting / cloud</td><td>Secure, always-on operation</td><td class="num">~₦0–₦180,000 / year by scale</td></tr>
+  <tr><td>SSL certificate</td><td>Encrypted connections</td><td class="num">Free — auto-issued</td></tr>
+  <tr><td>Official company email</td><td>Admin control, vendor sign-ups, OTP sender identity</td><td class="num">~₦0–₦12,000 / user / month</td></tr>
+  <tr><td>Brand assets, product photos &amp; data</td><td>Catalog content for launch</td><td class="num">By your arrangement</td></tr>
+</table>
+<p class="small">Figures are indicative vendor prices for budgeting only and may change without notice; they are payable directly to each provider by the client.</p>
+
+<h2>4. Mandatory Prerequisites</h2>
+<ol>
+  <li><b>CAC business registration</b> <span class="req">(required)</span> — gate for live payment gateway verification.</li>
+  <li><b>Business bank account</b> <span class="req">(required)</span> — settlement account in the registered entity's name.</li>
+  <li><b>Verified merchant account</b> <span class="req">(required)</span> — live API keys for Paystack or Monnify.</li>
+  <li><b>Written credit policy</b> <span class="req">(required)</span> — down-payment %, weekly vs monthly, grace period, penalties, interest.</li>
+  <li><b>Product catalog data</b> <span class="req">(required)</span> — CSV/Excel with cash prices and installment breakdowns.</li>
+  <li><b>KYC decision</b> <span class="req">(required)</span> — ID/BVN/guarantor rules before credit approval.</li>
+  <li>Domain &amp; hosting — purchased or owned by your organization (setup assistance available on your corporate email).</li>
+  <li>Brand assets, website copy, terms of service and privacy policy documents.</li>
+  <li>Official company email.</li>
+</ol>
+
+<h2>5. Timeline &amp; Delivery</h2>
+<ul>
+  <li><b>Milestone 1:</b> 3–4 weeks from mobilization + prerequisites confirmation.</li>
+  <li><b>Milestone 2:</b> 2–3 weeks from Milestone 1 acceptance.</li>
+</ul>
+<p class="small">The schedule pauses automatically if a prerequisite remains outstanding and resumes within 3 business days of it being provided. Where possible, delivery is made ahead of schedule.</p>
+
+<h2>6. Scope Management &amp; Acceptance</h2>
+<ul>
+  <li>Each milestone includes <b>two rounds of client review</b>; each review window is five business days. Silence after five business days counts as acceptance of that milestone.</li>
+  <li>Business-rule changes raised mid-build (repayment schedules, penalties, interest, product flows) are <b>new scope</b>, quoted separately before implementation.</li>
+</ul>
+
+<h2>7. Optional Post-Launch Maintenance &amp; Support Retainer</h2>
+<p><b>₦35,000 / month (optional)</b> — covers uptime monitoring, security patching, monthly transaction-ledger health checks, and routine support with a one-business-day response commitment. Explicitly excludes new feature development (quoted separately as needed).</p>
+
+<h2>8. Acceptance</h2>
+<p>To proceed, confirm by reply email acceptance of the fee and milestone structure, and indicate your status against the Section 4 checklist. Work begins on receipt of the Milestone 1 mobilization payment.</p>
+
+<div class="sigline">Client name / Signature / Date</div>
+
+<p class="small" style="margin-top:26px;"><i>Quotation valid for 30 days from the date above.</i></p>
+
+</body>
+</html>
