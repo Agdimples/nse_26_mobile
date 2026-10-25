@@ -20,9 +20,11 @@ import {
   HelpCircle,
   Info,
   ShieldCheck,
+  RefreshCw,
 } from "lucide-react";
 import { NsePageHeader } from "@/components/app/NsePageHeader";
 import { EVENT_CONFIG } from "@/lib/event-config";
+import { isAndroidBuild } from "@/lib/android-build";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/more")({
@@ -46,6 +48,22 @@ function MorePage() {
   const [codeOpen, setCodeOpen] = useState(false);
   const [code, setCode] = useState("");
   const [busy, setBusy] = useState(false);
+
+  /** Triggers the native Play update flow. Only reachable in the Android
+   *  build, whose launcher registers the window.NseApp JS bridge. */
+  function checkForAppUpdate() {
+    const bridge = (window as unknown as {
+      NseApp?: { checkForUpdate?: () => void; openPlayStore?: () => void };
+    }).NseApp;
+    if (typeof bridge?.checkForUpdate === "function") {
+      toast.info("Checking with Google Play for a newer version…");
+      bridge.checkForUpdate();
+    } else if (typeof bridge?.openPlayStore === "function") {
+      bridge.openPlayStore();
+    } else {
+      toast.info("You are on the website — there is nothing to update here.");
+    }
+  }
 
   async function redeem() {
     if (!code.trim()) return;
@@ -82,6 +100,29 @@ function MorePage() {
           </div>
         </div>
       </Card>
+
+      {isAndroidBuild && (
+        <Card className="border-0 bg-surface rounded-2xl p-4 shadow-card">
+          <div className="flex items-center gap-3.5">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-accent-soft text-primary shadow-inner">
+              <RefreshCw className="h-5 w-5" />
+            </div>
+            <div className="flex-1">
+              <p className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">App updates</p>
+              <p className="text-sm font-medium text-foreground">Check now</p>
+              <p className="text-xs text-muted-foreground">
+                Updates install through Google Play, right inside the app.
+              </p>
+            </div>
+            <Button
+              size="sm"
+              onClick={checkForAppUpdate}
+            >
+              Check
+            </Button>
+          </div>
+        </Card>
+      )}
 
       <Card className="overflow-hidden border-0 bg-surface rounded-2xl shadow-card">
         <ul className="divide-y divide-border">

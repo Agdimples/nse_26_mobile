@@ -44,6 +44,9 @@ dist-ssr
 *.aab
 *.ipa
 
+# Android offline SPA build output (synced copy lives in android/app/src/main/assets)
+dist-android/
+
 # Flutter / Dart
 .dart_tool/
 .flutter-plugins

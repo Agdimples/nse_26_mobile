@@ -8,6 +8,7 @@ import { ArrowLeft, Send, Sparkles } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { EVENT_CONFIG } from "@/lib/event-config";
+import { isAndroidBuild } from "@/lib/android-build";
 
 export const Route = createFileRoute("/_authenticated/chatbot")({
   component: ChatbotPage,
@@ -26,7 +27,11 @@ function ChatbotPage() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
-  const transport = useRef(new DefaultChatTransport({ api: "/api/chat" })).current;
+  // In the Android offline build there is no same-origin /api endpoint; the
+  // AI concierge is served by the deployed website instead.
+  const apiBase =
+    isAndroidBuild ? "https://www.myconferencecompanion.com.ng" : "";
+  const transport = useRef(new DefaultChatTransport({ api: `${apiBase}/api/chat` })).current;
   const { messages, sendMessage, status, error } = useChat({ transport });
 
   const isLoading = status === "submitted" || status === "streaming";

@@ -1,0 +1,10 @@
+// Android wrapper for the live Conference Companion web app.
+//
+// It is a Trusted Web Activity: Chrome renders
+// https://www.myconferencecompanion.com.ng full-screen with no browser UI, and
+// Digital Asset Links (public/.well-known/assetlinks.json) prove the app and the
+// site are owned by the same developer. There is no bundled web code, so a
+// deploy to the site is immediately live in the app.
+plugins {
+    id 'com.android.application' version '9.1.0' apply false
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Paths the Trusted Web Activity may share through its FileProvider.
+
+     twa_splash/ is REQUIRED by androidbrowserhelper's splash-screen
+     handoff: PwaWrapperSplashScreenStrategy writes the splash PNG to
+     files/twa_splash/splash_image.png and passes it to Chrome through
+     this provider. If no <files-path> root covers that directory,
+     FileProvider throws "Failed to find configured root that contains
+     ..." and the app crashes instantly on open ("has stopped"). -->
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <files-path name="twa_splash" path="twa_splash/" />
+    <files-path name="images" path="images/" />
+    <cache-path name="cache" path="/" />
+</paths>
