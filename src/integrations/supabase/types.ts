@@ -14,6 +14,90 @@ export type Database = {
   }
   public: {
     Tables: {
+      buses: {
+        Row: {
+          id: string
+          name: string
+          hotel_id: string
+          route_label: string
+          capacity: number
+          marshal_name: string
+          marshal_phone: string
+          pickup_point: string
+          updated_at: string
+        }
+        Insert: {
+          id: string
+          name: string
+          hotel_id: string
+          route_label: string
+          capacity?: number
+          marshal_name?: string
+          marshal_phone?: string
+          pickup_point: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          hotel_id?: string
+          route_label?: string
+          capacity?: number
+          marshal_name?: string
+          marshal_phone?: string
+          pickup_point?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      schedule_template: {
+        Row: {
+          id: number
+          label: string
+          direction: string
+          time: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          id?: number
+          label: string
+          direction: string
+          time: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          id?: number
+          label?: string
+          direction?: string
+          time?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      transport_config: {
+        Row: {
+          id: string
+          default_policy: string
+          policy_descriptions: Json
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          default_policy: string
+          policy_descriptions?: Json
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          default_policy?: string
+          policy_descriptions?: Json
+          updated_at?: string
+        }
+        Relationships: []
+      }
       accommodations: {
         Row: {
           address: string | null
