@@ -869,23 +869,27 @@
     ],
     "images": [
       {
-        "preview": "/hotels/prime/001.jpg",
-        "thumb": "/hotels/prime/thumb/001.jpg"
+        "preview": "/hotels/prime-lodge-rank-12/001.jpeg",
+        "thumb": "/hotels/prime-lodge-rank-12/001.jpeg"
       },
       {
-        "preview": "/hotels/prime/002.jpg",
-        "thumb": "/hotels/prime/thumb/002.jpg"
+        "preview": "/hotels/prime-lodge-rank-12/002.jpeg",
+        "thumb": "/hotels/prime-lodge-rank-12/002.jpeg"
       },
       {
-        "preview": "/hotels/prime/003.jpg",
-        "thumb": "/hotels/prime/thumb/003.jpg"
+        "preview": "/hotels/prime-lodge-rank-12/003.jpeg",
+        "thumb": "/hotels/prime-lodge-rank-12/003.jpeg"
       },
       {
-        "preview": "/hotels/prime/004.jpg",
-        "thumb": "/hotels/prime/thumb/004.jpg"
+        "preview": "/hotels/prime-lodge-rank-12/004.jpeg",
+        "thumb": "/hotels/prime-lodge-rank-12/004.jpeg"
+      },
+      {
+        "preview": "/hotels/prime-lodge-rank-12/005.jpeg",
+        "thumb": "/hotels/prime-lodge-rank-12/005.jpeg"
       }
     ],
-    "photoCount": 4,
+    "photoCount": 5,
     "latitude": 11.8128047,
     "longitude": 13.1324383
   },
