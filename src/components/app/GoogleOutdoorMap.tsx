@@ -537,7 +537,6 @@ export function GoogleOutdoorMap() {
 
       {/* ── Selected info sheet ── */}
       {selectedItem ? (
-<<<<<<< HEAD
         <Card className="border-0 rounded-2xl shadow-elevated overflow-hidden bg-white">
           {/* Category color stripe */}
           <div
@@ -571,15 +570,6 @@ export function GoogleOutdoorMap() {
                     {selectedItem.address}
                   </p>
                 )}
-=======
-        <Card className="border-0 p-4 shadow-card bg-surface transition-all">
-          <div className="flex items-start justify-between gap-2">
-            <div className="min-w-0">
-              <div className="flex items-center gap-1.5">
-                <Badge variant="outline" className="text-[10px] uppercase font-bold text-primary border-primary/25">
-                  {selectedItem.category}
-                </Badge>
->>>>>>> 3176e82b75000b0c0fb3f3412830617b3299f0a6
               </div>
               <button
                 onClick={() => setSelectedItem(null)}

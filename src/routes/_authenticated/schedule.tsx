@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import {
   createFileRoute,
   Link,
@@ -15,10 +14,6 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { formatTimeRange, initials } from "@/lib/format";
 import { EVENT_CONFIG } from "@/lib/event-config";
-=======
-import { createFileRoute, Outlet, useRouterState } from "@tanstack/react-router";
-import { ScheduleTab } from "@/components/conference/ScheduleTab";
->>>>>>> 3176e82b75000b0c0fb3f3412830617b3299f0a6
 import { NsePageHeader } from "@/components/app/NsePageHeader";
 import { useAuth } from "@/lib/auth";
 import { toast } from "sonner";
@@ -43,7 +38,6 @@ export const Route = createFileRoute("/_authenticated/schedule")({
   component: SchedulePage,
 });
 
-<<<<<<< HEAD
 // ---------------------------------------------------------------------------
 // Conference days
 // ---------------------------------------------------------------------------
@@ -636,24 +630,6 @@ function ExhibitorsList() {
           </div>
         </>
       )}
-=======
-function SchedulePage() {
-  const pathname = useRouterState({ select: (state) => state.location.pathname });
-  const showingChild = /^\/schedule\/[^/]+$/.test(pathname);
-
-  if (showingChild) {
-    return <Outlet />;
-  }
-
-  return (
-    <div className="pb-24">
-      <NsePageHeader
-        title="Programme & Schedule"
-        subtitle="Daily programme and event timings"
-        backTo="/conference"
-      />
-      <ScheduleTab />
->>>>>>> 3176e82b75000b0c0fb3f3412830617b3299f0a6
     </div>
   );
 }
