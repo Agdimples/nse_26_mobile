@@ -164,9 +164,11 @@ export function ScheduleTab() {
                       )}
                     </Button>
                   </div>
-                  <div className="mt-1.5 text-xs text-muted-foreground">
-                    <span className="font-medium text-foreground/80">📍 {event.location}</span>
-                  </div>
+                  {event.location && (
+                    <div className="mt-1.5 text-xs text-muted-foreground">
+                      <span className="font-medium text-foreground/80">📍 {event.location}</span>
+                    </div>
+                  )}
                 </div>
               </div>
             </Card>

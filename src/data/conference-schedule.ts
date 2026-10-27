@@ -16,29 +16,37 @@ export const conferenceSchedule: ConferenceScheduleDay[] = [
   {
     date: "Monday, November 30, 2026",
     events: [
-      { time: "8:00am - 6:00pm", title: "Registration/Arrival", location: "" },
-      { time: "9:30am - 10:30am", title: "Press Conference", location: "" },
+      {
+        time: "8:00am - 6:00pm",
+        title: "Registration/Arrival",
+        location: "International Conference Centre (ICC) Main hall",
+      },
+      {
+        time: "9:30am - 10:30am",
+        title: "Press Conference",
+        location: "International Conference Centre (ICC) Main hall",
+      },
       {
         time: "10:00am - 1:00pm",
         title: "Fellowship Symposium",
-        location: "",
+        location: "International Conference Centre (ICC) Main hall",
         category: "technical",
       },
       {
         time: "1:00pm",
         title: "Courtesy Visit to Host Governor",
-        location: "",
+        location: "International Conference Centre (ICC) Main hall",
         category: "social",
       },
       {
         time: "2:00pm - 4:00pm",
         title: "Fellowship Conferment Ceremony",
-        location: "",
+        location: "International Conference Centre (ICC) Main hall",
       },
       {
         time: "6:00pm - 8:00pm",
         title: "Presidential Cocktail Party",
-        location: "",
+        location: "International Conference Centre (ICC) Main hall",
         category: "social",
       },
     ],
@@ -46,25 +54,37 @@ export const conferenceSchedule: ConferenceScheduleDay[] = [
   {
     date: "Tuesday, December 1, 2026",
     events: [
-      { time: "8:00am - 6:00pm", title: "Registration", location: "" },
-      { time: "10:00am - 12:30pm", title: "Opening Ceremony", location: "" },
-      { time: "12:30pm - 1:00pm", title: "Lunch Break", location: "" },
+      {
+        time: "8:00am - 6:00pm",
+        title: "Registration",
+        location: "International Conference Centre (ICC) Main hall",
+      },
+      {
+        time: "10:00am - 12:30pm",
+        title: "Opening Ceremony",
+        location: "International Conference Centre (ICC) Main hall",
+      },
+      {
+        time: "12:30pm - 1:00pm",
+        title: "Lunch Break",
+        location: "International Conference Centre (ICC) Main hall",
+      },
       {
         time: "1:00pm - 5:00pm",
         title: "Spouses Programme",
-        location: "",
+        location: "Muhammadu Indimi International Conference Centre",
         category: "spouses",
       },
       {
         time: "1:00pm - 5:00pm",
         title: "Young Engineers Programme",
-        location: "",
+        location: "Academic Staff Union of Universities (ASUU) hall",
         category: "young-engineers",
       },
       {
         time: "1:00pm - 2:10pm",
         title: "Panel Discussion Session 1",
-        location: "",
+        location: "International Conference Centre (ICC) Main hall",
         category: "technical",
       },
       {
@@ -76,7 +96,7 @@ export const conferenceSchedule: ConferenceScheduleDay[] = [
       {
         time: "2:20pm - 3:30pm",
         title: "Panel Discussion Session 2",
-        location: "",
+        location: "International Conference Centre (ICC) Main hall",
         category: "technical",
       },
       {
@@ -88,51 +108,63 @@ export const conferenceSchedule: ConferenceScheduleDay[] = [
       {
         time: "3:30pm - 4:40pm",
         title: "Panel Discussion Session 3",
-        location: "",
+        location: "International Conference Centre (ICC) Main hall",
         category: "technical",
       },
-      { time: "5:00pm - 8:00pm", title: "Election Manifesto", location: "" },
+      {
+        time: "5:00pm - 8:00pm",
+        title: "Election Manifesto",
+        location: "International Conference Centre (ICC) Main hall",
+      },
     ],
   },
   {
     date: "Wednesday, December 2, 2026",
     events: [
-      { time: "9:00am - 6:00pm", title: "Registration", location: "" },
+      {
+        time: "9:00am - 6:00pm",
+        title: "Registration",
+        location: "International Conference Centre (ICC) Main hall",
+      },
       {
         time: "9:00am - 6:00pm",
         title: "Spouses Programme",
-        location: "",
+        location: "Muhammadu Indimi International Conference Centre",
         category: "spouses",
       },
       {
         time: "9:00am - 6:00pm",
         title: "Young Engineers Programme",
-        location: "",
+        location: "Academic Staff Union of Universities (ASUU) hall",
         category: "young-engineers",
       },
       {
         time: "9:00am - 10:00am",
         title: "Leadership and Energy Talks",
-        location: "",
+        location: "International Conference Centre (ICC) Main hall",
         category: "technical",
       },
       {
         time: "10:00am - 11:00am",
         title: "Technical Session 1",
-        location: "",
+        location: "International Conference Centre (ICC) Main hall",
         category: "technical",
       },
       {
         time: "11:00am - 12:15pm",
         title: "Panel Discussion Session 4",
-        location: "",
+        location: "International Conference Centre (ICC) Main hall",
         category: "technical",
       },
-      { time: "12:15pm - 12:45pm", title: "Lunch Break", location: "" },
+      {
+        time: "12:15pm - 12:45pm",
+        title: "Lunch Break",
+        location: "International Conference Centre (ICC) Main hall",
+      },
       {
         time: "12:45pm - 2:00pm",
         title: "Panel Discussion Session 5",
-        location: "",
+        location: "International Conference Centre (ICC) Main hall",
         category: "technical",
       },
       {
@@ -144,19 +176,19 @@ export const conferenceSchedule: ConferenceScheduleDay[] = [
       {
         time: "2:30pm - 4:00pm",
         title: "Panel Discussion Session 6",
-        location: "",
+        location: "International Conference Centre (ICC) Main hall",
         category: "technical",
       },
       {
         time: "4:00pm - 6:00pm",
         title: "Group Dynamics Competition (Branches and Divisions)",
-        location: "",
+        location: "International Conference Centre (ICC) Main hall",
         category: "social",
       },
       {
         time: "6:00pm - 8:00pm",
         title: "Welfare/Cultural Night",
-        location: "",
+        location: "International Conference Centre (ICC) Main hall",
         category: "social",
       },
     ],
@@ -173,14 +205,18 @@ export const conferenceSchedule: ConferenceScheduleDay[] = [
       {
         time: "10:00am - 1:00pm",
         title: "Annual General Meeting (AGM)",
-        location: "",
+        location: "International Conference Centre (ICC) Main hall",
         category: "technical",
       },
-      { time: "1:00pm - 2:00pm", title: "Lunch Break", location: "" },
+      {
+        time: "1:00pm - 2:00pm",
+        title: "Lunch Break",
+        location: "International Conference Centre (ICC) Main hall",
+      },
       {
         time: "6:00pm - 9:00pm",
         title: "Annual Dinner / Gala Night",
-        location: "",
+        location: "International Conference Centre (ICC) Main hall",
         category: "social",
       },
     ],
@@ -188,8 +224,16 @@ export const conferenceSchedule: ConferenceScheduleDay[] = [
   {
     date: "Friday, December 4, 2026",
     events: [
-      { time: "10:00am - 11:00am", title: "Closing Press Conference", location: "" },
-      { time: "11:00am", title: "Departure", location: "" },
+      {
+        time: "10:00am - 11:00am",
+        title: "Closing Press Conference",
+        location: "International Conference Centre (ICC) Main hall",
+      },
+      {
+        time: "11:00am",
+        title: "Departure",
+        location: "International Conference Centre (ICC) Main hall",
+      },
     ],
   },
 ];
