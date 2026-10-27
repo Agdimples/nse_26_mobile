@@ -33,7 +33,10 @@ export const Route = createFileRoute("/api/chat")({
 
           // Build event context from the database
           const url = process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL;
-          const anon = process.env.SUPABASE_PUBLISHABLE_KEY ?? process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+          const anon =
+            process.env.SUPABASE_PUBLISHABLE_KEY ??
+            process.env.VITE_SUPABASE_PUBLISHABLE_KEY ??
+            process.env.VITE_SUPABASE_ANON_KEY;
           let eventContext = "";
           if (url && anon) {
             const supabase = createClient<Database>(url, anon);

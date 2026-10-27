@@ -205,9 +205,6 @@ function HotelCard({ hotel }: { hotel: Hotel }) {
         <div className="flex items-start justify-between gap-2">
           <div className="min-w-0">
             <div className="flex items-center gap-1.5">
-              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
-                {hotel.rank}
-              </span>
               <h3 className="truncate text-base font-semibold leading-tight">
                 {hotel.name}
               </h3>

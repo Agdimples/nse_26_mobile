@@ -4,12 +4,13 @@ import { cn } from "@/lib/utils";
 
 const tabs = [
   { to: "/home", label: "Home", icon: Home },
-  { to: "/schedule", label: "Programme", icon: CalendarDays },
+  { to: "/conference", label: "Conference", icon: CalendarDays },
   { to: "/more", label: "More", icon: Menu },
 ] as const;
 
 export function BottomTabs() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const conferencePaths = ["/conference", "/schedule", "/speakers", "/exhibition"];
 
   return (
     <nav
@@ -21,7 +22,8 @@ export function BottomTabs() {
         {tabs.map(({ to, label, icon: Icon }) => {
           const active =
             pathname === to ||
-            (to !== "/home" && pathname.startsWith(to));
+            (to === "/conference" && conferencePaths.some((path) => pathname.startsWith(path))) ||
+            (to !== "/home" && to !== "/conference" && pathname.startsWith(to));
           return (
             <li key={to}>
               <Link

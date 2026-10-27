@@ -12,9 +12,7 @@ import {
   Cross,
   Utensils,
   Pill,
-  Banknote,
   ShoppingBag,
-  Users,
   Navigation,
   Phone,
   MapPin,
@@ -44,9 +42,7 @@ const CATEGORY_META: Record<
   Culture:       { icon: Church,     tint: "bg-purple-100 text-purple-700",    chip: "border-purple-200 bg-purple-50 text-purple-700",     chipActive: "border-purple-600 bg-purple-600 text-white"   },
   Hospital:      { icon: Cross,      tint: "bg-emerald-100 text-emerald-700",  chip: "border-emerald-200 bg-emerald-50 text-emerald-700",  chipActive: "border-emerald-600 bg-emerald-600 text-white" },
   Pharmacy:      { icon: Pill,       tint: "bg-teal-100 text-teal-700",        chip: "border-teal-200 bg-teal-50 text-teal-700",           chipActive: "border-teal-600 bg-teal-600 text-white"       },
-  ATM:           { icon: Banknote,   tint: "bg-green-100 text-green-700",      chip: "border-green-200 bg-green-50 text-green-700",        chipActive: "border-green-600 bg-green-600 text-white"     },
   Shopping:      { icon: ShoppingBag,tint: "bg-orange-100 text-orange-700",    chip: "border-orange-200 bg-orange-50 text-orange-700",     chipActive: "border-orange-500 bg-orange-500 text-white"   },
-  "Spouses visit":{ icon: Users,     tint: "bg-pink-100 text-pink-700",        chip: "border-pink-200 bg-pink-50 text-pink-700",           chipActive: "border-pink-500 bg-pink-500 text-white"       },
 };
 
 function categoryMeta(category: string) {
@@ -852,6 +848,16 @@ function NearbyPage() {
                     {pois.map((poi) => (
                       <CultureCard key={poi.id} poi={poi} />
                     ))}
+                  </div>
+                ) : category === "Shopping" ? (
+                  <div className="grid grid-cols-1 gap-4">
+                    {pois.map((poi) =>
+                      poi.imageFolder ? (
+                        <RestaurantCard key={poi.id} poi={poi} />
+                      ) : (
+                        <PoiCard key={poi.id} poi={poi} />
+                      ),
+                    )}
                   </div>
                 ) : (
                   /* Regular POI list */

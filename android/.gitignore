@@ -1,0 +1,14 @@
+# Build output
+.gradle/
+build/
+app/build/
+
+# Local machine configuration (Android SDK path)
+local.properties
+
+# The Play upload keystore and its credentials. NEVER commit these: losing
+# control of the upload key lets someone else publish as this developer.
+keystore/
+keystore.properties
+*.jks
+*.keystore

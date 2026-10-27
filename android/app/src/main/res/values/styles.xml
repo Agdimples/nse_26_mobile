@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Chrome draws the actual UI, so the Android theme only has to cover the
+         window between launch and the first painted frame. -->
+    <style name="Theme.ConferenceCompanion" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/backgroundColor</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="android:navigationBarColor">@color/navigationColor</item>
+    </style>
+
+    <!-- Shown while the Trusted Web Activity verifies the origin and starts up. -->
+    <style name="Theme.ConferenceCompanion.Splash" parent="Theme.ConferenceCompanion">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+</resources>

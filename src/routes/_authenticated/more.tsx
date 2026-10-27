@@ -22,13 +22,18 @@ import {
   HelpCircle,
   Info,
   ShieldCheck,
+<<<<<<< HEAD
   ChevronRight,
   Copy,
   Check,
   Shield,
   type LucideIcon,
+=======
+  RefreshCw,
+>>>>>>> 3176e82b75000b0c0fb3f3412830617b3299f0a6
 } from "lucide-react";
 import { EVENT_CONFIG } from "@/lib/event-config";
+import { isAndroidBuild } from "@/lib/android-build";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/more")({
@@ -77,6 +82,22 @@ function MorePage() {
       return data;
     },
   });
+
+  /** Triggers the native Play update flow. Only reachable in the Android
+   *  build, whose launcher registers the window.NseApp JS bridge. */
+  function checkForAppUpdate() {
+    const bridge = (window as unknown as {
+      NseApp?: { checkForUpdate?: () => void; openPlayStore?: () => void };
+    }).NseApp;
+    if (typeof bridge?.checkForUpdate === "function") {
+      toast.info("Checking with Google Play for a newer version…");
+      bridge.checkForUpdate();
+    } else if (typeof bridge?.openPlayStore === "function") {
+      bridge.openPlayStore();
+    } else {
+      toast.info("You are on the website — there is nothing to update here.");
+    }
+  }
 
   async function redeem() {
     if (!code.trim()) return;
@@ -134,6 +155,7 @@ function MorePage() {
         </div>
       </div>
 
+<<<<<<< HEAD
       <div className="space-y-5 px-4 pt-5">
 
         {/* ── Wi-Fi card ──────────────────────────────────────────────────── */}
@@ -174,6 +196,41 @@ function MorePage() {
               iconBg={danger ? "bg-red-50 border-red-200" : "bg-muted border-border"}
               danger={danger}
             />
+=======
+      {isAndroidBuild && (
+        <Card className="border-0 bg-surface rounded-2xl p-4 shadow-card">
+          <div className="flex items-center gap-3.5">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-accent-soft text-primary shadow-inner">
+              <RefreshCw className="h-5 w-5" />
+            </div>
+            <div className="flex-1">
+              <p className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">App updates</p>
+              <p className="text-sm font-medium text-foreground">Check now</p>
+              <p className="text-xs text-muted-foreground">
+                Updates install through Google Play, right inside the app.
+              </p>
+            </div>
+            <Button
+              size="sm"
+              onClick={checkForAppUpdate}
+            >
+              Check
+            </Button>
+          </div>
+        </Card>
+      )}
+
+      <Card className="overflow-hidden border-0 bg-surface rounded-2xl shadow-card">
+        <ul className="divide-y divide-border">
+          {items.map(({ to, label, icon: Icon }) => (
+            <li key={to}>
+              <Link to={to} className="flex items-center gap-3 px-4 py-3.5 transition active:bg-muted">
+                <Icon className="h-5 w-5 text-muted-foreground" />
+                <span className="flex-1 text-sm font-medium">{label}</span>
+                <span className="text-muted-foreground">›</span>
+              </Link>
+            </li>
+>>>>>>> 3176e82b75000b0c0fb3f3412830617b3299f0a6
           ))}
         </MenuSection>
 

@@ -210,9 +210,7 @@ export const POI_CATEGORY_ORDER = [
   "Culture",
   "Hospital",
   "Pharmacy",
-  "ATM",
   "Shopping",
-  "Spouses visit",
 ] as const;
 
 export function poisByCategory(pois: NearbyPoi[]): Map<string, NearbyPoi[]> {

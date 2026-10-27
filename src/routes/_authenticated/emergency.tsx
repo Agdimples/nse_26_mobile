@@ -57,6 +57,14 @@ const BASE_CONTACTS = [
     tint: "text-destructive",
     bg: "bg-destructive-soft",
   },
+  {
+    id: "icc-security-desk",
+    name: "ICC Security Desk",
+    detail: "Inside ICC — contact the venue security desk in person.",
+    icon: Lock,
+    tint: "text-primary",
+    bg: "bg-primary-soft",
+  },
 ] as const;
 
 function EmergencyPage() {
@@ -95,20 +103,25 @@ function EmergencyPage() {
 
   // If database contacts are loaded, display them; otherwise fallback to bundled BASE_CONTACTS
   const contactsToDisplay = dbContacts.length > 0
-    ? dbContacts.map((c) => ({
+    ? [
+        ...dbContacts.map((c) => ({
         id: c.id,
         name: c.label,
         detail: c.description || c.category || "Official Desk",
         phone: c.phone,
         ...getIconProps(c.category),
-      }))
+        })),
+        ...(!dbContacts.some((c) => c.label.toLowerCase().includes("icc security"))
+          ? BASE_CONTACTS.filter((c) => c.id === "icc-security-desk")
+          : []),
+      ]
     : BASE_CONTACTS;
 
   return (
     <div className="pb-24">
       <NsePageHeader
         title="Emergency"
-        subtitle="Tap a contact to call immediately."
+        subtitle="Tap a number to call, or contact venue staff in person."
         backTo="/home"
       />
       <div className="space-y-3 px-4 pt-4">
@@ -131,7 +144,7 @@ function ContactCard({
   id: string;
   name: string;
   detail: string;
-  phone: string;
+  phone?: string;
   icon: typeof Phone;
   tint: string;
   bg: string;
@@ -145,11 +158,13 @@ function ContactCard({
         <p className="truncate text-sm font-bold">{name}</p>
         <p className="truncate text-xs text-muted-foreground">{detail}</p>
       </div>
-      <Button size="sm" asChild className="shrink-0">
-        <a href={`tel:${phone.replace(/\s+/g, "")}`} aria-label={`Call ${name}`}>
-          <Phone className="h-3.5 w-3.5" /> Call
-        </a>
-      </Button>
+      {phone && (
+        <Button size="sm" asChild className="shrink-0">
+          <a href={`tel:${phone.replace(/\s+/g, "")}`} aria-label={`Call ${name}`}>
+            <Phone className="h-3.5 w-3.5" /> Call
+          </a>
+        </Button>
+      )}
     </div>
   );
 }
