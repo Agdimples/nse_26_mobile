@@ -15,6 +15,22 @@ the project root (for example, `https://<project-ref>.supabase.co`), not an API
 endpoint such as `/rest/v1` or `/auth/v1`. These are public client credentials;
 never put a service-role key in a `VITE_` variable.
 
+## AI concierge
+
+The chatbot needs a Gemini API key on the server. Create one in
+[Google AI Studio](https://aistudio.google.com/apikey), then add it to the root
+`.env.local`:
+
+```env
+GEMINI_API_KEY=your-key
+```
+
+Keep this key server-side: do not prefix it with `VITE_`, commit it, or put it
+in the Android client. Restart `npm run dev` after adding it. For production
+and preview deployments, add `GEMINI_API_KEY` in the Vercel project's
+**Settings → Environment Variables** for each environment you use, then
+redeploy.
+
 ## Bot protection (Cloudflare Turnstile)
 
 Sign-up and sign-in are gated by a Cloudflare Turnstile challenge. Turnstile
@@ -37,17 +53,17 @@ stored in this repo.
 
 ## What's in the app
 
-| Area | Screens |
-|------|---------|
-| **Core** | Auth, Home, Activity (waitlist), More |
-| **Programme** | Schedule, Session detail, Speakers |
-| **Venue** | Maiduguri, Map (ICC + outdoor), Directions, Nearby |
-| **Hotels** | 47 delegate hotels (bundled from the official masterlist) + Supabase |
-| **Concierge** | Usher, Food, Errands, My orders |
-| **Social** | Chat rooms, Delegate directory, DMs |
-| **Safety** | Announcements, Emergency contacts |
-| **AI** | On-device about conference |
-| **Admin** | Role-gated dashboards and queues |
+| Area          | Screens                                                              |
+| ------------- | -------------------------------------------------------------------- |
+| **Core**      | Auth, Home, Activity (waitlist), More                                |
+| **Programme** | Schedule, Session detail, Speakers                                   |
+| **Venue**     | Maiduguri, Map (ICC + outdoor), Directions, Nearby                   |
+| **Hotels**    | 47 delegate hotels (bundled from the official masterlist) + Supabase |
+| **Concierge** | Usher, Food, Errands, My orders                                      |
+| **Social**    | Chat rooms, Delegate directory, DMs                                  |
+| **Safety**    | Announcements, Emergency contacts                                    |
+| **AI**        | On-device about conference                                           |
+| **Admin**     | Role-gated dashboards and queues                                     |
 
 ## Reference data
 

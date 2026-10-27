@@ -22,9 +22,11 @@ function AuthCallback() {
 
     async function handle() {
       const params = new URLSearchParams(window.location.search);
+      const recoveryFlow = params.get("flow") === "recovery";
+      if (recoveryFlow) setMessage("Preparing your password reset…");
       const error = params.get("error_description") || params.get("error");
       if (error) {
-        setMessage("Sign-in failed: " + error);
+        setMessage(`${recoveryFlow ? "Password reset" : "Sign-in"} failed: ${error}`);
         setTimeout(() => window.location.replace("/auth"), 2500);
         return;
       }
@@ -32,7 +34,7 @@ function AuthCallback() {
       if (code) {
         const { error: exErr } = await supabase.auth.exchangeCodeForSession(code);
         if (exErr) {
-          setMessage("Sign-in failed: " + exErr.message);
+          setMessage(`${recoveryFlow ? "Password reset" : "Sign-in"} failed: ${exErr.message}`);
           setTimeout(() => window.location.replace("/auth"), 2500);
           return;
         }
@@ -40,14 +42,14 @@ function AuthCallback() {
         // Hash-style implicit flow fallback
         const { error: hashErr } = await supabase.auth.getSession();
         if (hashErr) {
-          setMessage("Sign-in failed: " + hashErr.message);
+          setMessage(`${recoveryFlow ? "Password reset" : "Sign-in"} failed: ${hashErr.message}`);
           setTimeout(() => window.location.replace("/auth"), 2500);
           return;
         }
       }
       const { data } = await supabase.auth.getUser();
       if (data.user) {
-        window.location.replace("/home");
+        window.location.replace(recoveryFlow ? "/auth?recovery=1" : "/home");
       } else {
         setMessage("No session — redirecting to sign in…");
         setTimeout(() => window.location.replace("/auth"), 1500);

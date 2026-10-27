@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
 import { NsePageHeader } from "@/components/app/NsePageHeader";
 import { Badge } from "@/components/ui/badge";
 import { useState, useMemo } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import {
   Bus,
   Phone,
@@ -12,7 +14,6 @@ import {
   Users,
   Search,
   CheckCircle2,
-  AlertCircle,
   ChevronRight,
   Info,
 } from "lucide-react";
@@ -51,6 +52,11 @@ function bayColour(letter: string) {
   );
 }
 
+function isMarshalAssigned(marshalName: string): boolean {
+  const normalized = marshalName.trim().toLowerCase();
+  return normalized !== "" && normalized !== "to be assigned";
+}
+
 // ── Schedule direction pill ────────────────────────────────────────────────────
 function DirectionPill({ direction }: { direction: "to_venue" | "to_hotel" }) {
   return direction === "to_venue" ? (
@@ -66,7 +72,35 @@ function DirectionPill({ direction }: { direction: "to_venue" | "to_hotel" }) {
 
 // ─────────────────────────────────────────────────────────────────────────────
 function TransportPage() {
-  const { defaultPolicy, policyDescriptions, buses, scheduleTemplate } = TRANSPORT;
+  const { defaultPolicy, policyDescriptions, scheduleTemplate } = TRANSPORT;
+  const { data: liveBuses, isError, isLoading } = useQuery({
+    queryKey: ["transport-buses"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("buses")
+        .select("id, name, hotel_id, route_label, capacity, marshal_name, marshal_phone, pickup_point")
+        .order("name");
+      if (error) throw error;
+      return data.map((bus) => ({
+        id: bus.id,
+        name: bus.name,
+        hotelId: bus.hotel_id,
+        routeLabel: bus.route_label,
+        capacity: bus.capacity,
+        marshalName: bus.marshal_name,
+        marshalPhone: bus.marshal_phone,
+        pickupPoint: bus.pickup_point,
+      })).sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }));
+    },
+    refetchInterval: 30_000,
+    refetchOnWindowFocus: true,
+  });
+  const hasLiveBuses = Boolean(liveBuses?.length);
+  const buses = (hasLiveBuses ? liveBuses : TRANSPORT.buses).map((bus) => ({
+    ...bus,
+    marshalName: "To be assigned",
+  }));
+  const showFallbackNotice = isError || (!isLoading && liveBuses?.length === 0);
 
   const [search, setSearch] = useState("");
 
@@ -82,9 +116,7 @@ function TransportPage() {
     );
   }, [buses, search]);
 
-  const assignedCount = buses.filter(
-    (b) => b.marshalName !== "To be assigned",
-  ).length;
+  const assignedCount = buses.filter((bus) => isMarshalAssigned(bus.marshalName)).length;
 
   return (
     <div className="min-h-screen bg-background pb-28">
@@ -95,6 +127,11 @@ function TransportPage() {
       />
 
       <div className="space-y-5 px-4 pt-3">
+        {showFallbackNotice && (
+          <p role="status" className="rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-800">
+            Live transport data is unavailable. Showing the saved route list.
+          </p>
+        )}
 
         {/* ── Hero stats strip ──────────────────────────────────────── */}
         <div className="grid grid-cols-3 gap-2.5">
@@ -218,7 +255,7 @@ function TransportPage() {
             )}
             {filtered.map((bus) => {
               const hotel = HOTELS.find((h) => h.id === bus.hotelId);
-              const assigned = bus.marshalName !== "To be assigned";
+              const assigned = isMarshalAssigned(bus.marshalName);
               const bay = bayLetter(bus.pickupPoint);
               const bc = bayColour(bay);
               const routeShort = bus.routeLabel.replace(/^ICC ↔ /, "");
@@ -248,10 +285,8 @@ function TransportPage() {
                       )}
                     </div>
                     {/* Status dot */}
-                    {assigned ? (
+                    {assigned && (
                       <CheckCircle2 className="h-4.5 w-4.5 shrink-0 text-emerald-500" />
-                    ) : (
-                      <AlertCircle className="h-4.5 w-4.5 shrink-0 text-amber-400" />
                     )}
                   </div>
 
@@ -286,18 +321,21 @@ function TransportPage() {
                       </div>
 
                       {/* Call button */}
-                      <a
-                        href={`tel:${bus.marshalPhone.replace(/\s+/g, "")}`}
-                        aria-label={`Call marshal for ${bus.name}`}
-                        className={`flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold transition-all active:scale-95 ${
-                          assigned
-                            ? "bg-emerald-50 text-emerald-700 hover:bg-emerald-100"
-                            : "bg-muted text-muted-foreground"
-                        }`}
-                      >
-                        <Phone className="h-3 w-3" />
-                        {assigned ? "Call" : "TBA"}
-                      </a>
+                      {assigned ? (
+                        <a
+                          href={`tel:${bus.marshalPhone.replace(/\s+/g, "")}`}
+                          aria-label={`Call marshal for ${bus.name}`}
+                          className="flex items-center gap-1.5 rounded-xl bg-emerald-50 px-3 py-1.5 text-xs font-bold text-emerald-700 transition-all active:scale-95 hover:bg-emerald-100"
+                        >
+                          <Phone className="h-3 w-3" />
+                          Call
+                        </a>
+                      ) : (
+                        <span className="flex items-center gap-1.5 rounded-xl bg-muted px-3 py-1.5 text-xs font-bold text-muted-foreground">
+                          <Phone className="h-3 w-3" />
+                          TBA
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>

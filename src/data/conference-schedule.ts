@@ -35,7 +35,7 @@ export const conferenceSchedule: ConferenceScheduleDay[] = [
       {
         time: "1:00pm",
         title: "Courtesy Visit to Host Governor",
-        location: "International Conference Centre (ICC) Main hall",
+        location: "Borno State Government House",
         category: "social",
       },
       {
@@ -46,7 +46,7 @@ export const conferenceSchedule: ConferenceScheduleDay[] = [
       {
         time: "6:00pm - 8:00pm",
         title: "Presidential Cocktail Party",
-        location: "International Conference Centre (ICC) Main hall",
+        location: "",
         category: "social",
       },
     ],
@@ -188,7 +188,7 @@ export const conferenceSchedule: ConferenceScheduleDay[] = [
       {
         time: "6:00pm - 8:00pm",
         title: "Welfare/Cultural Night",
-        location: "International Conference Centre (ICC) Main hall",
+        location: "",
         category: "social",
       },
     ],
@@ -216,7 +216,7 @@ export const conferenceSchedule: ConferenceScheduleDay[] = [
       {
         time: "6:00pm - 9:00pm",
         title: "Annual Dinner / Gala Night",
-        location: "International Conference Centre (ICC) Main hall",
+        location: "",
         category: "social",
       },
     ],

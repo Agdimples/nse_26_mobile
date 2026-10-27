@@ -124,6 +124,42 @@ export type Database = {
         }
         Relationships: []
       }
+      buses: {
+        Row: {
+          capacity: number
+          hotel_id: string
+          id: string
+          marshal_name: string
+          marshal_phone: string
+          name: string
+          pickup_point: string
+          route_label: string
+          updated_at: string
+        }
+        Insert: {
+          capacity: number
+          hotel_id: string
+          id?: string
+          marshal_name: string
+          marshal_phone: string
+          name: string
+          pickup_point: string
+          route_label: string
+          updated_at?: string
+        }
+        Update: {
+          capacity?: number
+          hotel_id?: string
+          id?: string
+          marshal_name?: string
+          marshal_phone?: string
+          name?: string
+          pickup_point?: string
+          route_label?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       chat_messages: {
         Row: {
           content: string

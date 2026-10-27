@@ -57,13 +57,23 @@ function AuthPage() {
     setCaptchaNonce((n) => n + 1);
   };
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("recovery") === "1") {
+      setTab("forgot");
+      setResetStage("newpass");
+    }
+  }, []);
+
   // Already signed in? Send users to the app (effect, not a thrown redirect —
   // throwing during render crashes the route instead of navigating).
   useEffect(() => {
-    if (!loading && user) {
+    const recoveryLink = new URLSearchParams(window.location.search).get("recovery") === "1";
+    const completingRecovery = recoveryLink || (tab === "forgot" && resetStage !== "request");
+    if (!loading && user && !completingRecovery) {
       void navigate({ to: "/home", replace: true });
     }
-  }, [loading, user, navigate]);
+  }, [loading, user, tab, resetStage, navigate]);
 
   async function signIn(e: React.FormEvent) {
     e.preventDefault();
@@ -147,7 +157,7 @@ function AuthPage() {
     e.preventDefault();
     setBusy(true);
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/home`,
+      redirectTo: `${window.location.origin}/auth/callback?flow=recovery`,
     });
     setBusy(false);
     if (error) return toast.error(error.message);
@@ -158,7 +168,7 @@ function AuthPage() {
   async function resendRecoveryCode() {
     setBusy(true);
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/home`,
+      redirectTo: `${window.location.origin}/auth/callback?flow=recovery`,
     });
     setBusy(false);
     if (error) return toast.error(error.message);
@@ -361,7 +371,7 @@ function AuthPage() {
               {resetStage === "request" && (
                 <form onSubmit={requestReset} className="space-y-3">
                   <p className="text-xs text-muted-foreground">
-                    Enter the email you registered with — we'll send a 6-digit code to confirm it's you.
+                    Enter your registered email. Use the code in the email, or open its reset link.
                   </p>
                   <div className="space-y-1.5">
                     <Label htmlFor="fp-email">Email</Label>
@@ -420,7 +430,9 @@ function AuthPage() {
               )}
               {resetStage === "newpass" && (
                 <form onSubmit={setNewPassword} className="space-y-3">
-                  <p className="text-xs text-muted-foreground">Code verified — now set a new password.</p>
+                  <p className="text-xs text-muted-foreground">
+                    Verification complete — now set a new password.
+                  </p>
                   <div className="space-y-1.5">
                     <Label htmlFor="fp-new">New password</Label>
                     <Input
