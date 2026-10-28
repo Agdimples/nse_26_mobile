@@ -1893,6 +1893,45 @@
     "longitude": 13.1722376
   },
   {
+    "id": "yerwa-guest-inn",
+    "rank": 30,
+    "qualityTier": "pending",
+    "name": "Yerwa Guest Inn",
+    "shortName": "Yerwa Guest",
+    "tone": "Yerwa city stay",
+    "location": "Yerwa, Maiduguri, Borno State",
+    "distanceToVenue": "5.2 KM",
+    "contactPhone": null,
+    "description": "A Maiduguri guest inn associated with the Yerwa area and referenced publicly on Facebook. Public posts mention comfortable rooms, gym, outdoor pool and restaurant facilities.",
+    "roomSummary": "Rooms pending",
+    "rateStatus": "Rates pending",
+    "highlights": [
+      "Public Facebook page describes rooms, gym, pool and restaurant",
+      "Included from supplied local hotel folder",
+      "Exact address, phone number, rates and downloadable public photos still need confirmation",
+      "Distance to venue: 5.2 KM"
+    ],
+    "rooms": [
+      {
+        "label": "Rates",
+        "rate": "Pending"
+      }
+    ],
+    "images": [
+      {
+        "preview": "/hotels/yerwa/preview/001.webp",
+        "thumb": "/hotels/yerwa/thumb/001.webp"
+      },
+      {
+        "preview": "/hotels/yerwa/preview/002.webp",
+        "thumb": "/hotels/yerwa/thumb/002.webp"
+      }
+    ],
+    "photoCount": 2,
+    "latitude": 12.1073056,
+    "longitude": 12.8466225
+  },
+  {
     "id": "unimaid-guest-inn",
     "rank": 31,
     "qualityTier": "pending",
