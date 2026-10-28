@@ -11,7 +11,6 @@ import {
   ExternalLink,
   Phone,
   Mail,
-  Clock,
   Bus,
   Users,
   Award,
@@ -102,9 +101,8 @@ function AboutPage() {
 
         {/* ── Tabs ─────────────────────────────────────────────────── */}
         <Tabs defaultValue="about" className="w-full">
-          <TabsList className="grid w-full grid-cols-3 bg-muted/70 p-1 h-11">
+          <TabsList className="grid w-full grid-cols-2 bg-muted/70 p-1 h-11">
             <TabsTrigger value="about" className="text-sm font-semibold">About</TabsTrigger>
-            <TabsTrigger value="schedule" className="text-sm font-semibold">Programme</TabsTrigger>
             <TabsTrigger value="contact" className="text-sm font-semibold">Secretariat</TabsTrigger>
           </TabsList>
 
@@ -251,41 +249,7 @@ function AboutPage() {
             )}
           </TabsContent>
 
-          {/* ════════════════ TAB 2 · SCHEDULE ════════════════════ */}
-          <TabsContent value="schedule" className="mt-4 space-y-3">
-            {(info.scheduleOutline ?? []).map((day) => (
-              <Card key={day.day} className="overflow-hidden border-0 shadow-card">
-                <div className="flex">
-                  {/* Day number sidebar */}
-                  <div className="flex w-14 shrink-0 flex-col items-center justify-center bg-primary/10 py-4">
-                    <p className="text-[11px] font-bold uppercase tracking-wider text-primary">Day</p>
-                    <p className="text-2xl font-extrabold text-primary">{day.day}</p>
-                  </div>
-
-                  {/* Content */}
-                  <div className="flex-1 border-l-4 border-primary p-4">
-                    <div className="flex items-center justify-between gap-2 flex-wrap">
-                      <span className="rounded-lg bg-primary-soft px-2.5 py-1 text-xs font-bold text-primary">
-                        {day.date}
-                      </span>
-                      <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                        <Clock className="h-3.5 w-3.5" />
-                        {day.time}
-                      </span>
-                    </div>
-                    <h4 className="mt-2.5 text-base font-bold text-foreground leading-snug">
-                      {day.title}
-                    </h4>
-                    <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">
-                      {day.summary}
-                    </p>
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </TabsContent>
-
-          {/* ════════════════ TAB 3 · SECRETARIAT ═════════════════ */}
+          {/* ════════════════ TAB 2 · SECRETARIAT ═════════════════ */}
           <TabsContent value="contact" className="mt-4 space-y-4">
 
             <Card className="border-0 overflow-hidden shadow-card">
@@ -380,15 +344,6 @@ function AboutPage() {
               </div>
             </Card>
 
-            {/* Acknowledgment */}
-            {info.acknowledgment && (
-              <Card className="border-0 bg-muted/40 p-4 shadow-sm">
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  <span className="font-bold text-foreground">Acknowledgment: </span>
-                  {info.acknowledgment}
-                </p>
-              </Card>
-            )}
           </TabsContent>
         </Tabs>
 

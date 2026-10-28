@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Card } from "@/components/ui/card";
 import { NsePageHeader } from "@/components/app/NsePageHeader";
-import { BellRing, UtensilsCrossed, ReceiptText } from "lucide-react";
+import { BellRing } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/concierge/")({
   component: ConciergeHub,
@@ -14,20 +14,6 @@ const tiles = [
     desc: "Need help in your session? Call an usher to your seat.",
     icon: BellRing,
     tone: "bg-primary-soft text-primary",
-  },
-  {
-    to: "/concierge/food",
-    label: "Food Menu & Orders",
-    desc: "Browse the menu, place an order, track status.",
-    icon: UtensilsCrossed,
-    tone: "bg-accent-soft text-warning-foreground",
-  },
-  {
-    to: "/concierge/orders",
-    label: "My Orders & Requests",
-    desc: "View status of food orders and active requests.",
-    icon: ReceiptText,
-    tone: "bg-accent-soft text-warning-foreground",
   },
 ] as const;
 
@@ -44,7 +30,9 @@ function ConciergeHub() {
         {tiles.map(({ to, label, desc, icon: Icon, tone }) => (
           <Link key={to} to={to} className="block transition active:scale-[0.99]">
             <Card className="flex items-center gap-3.5 border-0 bg-surface p-4 rounded-2xl shadow-card transition-shadow hover:shadow-md">
-              <span className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl shadow-inner ${tone}`}>
+              <span
+                className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl shadow-inner ${tone}`}
+              >
                 <Icon className="h-6 w-6" />
               </span>
               <div className="min-w-0 flex-1">
