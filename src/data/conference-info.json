@@ -45,43 +45,6 @@
       "value": "66+ yrs"
     }
   ],
-  "scheduleOutline": [
-    {
-      "day": 1,
-      "date": "30 Nov, 2026",
-      "time": "8:00 am - 6:00 pm",
-      "title": "Arrival – Registration – Presidential Cocktail – Fellowship Conferment",
-      "summary": "Arrival of delegates, accreditation, kit collection, fellowship conferment ceremony, and evening presidential cocktail."
-    },
-    {
-      "day": 2,
-      "date": "01 Dec, 2026",
-      "time": "8:00 am - 6:00 pm",
-      "title": "Opening Ceremony – First Plenary Session",
-      "summary": "Official opening ceremony, presidential address, exhibition launch, and first plenary session on national security innovations."
-    },
-    {
-      "day": 3,
-      "date": "02 Dec, 2026",
-      "time": "8:00 am - 6:00 pm",
-      "title": "Second Plenary Session – Group Dynamics Competitions – Welfare Night – Cultural Night",
-      "summary": "Second plenary on resilient infrastructure, innovation competitions, technical presentations, and the Borno Cultural Night."
-    },
-    {
-      "day": 4,
-      "date": "03 Dec, 2026",
-      "time": "8:00 am - 9:00 pm",
-      "title": "Closing Ceremony – AGM – Annual Dinner – Gala Night",
-      "summary": "Technical communiqué, official closing ceremony, NSE Annual General Meeting (AGM), and grand Annual Dinner & Gala Night."
-    },
-    {
-      "day": 5,
-      "date": "04 Dec, 2026",
-      "time": "8:00 am - 4:00 pm",
-      "title": "Tour / Industrial Visit – Departures",
-      "summary": "Engineering project tours across Maiduguri, spouses heritage visit, and airport shuttle transfers for departing delegates."
-    }
-  ],
   "enquiries": {
     "registration": "+234 201 330 1060 (Ext. 4815, 4852, 4851, 4861)",
     "technical": "+234 201 330 1060 (Ext. 4833)",
@@ -89,7 +52,6 @@
     "partnershipEmail": "mimusa@nse.org.ng",
     "email": "conference@nse.org.ng"
   },
-  "acknowledgment": "The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support.",
   "entertainment": {
     "title": "Entertainment Sub-Committee",
     "chair": "",

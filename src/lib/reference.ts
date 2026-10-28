@@ -71,14 +71,6 @@ export interface FeeItem {
   benefits: string[];
 }
 
-export interface ScheduleOutlineItem {
-  day: number;
-  date: string;
-  time: string;
-  title: string;
-  summary: string;
-}
-
 export interface ConferenceInfo {
   organizationName: string;
   conferenceTitle: string;
@@ -93,7 +85,6 @@ export interface ConferenceInfo {
   aboutSummary?: string;
   stats: { label: string; value: string }[];
   societyStats?: { label: string; value: string }[];
-  scheduleOutline?: ScheduleOutlineItem[];
   fees?: {
     earlyBird: { period: string; items: FeeItem[] };
     lateRegistration: { period: string; items: FeeItem[] };
@@ -109,7 +100,6 @@ export interface ConferenceInfo {
     partnershipEmail?: string;
     email: string;
   };
-  acknowledgment?: string;
   entertainment: { title: string; chair: string; focus: string };
   spouses: { title: string; venue: string; focus: string };
 }

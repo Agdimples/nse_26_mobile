@@ -15,6 +15,8 @@ export const Route = createFileRoute("/_authenticated/network")({
   component: NetworkPage,
 });
 
+const CHATROOM_CATEGORIES = ["General", "Technical Track", "Young Engineers", "Spouses"] as const;
+
 function NetworkPage() {
   // Child routes (/network/room/$roomId and /network/$userId) replace this
   // list entirely — without this handoff, tapping a chat room or a person
@@ -44,8 +46,18 @@ function NetworkPage() {
   const { data: rooms = [] } = useQuery({
     queryKey: ["rooms"],
     queryFn: async () => {
-      const { data } = await supabase.from("chat_rooms").select("*").order("sort_order");
-      return data ?? [];
+      const { data } = await supabase
+        .from("chat_rooms")
+        .select("*")
+        .in("name", [...CHATROOM_CATEGORIES]);
+      const categoryOrder = new Map(
+        CHATROOM_CATEGORIES.map((name, index): [string, number] => [name, index]),
+      );
+      return (data ?? []).sort(
+        (a, b) =>
+          (categoryOrder.get(a.name) ?? Number.MAX_SAFE_INTEGER) -
+          (categoryOrder.get(b.name) ?? Number.MAX_SAFE_INTEGER),
+      );
     },
   });
 
