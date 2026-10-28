@@ -36,8 +36,9 @@ function AboutPage() {
       <div className="space-y-5 px-4">
 
         {/* ── Hero Banner ─────────────────────────────────────────── */}
-        <Card className="relative overflow-hidden border-0 shadow-elevated">
-          <div className="hero-sheen  px-5 py-8 text-center text-white">
+        <Card className="relative overflow-hidden border-0 bg-brand-gradient text-white shadow-elevated">
+          <div className="hero-sheen pointer-events-none absolute inset-0" />
+          <div className="relative px-5 py-8 text-center">
             {/* Crest */}
             <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-white/15 shadow-lg ring-2 ring-white/30 backdrop-blur-md">
               <img
@@ -166,7 +167,9 @@ function AboutPage() {
                   </div>
                   <div>
                     <p className="text-sm font-bold text-foreground">Conference Chairman</p>
-                    <p className="mt-0.5 text-sm font-semibold text-primary">{info.chairman}</p>
+                    {info.chairman && (
+                      <p className="mt-0.5 text-sm font-semibold text-primary">{info.chairman}</p>
+                    )}
                     <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
                       Leads the National Organizing Committee for the conference and all sub-committees.
                     </p>
@@ -182,7 +185,11 @@ function AboutPage() {
                   </div>
                   <div>
                     <p className="text-sm font-bold text-foreground">{info.entertainment.title}</p>
-                    <p className="mt-0.5 text-sm font-semibold text-primary">Chair: {info.entertainment.chair}</p>
+                    {info.entertainment.chair && (
+                      <p className="mt-0.5 text-sm font-semibold text-primary">
+                        Chair: {info.entertainment.chair}
+                      </p>
+                    )}
                     <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
                       {info.entertainment.focus}
                     </p>
