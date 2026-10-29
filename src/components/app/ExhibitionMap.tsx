@@ -92,7 +92,7 @@ const pavilions: Pavilion[] = [
     label: "Indoor",
     title: "Pavilion A · Indoor Exhibition",
     image: "/expo/pavilion-a-indoor.png",
-    description: "The official indoor floor plan, reproduced from the NSE Expo brochure.",
+    description: "Main Exhibition Hall and Layout",
     boothPrice: "Booth sizes and rates",
     included: [
       "Aa1–Aa4: 4×5m partner spaces (partners only)",
@@ -104,8 +104,8 @@ const pavilions: Pavilion[] = [
   },
   {
     value: "open-court",
-    label: "Open Court",
-    title: "Pavilion B · Open Court",
+    label: "Outdoor Display",
+    title: "Pavilion B · Outdoor Display",
     image: "/expo/pavilion-b-open-court.png",
     description: "Outdoor equipment and fabrication space for heavy machinery and large displays.",
     boothPrice: "10ft gazebo / pagoda tent · ₦800,000",
@@ -268,7 +268,7 @@ export default function ExhibitionMap() {
         NSE 2026 Exhibition Floor
       </h1>
       <p className="mb-5 text-sm text-muted-foreground">
-        Official floor plans and booth details from the NSE 2026 Expo brochure.
+        Official floor plans and booth details for NSE 2026 Expo.
       </p>
 
       {loading && <p className="mb-4 text-sm text-muted-foreground">Loading live booth status…</p>}

@@ -15,9 +15,9 @@ import {
   Users,
   Sparkles,
   MapPin,
-  Info,
   ArrowRight,
   Zap,
+  Store,
 } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/home")({
@@ -35,9 +35,9 @@ const tools = [
     ring: "ring-blue-400/30",
   },
   {
-    to: "/concierge",
-    label: "Concierge",
-    icon: ConciergeBell,
+    to: "/exhibition",
+    label: "Exhibition",
+    icon: Store,
     gradient: "from-amber-400 to-orange-500",
     shadow: "shadow-orange-400/30",
     ring: "ring-orange-300/30",
@@ -51,9 +51,9 @@ const tools = [
     ring: "ring-emerald-400/30",
   },
   {
-    to: "/about",
-    label: "About NSE",
-    icon: Info,
+    to: "/concierge",
+    label: "Concierge",
+    icon: ConciergeBell,
     gradient: "from-violet-500 to-purple-700",
     shadow: "shadow-violet-500/30",
     ring: "ring-violet-400/30",

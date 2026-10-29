@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, CalendarDays, Mic2, Store } from "lucide-react";
+import { ArrowRight, CalendarDays, Mic2 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { NsePageHeader } from "@/components/app/NsePageHeader";
 import { EVENT_CONFIG } from "@/lib/event-config";
@@ -29,33 +29,19 @@ const features = [
     ring: "ring-violet-400/30",
     badge: "Event speakers",
   },
-  {
-    to: "/exhibition",
-    label: "Exhibition",
-    description: "Explore the exhibition pavilions and available booths.",
-    icon: Store,
-    gradient: "from-emerald-500 to-teal-600",
-    shadow: "shadow-emerald-500/35",
-    ring: "ring-emerald-400/30",
-    badge: "Interactive",
-  },
 ] as const;
 
 function ConferencePage() {
   return (
     <div className="space-y-5 pb-28">
-      <NsePageHeader
-        title="Conference"
-        subtitle="Programme, speakers and exhibition"
-        backTo="/home"
-      />
+      <NsePageHeader title="Conference" subtitle="Programme and speakers" backTo="/home" />
 
       <div className="mx-4 overflow-hidden rounded-2xl bg-brand-gradient px-4 py-4 text-white shadow-elevated">
         <p className="text-sm font-extrabold leading-tight">
           {EVENT_CONFIG.name} {EVENT_CONFIG.year}
         </p>
         <p className="mt-1 text-xs leading-snug text-white/80">
-          Your conference programme, event speakers and exhibition — all in one place.
+          Your conference programme and event speakers — all in one place.
         </p>
       </div>
 

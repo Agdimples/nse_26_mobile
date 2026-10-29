@@ -10,7 +10,7 @@ const tabs = [
 
 export function BottomTabs() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const conferencePaths = ["/conference", "/schedule", "/speakers", "/exhibition"];
+  const conferencePaths = ["/conference", "/schedule", "/speakers"];
 
   return (
     <nav
