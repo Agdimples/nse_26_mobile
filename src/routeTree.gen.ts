@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as DeleteAccountRouteImport } from './routes/delete-account'
+import { Route as ExhibitionRouteImport } from './routes/exhibition'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as AuthenticatedAboutRouteImport } from './routes/_authenticated/about'
 import { Route as AuthenticatedAccommodationRouteImport } from './routes/_authenticated/accommodation'
@@ -23,7 +24,6 @@ import { Route as AuthenticatedConciergeRouteImport } from './routes/_authentica
 import { Route as AuthenticatedConferenceRouteImport } from './routes/_authenticated/conference'
 import { Route as AuthenticatedDirectionsRouteImport } from './routes/_authenticated/directions'
 import { Route as AuthenticatedEmergencyRouteImport } from './routes/_authenticated/emergency'
-import { Route as AuthenticatedExhibitionRouteImport } from './routes/_authenticated/exhibition'
 import { Route as AuthenticatedFaqRouteImport } from './routes/_authenticated/faq'
 import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/home'
 import { Route as AuthenticatedMaidguideRouteImport } from './routes/_authenticated/maidguide'
@@ -77,6 +77,11 @@ const DeleteAccountRoute = DeleteAccountRouteImport.update({
   path: '/delete-account',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ExhibitionRoute = ExhibitionRouteImport.update({
+  id: '/exhibition',
+  path: '/exhibition',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
@@ -127,11 +132,6 @@ const AuthenticatedDirectionsRoute = AuthenticatedDirectionsRouteImport.update({
 const AuthenticatedEmergencyRoute = AuthenticatedEmergencyRouteImport.update({
   id: '/emergency',
   path: '/emergency',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedExhibitionRoute = AuthenticatedExhibitionRouteImport.update({
-  id: '/exhibition',
-  path: '/exhibition',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedFaqRoute = AuthenticatedFaqRouteImport.update({
@@ -320,6 +320,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRouteWithChildren
   '/delete-account': typeof DeleteAccountRoute
+  '/exhibition': typeof ExhibitionRoute
   '/privacy': typeof PrivacyRoute
   '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/about': typeof AuthenticatedAboutRoute
@@ -330,7 +331,6 @@ export interface FileRoutesByFullPath {
   '/conference': typeof AuthenticatedConferenceRoute
   '/directions': typeof AuthenticatedDirectionsRoute
   '/emergency': typeof AuthenticatedEmergencyRoute
-  '/exhibition': typeof AuthenticatedExhibitionRoute
   '/faq': typeof AuthenticatedFaqRoute
   '/home': typeof AuthenticatedHomeRoute
   '/maidguide': typeof AuthenticatedMaidguideRoute
@@ -369,6 +369,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRouteWithChildren
   '/delete-account': typeof DeleteAccountRoute
+  '/exhibition': typeof ExhibitionRoute
   '/privacy': typeof PrivacyRoute
   '/about': typeof AuthenticatedAboutRoute
   '/accommodation': typeof AuthenticatedAccommodationRoute
@@ -377,7 +378,6 @@ export interface FileRoutesByTo {
   '/conference': typeof AuthenticatedConferenceRoute
   '/directions': typeof AuthenticatedDirectionsRoute
   '/emergency': typeof AuthenticatedEmergencyRoute
-  '/exhibition': typeof AuthenticatedExhibitionRoute
   '/faq': typeof AuthenticatedFaqRoute
   '/home': typeof AuthenticatedHomeRoute
   '/maidguide': typeof AuthenticatedMaidguideRoute
@@ -418,6 +418,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRouteWithChildren
   '/delete-account': typeof DeleteAccountRoute
+  '/exhibition': typeof ExhibitionRoute
   '/privacy': typeof PrivacyRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/_authenticated/about': typeof AuthenticatedAboutRoute
@@ -428,7 +429,6 @@ export interface FileRoutesById {
   '/_authenticated/conference': typeof AuthenticatedConferenceRoute
   '/_authenticated/directions': typeof AuthenticatedDirectionsRoute
   '/_authenticated/emergency': typeof AuthenticatedEmergencyRoute
-  '/_authenticated/exhibition': typeof AuthenticatedExhibitionRoute
   '/_authenticated/faq': typeof AuthenticatedFaqRoute
   '/_authenticated/home': typeof AuthenticatedHomeRoute
   '/_authenticated/maidguide': typeof AuthenticatedMaidguideRoute
@@ -469,6 +469,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/delete-account'
+    | '/exhibition'
     | '/privacy'
     | '/admin'
     | '/about'
@@ -479,7 +480,6 @@ export interface FileRouteTypes {
     | '/conference'
     | '/directions'
     | '/emergency'
-    | '/exhibition'
     | '/faq'
     | '/home'
     | '/maidguide'
@@ -518,6 +518,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/delete-account'
+    | '/exhibition'
     | '/privacy'
     | '/about'
     | '/accommodation'
@@ -526,7 +527,6 @@ export interface FileRouteTypes {
     | '/conference'
     | '/directions'
     | '/emergency'
-    | '/exhibition'
     | '/faq'
     | '/home'
     | '/maidguide'
@@ -566,6 +566,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/delete-account'
+    | '/exhibition'
     | '/privacy'
     | '/_authenticated/admin'
     | '/_authenticated/about'
@@ -576,7 +577,6 @@ export interface FileRouteTypes {
     | '/_authenticated/conference'
     | '/_authenticated/directions'
     | '/_authenticated/emergency'
-    | '/_authenticated/exhibition'
     | '/_authenticated/faq'
     | '/_authenticated/home'
     | '/_authenticated/maidguide'
@@ -617,6 +617,7 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRouteWithChildren
   DeleteAccountRoute: typeof DeleteAccountRoute
+  ExhibitionRoute: typeof ExhibitionRoute
   PrivacyRoute: typeof PrivacyRoute
   ApiChatRoute: typeof ApiChatRoute
 }
@@ -649,6 +650,13 @@ declare module '@tanstack/react-router' {
       path: '/delete-account'
       fullPath: '/delete-account'
       preLoaderRoute: typeof DeleteAccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/exhibition': {
+      id: '/exhibition'
+      path: '/exhibition'
+      fullPath: '/exhibition'
+      preLoaderRoute: typeof ExhibitionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy': {
@@ -719,13 +727,6 @@ declare module '@tanstack/react-router' {
       path: '/emergency'
       fullPath: '/emergency'
       preLoaderRoute: typeof AuthenticatedEmergencyRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/exhibition': {
-      id: '/_authenticated/exhibition'
-      path: '/exhibition'
-      fullPath: '/exhibition'
-      preLoaderRoute: typeof AuthenticatedExhibitionRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/faq': {
@@ -1066,7 +1067,6 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedConferenceRoute: typeof AuthenticatedConferenceRoute
   AuthenticatedDirectionsRoute: typeof AuthenticatedDirectionsRoute
   AuthenticatedEmergencyRoute: typeof AuthenticatedEmergencyRoute
-  AuthenticatedExhibitionRoute: typeof AuthenticatedExhibitionRoute
   AuthenticatedFaqRoute: typeof AuthenticatedFaqRoute
   AuthenticatedHomeRoute: typeof AuthenticatedHomeRoute
   AuthenticatedMaidguideRoute: typeof AuthenticatedMaidguideRoute
@@ -1091,7 +1091,6 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedConferenceRoute: AuthenticatedConferenceRoute,
   AuthenticatedDirectionsRoute: AuthenticatedDirectionsRoute,
   AuthenticatedEmergencyRoute: AuthenticatedEmergencyRoute,
-  AuthenticatedExhibitionRoute: AuthenticatedExhibitionRoute,
   AuthenticatedFaqRoute: AuthenticatedFaqRoute,
   AuthenticatedHomeRoute: AuthenticatedHomeRoute,
   AuthenticatedMaidguideRoute: AuthenticatedMaidguideRoute,
@@ -1124,6 +1123,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRouteWithChildren,
   DeleteAccountRoute: DeleteAccountRoute,
+  ExhibitionRoute: ExhibitionRoute,
   PrivacyRoute: PrivacyRoute,
   ApiChatRoute: ApiChatRoute,
 }
