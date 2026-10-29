@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import ExhibitionMap from "@/components/app/ExhibitionMap";
+import { MobileShell } from "@/components/app/MobileShell";
 import { NsePageHeader } from "@/components/app/NsePageHeader";
 
 export const Route = createFileRoute("/exhibition")({
@@ -8,9 +9,14 @@ export const Route = createFileRoute("/exhibition")({
 
 function ExhibitionPage() {
   return (
-    <div className="pb-24">
-      <NsePageHeader title="Exhibition" subtitle="Explore the conference exhibition pavilions" />
-      <ExhibitionMap />
-    </div>
+    <MobileShell>
+      <div className="pb-24">
+        <NsePageHeader
+          title="Exhibition"
+          subtitle="Official conference exhibition booth allocations"
+        />
+        <ExhibitionMap />
+      </div>
+    </MobileShell>
   );
 }

@@ -86,6 +86,21 @@ const sharedMarketBooths = new Set([
   "C32",
 ]);
 
+const allocatedExhibitors: Record<string, string> = {
+  Aa1: "Tytanic Engineering Ltd.",
+  Aa2: "Greenville LNG",
+  Ab1: "Borno Rural Water Supply & Sanitation Agency (RUWASSA)",
+  Ab2: "Panar Pipes Ltd.",
+  Ab3: "Borno State Ministry of Information",
+  Ab4: "Borno State Ministry of Works and Housing",
+  Ab5: "Borno State Ministry of Transport and Energy",
+  Ab6: "Borno State Ministry of Reconstruction Rehabilitation and Resettlement",
+  Ab7: "Borno Roads Maintenance Agency (BORMA)",
+  B1: "Borno Rural Water Supply & Sanitation Agency (RUWASA)",
+  B2: "Borno State Ministry of Transport and Energy",
+  B3: "Borno State Ministry of Works and Housing",
+};
+
 const pavilions: Pavilion[] = [
   {
     value: "indoor",
@@ -193,18 +208,20 @@ export default function ExhibitionMap() {
   }
 
   const handleBoothClick = (boothId: string, sectionName: string, priceText: string) => {
+    const assignedExhibitor = allocatedExhibitors[boothId];
+    if (assignedExhibitor) {
+      toast.info(`Booth ${boothId} is allocated to ${assignedExhibitor}.`);
+      return;
+    }
+
     const boothData = booths[boothId] || {
       status: "available",
       price: priceText,
       section: sectionName,
     };
 
-    if (boothData.status === "booked") {
-      toast.info(`Booth ${boothId} is already fully booked and verified.`);
-      return;
-    }
-    if (boothData.status === "pending") {
-      toast.info(`Booth ${boothId} has a pending application awaiting payment verification.`);
+    if (boothData.status === "booked" || boothData.status === "pending") {
+      toast.info(`Booth ${boothId} is already taken.`);
       return;
     }
 
@@ -256,9 +273,13 @@ export default function ExhibitionMap() {
   }
 
   const getButtonColor = (id: string) => {
-    const status = booths[id]?.status || "available";
-    if (status === "booked") return "bg-gray-300 text-gray-500 cursor-not-allowed";
-    if (status === "pending") return "bg-amber-500 text-white shadow";
+    if (
+      allocatedExhibitors[id] ||
+      booths[id]?.status === "booked" ||
+      booths[id]?.status === "pending"
+    ) {
+      return "bg-gray-300 text-gray-500 cursor-not-allowed";
+    }
     return "bg-green-600 text-white shadow hover:bg-green-700";
   };
 
@@ -270,7 +291,6 @@ export default function ExhibitionMap() {
       <p className="mb-5 text-sm text-muted-foreground">
         Official floor plans and booth details for NSE 2026 Expo.
       </p>
-
       {loading && <p className="mb-4 text-sm text-muted-foreground">Loading live booth status…</p>}
       {loadError && (
         <p role="alert" className="mb-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-900">
@@ -320,31 +340,34 @@ export default function ExhibitionMap() {
 
                 <div>
                   <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-                    <h3 className="text-sm font-bold text-foreground">Select a booth</h3>
+                    <h3 className="text-sm font-bold text-foreground">Booth availability</h3>
                     <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted-foreground">
                       <span>
                         <span className="mr-1 inline-block h-2.5 w-2.5 rounded-sm bg-green-600" />
                         Available
                       </span>
                       <span>
-                        <span className="mr-1 inline-block h-2.5 w-2.5 rounded-sm bg-amber-500" />
-                        Pending
-                      </span>
-                      <span>
                         <span className="mr-1 inline-block h-2.5 w-2.5 rounded-sm bg-gray-300" />
-                        Booked
+                        Taken
                       </span>
                     </div>
                   </div>
                   <div className="grid grid-cols-4 gap-2 sm:grid-cols-6 md:grid-cols-8">
                     {pavilion.booths.map((booth) => {
-                      const status = booths[booth.id]?.status || "available";
+                      const status =
+                        allocatedExhibitors[booth.id] ||
+                        booths[booth.id]?.status === "booked" ||
+                        booths[booth.id]?.status === "pending"
+                          ? "taken"
+                          : "available";
+                      const exhibitor = allocatedExhibitors[booth.id];
                       return (
                         <button
                           key={booth.id}
                           type="button"
                           onClick={() => handleBoothClick(booth.id, pavilion.label, booth.price)}
-                          aria-label={`${booth.id}, ${status}, ${booth.price}`}
+                          aria-label={`${booth.id}, ${status}${exhibitor ? `, allocated to ${exhibitor}` : ""}, ${booth.price}`}
+                          title={exhibitor ? `Allocated to ${exhibitor}` : undefined}
                           className={`rounded-lg p-2 text-sm font-semibold transition-transform hover:scale-105 ${getButtonColor(booth.id)}`}
                         >
                           {booth.id}
