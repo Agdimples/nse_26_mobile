@@ -497,7 +497,9 @@ function AuthPage() {
           .
         </p>
         <p className="mt-2 text-center text-xs">
-          <Link to="/" className="text-white/70 hover:text-white">← Back</Link>
+          <Link to="/exhibition" className="text-white/70 underline hover:text-white">
+            View exhibition booth allocations without signing in
+          </Link>
         </p>
       </div>
     </div>
