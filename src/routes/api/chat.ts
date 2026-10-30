@@ -4,7 +4,6 @@ import { convertToModelMessages, streamText, type UIMessage } from "ai";
 import { createClient } from "@supabase/supabase-js";
 import type { Database } from "@/integrations/supabase/types";
 import { CONFERENCE_INFO, FAQS, HOTELS, TRANSPORT, VENUE_DATA } from "@/lib/reference";
-import { conferenceSchedule } from "@/data/conference-schedule";
 import { EVENT_CONFIG } from "@/lib/event-config";
 
 type KnowledgeItem = { title: string; content: string; searchable: string };
@@ -63,13 +62,6 @@ const knowledge: KnowledgeItem[] = [
     content: `${faq.question}\n${faq.answer}`,
     searchable: `${faq.question} ${faq.answer} ${faq.keywords.join(" ")}`,
   })),
-  ...conferenceSchedule.flatMap((day) =>
-    day.events.map((event) => ({
-      title: `Schedule — ${event.title}`,
-      content: `${day.date}, ${event.time}: ${event.title}${event.location ? ` at ${event.location}` : ""}.`,
-      searchable: `${day.date} ${event.time} ${event.title} ${event.location} ${event.category ?? ""}`,
-    })),
-  ),
   ...HOTELS.map((hotel) => {
     const rates = hotel.rooms.map((room) => `${room.label}: ${room.rate}`).join("; ");
     const content = [
@@ -137,17 +129,23 @@ async function getLiveContext(question: string): Promise<string> {
   const asksAboutAnnouncements = /\b(announcements?|updates?|news|notices?|what changed)\b/.test(
     normalized,
   );
+  const asksAboutSchedule =
+    /\b(schedule|programme|program|industrial visit|tour|session|event on)\b/.test(normalized);
   const asksAboutEmergency =
     /\b(emergency|urgent|ambulance|police|hospital|security contact)\b/.test(normalized);
 
-  if (!asksAboutSpeakers && !asksAboutAnnouncements && !asksAboutEmergency) return "";
+  if (!asksAboutSpeakers && !asksAboutAnnouncements && !asksAboutEmergency && !asksAboutSchedule) {
+    return "";
+  }
 
   const url = process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL;
   const anon =
     process.env.SUPABASE_PUBLISHABLE_KEY ??
     process.env.VITE_SUPABASE_PUBLISHABLE_KEY ??
     process.env.VITE_SUPABASE_ANON_KEY;
-  if (!url || !anon) return "Live speaker, announcement, and emergency records are unavailable.";
+  if (!url || !anon) {
+    return "Live speaker, announcement, emergency, and programme records are unavailable.";
+  }
 
   const supabase = createClient<Database>(url, anon);
 
@@ -211,6 +209,34 @@ async function getLiveContext(question: string): Promise<string> {
             (contact) =>
               `- ${contact.label}: ${contact.phone}${contact.description ? ` (${contact.description})` : ""}`,
           )
+          .join("\n")}`;
+      }),
+    );
+  }
+
+  if (asksAboutSchedule) {
+    requests.push(
+      cachedLiveContext("schedule-events", async () => {
+        const { data, error } = await supabase
+          .from("schedule_events")
+          .select("day, title, time, location, category")
+          .order("day")
+          .order("sort_order");
+        if (error) {
+          console.error("Chat programme lookup error", error);
+          return "The published programme could not be loaded; do not guess schedule details.";
+        }
+        return `PUBLISHED PROGRAMME:\n${(data ?? [])
+          .map((event) => {
+            const date = new Date(EVENT_CONFIG.start);
+            date.setDate(date.getDate() + event.day - 1);
+            const dateLabel = date.toLocaleDateString("en-GB", {
+              weekday: "long",
+              day: "numeric",
+              month: "long",
+            });
+            return `- Day ${event.day} (${dateLabel}), ${event.time}: ${event.title}${event.location ? ` at ${event.location}` : ""}${event.category ? ` [${event.category}]` : ""}`;
+          })
           .join("\n")}`;
       }),
     );

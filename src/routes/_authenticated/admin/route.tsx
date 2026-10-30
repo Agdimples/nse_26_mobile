@@ -24,31 +24,23 @@ type AdminTab = {
     | "/admin/exhibitors"
     | "/admin/sessions"
     | "/admin/speakers"
-    | "/admin/accommodations"
     | "/admin/emergency"
     | "/admin/announcements"
-    | "/admin/menu"
-    | "/admin/orders"
-    | "/admin/ushers"
-    | "/admin/staff";
+    | "/admin/ushers";
   label: string;
   exact?: boolean;
-  // Sub-roles that may see this tab. super_admin always sees everything.
+  // Sub-roles that may see this tab. Admin and super_admin see all tabs.
   roles: AppRole[];
 };
 
 const tabs: ReadonlyArray<AdminTab> = [
-  { to: "/admin", label: "Overview", exact: true, roles: ["super_admin", "front_desk", "kitchen", "program", "logistics", "comms"] },
+  { to: "/admin", label: "Overview", exact: true, roles: ["super_admin", "front_desk", "program", "logistics", "comms"] },
   { to: "/admin/exhibitors", label: "Exhibitors", roles: ["super_admin", "admin"] },
   { to: "/admin/sessions", label: "Sessions", roles: ["program"] },
   { to: "/admin/speakers", label: "Speakers", roles: ["program"] },
-  { to: "/admin/accommodations", label: "Hotels", roles: ["logistics"] },
-  { to: "/admin/menu", label: "Menu", roles: ["kitchen"] },
-  { to: "/admin/orders", label: "Orders", roles: ["kitchen"] },
   { to: "/admin/ushers", label: "Ushers", roles: ["front_desk"] },
   { to: "/admin/emergency", label: "Emergency", roles: ["logistics"] },
   { to: "/admin/announcements", label: "Announcements", roles: ["comms"] },
-  { to: "/admin/staff", label: "Staff & People", roles: ["super_admin", "admin"] },
 ];
 
 const ROLE_LABEL: Record<AppRole, string> = {
@@ -65,8 +57,8 @@ const ROLE_LABEL: Record<AppRole, string> = {
 function AdminLayout() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const { roles, hasAnyAdminRole } = useAuth();
-  const isSuper = roles.includes("super_admin");
-  const visible = tabs.filter((t) => isSuper || hasAnyAdminRole(t.roles));
+  const isAdmin = roles.includes("admin") || roles.includes("super_admin");
+  const visible = tabs.filter((t) => isAdmin || hasAnyAdminRole(t.roles));
 
   // Human-friendly badge of which role panels you can access
   const myRoles = (Object.keys(ROLE_LABEL) as AppRole[]).filter(

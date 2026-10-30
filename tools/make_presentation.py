@@ -1,7 +1,8 @@
-"""Generate a branded PDF presentation for the NSE '26 conference app.
+"""Generate a 10-slide MaidGuide-focused PDF presentation for NSE '26.
 
 Run:  python tools/make_presentation.py
 Output: NSE26-App-Presentation.pdf (project root)
+Screenshots: assets/presentation/screenshots/ (captured from the local app)
 """
 import os
 from reportlab.pdfgen import canvas
@@ -34,8 +35,9 @@ WHITE     = hexc("FFFFFF")
 RED       = hexc("C93D2E")
 RED_SOFT  = hexc("FCECEA")
 
-APP_ICON = os.path.join(ROOT, "assets", "images", "app_icon.png")
-CREST    = os.path.join(ROOT, "assets", "images", "nse_crest.png")
+APP_ICON = os.path.join(ROOT, "public", "icons", "icon-512.png")
+CREST    = os.path.join(ROOT, "public", "nse_crest.png")
+SCREENSHOTS = os.path.join(ROOT, "assets", "presentation", "screenshots")
 
 FONT   = "Helvetica"
 FONTB  = "Helvetica-Bold"
@@ -93,7 +95,7 @@ def footer(page, total):
     c.setStrokeColor(hexc("D8DCE3"))
     c.setLineWidth(1)
     c.line(64, 40, W - 64, 40)
-    text(64, 26, "NSE '26  ·  Official Conference App", FONT, 9, INK_SOFT)
+    text(64, 26, "MaidGuide  ·  NSE '26 Official Conference App", FONT, 9, INK_SOFT)
     text(W - 64, 26, f"{page} / {total}", FONT, 9, INK_SOFT, align="r")
 
 
@@ -110,15 +112,12 @@ def feature_tile(x, y, w, h, title, body, accent, accent_soft, glyph=""):
 
 
 def draw_image_contain(path, x, y, w, h):
-    try:
-        img = ImageReader(path)
-        iw, ih = img.getSize()
-        scale = min(w / iw, h / ih)
-        dw, dh = iw * scale, ih * scale
-        c.drawImage(img, x + (w - dw) / 2, y + (h - dh) / 2, dw, dh,
-                    preserveAspectRatio=True, mask="auto")
-    except Exception:
-        pass
+    img = ImageReader(path)
+    iw, ih = img.getSize()
+    scale = min(w / iw, h / ih)
+    dw, dh = iw * scale, ih * scale
+    c.drawImage(img, x + (w - dw) / 2, y + (h - dh) / 2, dw, dh,
+                preserveAspectRatio=True, mask="auto")
 
 
 # =============================================================================
@@ -322,53 +321,259 @@ def slide_closing():
     text(W / 2, 92, "30 November – 4 December 2026", FONT, 12, NAVY_SOFT, align="c")
 
 
+def phone_screenshot(name, x, y, width=208):
+    """Place an actual mobile app capture inside a presentation phone frame."""
+    path = os.path.join(SCREENSHOTS, f"{name}.png")
+    image = ImageReader(path)
+    iw, ih = image.getSize()
+    screen_w = width - 12
+    screen_h = screen_w * ih / iw
+    frame_h = screen_h + 12
+
+    c.setFillColor(Color(0.05, 0.10, 0.17, 0.20))
+    c.roundRect(x + 2, y - 4, width, frame_h + 4, 25, fill=1, stroke=0)
+    c.setFillColor(hexc("101820"))
+    c.roundRect(x, y, width, frame_h, 24, fill=1, stroke=0)
+    screen_x, screen_y = x + 6, y + 6
+    clip = c.beginPath()
+    clip.roundRect(screen_x, screen_y, screen_w, screen_h, 18)
+    c.saveState()
+    c.clipPath(clip, stroke=0, fill=0)
+    c.drawImage(image, screen_x, screen_y, screen_w, screen_h)
+    c.restoreState()
+    return frame_h
+
+
+def slide_intro():
+    bg(NAVY_DARK)
+    c.setFillColor(NAVY)
+    c.rect(0, 0, W, H * 0.55, fill=1, stroke=0)
+    c.setFillColor(GOLD)
+    c.rect(0, H - 6, W, 6, fill=1, stroke=0)
+    draw_image_contain(APP_ICON, 76, H - 126, 66, 66)
+    text(76, H - 151, "NSE '26  ·  OFFICIAL CONFERENCE APP", FONTB, 10.5, GOLD)
+    text(76, H - 214, "MaidGuide", FONTB, 48, WHITE)
+    text(76, H - 252, "Maiduguri made easier.", FONTB, 26, WHITE)
+    paragraph(78, H - 294,
+              "A simpler way to find your way around the city, reach the venue "
+              "and make the most of every conference day.",
+              475, FONT, 15, NAVY_SOFT, leading=23)
+    text(78, 118, "30 NOV – 4 DEC 2026", FONTB, 11, GOLD)
+    text(78, 97, "International Conference Centre · Maiduguri", FONT, 11, WHITE)
+    phone_screenshot("maidguide", 690, 34, 218)
+
+
+def slide_journey(page, total):
+    bg()
+    kicker_title("The delegate experience", "Conference days should feel simple",
+                 "One guide connects the city, the venue and the activities that bring everyone together.")
+    stages = [
+        ("01", "Arrive with a plan", "Find a place to stay and understand your options before setting out.", NAVY, NAVY_SOFT),
+        ("02", "Get around confidently", "See routes, nearby services and shuttle details without juggling separate searches.", GREEN, GREEN_SOFT),
+        ("03", "Focus on the conference", "Find the right room, keep up with the programme and spend more time participating.", GOLD, GOLD_SOFT),
+    ]
+    gap = 20
+    tw = (W - 168 - 2 * gap) / 3
+    for i, (num, title, body, accent, tint) in enumerate(stages):
+        x = 84 + i * (tw + gap)
+        soft_shadow_rect(x, 132, tw, 170, 16, SURFACE)
+        c.setFillColor(tint)
+        c.circle(x + 38, 264, 19, fill=1, stroke=0)
+        text(x + 38, 260, num, FONTB, 10, accent, align="c")
+        text(x + 22, 222, title, FONTB, 16, INK)
+        paragraph(x + 22, 196, body, tw - 44, FONT, 11.5, INK_SOFT, leading=17)
+    text(84, 83, "Less time figuring things out. More time being there.", FONTB, 17, NAVY_DARK)
+    footer(page, total)
+
+
+def slide_maidguide(page, total):
+    bg()
+    kicker_title("Meet MaidGuide", "Your starting point for Maiduguri",
+                 "City essentials and conference-day help, organized in one familiar place.")
+    phone_screenshot("maidguide", 706, 50, 204)
+    items = [
+        ("3D Venue & Map", "Explore ICC floor plans, the wider city map, hotels and local places.", NAVY, NAVY_SOFT),
+        ("Live Directions", "Choose walk or drive routes and start navigation for a destination.", GOLD, GOLD_SOFT),
+        ("Hotels & nearby places", "Browse stays, restaurants, hospitals, security and other points of interest.", GREEN, GREEN_SOFT),
+        ("Shuttle & FAQ", "Check the daily transport schedule and quickly find practical conference answers.", NAVY, NAVY_SOFT),
+    ]
+    y = 344
+    for title, body, accent, tint in items:
+        c.setFillColor(tint)
+        c.roundRect(84, y - 1, 34, 34, 10, fill=1, stroke=0)
+        c.setFillColor(accent)
+        c.circle(101, y + 16, 5, fill=1, stroke=0)
+        text(132, y + 17, title, FONTB, 14, INK)
+        paragraph(132, y - 3, body, 500, FONT, 10.5, INK_SOFT, leading=15)
+        y -= 75
+    footer(page, total)
+
+
+def slide_city(page, total):
+    bg()
+    kicker_title("Explore the city", "Find your way across Maiduguri",
+                 "A useful city guide for the moments before, between and after conference sessions.")
+    phone_screenshot("directions", 706, 50, 204)
+    feature_tile(84, 292, 540, 84, "Choose how to travel",
+                 "Switch between walking and driving, then compare route distance and estimated time.",
+                 NAVY, NAVY_SOFT)
+    feature_tile(84, 188, 540, 84, "Start with a destination",
+                 "Open directions from a hotel or nearby place and continue navigation in Google Maps.",
+                 GREEN, GREEN_SOFT)
+    feature_tile(84, 84, 540, 84, "Know what's around you",
+                 "Discover restaurants, hospitals, pharmacies, security and other local points of interest.",
+                 GOLD, GOLD_SOFT)
+    footer(page, total)
+
+
+def slide_stays(page, total):
+    bg()
+    kicker_title("Stay & discover", "Choose a stay that fits",
+                 "Turn the hotel search into a practical decision, then get directions when you're ready.")
+    phone_screenshot("hotels", 706, 50, 204)
+    facts = [
+        ("40", "hotels in the official delegate masterlist"),
+        ("Photos", "see property galleries alongside location details"),
+        ("Sort", "ranked, nearest or cheapest options"),
+        ("Next step", "open directions from a hotel listing"),
+    ]
+    y = 342
+    for value, label in facts:
+        soft_shadow_rect(84, y - 28, 540, 58, 13, SURFACE)
+        text(104, y - 1, value, FONTB, 16, NAVY)
+        text(226, y - 1, label, FONT, 11.5, INK_SOFT)
+        y -= 76
+    footer(page, total)
+
+
+def slide_shuttles(page, total):
+    bg()
+    kicker_title("Conference transport", "Make the hotel-to-venue trip clearer",
+                 "Keep shuttle routes, pickup details and the day’s timetable close at hand.")
+    phone_screenshot("transport", 706, 50, 204)
+    rows = [
+        ("Bus directory", "Browse the saved route list and find a bus or hotel."),
+        ("Daily schedule", "Check planned morning, midday, afternoon and evening runs."),
+        ("Pickup context", "Review route labels, hotel associations and marshal details where available."),
+    ]
+    y = 337
+    for i, (title, body) in enumerate(rows, 1):
+        c.setFillColor(NAVY_SOFT if i == 1 else GREEN_SOFT if i == 2 else GOLD_SOFT)
+        c.circle(103, y + 7, 17, fill=1, stroke=0)
+        text(103, y + 3, str(i), FONTB, 10, NAVY_DARK, align="c")
+        text(136, y + 12, title, FONTB, 14, INK)
+        paragraph(136, y - 9, body, 474, FONT, 11, INK_SOFT, leading=16)
+        y -= 90
+    paragraph(84, 77,
+              "Transport availability can change; the app keeps the saved route list visible when live data is unavailable.",
+              540, FONT, 9.5, INK_SOFT, leading=14)
+    footer(page, total)
+
+
+def slide_venue(page, total):
+    bg()
+    kicker_title("At the International Conference Centre", "Find the right room, faster",
+                 "The venue map brings floor plans, room search and site context into the same app.")
+    phone_screenshot("map", 706, 50, 204)
+    feature_tile(84, 300, 540, 78, "Browse both floors",
+                 "Switch between ground and first-floor plans without leaving the map.",
+                 NAVY, NAVY_SOFT)
+    feature_tile(84, 202, 540, 78, "Search rooms & facilities",
+                 "Find mapped spaces, with 38 rooms shown on the venue plan.",
+                 GREEN, GREEN_SOFT)
+    feature_tile(84, 104, 540, 78, "Choose the view you need",
+                 "Move between floor plans, the site plan, route view and outdoor map.",
+                 GOLD, GOLD_SOFT)
+    footer(page, total)
+
+
+def slide_activities(page, total):
+    bg()
+    kicker_title("Make the most of the programme", "Keep conference activities within reach",
+                 "MaidGuide supports the full delegate day—not just the trip to the venue.")
+    phone_screenshot("schedule", 706, 50, 204)
+    feature_tile(84, 300, 540, 78, "See each day at a glance",
+                 "Browse the programme by conference day and discover sessions, events and locations.",
+                 NAVY, NAVY_SOFT)
+    feature_tile(84, 202, 540, 78, "Filter by track",
+                 "Narrow the schedule to the activities most relevant to you.",
+                 GREEN, GREEN_SOFT)
+    feature_tile(84, 104, 540, 78, "Save sessions as you go",
+                 "Bookmark programme items to shape a more personal conference agenda.",
+                 GOLD, GOLD_SOFT)
+    footer(page, total)
+
+
+def slide_end_to_end(page, total):
+    bg(NAVY_DARK)
+    c.setFillColor(GOLD)
+    c.rect(0, H - 6, W, 6, fill=1, stroke=0)
+    text(84, H - 75, "ONE CONTINUOUS DELEGATE JOURNEY", FONTB, 11, GOLD)
+    text(84, H - 114, "From arrival to the last session.", FONTB, 29, WHITE)
+    paragraph(84, H - 148,
+              "MaidGuide brings the practical pieces of a conference visit together, "
+              "so delegates can move with more confidence and less friction.",
+              700, FONT, 13, NAVY_SOFT, leading=19)
+    steps = [
+        ("Find a stay", "Compare hotels"),
+        ("Get around", "Routes & nearby places"),
+        ("Reach the ICC", "Shuttles & directions"),
+        ("Join in", "Rooms & programme"),
+    ]
+    x0, y, gap = 84, 252, 24
+    tw = (W - 168 - 3 * gap) / 4
+    for i, (title, body) in enumerate(steps):
+        x = x0 + i * (tw + gap)
+        c.setFillColor(Color(1, 1, 1, 0.09))
+        c.roundRect(x, y, tw, 105, 14, fill=1, stroke=0)
+        c.setFillColor(GOLD)
+        c.circle(x + 22, y + 76, 11, fill=1, stroke=0)
+        text(x + 22, y + 72, str(i + 1), FONTB, 9, NAVY_DARK, align="c")
+        text(x + 16, y + 47, title, FONTB, 13, WHITE)
+        paragraph(x + 16, y + 27, body, tw - 32, FONT, 10, NAVY_SOFT, leading=14)
+        if i < 3:
+            text(x + tw + gap / 2, y + 49, "→", FONTB, 16, GOLD, align="c")
+    text(84, 164, "A smoother visit, from door to door.", FONTB, 22, WHITE)
+    text(84, 133, "Built around the delegate, all in one place.", FONTB, 16, GOLD)
+    c.setStrokeColor(Color(1, 1, 1, 0.18))
+    c.line(64, 40, W - 64, 40)
+    text(64, 26, "MaidGuide  ·  NSE '26 Official Conference App", FONT, 9, NAVY_SOFT)
+    text(W - 64, 26, f"{page} / {total}", FONT, 9, NAVY_SOFT, align="r")
+
+
+def slide_final():
+    bg(NAVY_DARK)
+    c.setFillColor(NAVY)
+    c.rect(0, 0, W, H * 0.44, fill=1, stroke=0)
+    c.setFillColor(GOLD)
+    c.rect(0, H - 6, W, 6, fill=1, stroke=0)
+    draw_image_contain(APP_ICON, 84, H - 160, 76, 76)
+    text(84, H - 200, "MaidGuide", FONTB, 14, GOLD)
+    text(84, H - 263, "Find your way.", FONTB, 38, WHITE)
+    text(84, H - 308, "Focus on the conference.", FONTB, 31, WHITE)
+    paragraph(86, H - 346,
+              "Your city and conference companion for the NSE International Conference 2026.",
+              475, FONT, 13, NAVY_SOFT, leading=20)
+    text(86, 108, "30 NOV – 4 DEC 2026", FONTB, 11, GOLD)
+    text(86, 86, "International Conference Centre · Maiduguri", FONT, 11, WHITE)
+    phone_screenshot("maidguide", 690, 34, 218)
+
+
 # =============================================================================
-# BUILD
+# BUILD — 10 slides
 # =============================================================================
-TOTAL = 11
+TOTAL = 10
 
-slide_cover(); c.showPage()
-slide_overview(2, TOTAL); c.showPage()
-slide_stats(3, TOTAL); c.showPage()
-
-feature_slide(4, TOTAL, "Delegate experience", "Plan your conference", [
-    ("Home dashboard", "A calm, glanceable hub: up-next session, latest announcement, quick actions and a search bar.", NAVY, NAVY_SOFT),
-    ("Schedule & sessions", "Filter the full programme by day and track; open any session for details, room and speakers.", GREEN, GREEN_SOFT),
-    ("Speakers", "Browse keynote and technical speakers with bios, roles and their sessions.", GOLD, GOLD_SOFT),
-    ("My Agenda", "Delegates bookmark sessions to build a personal, day-by-day schedule.", NAVY, NAVY_SOFT),
-]); c.showPage()
-
-feature_slide(5, TOTAL, "Delegate experience", "Find your way around", [
-    ("Indoor venue map", "Interactive floor plans with turn-by-turn wayfinding and a QR \u201cyou are here\u201d locator.", NAVY, NAVY_SOFT),
-    ("Hotels", "20+ partner hotels ranked by quality, each with photo galleries, distance and booking info.", GOLD, GOLD_SOFT),
-    ("Nearby places", "Pharmacies, ATMs, food and fuel around the venue, with distances.", GREEN, GREEN_SOFT),
-    ("Maiduguri guide", "A local guide with directions, tips and points of interest for visiting delegates.", NAVY, NAVY_SOFT),
-]); c.showPage()
-
-feature_slide(6, TOTAL, "Delegate experience", "Get things done \u2014 Concierge", [
-    ("Call an usher", "Request on-the-spot assistance from the nearest usher, tracked live to resolution.", NAVY, NAVY_SOFT),
-    ("Order food", "Browse the menu and place meal orders that flow straight to the kitchen queue.", GOLD, GOLD_SOFT),
-    ("Send an errand", "Delegate small tasks to the support team and follow their status in real time.", GREEN, GREEN_SOFT),
-    ("Transport", "Each delegate is assigned a dedicated bus for the conference, simplifying headcounts.", NAVY, NAVY_SOFT),
-]); c.showPage()
-
-feature_slide(7, TOTAL, "Delegate experience", "Stay connected & informed", [
-    ("Networking", "Topic rooms and direct messages so delegates can connect during the event.", NAVY, NAVY_SOFT),
-    ("Announcements", "Priority updates from the committee, surfaced first on the home screen.", GOLD, GOLD_SOFT),
-    ("Emergency & safety", "One-tap access to emergency, medical and security contacts.", RED, RED_SOFT),
-    ("Assistant & FAQ", "A built-in chatbot and FAQ answer common questions instantly.", GREEN, GREEN_SOFT),
-]); c.showPage()
-
-feature_slide(8, TOTAL, "For organisers", "A complete admin console", [
-    ("Manage content", "Create and edit sessions, speakers, hotels, menus, announcements and emergency contacts.", NAVY, NAVY_SOFT),
-    ("Live service queues", "Kitchen, usher and errand teams work real-time queues with status controls.", GREEN, GREEN_SOFT),
-    ("Transport control", "Configure buses, routes and boarding policy for the whole fleet.", GOLD, GOLD_SOFT),
-    ("Roles & delegates", "Role-based access and a searchable delegate directory for the committee.", NAVY, NAVY_SOFT),
-]); c.showPage()
-
-slide_design(9, TOTAL); c.showPage()
-slide_tech(10, TOTAL); c.showPage()
-slide_closing(); c.showPage()
+slide_intro(); c.showPage()
+slide_journey(2, TOTAL); c.showPage()
+slide_maidguide(3, TOTAL); c.showPage()
+slide_city(4, TOTAL); c.showPage()
+slide_stays(5, TOTAL); c.showPage()
+slide_shuttles(6, TOTAL); c.showPage()
+slide_venue(7, TOTAL); c.showPage()
+slide_activities(8, TOTAL); c.showPage()
+slide_end_to_end(9, TOTAL); c.showPage()
+slide_final(); c.showPage()
 
 c.save()
 print("WROTE", OUT)

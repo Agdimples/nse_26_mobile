@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { BookmarkCheck, BookmarkPlus } from "lucide-react";
 import { toast } from "sonner";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { EVENT_CONFIG } from "@/lib/event-config";
-import { conferenceSchedule, type ConferenceScheduleCategory } from "@/data/conference-schedule";
+import { getScheduleEventKey, type ConferenceScheduleCategory } from "@/data/conference-schedule";
 import { useAuth } from "@/lib/auth";
+import { supabase } from "@/integrations/supabase/client";
 
 const CATEGORIES: {
   value: "all" | ConferenceScheduleCategory;
@@ -35,12 +37,42 @@ const CONF_DAYS = (() => {
 })();
 
 export function ScheduleTab() {
+  const queryClient = useQueryClient();
   const [day, setDay] = useState(1);
   const [category, setCategory] = useState<(typeof CATEGORIES)[number]["value"]>("all");
-  const selectedDay = conferenceSchedule[day - 1] ?? conferenceSchedule[0];
   const { user } = useAuth();
   const [savedAgendas, setSavedAgendas] = useState<Record<string, string[]>>({});
   const [loadedUserId, setLoadedUserId] = useState<string | null>(null);
+
+  const {
+    data: scheduleEvents = [],
+    isPending,
+    error: scheduleError,
+  } = useQuery({
+    queryKey: ["published-schedule"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("schedule_events")
+        .select("*")
+        .order("day")
+        .order("sort_order");
+      if (error) throw error;
+      return data;
+    },
+    refetchInterval: 30_000,
+  });
+
+  useEffect(() => {
+    const channel = supabase
+      .channel("published-schedule")
+      .on("postgres_changes", { event: "*", schema: "public", table: "schedule_events" }, () => {
+        void queryClient.invalidateQueries({ queryKey: ["published-schedule"] });
+      })
+      .subscribe();
+    return () => {
+      void supabase.removeChannel(channel);
+    };
+  }, [queryClient]);
 
   useEffect(() => {
     if (!user) {
@@ -67,11 +99,19 @@ export function ScheduleTab() {
   }, [user]);
 
   const savedEventKeys = new Set(user ? (savedAgendas[user.id] ?? []) : []);
-  const filteredEvents = selectedDay.events
-    .filter((event) => category === "all" || event.category === category)
+  const scheduleDate = new Date(EVENT_CONFIG.start);
+  scheduleDate.setDate(scheduleDate.getDate() + day - 1);
+  const scheduleDateLabel = scheduleDate.toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  const filteredEvents = scheduleEvents
+    .filter((event) => event.day === day && (category === "all" || event.category === category))
     .map((event) => ({
       ...event,
-      eventKey: `${selectedDay.date}|${event.time}|${event.title}`,
+      eventKey: getScheduleEventKey(scheduleDateLabel, event.time, event.title),
     }));
 
   function toggleAgenda(eventKey: string, isSaved: boolean) {
@@ -123,12 +163,20 @@ export function ScheduleTab() {
       </div>
 
       <div className="space-y-3 px-4 py-4">
+        {scheduleError && (
+          <Card className="border border-destructive/30 bg-destructive/5 p-4 text-sm text-destructive">
+            The published programme could not be loaded: {scheduleError.message}
+          </Card>
+        )}
+        {isPending && (
+          <p className="py-8 text-center text-sm text-muted-foreground">Loading programme…</p>
+        )}
         {!user && (
           <p className="text-center text-xs text-muted-foreground">
             Sign in to bookmark activities.
           </p>
         )}
-        {filteredEvents.length === 0 && (
+        {!isPending && !scheduleError && filteredEvents.length === 0 && (
           <p className="py-12 text-center text-sm text-muted-foreground">
             No events in this category for this day.
           </p>
