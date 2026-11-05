@@ -220,7 +220,7 @@ export default function ExhibitionMap() {
       section: sectionName,
     };
 
-    if (boothData.status === "booked" || boothData.status === "pending") {
+    if (boothData.status === "booked") {
       toast.info(`Booth ${boothId} is already taken.`);
       return;
     }
@@ -273,11 +273,7 @@ export default function ExhibitionMap() {
   }
 
   const getButtonColor = (id: string) => {
-    if (
-      allocatedExhibitors[id] ||
-      booths[id]?.status === "booked" ||
-      booths[id]?.status === "pending"
-    ) {
+    if (allocatedExhibitors[id] || booths[id]?.status === "booked") {
       return "bg-gray-300 text-gray-500 cursor-not-allowed";
     }
     return "bg-green-600 text-white shadow hover:bg-green-700";
@@ -355,9 +351,7 @@ export default function ExhibitionMap() {
                   <div className="grid grid-cols-4 gap-2 sm:grid-cols-6 md:grid-cols-8">
                     {pavilion.booths.map((booth) => {
                       const status =
-                        allocatedExhibitors[booth.id] ||
-                        booths[booth.id]?.status === "booked" ||
-                        booths[booth.id]?.status === "pending"
+                        allocatedExhibitors[booth.id] || booths[booth.id]?.status === "booked"
                           ? "taken"
                           : "available";
                       const exhibitor = allocatedExhibitors[booth.id];
@@ -430,8 +424,8 @@ export default function ExhibitionMap() {
                 />
               </div>
               <p className="text-xs text-amber-700 bg-amber-50 p-2 rounded mb-4">
-                Note: Submitting registers your interest. The booth status will update to pending
-                until payment is verified.
+                Note: Submitting registers your interest. The booth is only marked taken once
+                payment is confirmed.
               </p>
               <div className="flex justify-end gap-2">
                 <button
