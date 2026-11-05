@@ -489,17 +489,32 @@ function AuthPage() {
           )}
         </Card>
 
-        <p className="mt-6 text-center text-xs text-white/60">
+        <Link
+          to="/exhibition"
+          className="mt-6 flex items-center justify-between gap-3 rounded-2xl bg-white px-4 py-3.5 text-left shadow-elevated ring-2 ring-emerald-300/70 transition hover:bg-emerald-50 active:scale-[0.99]"
+        >
+          <span className="min-w-0">
+            <span className="block text-[11px] font-bold uppercase tracking-widest text-emerald-700">
+              No sign-in needed
+            </span>
+            <span className="block text-base font-extrabold leading-tight text-slate-900">
+              Explore the Exhibition
+            </span>
+            <span className="block text-xs font-medium text-slate-600">
+              Booth floor plans, allocations and trip guide
+            </span>
+          </span>
+          <span aria-hidden className="text-2xl font-bold text-emerald-700">
+            →
+          </span>
+        </Link>
+
+        <p className="mt-4 text-center text-xs text-white/60">
           By signing in you agree to the conference code of conduct. See our{" "}
           <Link to="/privacy" className="underline hover:text-white">
             Privacy Policy
           </Link>
           .
-        </p>
-        <p className="mt-2 text-center text-xs">
-          <Link to="/exhibition" className="text-white/70 underline hover:text-white">
-            View exhibition booth allocations without signing in
-          </Link>
         </p>
       </div>
     </div>
