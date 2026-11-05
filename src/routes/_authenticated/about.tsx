@@ -33,7 +33,6 @@ function AboutPage() {
       />
 
       <div className="space-y-5 px-4">
-
         {/* ── Hero Banner ─────────────────────────────────────────── */}
         <Card className="relative overflow-hidden border-0 bg-brand-gradient text-white shadow-elevated">
           <div className="hero-sheen pointer-events-none absolute inset-0" />
@@ -87,10 +86,7 @@ function AboutPage() {
         {/* ── Impact Stats ─────────────────────────────────────────── */}
         <div className="grid grid-cols-4 gap-2.5 text-center">
           {info.stats.map((s) => (
-            <Card
-              key={s.label}
-              className="border-0 bg-surface p-3 shadow-card"
-            >
+            <Card key={s.label} className="border-0 bg-surface p-3 shadow-card">
               <p className="text-xl font-extrabold text-primary">{s.value}</p>
               <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-tight text-muted-foreground leading-tight">
                 {s.label}
@@ -102,22 +98,23 @@ function AboutPage() {
         {/* ── Tabs ─────────────────────────────────────────────────── */}
         <Tabs defaultValue="about" className="w-full">
           <TabsList className="grid w-full grid-cols-2 bg-muted/70 p-1 h-11">
-            <TabsTrigger value="about" className="text-sm font-semibold">About</TabsTrigger>
-            <TabsTrigger value="contact" className="text-sm font-semibold">Secretariat</TabsTrigger>
+            <TabsTrigger value="about" className="text-sm font-semibold">
+              About
+            </TabsTrigger>
+            <TabsTrigger value="contact" className="text-sm font-semibold">
+              Secretariat
+            </TabsTrigger>
           </TabsList>
 
           {/* ════════════════ TAB 1 · ABOUT ═══════════════════════ */}
           <TabsContent value="about" className="mt-4 space-y-4">
-
             {/* About NSE */}
             <Card className="border-0 p-5 shadow-card">
               <div className="flex items-center gap-2 mb-3">
                 <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary-soft">
                   <Award className="h-5 w-5 text-primary" />
                 </div>
-                <h3 className="text-base font-bold text-foreground leading-tight">
-                  About NSE
-                </h3>
+                <h3 className="text-base font-bold text-foreground leading-tight">About NSE</h3>
               </div>
               <p className="text-sm leading-relaxed text-muted-foreground">
                 The Nigerian Society of Engineers (NSE) — founded in 1958 — is the umbrella
@@ -126,6 +123,20 @@ function AboutPage() {
                 infrastructure and technology, and it is the organiser of the annual International
                 Engineering Conference, Exhibition and Annual General Meeting.
               </p>
+              <dl className="mt-3 space-y-2 text-sm leading-relaxed text-muted-foreground">
+                <div>
+                  <dt className="font-semibold text-foreground">Vision</dt>
+                  <dd>To be one of the very best engineering professional bodies in the world.</dd>
+                </div>
+                <div>
+                  <dt className="font-semibold text-foreground">Mission</dt>
+                  <dd>
+                    Quality services for members&rsquo; professional competence, collaboration with
+                    and advice to Government, Industry, Academia and Society, and the advancement of
+                    technology worldwide.
+                  </dd>
+                </div>
+              </dl>
               <a
                 href={info.officialSite}
                 target="_blank"
@@ -134,6 +145,34 @@ function AboutPage() {
               >
                 Official Portal <ExternalLink className="h-3.5 w-3.5" />
               </a>
+            </Card>
+
+            {/* Distinguished guests */}
+            <Card className="border-0 p-5 shadow-card">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary-soft">
+                  <Users className="h-5 w-5 text-primary" />
+                </div>
+                <h3 className="text-base font-bold text-foreground leading-tight">
+                  Distinguished Guests
+                </h3>
+              </div>
+              <dl className="space-y-2.5 text-sm">
+                {[
+                  ["Distinguished Guest of Honour", "President Bola Ahmed Tinubu, GCFR"],
+                  ["Special Guest of Honour", "Vice President Sen. Kashim Shettima, GCON"],
+                  ["Chief Host", "Gov. Prof. Babagana Umara Zulum of Borno State"],
+                  ["Keynote Speaker", "Gen. Christopher Gwabin Musa (Rtd), Minister of Defence"],
+                  ["NSE President", "Engr. Ali Alimasuya Rabiu, FNSE"],
+                ].map(([role, name]) => (
+                  <div key={role}>
+                    <dt className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+                      {role}
+                    </dt>
+                    <dd className="font-semibold text-foreground">{name}</dd>
+                  </div>
+                ))}
+              </dl>
             </Card>
 
             {/* About the Conference */}
@@ -169,7 +208,8 @@ function AboutPage() {
                       <p className="mt-0.5 text-sm font-semibold text-primary">{info.chairman}</p>
                     )}
                     <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
-                      Leads the National Organizing Committee for the conference and all sub-committees.
+                      Leads the National Organizing Committee for the conference and all
+                      sub-committees.
                     </p>
                   </div>
                 </div>
@@ -224,7 +264,10 @@ function AboutPage() {
                 {TRANSPORT.policyDescriptions[TRANSPORT.defaultPolicy]}
               </p>
               <p className="mt-2 text-sm text-muted-foreground">
-                <span className="font-semibold text-foreground">{TRANSPORT.buses.length} active shuttles</span> running daily across official delegate hotels and the ICC.
+                <span className="font-semibold text-foreground">
+                  {TRANSPORT.buses.length} active shuttles
+                </span>{" "}
+                running daily across official delegate hotels and the ICC.
               </p>
             </Card>
 
@@ -251,11 +294,12 @@ function AboutPage() {
 
           {/* ════════════════ TAB 2 · SECRETARIAT ═════════════════ */}
           <TabsContent value="contact" className="mt-4 space-y-4">
-
             <Card className="border-0 overflow-hidden shadow-card">
               {/* Header */}
               <div className="bg-primary/10 px-5 py-4 border-b border-border">
-                <h4 className="text-base font-bold text-foreground">On-Site Secretariat &amp; Desks</h4>
+                <h4 className="text-base font-bold text-foreground">
+                  On-Site Secretariat &amp; Desks
+                </h4>
                 <p className="mt-0.5 text-sm text-muted-foreground">
                   Located at the International Conference Centre (ICC)
                 </p>
@@ -263,14 +307,15 @@ function AboutPage() {
 
               {/* Desk items */}
               <div className="divide-y divide-border">
-
                 {/* Secretariat */}
                 <div className="flex items-start gap-3 p-5">
                   <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary-soft mt-0.5">
                     <Award className="h-5 w-5 text-primary" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-sm font-bold text-foreground">Secretariat &amp; Kit Collection</p>
+                    <p className="text-sm font-bold text-foreground">
+                      Secretariat &amp; Kit Collection
+                    </p>
                     <p className="mt-0.5 text-sm text-muted-foreground">ICC Main Foyer</p>
                     <a
                       href="tel:+2342013301060"
@@ -288,8 +333,12 @@ function AboutPage() {
                     <ChevronRight className="h-5 w-5 text-primary" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-sm font-bold text-foreground">Technical &amp; Presentation Desk</p>
-                    <p className="mt-0.5 text-sm text-muted-foreground">Speaker preview room &amp; AV support</p>
+                    <p className="text-sm font-bold text-foreground">
+                      Technical &amp; Presentation Desk
+                    </p>
+                    <p className="mt-0.5 text-sm text-muted-foreground">
+                      Speaker preview room &amp; AV support
+                    </p>
                     <a
                       href="tel:+2342013301060"
                       className="mt-2 flex items-center gap-1.5 text-sm font-mono font-medium text-primary hover:underline"
@@ -306,7 +355,9 @@ function AboutPage() {
                     <Users className="h-5 w-5 text-warning-foreground" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-sm font-bold text-foreground">Partnership, Exhibition &amp; Protocol</p>
+                    <p className="text-sm font-bold text-foreground">
+                      Partnership, Exhibition &amp; Protocol
+                    </p>
                     <a
                       href="tel:+2342013301060"
                       className="mt-2 flex items-center gap-1.5 text-sm font-mono font-medium text-primary hover:underline"
@@ -340,10 +391,8 @@ function AboutPage() {
                     </a>
                   </div>
                 </div>
-
               </div>
             </Card>
-
           </TabsContent>
         </Tabs>
 
@@ -351,7 +400,6 @@ function AboutPage() {
         <p className="pt-2 text-center text-sm text-muted-foreground">
           {EVENT_CONFIG.fullName} · {EVENT_CONFIG.dates}
         </p>
-
       </div>
     </div>
   );

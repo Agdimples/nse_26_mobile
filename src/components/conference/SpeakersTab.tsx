@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { NsePageHeader } from "@/components/app/NsePageHeader";
 import { initials } from "@/lib/format";
+import { programmeSpeakers } from "@/data/programme-speakers";
 
 export function SpeakersTab({ showHeader = false }: { showHeader?: boolean }) {
   const { data: speakers = [] } = useQuery({
@@ -26,16 +27,12 @@ export function SpeakersTab({ showHeader = false }: { showHeader?: boolean }) {
       {showHeader && (
         <NsePageHeader
           title="Speakers"
-          subtitle={`${speakers.length} keynote lecturers & industry leaders`}
+          subtitle="Keynote, panel and technical programme contributors"
           backTo="/conference"
         />
       )}
       <div className="space-y-4 px-4 pt-4">
-        {speakers.length === 0 ? (
-          <p className="py-12 text-center text-sm text-muted-foreground">
-            Speaker details will be available soon.
-          </p>
-        ) : (
+        {speakers.length > 0 && (
           <div className="grid grid-cols-2 gap-3">
             {speakers.map((speaker) => (
               <Link
@@ -73,6 +70,27 @@ export function SpeakersTab({ showHeader = false }: { showHeader?: boolean }) {
               </Link>
             ))}
           </div>
+        )}
+        {speakers.length === 0 && programmeSpeakers.length === 0 ? (
+          <p className="py-12 text-center text-sm text-muted-foreground">
+            Speaker details will be available soon.
+          </p>
+        ) : (
+          <section className="space-y-3">
+            <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
+              Named in the conference programme
+            </h2>
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+              {programmeSpeakers.map((speaker) => (
+                <Card key={speaker.name} className="rounded-xl border-0 bg-surface p-3 shadow-card">
+                  <p className="text-sm font-bold leading-snug text-foreground">{speaker.name}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                    {speaker.role}
+                  </p>
+                </Card>
+              ))}
+            </div>
+          </section>
         )}
       </div>
     </>

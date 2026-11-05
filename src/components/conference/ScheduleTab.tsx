@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
-import { BookmarkCheck, BookmarkPlus } from "lucide-react";
+import { BookmarkCheck, BookmarkPlus, ChevronDown } from "lucide-react";
 import { toast } from "sonner";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { EVENT_CONFIG } from "@/lib/event-config";
-import { conferenceSchedule, type ConferenceScheduleCategory } from "@/data/conference-schedule";
+import {
+  conferenceSchedule,
+  getScheduleEventKey,
+  type ConferenceScheduleCategory,
+} from "@/data/conference-schedule";
 import { useAuth } from "@/lib/auth";
 
 const CATEGORIES: {
@@ -34,13 +38,21 @@ const CONF_DAYS = (() => {
   return days;
 })();
 
+const SCHEDULE_EVENTS = conferenceSchedule.flatMap(({ date, events }, index) =>
+  events.map((event) => ({
+    ...event,
+    date,
+    day: index + 1,
+  })),
+);
+
 export function ScheduleTab() {
   const [day, setDay] = useState(1);
   const [category, setCategory] = useState<(typeof CATEGORIES)[number]["value"]>("all");
-  const selectedDay = conferenceSchedule[day - 1] ?? conferenceSchedule[0];
   const { user } = useAuth();
   const [savedAgendas, setSavedAgendas] = useState<Record<string, string[]>>({});
   const [loadedUserId, setLoadedUserId] = useState<string | null>(null);
+  const [expanded, setExpanded] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     if (!user) {
@@ -67,12 +79,20 @@ export function ScheduleTab() {
   }, [user]);
 
   const savedEventKeys = new Set(user ? (savedAgendas[user.id] ?? []) : []);
-  const filteredEvents = selectedDay.events
-    .filter((event) => category === "all" || event.category === category)
-    .map((event) => ({
-      ...event,
-      eventKey: `${selectedDay.date}|${event.time}|${event.title}`,
-    }));
+  const filteredEvents = SCHEDULE_EVENTS.filter(
+    (event) => event.day === day && (category === "all" || event.category === category),
+  ).map((event) => ({
+    ...event,
+    eventKey: getScheduleEventKey(event.date, event.time, event.title),
+  }));
+
+  function toggleExpanded(eventKey: string) {
+    setExpanded((current) => {
+      const next = new Set(current);
+      if (!next.delete(eventKey)) next.add(eventKey);
+      return next;
+    });
+  }
 
   function toggleAgenda(eventKey: string, isSaved: boolean) {
     if (!user) return;
@@ -135,6 +155,8 @@ export function ScheduleTab() {
         )}
         {filteredEvents.map((event, index) => {
           const isSaved = savedEventKeys.has(event.eventKey);
+          const hasMore = Boolean(event.details?.length || event.timeline?.length);
+          const isOpen = expanded.has(event.eventKey);
           return (
             <Card
               key={`${event.eventKey}-${index}`}
@@ -167,6 +189,46 @@ export function ScheduleTab() {
                   {event.location && (
                     <div className="mt-1.5 text-xs text-muted-foreground">
                       <span className="font-medium text-foreground/80">📍 {event.location}</span>
+                    </div>
+                  )}
+                  {event.summary && (
+                    <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
+                      {event.summary}
+                    </p>
+                  )}
+                  {hasMore && (
+                    <button
+                      type="button"
+                      aria-expanded={isOpen}
+                      onClick={() => toggleExpanded(event.eventKey)}
+                      className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary"
+                    >
+                      {isOpen ? "Hide details" : "View details"}
+                      <ChevronDown
+                        className={`h-3.5 w-3.5 transition-transform ${isOpen ? "rotate-180" : ""}`}
+                      />
+                    </button>
+                  )}
+                  {hasMore && isOpen && (
+                    <div className="mt-2 space-y-2 border-t border-border pt-2 text-xs">
+                      {event.details?.map((item) => (
+                        <p key={item.label} className="leading-relaxed text-muted-foreground">
+                          <span className="font-semibold text-foreground/80">{item.label}: </span>
+                          {item.value}
+                        </p>
+                      ))}
+                      {event.timeline && (
+                        <ul className="space-y-1">
+                          {event.timeline.map((step) => (
+                            <li key={`${step.time}-${step.text}`} className="flex gap-2">
+                              <span className="w-14 shrink-0 font-semibold text-primary">
+                                {step.time}
+                              </span>
+                              <span className="text-muted-foreground">{step.text}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </div>
                   )}
                 </div>
