@@ -1,118 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
-import { convertToModelMessages, streamText, type UIMessage } from "ai";
+import {
+  convertToModelMessages,
+  createUIMessageStream,
+  createUIMessageStreamResponse,
+  streamText,
+  type UIMessage,
+} from "ai";
 import { createClient } from "@supabase/supabase-js";
 import type { Database } from "@/integrations/supabase/types";
-import { CONFERENCE_INFO, FAQS, HOTELS, TRANSPORT, VENUE_DATA } from "@/lib/reference";
-import { conferenceSchedule } from "@/data/conference-schedule";
 import { EVENT_CONFIG } from "@/lib/event-config";
-
-type KnowledgeItem = { title: string; content: string; searchable: string };
-
-const stopWords = new Set([
-  "about",
-  "after",
-  "and",
-  "are",
-  "can",
-  "does",
-  "for",
-  "from",
-  "give",
-  "have",
-  "help",
-  "how",
-  "into",
-  "let",
-  "me",
-  "more",
-  "please",
-  "tell",
-  "that",
-  "the",
-  "their",
-  "there",
-  "this",
-  "what",
-  "when",
-  "where",
-  "which",
-  "who",
-  "with",
-  "would",
-  "you",
-  "your",
-]);
-
-const knowledge: KnowledgeItem[] = [
-  {
-    title: "Conference overview",
-    content: [
-      `${CONFERENCE_INFO.conferenceTitle} — ${CONFERENCE_INFO.theme}.`,
-      `Dates: ${EVENT_CONFIG.dates}. Venue: ${EVENT_CONFIG.venue.name}, ${EVENT_CONFIG.venue.address}.`,
-      CONFERENCE_INFO.aboutSummary ?? "",
-      `Official website: ${CONFERENCE_INFO.officialSite}.`,
-      `Enquiries: ${CONFERENCE_INFO.enquiries?.email ?? EVENT_CONFIG.email}; registration ${CONFERENCE_INFO.enquiries?.registration ?? EVENT_CONFIG.primaryHotline}.`,
-    ]
-      .filter(Boolean)
-      .join("\n"),
-    searchable: "conference overview theme dates venue registration about engineering",
-  },
-  ...FAQS.map((faq) => ({
-    title: `FAQ — ${faq.question}`,
-    content: `${faq.question}\n${faq.answer}`,
-    searchable: `${faq.question} ${faq.answer} ${faq.keywords.join(" ")}`,
-  })),
-  ...conferenceSchedule.flatMap((day) =>
-    day.events.map((event) => ({
-      title: `Schedule — ${event.title}`,
-      content: `${day.date}, ${event.time}: ${event.title}${event.location ? ` at ${event.location}` : ""}.`,
-      searchable: `${day.date} ${event.time} ${event.title} ${event.location} ${event.category ?? ""}`,
-    })),
-  ),
-  ...HOTELS.map((hotel) => {
-    const rates = hotel.rooms.map((room) => `${room.label}: ${room.rate}`).join("; ");
-    const content = [
-      `${hotel.name} — ${hotel.location}.`,
-      hotel.distanceToVenue ? `Distance to venue: ${hotel.distanceToVenue}.` : "",
-      rates ? `Room rates: ${rates}.` : "",
-      hotel.contactPhone ? `Contact: ${hotel.contactPhone}.` : "",
-      hotel.description,
-    ]
-      .filter(Boolean)
-      .join("\n");
-    return {
-      title: `Hotel — ${hotel.name}`,
-      content,
-      searchable: `${hotel.name} ${hotel.shortName} ${hotel.location} ${hotel.distanceToVenue} ${hotel.description} ${rates}`,
-    };
-  }),
-  {
-    title: "Venue and getting around",
-    content: [
-      `Venue: ${VENUE_DATA.venue.name} (${VENUE_DATA.venue.shortName}).`,
-      `Shuttle: ${VENUE_DATA.shuttle}`,
-      `Parking: ${VENUE_DATA.parking}`,
-      `Directions: ${VENUE_DATA.directions.join(" ")}`,
-    ].join("\n"),
-    searchable: `venue directions shuttle parking ${VENUE_DATA.shuttle} ${VENUE_DATA.directions.join(" ")}`,
-  },
-  ...VENUE_DATA.nearby.map((place) => ({
-    title: `Nearby — ${place.name}`,
-    content: `${place.name} (${place.category})${place.distance ? `, ${place.distance} away` : ""}.${place.note ? ` ${place.note}.` : ""}${place.phone ? ` Phone: ${place.phone}.` : ""}`,
-    searchable: `${place.name} ${place.category} ${place.distance ?? ""} ${place.note ?? ""}`,
-  })),
-  {
-    title: "Conference shuttle policy",
-    content: `${TRANSPORT.policyDescriptions[TRANSPORT.defaultPolicy]} Shuttle schedules and hotel routes are listed in the app's Transport section.`,
-    searchable: "bus shuttle transport hotel route pickup schedule policy",
-  },
-  ...TRANSPORT.buses.map((bus) => ({
-    title: `Shuttle route — ${bus.name}`,
-    content: `${bus.routeLabel}. Pickup: ${bus.pickupPoint}. Hotel route: ${HOTELS.find((hotel) => hotel.id === bus.hotelId)?.name ?? bus.hotelId}.`,
-    searchable: `${bus.name} ${bus.routeLabel} ${bus.pickupPoint} ${bus.hotelId}`,
-  })),
-];
+import { conferenceSchedule } from "@/data/conference-schedule";
+import { answerLocally, relevantKnowledge } from "@/lib/concierge-knowledge";
 
 const liveContextCache = new Map<string, { expiresAt: number; value: Promise<string> }>();
 
@@ -137,17 +36,23 @@ async function getLiveContext(question: string): Promise<string> {
   const asksAboutAnnouncements = /\b(announcements?|updates?|news|notices?|what changed)\b/.test(
     normalized,
   );
+  const asksAboutSchedule =
+    /\b(schedule|programme|program|industrial visit|tour|session|event on)\b/.test(normalized);
   const asksAboutEmergency =
     /\b(emergency|urgent|ambulance|police|hospital|security contact)\b/.test(normalized);
 
-  if (!asksAboutSpeakers && !asksAboutAnnouncements && !asksAboutEmergency) return "";
+  if (!asksAboutSpeakers && !asksAboutAnnouncements && !asksAboutEmergency && !asksAboutSchedule) {
+    return "";
+  }
 
   const url = process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL;
   const anon =
     process.env.SUPABASE_PUBLISHABLE_KEY ??
     process.env.VITE_SUPABASE_PUBLISHABLE_KEY ??
     process.env.VITE_SUPABASE_ANON_KEY;
-  if (!url || !anon) return "Live speaker, announcement, and emergency records are unavailable.";
+  if (!url || !anon) {
+    return "Live speaker, announcement, emergency, and programme records are unavailable.";
+  }
 
   const supabase = createClient<Database>(url, anon);
 
@@ -216,36 +121,37 @@ async function getLiveContext(question: string): Promise<string> {
     );
   }
 
+  if (asksAboutSchedule) {
+    requests.push(
+      cachedLiveContext("schedule-events", async () => {
+        return `PUBLISHED PROGRAMME:\n${conferenceSchedule
+          .flatMap((day, index) =>
+            day.events.map(
+              (event) =>
+                `- Day ${index + 1} (${day.date}), ${event.time}: ${event.title}${event.location ? ` at ${event.location}` : ""}${event.category ? ` [${event.category}]` : ""}`,
+            ),
+          )
+          .join("\n")}`;
+      }),
+    );
+  }
+
   return (await Promise.all(requests)).join("\n\n");
 }
 
-function relevantKnowledge(question: string): string {
-  const terms = [...new Set(question.toLowerCase().match(/[\p{L}\p{N}]{3,}/gu) ?? [])].filter(
-    (term) => !stopWords.has(term),
-  );
-  if (!terms.length) return "";
-
-  return knowledge
-    .map((item) => {
-      const searchable = item.searchable.toLowerCase();
-      const score = terms.reduce((total, term) => total + (searchable.includes(term) ? 1 : 0), 0);
-      return { item, score };
-    })
-    .filter(({ score }) => score > 0)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 7)
-    .map(({ item }) => `${item.title}\n${item.content}`)
-    .join("\n\n");
+function userQuestions(messages: UIMessage[]): string[] {
+  return messages
+    .filter((message) => message.role === "user")
+    .map((message) =>
+      message.parts
+        .filter((part) => part.type === "text")
+        .map((part) => part.text)
+        .join("\n"),
+    );
 }
 
 function getLastQuestion(messages: UIMessage[]): string {
-  const lastUserMessage = [...messages].reverse().find((message) => message.role === "user");
-  return (
-    lastUserMessage?.parts
-      .filter((part) => part.type === "text")
-      .map((part) => part.text)
-      .join("\n") ?? ""
-  );
+  return userQuestions(messages).at(-1) ?? "";
 }
 
 export const Route = createFileRoute("/api/chat")({
@@ -259,20 +165,21 @@ export const Route = createFileRoute("/api/chat")({
           }
 
           const key = process.env.GEMINI_API_KEY ?? process.env.LOVABLE_API_KEY;
+          const question = getLastQuestion(messages);
           if (!key) {
-            return new Response(
-              JSON.stringify({
-                error:
-                  "The AI concierge is not configured. Add GEMINI_API_KEY as a server-side environment variable.",
-              }),
-              {
-                status: 503,
-                headers: { "Content-Type": "application/json" },
+            // No AI key configured: answer from the bundled conference data.
+            const answer = answerLocally(question, userQuestions(messages).slice(-3, -1));
+            const stream = createUIMessageStream({
+              originalMessages: messages,
+              execute: ({ writer }) => {
+                writer.write({ type: "text-start", id: "local" });
+                writer.write({ type: "text-delta", id: "local", delta: answer });
+                writer.write({ type: "text-end", id: "local" });
               },
-            );
+            });
+            return createUIMessageStreamResponse({ stream });
           }
 
-          const question = getLastQuestion(messages);
           const [bundledContext, liveContext] = await Promise.all([
             Promise.resolve(relevantKnowledge(question)),
             getLiveContext(question),

@@ -33,7 +33,7 @@ type AdminTab = {
     | "/admin/staff";
   label: string;
   exact?: boolean;
-  // Sub-roles that may see this tab. super_admin always sees everything.
+  // Sub-roles that may see this tab. Admin and super_admin see all tabs.
   roles: AppRole[];
 };
 
@@ -65,8 +65,8 @@ const ROLE_LABEL: Record<AppRole, string> = {
 function AdminLayout() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const { roles, hasAnyAdminRole } = useAuth();
-  const isSuper = roles.includes("super_admin");
-  const visible = tabs.filter((t) => isSuper || hasAnyAdminRole(t.roles));
+  const isAdmin = roles.includes("admin") || roles.includes("super_admin");
+  const visible = tabs.filter((t) => isAdmin || hasAnyAdminRole(t.roles));
 
   // Human-friendly badge of which role panels you can access
   const myRoles = (Object.keys(ROLE_LABEL) as AppRole[]).filter(

@@ -50,7 +50,9 @@ function AdminHotels() {
     onSuccess: () => {
       toast.success("Deleted");
       qc.invalidateQueries({ queryKey: ["admin-hotels"] });
+      qc.invalidateQueries({ queryKey: ["accommodations"] });
     },
+    onError: (e: Error) => toast.error(e.message),
   });
 
   return (

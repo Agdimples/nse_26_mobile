@@ -44,7 +44,9 @@ function AdminMenu() {
     onSuccess: () => {
       toast.success("Deleted");
       qc.invalidateQueries({ queryKey: ["admin-menu-items"] });
+      qc.invalidateQueries({ queryKey: ["menu-items"] });
     },
+    onError: (e: Error) => toast.error(e.message),
   });
 
   const catName = (id: string | null) => categories.find((c) => c.id === id)?.name ?? "—";

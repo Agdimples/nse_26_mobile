@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
+import { AnnouncementBanner } from "@/components/app/AnnouncementBanner";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CONFERENCE_INFO } from "@/lib/reference";
@@ -95,19 +94,6 @@ const tools = [
 function HomePage() {
   const { user } = useAuth();
   const info = CONFERENCE_INFO;
-
-  const { data: announcement } = useQuery({
-    queryKey: ["latest-announcement"],
-    queryFn: async () => {
-      const { data } = await supabase
-        .from("announcements")
-        .select("*")
-        .order("created_at", { ascending: false })
-        .limit(1)
-        .maybeSingle();
-      return data as { title?: string; body?: string } | null;
-    },
-  });
 
   const firstName = user?.user_metadata?.full_name ?? "Delegate";
   const countdown = countdownLabel();
@@ -256,26 +242,8 @@ function HomePage() {
           </div>
         </section>
 
-        {/* Latest announcement card */}
-        <Link to="/announcements" className="block">
-          <div className="rounded-2xl bg-surface p-4 shadow-card">
-            <div className="flex items-center gap-2.5">
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-soft">
-                <Megaphone className="h-5 w-5 text-primary" />
-              </span>
-              <p className="flex-1 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-                Latest announcement
-              </p>
-              <span className="text-xs text-muted-foreground/60">›</span>
-            </div>
-            <p className="mt-3 text-lg font-extrabold leading-snug">
-              {announcement?.title ?? "No updates yet"}
-            </p>
-            <p className="mt-1.5 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
-              {announcement?.body ?? "Conference announcements will appear here first."}
-            </p>
-          </div>
-        </Link>
+        {/* Rotating announcements and welcome messages */}
+        <AnnouncementBanner firstName={firstName} />
 
         {/* Concierge CTA */}
         <Link to="/concierge" className="block">

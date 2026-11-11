@@ -776,6 +776,42 @@ export type Database = {
         }
         Relationships: []
       }
+      schedule_events: {
+        Row: {
+          category: string | null
+          created_at: string
+          day: number
+          id: string
+          location: string
+          sort_order: number
+          time: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          day: number
+          id?: string
+          location?: string
+          sort_order?: number
+          time: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          day?: number
+          id?: string
+          location?: string
+          sort_order?: number
+          time?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       signup_codes: {
         Row: {
           code: string

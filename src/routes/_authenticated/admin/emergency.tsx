@@ -35,7 +35,9 @@ function AdminEmergency() {
     onSuccess: () => {
       toast.success("Deleted");
       qc.invalidateQueries({ queryKey: ["admin-emergency"] });
+      qc.invalidateQueries({ queryKey: ["emergency-contacts"] });
     },
+    onError: (e: Error) => toast.error(e.message),
   });
 
   return (

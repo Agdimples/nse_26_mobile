@@ -17,7 +17,11 @@ never put a service-role key in a `VITE_` variable.
 
 ## AI concierge
 
-The chatbot needs a Gemini API key on the server. Create one in
+Without a key, the concierge answers locally from the bundled conference data
+(schedule, speakers, FAQs, hotels, venue, transport, contacts) — see
+`src/lib/concierge-knowledge.ts`. With a key it uses Gemini for fuller answers.
+
+For Gemini, the server needs an API key. Create one in
 [Google AI Studio](https://aistudio.google.com/apikey), then add it to the root
 `.env.local`:
 

@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { supabase } from "@/integrations/supabase/client";
@@ -10,32 +10,13 @@ type Booth = {
   section?: string | null;
 };
 
-type BoothInterest = {
-  id: string;
-  section: string;
-  price: string;
-  status: "pending";
-  booked_by: string;
-  contact_phone: string;
-  contact_email: string;
-};
-
 type BoothStore = {
   from: (table: "booths") => {
     select: (columns: "*") => Promise<{
       data: Booth[] | null;
       error: { message: string } | null;
     }>;
-    upsert: (booth: BoothInterest) => Promise<{
-      error: { message: string } | null;
-    }>;
   };
-};
-
-type SelectedBooth = {
-  id: string;
-  section: string;
-  price: string;
 };
 
 type ExhibitionBooth = {
@@ -55,6 +36,7 @@ type Pavilion = {
 };
 
 const boothStore = supabase as unknown as BoothStore;
+const EXHIBITION_FORM_URL = "https://forms.gle/CpNLskMr3XPa9VZW9";
 
 const indoorBooths: ExhibitionBooth[] = [
   ...Array.from({ length: 4 }, (_, index) => ({
@@ -177,8 +159,6 @@ const pavilions: Pavilion[] = [
 export default function ExhibitionMap() {
   const [activePavilion, setActivePavilion] = useState("indoor");
   const [booths, setBooths] = useState<Record<string, Booth>>({});
-  const [selectedBooth, setSelectedBooth] = useState<SelectedBooth | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
 
@@ -207,70 +187,14 @@ export default function ExhibitionMap() {
     }
   }
 
-  const handleBoothClick = (boothId: string, sectionName: string, priceText: string) => {
+  const handleTakenBoothClick = (boothId: string) => {
     const assignedExhibitor = allocatedExhibitors[boothId];
     if (assignedExhibitor) {
       toast.info(`Booth ${boothId} is allocated to ${assignedExhibitor}.`);
-      return;
-    }
-
-    const boothData = booths[boothId] || {
-      status: "available",
-      price: priceText,
-      section: sectionName,
-    };
-
-    if (boothData.status === "booked") {
+    } else {
       toast.info(`Booth ${boothId} is already taken.`);
-      return;
     }
-
-    setSelectedBooth({ id: boothId, section: sectionName, price: priceText });
-    setIsModalOpen(true);
   };
-
-  async function handleSubmitInterest(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    if (!selectedBooth) return;
-    const formData = new FormData(e.currentTarget);
-    const exhibitor = formData.get("exhibitor");
-    const phone = formData.get("phone");
-    const email = formData.get("email");
-
-    if (typeof exhibitor !== "string" || typeof phone !== "string" || typeof email !== "string") {
-      toast.error("Please complete all exhibitor contact fields.");
-      return;
-    }
-
-    // Update status to 'pending' awaiting payment verification
-    try {
-      const { error } = await boothStore.from("booths").upsert({
-        id: selectedBooth.id,
-        section: selectedBooth.section,
-        price: selectedBooth.price,
-        status: "pending",
-        booked_by: exhibitor,
-        contact_phone: phone,
-        contact_email: email,
-      });
-      if (error) {
-        toast.error(`Error submitting interest: ${error.message}`);
-        return;
-      }
-      toast.success(
-        "Interest submitted successfully! The committee will verify payment and update your booth status.",
-      );
-      setIsModalOpen(false);
-      setSelectedBooth(null);
-      void fetchBooths();
-    } catch (error) {
-      toast.error(
-        `Error submitting interest: ${
-          error instanceof Error ? error.message : "Unexpected request error."
-        }`,
-      );
-    }
-  }
 
   const getButtonColor = (id: string) => {
     if (allocatedExhibitors[id] || booths[id]?.status === "booked") {
@@ -348,6 +272,10 @@ export default function ExhibitionMap() {
                       </span>
                     </div>
                   </div>
+                  <p className="mb-3 text-xs text-muted-foreground">
+                    Select an available booth to open the exhibition form. Please note its number
+                    before continuing; selecting a booth does not reserve it.
+                  </p>
                   <div className="grid grid-cols-4 gap-2 sm:grid-cols-6 md:grid-cols-8">
                     {pavilion.booths.map((booth) => {
                       const status =
@@ -355,14 +283,31 @@ export default function ExhibitionMap() {
                           ? "taken"
                           : "available";
                       const exhibitor = allocatedExhibitors[booth.id];
+                      const label = `${booth.id}, ${status}${exhibitor ? `, allocated to ${exhibitor}` : ""}, ${booth.price}`;
+                      const className = `rounded-lg p-2 text-center text-sm font-semibold transition-transform hover:scale-105 ${getButtonColor(booth.id)}`;
+                      if (status === "available") {
+                        return (
+                          <a
+                            key={booth.id}
+                            href={EXHIBITION_FORM_URL}
+                            aria-label={`${label}, open exhibition form`}
+                            className={className}
+                          >
+                            {booth.id}
+                            <span className="mt-0.5 block text-[10px] font-normal capitalize">
+                              {status}
+                            </span>
+                          </a>
+                        );
+                      }
                       return (
                         <button
                           key={booth.id}
                           type="button"
-                          onClick={() => handleBoothClick(booth.id, pavilion.label, booth.price)}
-                          aria-label={`${booth.id}, ${status}${exhibitor ? `, allocated to ${exhibitor}` : ""}, ${booth.price}`}
+                          onClick={() => handleTakenBoothClick(booth.id)}
+                          aria-label={label}
                           title={exhibitor ? `Allocated to ${exhibitor}` : undefined}
-                          className={`rounded-lg p-2 text-sm font-semibold transition-transform hover:scale-105 ${getButtonColor(booth.id)}`}
+                          className={className}
                         >
                           {booth.id}
                           <span className="mt-0.5 block text-[10px] font-normal capitalize">
@@ -378,74 +323,6 @@ export default function ExhibitionMap() {
           </TabsContent>
         ))}
       </Tabs>
-
-      {/* INTEREST FORM MODAL */}
-      {isModalOpen && selectedBooth && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-xl max-w-md w-full p-6 relative shadow-2xl">
-            <h3 className="text-xl font-bold text-green-800 mb-1">
-              Book Booth: {selectedBooth.id}
-            </h3>
-            <p className="text-xs text-gray-500 mb-4">
-              {selectedBooth.section} | {selectedBooth.price}
-            </p>
-
-            <form onSubmit={handleSubmitInterest}>
-              <div className="mb-3">
-                <label className="block text-xs font-bold text-gray-700 mb-1">
-                  Organization / Exhibitor Name
-                </label>
-                <input
-                  name="exhibitor"
-                  type="text"
-                  required
-                  className="w-full p-2 border rounded text-sm"
-                  placeholder="e.g. Acme Engineering Ltd"
-                />
-              </div>
-              <div className="mb-3">
-                <label className="block text-xs font-bold text-gray-700 mb-1">Phone Number</label>
-                <input
-                  name="phone"
-                  type="text"
-                  required
-                  className="w-full p-2 border rounded text-sm"
-                  placeholder="08000000000"
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-xs font-bold text-gray-700 mb-1">Email Address</label>
-                <input
-                  name="email"
-                  type="email"
-                  required
-                  className="w-full p-2 border rounded text-sm"
-                  placeholder="info@company.com"
-                />
-              </div>
-              <p className="text-xs text-amber-700 bg-amber-50 p-2 rounded mb-4">
-                Note: Submitting registers your interest. The booth is only marked taken once
-                payment is confirmed.
-              </p>
-              <div className="flex justify-end gap-2">
-                <button
-                  type="button"
-                  onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 bg-gray-200 text-gray-700 rounded text-sm"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="px-4 py-2 bg-green-700 text-white rounded text-sm font-semibold"
-                >
-                  Submit Interest
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
